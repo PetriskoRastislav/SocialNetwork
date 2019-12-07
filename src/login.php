@@ -68,7 +68,7 @@
 
     </form>
 
-    <p class="odsadenie"><span class="required">*</span>Povinné pole.</p>
+    <p class="odsadenie"><span class="required">*</span> Povinné pole.</p>
 
 </div>
 

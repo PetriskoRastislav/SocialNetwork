@@ -1,21 +1,28 @@
-/* formatovanie tela: */
+/* formatting of body */
 
-
-body {
-    background-color: rgb(250,250,250);
+.body-light {
+    background-color: rgb(250, 250, 250);
 }
 
+.body-dark {
+    background-color: rgb(54, 57, 63);
+}
 
-/* formatovaie odstavcov: */
-
+/* formatting of paragraphs */
 
 p {
     font-family: 'Arial', Helvetica, sans-serif;
     font-size: 0.9375em; /* 15px */
     line-height: 1.25em; /* 20px */
+}
+
+.p-light {
     color: rgb(0, 0, 0);
 }
 
+.p-dark {
+    color: rgb(160, 160, 160);
+}
 
 .odsadenie {
     margin-top: 1.25em; /* 20px */
@@ -23,45 +30,62 @@ p {
     line-height: 1.5625em; /* 25px */
 }
 
-
-/* formatovanie nadpisov */
-
+/* formatting of headings */
 
 h1 {
     width: auto;
     text-align: center;
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Arial', Helvetica, sans-serif;
     font-weight: bold;
     font-size: 2.4em;
     padding: 10px;
-    border-bottom: solid rgb(0,0,0) 0.03125em; /* bolo 1px ale v em je tam hodnota pre 0.5px - vyzera to rovnako */
+}
+
+.h1-light {
+    border-bottom: solid rgb(0, 0, 0) 0.03125em;
     color: rgb(0, 0, 0);
 }
 
+.h1-dark {
+    border-bottom: solid rgb(180, 180, 180) 0.03125em;
+    color: rgb(160, 160, 160);
+}
 
 h2 {
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Arial', Helvetica, sans-serif;
     font-size: 1.5em;
     text-align: left;
     font-weight: bold;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.h2-light {
     color: rgb(0, 0, 0);
 }
 
+.h2-dark {
+    color: rgb(160, 160, 160);
+}
 
 h3 {
-    font-family: "Times New Roman", Times, serif;
+    font-family: 'Arial', Helvetica, sans-serif;
     font-size: 1.2em;
     text-align: left;
     font-weight: bold;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.h3-light {
     color: rgb(0, 0, 0);
 }
 
+.h3-dark {
+    color: rgb(160, 160, 160);
+}
 
-/* formatovanie .main_content */
+/* formatting of .main_content */
 
 .main_content {
     margin-bottom: 0.9375em; /* 15px */
