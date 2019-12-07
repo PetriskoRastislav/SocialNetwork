@@ -1,15 +1,28 @@
-/* formatovanie formularov */
+/* formatting of forms */
 
 .odsadenie_form {
     margin-top: 0.1875em; /* 3px */
     margin-bottom: 0.1875em; /* 3px */
 }
 
-.povinne {
+.required {
     color: rgb(255, 0, 0);
 }
 
-/* format. inputov */
+.div_form_logreg {
+    width: 30em;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+
+.logreg {
+    width: 30em;
+    margin: 1em auto 1em auto;
+}
+
+/* formatting of inputs */
 
 .input_form {
     box-sizing: border-box;
@@ -28,7 +41,7 @@
     border: 2px solid rgb(0, 0, 0);
 }
 
-/* format. textaera */
+/* formatting of textarea */
 
 .text_area_form {
     box-sizing: border-box;
@@ -49,7 +62,7 @@
     border: 2px solid rgb(0,0,0);
 }
 
-/* format selectov */
+/* formatting of selects */
 
 .select_form {
     box-sizing: border-box;
@@ -68,7 +81,7 @@
     border: 2px solid rgb(0,0,0);
 }
 
-/* format. button */
+/* formatting of buttons */
 
 .button_form_submit {
     background-color: rgb(100,100,100);
@@ -86,33 +99,12 @@
     text-align: center;
 }
 
-.button_form_submit:hover {
+.button_form_submit:hover, .button_form_submit:focus {
     background-color: rgb(0, 0, 0);
     color: rgb(250, 250, 250);
 }
 
-.button_form_submit:focus {
-    background-color: rgb(0, 0, 0);
-    color: rgb(250, 250, 250);
-}
-
-/* format. formularov */
-
-.div_form_logreg {
-    width: 30em;
-    position: relative;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-}
-
-.logreg {
-    width: 30em;
-    margin: 1em auto 1em auto;
-}
-
-
-/*  */
+/* formatting of buttons for switching between registration and log in forms*/
 
 .logreg_button {
     position: relative;
@@ -137,21 +129,7 @@
     display: none;
 }
 
-.logreg_button:hover {
+.logreg_button:hover, .logreg_button:focus, .logreg_active {
     background-color: rgb(0, 0, 0);
     color: rgb(250, 250, 250);
 }
-
-.logreg_button:focus {
-    background-color: rgb(0, 0, 0);
-    color: rgb(250, 250, 250);
-}
-
-.logreg_button_active {
-    background-color: rgb(0, 0, 0);
-    color: rgb(250, 250, 250);
-}
-
-/*#log_button {
-    background-color: rgb(0, 0, 0);
-}*/

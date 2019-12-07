@@ -7,38 +7,38 @@
 
 <div class="div_form_logreg" id="div_reg">
 
-    <button onclick="shlog()" class="logreg_button" id="log_button logreg_button_active">Prihlásenie</button>
-    <button onclick="shreg()" class="logreg_button" id="reg_button">Registrácia</button>
+    <button onclick="showLogForm()" class="logreg_button logreg_active" id="log_button">Prihlásenie</button>
+    <button onclick="showRegForm()" class="logreg_button" id="reg_button">Registrácia</button>
 
     <form method="POST" class="logreg" id="registration" action="">
 
         <p class="odsadenie_form">
             Meno
-            <span class="povinne">*</span>
+            <span class="required">*</span>
         </p>
         <input required class="odsadenie_form input_form" type="text" name="meno" size="35" placeholder="meno">
 
         <p class="odsadenie_form">
             Priezvisko
-            <span class="povinne">*</span>
+            <span class="required">*</span>
         </p>
         <input required class="odsadenie_form input_form" type="text" name="priezvisko" size="35" placeholder="priezvisko">
 
         <p class="odsadenie_form">
             Heslo
-            <span class="povinne">*</span>
+            <span class="required">*</span>
         </p>
         <input required class="odsadenie_form input_form" type="password" name="password" size="35" placeholder="heslo">
 
         <p class="odsadenie_form">
             Heslo znova
-            <span class="povinne">*</span>
+            <span class="required">*</span>
         </p>
         <input required class="odsadenie_form input_form" type="password" name="password2" size="35" placeholder="heslo znovu">
 
         <p class="odsadenie_form">
             E-mail
-            <span class="povinne">*</span>
+            <span class="required">*</span>
         </p>
         <input required class="odsadenie_form input_form" type="email" name="email" size="35" placeholder="e-mail">
 
@@ -52,13 +52,13 @@
 
         <p class="odsadenie_form">
             E-mail
-            <span class="povinne">*</span>
+            <span class="required">*</span>
         </p>
         <input required class="odsadenie_form input_form" type="email" name="email" size="35" placeholder="e-mail">
 
         <p class="odsadenie_form">
             Heslo
-            <span class="povinne">*</span>
+            <span class="required">*</span>
         </p>
         <input required class="odsadenie_form input_form" type="password" name="password" size="35" placeholder="heslo">
 
@@ -68,7 +68,7 @@
 
     </form>
 
-    <p class="odsadenie"><span class="povinne">*</span>Povinné pole.</p>
+    <p class="odsadenie"><span class="required">*</span>Povinné pole.</p>
 
 </div>
 
