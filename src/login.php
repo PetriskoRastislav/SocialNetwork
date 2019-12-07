@@ -12,63 +12,63 @@
 
     <form method="POST" class="logreg" id="registration" action="">
 
-        <p class="odsadenie_form">
+        <p class="spacing_form">
             Meno
             <span class="required">*</span>
         </p>
-        <input required class="odsadenie_form input_form" type="text" name="meno" size="35" placeholder="meno">
+        <input required class="spacing_form input_form" type="text" name="meno" size="35" placeholder="meno">
 
-        <p class="odsadenie_form">
+        <p class="spacing_form">
             Priezvisko
             <span class="required">*</span>
         </p>
-        <input required class="odsadenie_form input_form" type="text" name="priezvisko" size="35" placeholder="priezvisko">
+        <input required class="spacing_form input_form" type="text" name="priezvisko" size="35" placeholder="priezvisko">
 
-        <p class="odsadenie_form">
+        <p class="spacing_form">
             Heslo
             <span class="required">*</span>
         </p>
-        <input required class="odsadenie_form input_form" type="password" name="password" size="35" placeholder="heslo">
+        <input required class="spacing_form input_form" type="password" name="password" size="35" placeholder="heslo">
 
-        <p class="odsadenie_form">
+        <p class="spacing_form">
             Heslo znova
             <span class="required">*</span>
         </p>
-        <input required class="odsadenie_form input_form" type="password" name="password2" size="35" placeholder="heslo znovu">
+        <input required class="spacing_form input_form" type="password" name="password2" size="35" placeholder="heslo znovu">
 
-        <p class="odsadenie_form">
+        <p class="spacing_form">
             E-mail
             <span class="required">*</span>
         </p>
-        <input required class="odsadenie_form input_form" type="email" name="email" size="35" placeholder="e-mail">
+        <input required class="spacing_form input_form" type="email" name="email" size="35" placeholder="e-mail">
 
-        <p class="odsadenie_form">
-        <button class="odsadenie_form button_form_submit" type="submit" form="registration" formaction="">Zaregistrovať</button>
+        <p class="spacing_form">
+        <button class="spacing_form button_form_submit" type="submit" form="registration" formaction="">Zaregistrovať</button>
         </p>
 
     </form>
 
     <form method="POST" class="logreg" id="login" action="">
 
-        <p class="odsadenie_form">
+        <p class="spacing_form">
             E-mail
             <span class="required">*</span>
         </p>
-        <input required class="odsadenie_form input_form" type="email" name="email" size="35" placeholder="e-mail">
+        <input required class="spacing_form input_form" type="email" name="email" size="35" placeholder="e-mail">
 
-        <p class="odsadenie_form">
+        <p class="spacing_form">
             Heslo
             <span class="required">*</span>
         </p>
-        <input required class="odsadenie_form input_form" type="password" name="password" size="35" placeholder="heslo">
+        <input required class="spacing_form input_form" type="password" name="password" size="35" placeholder="heslo">
 
-        <p class="odsadenie_form">
-            <button class="odsadenie_form button_form_submit" type="submit" form="login" formaction="">Prihlásiť</button>
+        <p class="spacing_form">
+            <button class="spacing_form button_form_submit" type="submit" form="login" formaction="">Prihlásiť</button>
         </p>
 
     </form>
 
-    <p class="odsadenie"><span class="required">*</span> Povinné pole.</p>
+    <p class="spacing"><span class="required">*</span> Povinné pole.</p>
 
 </div>
 

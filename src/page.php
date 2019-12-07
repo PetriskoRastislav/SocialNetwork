@@ -39,7 +39,7 @@
                 echo "<link rel='stylesheet' href='" . $style . "'>";
                 $style = next($styles);
             }
-
+            
             echo "</head>";
         }
 
