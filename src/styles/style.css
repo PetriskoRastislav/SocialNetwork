@@ -27,7 +27,7 @@ h1 {
     font-family: 'Arial', Helvetica, sans-serif;
     font-weight: bold;
     font-size: 2.4em;
-    border-bottom: solid rgb(0, 0, 0) 0.03125em;
+    border-bottom: solid rgb(0, 0, 0) 0.0625em;
     color: rgb(0, 0, 0);
     padding: 10px;
 }

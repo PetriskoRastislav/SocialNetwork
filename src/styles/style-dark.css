@@ -7,20 +7,20 @@ body {
 /* formatting of paragraphs */
 
 p {
-    color: rgb(160, 160, 160);
+    color: rgb(200, 200, 200);
 }
 
 /* formatting of headings */
 
 h1 {
-    border-bottom: solid rgb(180, 180, 180) 0.03125em;
-    color: rgb(160, 160, 160);
+    border-bottom: solid rgb(180, 180, 180) 0.0625em;
+    color: rgb(200, 200, 200);
 }
 
 h2 {
-    color: rgb(160, 160, 160);
+    color: rgb(200, 200, 200);
 }
 
 h3 {
-    color: rgb(160, 160, 160);
+    color: rgb(200, 200, 200);
 }
