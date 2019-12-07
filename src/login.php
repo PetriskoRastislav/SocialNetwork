@@ -2,15 +2,15 @@
     require('page.php');
     $page = new Page();
     $page->displayHead( "login", array("styles/style_form.css"));
-
     $page->displayBodyStart("Prihlásenie / Registrácia");
 ?>
 
 <div class="div_form_logreg" id="div_reg">
 
-    <h2>Registrácia</h2>
+    <button onclick="shlog()" class="logreg_button" id="log_button logreg_button_active">Prihlásenie</button>
+    <button onclick="shreg()" class="logreg_button" id="reg_button">Registrácia</button>
 
-    <form method="POST" class="logreg" id="reg" action="">
+    <form method="POST" class="logreg" id="registration" action="">
 
         <p class="odsadenie_form">
             Meno
@@ -43,20 +43,12 @@
         <input required class="odsadenie_form input_form" type="email" name="email" size="35" placeholder="e-mail">
 
         <p class="odsadenie_form">
-            <button class="odsadenie_form button_form_submit" type="submit" form="pridat_ludia" formaction="php_script/pridat_ludia.php">Pridať</button>
+        <button class="odsadenie_form button_form_submit" type="submit" form="registration" formaction="">Zaregistrovať</button>
         </p>
 
     </form>
 
-    <p class="odsadenie"><span class="povinne">*</span>Povinné pole.</p>
-
-</div>
-
-<div class="div_form_logreg" id="div_log">
-
-    <h2>Prihlásenie</h2>
-
-    <form method="POST" class="logreg" id="log" action="">
+    <form method="POST" class="logreg" id="login" action="">
 
         <p class="odsadenie_form">
             E-mail
@@ -71,7 +63,7 @@
         <input required class="odsadenie_form input_form" type="password" name="password" size="35" placeholder="heslo">
 
         <p class="odsadenie_form">
-            <button class="odsadenie_form button_form_submit" type="submit" form="pridat_ludia" formaction="php_script/pridat_ludia.php">Pridať</button>
+            <button class="odsadenie_form button_form_submit" type="submit" form="login" formaction="">Prihlásiť</button>
         </p>
 
     </form>
@@ -79,6 +71,8 @@
     <p class="odsadenie"><span class="povinne">*</span>Povinné pole.</p>
 
 </div>
+
+<script src="js/toggle_log_reg_forms.js"></script>
 
 <?php
     $page->displayBodyEnd();
