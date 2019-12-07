@@ -9,10 +9,6 @@
             $this->displayStyles($styles);
         }
 
-        public function displayTitle($title){
-            echo "<h1 class='pageTitle'>" . $title . "</h1>";
-        }
-
         private function displayDeclaration(){
             ?>
             <!DOCTYPE html>
@@ -35,8 +31,8 @@
         }
 
         private function displayStyles($styles){
-            //echo "<link rel='stylesheet' href='styles/reset.css'>";
-            //echo "<link rel='stylesheet' href='styles/style.css'>";
+            echo "<link rel='stylesheet' href='styles/reset.css'>";
+            echo "<link rel='stylesheet' href='styles/style.css'>";
 
             $style = @reset($styles);
             while ($style){
@@ -45,6 +41,26 @@
             }
 
             echo "</head>";
+        }
+
+        public function displayBodyStart($title){
+           ?>
+           <body>
+           <div class="main_content">
+           <?php
+           $this->displayTitle($title);
+        }
+
+        private function displayTitle($title){
+            echo "<h1 class='pageTitle'>" . $title . "</h1>";
+        }
+
+        public function displayBodyEnd(){
+            ?>
+            </div>
+            </body>
+            </html>
+            <?php
         }
 
     }
