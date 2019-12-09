@@ -10,11 +10,9 @@
         }
 
         private function displayDeclaration(){
-            ?>
-            <!DOCTYPE html>
-            <html lang="sk">
-            <head>
-            <?php
+            echo "<!DOCTYPE html>" .
+            "<html lang='sk'>" .
+            "<head>";
         }
 
         private function displayHeadTitle($titleA){
@@ -45,31 +43,24 @@
         }
 
         public function displayBodyStart(){
-           ?>
-           <body>
-           <div class="main_content">
-           <?php
-           //$this->displayTitle($title);
+            echo "<body>";
+            $this->displayHeader();
+            echo "<div class='main_content'>";
         }
 
         public function displayHeader(){
-            echo "<div class='header'>" .
-                "<img class='pageLogo' src='' alt='logo'>" .
-                "<p class='pageTitle'>" . $this->title . "</p>" .
+            echo "<div class='pageHeader'>" .
+                "<img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>" .
+                "<p class='pageName'>" . $this->title . "</p>" .
                 "</div>";
         }
 
-        private function displayTitle($title){
+        public function displayTitle($title){
             echo "<h1 class='pageTitle'>" . $title . "</h1>";
         }
 
         public function displayBodyEnd(){
-            ?>
-            </div>
-            </body>
-            </html>
-            <?php
+            echo "</div>" . "</body>" . "</html>";
         }
-
     }
 ?>

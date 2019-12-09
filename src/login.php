@@ -3,7 +3,6 @@
     $page = new Page();
     $page->displayHead( "login", array("styles/style_form.css", "styles/style_form-dark.css"));
     $page->displayBodyStart();
-    $page->displayHeader();
 ?>
 
 <div class="div_form_logreg" id="div_reg">
