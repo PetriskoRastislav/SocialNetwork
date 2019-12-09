@@ -1,6 +1,6 @@
 <?php
     class Page{
-        public $title = "SocialNetwork";
+        private $title = "Nazov (tmp)";
 
         public function displayHead($titleA, $styles = null){
             $this->displayDeclaration();
@@ -33,22 +33,30 @@
         private function displayStyles($styles){
             echo "<link rel='stylesheet' href='styles/reset.css'>";
             echo "<link rel='stylesheet' href='styles/style.css'>";
+            echo "<link rel='stylesheet' href='styles/style-dark.css'>";
 
             $style = @reset($styles);
             while ($style){
                 echo "<link rel='stylesheet' href='" . $style . "'>";
                 $style = next($styles);
             }
-            
+
             echo "</head>";
         }
 
-        public function displayBodyStart($title){
+        public function displayBodyStart(){
            ?>
            <body>
            <div class="main_content">
            <?php
-           $this->displayTitle($title);
+           //$this->displayTitle($title);
+        }
+
+        public function displayHeader(){
+            echo "<div class='header'>" .
+                "<img class='pageLogo' src='' alt='logo'>" .
+                "<p class='pageTitle'>" . $this->title . "</p>" .
+                "</div>";
         }
 
         private function displayTitle($title){

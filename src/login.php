@@ -1,8 +1,9 @@
 <?php
     require('page.php');
     $page = new Page();
-    $page->displayHead( "login", array("styles/style_form.css"));
-    $page->displayBodyStart("Prihlásenie / Registrácia");
+    $page->displayHead( "login", array("styles/style_form.css", "styles/style_form-dark.css"));
+    $page->displayBodyStart();
+    $page->displayHeader();
 ?>
 
 <div class="div_form_logreg" id="div_reg">
