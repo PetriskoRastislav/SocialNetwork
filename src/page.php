@@ -1,6 +1,6 @@
 <?php
     class Page{
-        private $title = "Nazov (tmp)";
+        private $title = "SocialNetwork (tmp)";
 
         public function displayHead($titleA, $styles = null){
             $this->displayDeclaration();

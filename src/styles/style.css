@@ -1,8 +1,14 @@
+/* font-family: Cambria, Georgia, serif; */
+
 /* formatting of header */
 
 .pageHeader {
-    background-color: rgb(0, 170, 100);
+    /*background-color: rgb(0, 170, 100);*/
+    background-color: rgb(220, 20, 60);
+    /*background-color: rgb(158, 27, 50);*/
+    /*background-color: rgb(255, 0, 79);*/
     height: 4em;
+    width: 100%;
 }
 
 .pageLogo {
@@ -23,6 +29,7 @@
     margin: 0;
     color: rgb(0, 0, 0);
 }
+
 
 /* formatting of body */
 
