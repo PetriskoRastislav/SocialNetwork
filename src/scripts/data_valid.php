@@ -20,5 +20,4 @@ function valid_email($address) {
 }
 
 
-
 ?>
