@@ -33,8 +33,10 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
     `password` VARCHAR(512) NOT NULL,
     `profile_picture` LONGBLOB DEFAULT NULL,
     `cover_picture` LONGBLOB DEFAULT NULL,
-    `registered` timestamp,
-    `last_active` timestamp
+    `registered` timestamp NOT NULL,
+    `last_active` timestamp NOT NULL
 );
+
+SELECT * FROM `users`;
 
 
