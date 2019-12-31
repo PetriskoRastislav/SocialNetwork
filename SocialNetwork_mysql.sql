@@ -17,9 +17,11 @@ USE `SocialNetwork`;
    rows from database
  */
 
-GRANT SELECT, INSERT, DELETE, UPDATE
-ON `SocialNetwork`.*
-TO 'WebUser' IDENTIFIED BY 'SN13wEb19-20';
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON SocialNetwork.*
+TO WebUser@localhost IDENTIFIED BY 'SN13wEb19-20';
+
+DROP USER WebUser;
 
 /* Creation of tables */
 
@@ -38,5 +40,5 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
 );
 
 SELECT * FROM `users`;
-
+SELECT id_users FROM users WHERE email = "test01@test.com";
 
