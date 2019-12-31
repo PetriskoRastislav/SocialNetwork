@@ -46,6 +46,7 @@
             echo "<body>";
             $this->displayHeader();
             echo "<div class='main_content'>";
+            echo "<a href='scripts/logout.php'>Logout</a>";
         }
 
         public function displayHeader(){
