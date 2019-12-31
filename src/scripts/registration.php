@@ -63,6 +63,7 @@ try {
     $id = $stmt->fetch();
 
     $stmt->close();
+    $db->close();
 
     // Storing id in SESSION variable
     $_SESSION['id_user'] = $id;
