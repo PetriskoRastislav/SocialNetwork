@@ -30,7 +30,7 @@ DROP USER WebUser;
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
 	`id_users` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `email` CHAR(255) NOT NULL UNIQUE,
-    `fistname` CHAR(100) NOT NULL , 
+    `firstname` CHAR(100) NOT NULL,
     `surname` CHAR(100) NOT NULL,
     `password` VARCHAR(512) NOT NULL,
     `profile_picture` LONGBLOB DEFAULT NULL,

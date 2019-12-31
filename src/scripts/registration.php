@@ -34,37 +34,46 @@ try {
 
     // Connection to database.
     $db = db_connect();
+    mysqli_set_charset($db,"utf8");
 
     // Checks whether user with same email has already been registered.
-    $result = $db->query("SELECT * FROM users WHERE email = ' . $email . '");
+    $result = $db->query("SELECT * FROM `users` WHERE email = ' . $email . '");
     if (!$result) {
         throw new Exception("Failed to execute query.");
     }
-    if (!$result->num_rows > 0) {
+    if ($result->num_rows > 0) {
         throw new Exception("User with same email address already registered.");
     }
 
     unset($result);
 
-    $stmt = $db->prepare("INSERT INTO users (email, firstname, surname, password) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $email, $name, $surname, $password);
+    // Registering new user
+    $stmt = $db->prepare("INSERT INTO users (email, firstname, surname, password, registered, last_active) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssss", $email, $name, $surname, $password1, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"));
     $stmt->execute();
 
     if(!$stmt->affected_rows > 0){
         throw new Exception("Failed to register new user.");
     }
 
-    $stmt = $db->query("SELECT id_users FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
+    // Fetching id of a registered user
+    $stmt = $db->prepare("SELECT users.id_users FROM users WHERE users.email = ?");
+    $stmt->bind_param("s",$email);
     $stmt->execute();
-    $id = $stmt->fetch_row();
+    $id = $stmt->fetch();
 
+    $stmt->close();
+
+    // Storing id in SESSION variable
     $_SESSION['id_user'] = $id;
-    header("Location: user.php");
+
+    // Redirecting user to his profile page
+    header("Location: ../user.php");
+
     exit();
 }
 catch (Exception $ex) {
-
+    echo $ex->getMessage();
 
     exit();
 }
