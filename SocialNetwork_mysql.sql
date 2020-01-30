@@ -21,8 +21,6 @@ GRANT SELECT, INSERT, UPDATE, DELETE
 ON SocialNetwork.*
 TO WebUser@localhost IDENTIFIED BY 'SN13wEb19-20';
 
-DROP USER WebUser;
-
 /* Creation of tables */
 
 /* Table for storing users and information about them */
@@ -32,13 +30,21 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
     `email` CHAR(255) NOT NULL UNIQUE,
     `firstname` CHAR(100) NOT NULL,
     `surname` CHAR(100) NOT NULL,
-    `password` VARCHAR(512) NOT NULL,
+    `password` VARCHAR(97) NOT NULL,
     `profile_picture` LONGBLOB DEFAULT NULL,
     `cover_picture` LONGBLOB DEFAULT NULL,
     `registered` timestamp NOT NULL,
     `last_active` timestamp NOT NULL
-);
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
-SELECT * FROM `users`;
-SELECT id_users FROM users WHERE email = "test01@test.com";
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`friends`(
+	`id_user1` INT UNSIGNED NOT NULL,
+    `id_user2` INT UNSIGNED NOT NULL
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
 
+ALTER TABLE friends ADD foreign key (id_user1) references users(`id_users`);
+ALTER TABLE friends ADD foreign key (id_user2) references users(`id_users`);

@@ -49,7 +49,7 @@ try {
 
     // Registering new user
     $stmt = $db->prepare("INSERT INTO users (email, firstname, surname, password, registered, last_active) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $email, $name, $surname, $password1, date("Y-m-d H:i:s"), date("Y-m-d H:i:s"));
+    $stmt->bind_param("ssssss", $email, $name, $surname, password_hash($password1, PASSWORD_ARGON2ID), date("Y-m-d H:i:s"), date("Y-m-d H:i:s"));
     $stmt->execute();
 
     if(!$stmt->affected_rows > 0){

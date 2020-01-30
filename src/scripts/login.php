@@ -22,36 +22,22 @@ try {
     $db = db_connect();
     mysqli_set_charset($db,"utf8");
 
-    $stmt = $db->prepare("SELECT id_users FROM users WHERE email = ?");
+    $stmt = $db->prepare("SELECT id_users, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $id2 = intval($stmt->fetch());
+    $stmt->bind_result($id, $pass_hash);
+    $stmt->fetch();
 
-    $stmt->close();
-
-    $stmt = $db->prepare("SELECT id_users FROM users WHERE email = ? AND password = ?");
-    $stmt->bind_param("ss", $email, $password);
-    $stmt->execute();
-    $id = intval($stmt->fetch());
-
-    $stmt->close();
-
-    $db->close();
-
-    if (!is_int($id)){
-        throw new Exception("Login failed.");
+    if(password_verify($password, $pass_hash)) {
+        // Storing id in SESSION variable
+        $_SESSION['id_user'] = $id;
     }
-
-    if (!$id > 0 && $id2 > 0){
+    else if($id > 0) {
         throw new Exception("Wrong password");
     }
-
-    if (!$id > 0){
-        throw new Exception("Wrong email.");
+    else {
+        throw new Exception("Unknown email.");
     }
-
-    // Storing id in SESSION variable
-    $_SESSION['id_user'] = $id;
 
     // Redirecting user to his profile page
     header("Location: ../user.php");
@@ -59,7 +45,6 @@ try {
 
 }
 catch (Exception $ex) {
-
 
     echo $ex->getMessage();
 

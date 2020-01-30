@@ -1,5 +1,6 @@
 <?php
     class Page{
+
         private $title = "SocialNetwork (tmp)";
 
         public function displayHead($titleA, $styles = null){
@@ -46,7 +47,7 @@
             echo "<body>";
             $this->displayHeader();
             echo "<div class='main_content'>";
-            echo "<a href='scripts/logout.php'>Logout</a>";
+            if(isset($_SESSION['id_user'])) echo "<a href='scripts/logout.php'>Logout</a>";
         }
 
         public function displayHeader(){
