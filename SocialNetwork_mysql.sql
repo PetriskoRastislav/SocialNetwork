@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
     `email` CHAR(255) NOT NULL UNIQUE,
     `firstname` CHAR(100) NOT NULL,
     `surname` CHAR(100) NOT NULL,
-    `password` VARCHAR(97) NOT NULL,
+    `password` CHAR(97) NOT NULL,
     `profile_picture` LONGBLOB DEFAULT NULL,
     `cover_picture` LONGBLOB DEFAULT NULL,
     `registered` timestamp NOT NULL,
