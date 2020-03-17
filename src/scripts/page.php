@@ -47,14 +47,59 @@
             echo "<body>";
             $this->displayHeader();
             echo "<div class='main_content'>";
-            if(isset($_SESSION['id_user'])) echo "<a href='scripts/logout.php'>Logout</a>";
         }
 
         public function displayHeader(){
-            echo "<div class='pageHeader'>" .
-                "<img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>" .
-                "<p class='pageName'>" . $this->title . "</p>" .
-                "</div>";
+            /*$message = "
+                <div class='pageHeader'>
+                    <div class='left pageHeader'>
+                        <img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>
+                        <p class='pageName'>" . $this->title . "</p>
+                    </div>
+                    <div class='right pageHeader'>";*/
+
+            $message = "
+                <div class='pageHeader'>
+                    <div class='header_content'>
+                        <div class='left'>
+                    
+                            <img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>
+                            <p class='pageName'>" . $this->title . "</p>
+                        </div>
+                        
+                        ";
+
+
+
+
+            if(isset($_SESSION['id_user']))
+                $message .= "
+                    <div class='right'>
+                        <div class='header_menu_item header_drop_btn'>
+                            <a href=''>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
+                        </div>
+                        <div class='header_drop_content'>
+                            <div class='header_menu_item'>
+                                <a href=''>Friends</a>
+                            </div>
+                            <div class='header_menu_item'>
+                                <a href=''>Settings</a>
+                            </div>
+                            <div class='header_menu_item'>
+                                <a href='scripts/logout.php'>Logout</a>
+                            </div>
+                        </div>
+                        <div class='header_menu_item'>
+                            <a href=''>Messages</a>
+                        </div>
+                        <div class='header_menu_item'>
+                            <a href=''>Notifications</a>
+                        </div>
+                    </div>";
+
+            $message .= "</div></div>";
+
+            echo $message;
         }
 
         public function displayTitle($title){
@@ -62,7 +107,7 @@
         }
 
         public function displayBodyEnd(){
-            echo "</div>" . "</body>" . "</html>";
+            echo "</div></body></html>";
         }
     }
 ?>

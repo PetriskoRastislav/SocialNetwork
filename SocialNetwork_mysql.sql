@@ -28,7 +28,7 @@ TO WebUser@localhost IDENTIFIED BY 'SN13wEb19-20';
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
 	`id_users` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `email` CHAR(255) NOT NULL UNIQUE,
-    `firstname` CHAR(100) NOT NULL,
+    `name` CHAR(100) NOT NULL,
     `surname` CHAR(100) NOT NULL,
     `password` CHAR(97) NOT NULL,
     `profile_picture` LONGBLOB DEFAULT NULL,

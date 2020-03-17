@@ -39,6 +39,19 @@ try {
         throw new Exception("Unknown email.");
     }
 
+    $stmt->free_result();
+
+    $stmt = $db->prepare("SELECT name, surname FROM users WHERE id_users = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->bind_result($firstname, $surname);
+    $stmt->fetch();
+
+    $_SESSION['name'] = $firstname;
+    $_SESSION['surname'] = $surname;
+
+    $stmt->free_result();
+
     // Redirecting user to his profile page
     header("Location: ../user.php");
     exit();
