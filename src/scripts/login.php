@@ -53,7 +53,7 @@ try {
     $stmt->free_result();
 
     // Redirecting user to his profile page
-    header("Location: ../user.php");
+    header("Location: ../profile.php");
     exit();
 
 }

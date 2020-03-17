@@ -10,7 +10,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "user", array("styles/style_form-dark.css"));
+$page->displayHead( "home", array());
 $page->displayBodyStart();
 
 

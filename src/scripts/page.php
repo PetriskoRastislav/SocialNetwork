@@ -32,7 +32,7 @@
         private function displayStyles($styles){
             echo "<link rel='stylesheet' href='styles/reset.css'>";
             echo "<link rel='stylesheet' href='styles/style.css'>";
-            echo "<link rel='stylesheet' href='styles/style-dark.css'>";
+            /*echo "<link rel='stylesheet' href='styles/style-dark.css'>";*/
 
             $style = @reset($styles);
             while ($style){
@@ -61,13 +61,16 @@
             $message = "
                 <div class='pageHeader'>
                     <div class='header_content'>
-                        <div class='left'>
-                    
+                        <div class='left'>";
+
+            if (isset($_SESSION['id_user'])) $message .= "
+                            <a href='home.php' class='home_link'>";
+
+            $message .= "
                             <img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>
                             <p class='pageName'>" . $this->title . "</p>
-                        </div>
-                        
-                        ";
+                            </a>
+                        </div>";
 
 
 
@@ -76,16 +79,16 @@
                 $message .= "
                     <div class='right'>
                         <div class='header_menu_item header_drop_btn'>
-                            <a href=''>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
+                            <a href='profile.php'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
                         </div>
                         <div class='header_drop_content'>
-                            <div class='header_menu_item'>
+                            <div class='header_sub_menu_item'>
                                 <a href=''>Friends</a>
                             </div>
-                            <div class='header_menu_item'>
+                            <div class='header_sub_menu_item'>
                                 <a href=''>Settings</a>
                             </div>
-                            <div class='header_menu_item'>
+                            <div class='header_sub_menu_item'>
                                 <a href='scripts/logout.php'>Logout</a>
                             </div>
                         </div>

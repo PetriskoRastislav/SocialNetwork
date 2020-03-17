@@ -71,7 +71,7 @@ try {
     $_SESSION['surname'] = $surname;
 
     // Redirecting user to his profile page
-    header("Location: ../user.php");
+    header("Location: ../profile.php");
 
     exit();
 }
