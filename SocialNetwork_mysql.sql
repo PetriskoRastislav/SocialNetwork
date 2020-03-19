@@ -39,12 +39,16 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+/* Table to store friend relationships between users */
+
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`friends`(
 	`id_user_1` INT UNSIGNED NOT NULL,
     `id_user_2` INT UNSIGNED NOT NULL
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+/* Table to store messages between two users */
 
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`messages`(
 	`id_message` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -57,6 +61,8 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`messages`(
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+/* Table to store groups and informations about them */
+
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`groups`(
 	`id_group` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `group_name` CHAR(60) NOT NULL,
@@ -66,6 +72,8 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`groups`(
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+/* Table to store members of a particular group */
+
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_members`(
 	`id_group` INT UNSIGNED NOT NULL,
     `id_user` INT UNSIGNED NOT NULL,
@@ -74,6 +82,10 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_members`(
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+/* Table to store informations about group chats, group chat can belong to a particular group,
+ but can be also created without affinity to any group.
+ One group can own multiple group chats, for example for all members, for adminstartors and owners, and etc. */
 
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chats`(
 	`id_group_chat` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -85,6 +97,8 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chats`(
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+/* Table for storing members of particular group chat */
+
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chat_members`(
 	`id_group_chat` INT UNSIGNED NOT NULL,
     `id_user` INT UNSIGNED NOT NULL,
@@ -94,6 +108,8 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chat_members`(
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
+
+/* Table for storing messages in particular group chats */
 
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chat_messages`(
 	`id_group_chat_message` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -107,6 +123,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
+/* Foreign keys */
 
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_1`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_2`) REFERENCES `SocialNetwork`.`users`(`id_user`);
