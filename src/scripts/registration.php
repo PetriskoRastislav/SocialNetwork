@@ -49,7 +49,9 @@ try {
 
     // Registering new user
     $stmt = $db->prepare("INSERT INTO users (email, name, surname, password, registered, last_active) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $email, $name, $surname, password_hash($password1, PASSWORD_ARGON2ID), date("Y-m-d H:i:s"), date("Y-m-d H:i:s"));
+    $password_hash = password_hash($password1, PASSWORD_ARGON2ID);
+    $time_now = date("Y-m-d H:i:s");
+    $stmt->bind_param("ssssss", $email, $name, $surname, $password_hash, $time_now, $time_now);
     $stmt->execute();
 
     if(!$stmt->affected_rows > 0){
@@ -57,7 +59,7 @@ try {
     }
 
     // Fetching id of a registered user
-    $stmt = $db->prepare("SELECT users.id_users FROM users WHERE users.email = ?");
+    $stmt = $db->prepare("SELECT users.id_user FROM users WHERE users.email = ?");
     $stmt->bind_param("s",$email);
     $stmt->execute();
     $id = $stmt->fetch();

@@ -22,7 +22,7 @@ try {
     $db = db_connect();
     mysqli_set_charset($db,"utf8");
 
-    $stmt = $db->prepare("SELECT id_users, password FROM users WHERE email = ?");
+    $stmt = $db->prepare("SELECT id_user, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->bind_result($id, $pass_hash);
@@ -41,7 +41,7 @@ try {
 
     $stmt->free_result();
 
-    $stmt = $db->prepare("SELECT name, surname FROM users WHERE id_users = ?");
+    $stmt = $db->prepare("SELECT name, surname FROM users WHERE id_user = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->bind_result($firstname, $surname);
