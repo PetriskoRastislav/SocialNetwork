@@ -84,6 +84,7 @@
 .header_menu_li {
     background-color: rgb(150, 150, 150);
     margin: 0;
+    padding: 0;
     font-family: Cambria, Georgia, serif;
     /*height: 3em;*/
     height: 100%;
@@ -158,7 +159,18 @@
     display: block;
 }
 
+.header_menu_img {
+    display: block;
+    height: 2.3em;
+    width: auto;
+    padding: 0;
+    margin: 0;
+}
 
+.header_menu_a_img {
+    padding: 0.2em 0.6em;
+    height: 2.3em;
+}
 
 
 
@@ -175,7 +187,25 @@
     background-color: rgb(255, 255, 255);
 }*/
 
+/* arrows */
 
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transition: 0.7s;
+}
+
+.up_arrow {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down_arrow {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
 
 
 

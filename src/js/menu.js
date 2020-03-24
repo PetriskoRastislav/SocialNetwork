@@ -4,23 +4,49 @@ toggle between hiding and showing the dropdown content */
     document.getElementById("header_drop_content").classList.toggle("header_drop_content_show");
 }*/
 
-$(document).ready(function(){
+/*function showDropContent(){
+    let drop_content = document.getElementById('header_drop_content');
+    let drop_btn = document.getElementById('header_menu_drop_btn');
+    if(drop_content.style.display === 'block'){
+        drop_content.style.display = 'none';
+        drop_btn.classList.remove('header_menu_drop_btn_active');
+    }
+    else{
+        drop_content.style.display = 'block';
+        drop_btn.classList.add('header_menu_drop_btn_active');
+    }
+}*/
 
-    $(document).on('click', '#header_menu_drop_btn', function () {
-        let drop_content = document.getElementById('header_drop_content');
-        let drop_btn = document.getElementById('header_menu_drop_btn');
+window.onclick = function(e) {
+    let drop_btn = document.getElementById('header_menu_drop_btn');
+    let drop_content = document.getElementById("header_drop_content");
+
+    if (e.target !== drop_content) {
+        if (drop_content.style.display === 'block') {
+            drop_content.style.display = 'none';
+        }
+    }
+
+    if ( ) {
         if(drop_content.style.display === 'block'){
             drop_content.style.display = 'none';
-            drop_btn.classList.remove('header_menu_drop_btn_active')
+            drop_btn.classList.remove('header_menu_drop_btn_active');
         }
         else{
             drop_content.style.display = 'block';
-            drop_btn.classList.add('header_menu_drop_btn_active')
+            drop_btn.classList.add('header_menu_drop_btn_active');
         }
-    });
+    }
+
+};
+
+
+/*$(document).ready(function(){*/
+
+
 
     /*window.onclick = function(event) {
-        let drop_content = document.getElementById('header_drop_content')
+        let drop_content = document.getElementById('header_drop_content');
         let drop_btn = document.getElementById('header_menu_drop_btn');
 
         if(event.target !== drop_btn || event.target !== drop_content){
@@ -28,7 +54,7 @@ $(document).ready(function(){
         }
     };*/
 
-});
+//});
 
 
 /*$(document).on('click', '#page', function () {
@@ -52,21 +78,7 @@ $(document).ready(function(){
 }*/
 
 // Close the dropdown if the user clicks outside of it
-/*window.onclick = function(event) {
-    if (!event.target.matches('.header_menu_drop_btn')) {*/
-        //document.getElementsByClassName(".header_drop_content").classList.remove("header_drop_content_show");
 
-        /*var dropdowns = document.getElementsByClassName("header_drop_content-content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('header_drop_content_show')) {
-                openDropdown.classList.remove('header_drop_content_show');
-            }
-        }*/
-    /*}
-
-}*/
 
 /*window.onclick = function(e) {
     if (!e.target.addEventListene)) {

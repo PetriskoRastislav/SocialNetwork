@@ -10,7 +10,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "setting", array());
+$page->displayHead( "settings", array());
 $page->displayBodyStart();
 
 

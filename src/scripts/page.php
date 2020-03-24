@@ -32,7 +32,7 @@
         private function displayStyles($styles){
             echo "<link rel='stylesheet' href='styles/reset.css'>";
             echo "<link rel='stylesheet' href='styles/style.css'>";
-            /*echo "<link rel='stylesheet' href='styles/style-dark.css'>";*/
+            echo "<link rel='stylesheet' href='styles/style-dark.css'>";
 
             $style = @reset($styles);
             while ($style){
@@ -83,25 +83,29 @@
                     <div class='right'>
                         <div class='header_menu_div'>
                             <ul class='menu_ul'>
-                           
-                                <li class='header_menu_li border_left' id='header_menu_drop_btn'>
-                                    <p class='header_menu_a'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</p>
+                                
+                                <li class='header_menu_li' id='header_menu_drop_btn'>
+                                    <p class='header_menu_a'><i class='arrow up_arrow'></i></p>
                                 </li>
                                 
                                 <div id='header_drop_content'>
                                     <a class='header_menu_a' href=''>Friends</a>
                                     
-                                    <a class='header_menu_a' href=''>Settings</a>
+                                    <a class='header_menu_a' href='user_settings.php'>Settings</a>
 
                                     <a class='header_menu_a' href='scripts/logout.php'>Logout</a>
                                 </div>
                                 
                                 <li class='header_menu_li border_left'>
-                                    <a class='header_menu_a' href=''>Messages</a>
+                                    <a class='header_menu_a' href='profile.php'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
+                                </li>
+                                
+                                <li class='header_menu_li border_left'>
+                                    <a class='header_menu_a header_menu_a_img' href='messages.php'><img class='header_menu_img' src='srcPictures/icons8-message-100.png' alt='message icon'></a>
                                 </li>
                                 
                                 <li class='header_menu_li'>
-                                    <a class='header_menu_a' href=''>Notifications</a>
+                                    <p class='header_menu_a'>Notifications</p>
                                 </li>
                                 
                             </ul>
