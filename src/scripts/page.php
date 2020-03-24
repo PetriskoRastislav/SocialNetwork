@@ -1,7 +1,7 @@
 <?php
     class Page{
 
-        private $title = "SocialNetwork (tmp)";
+        private $title = "SocialNetwork";
 
         public function displayHead($titleA, $styles = null){
             $this->displayDeclaration();
@@ -45,6 +45,7 @@
 
         public function displayBodyStart(){
             echo "<body>";
+            echo "<div id='page'>";
             $this->displayHeader();
             echo "<div class='main_content'>";
         }
@@ -63,40 +64,47 @@
                     <div class='header_content'>
                         <div class='left'>";
 
-            if (isset($_SESSION['id_user'])) $message .= "
-                            <a href='home.php' class='home_link'>";
+            if (isset($_SESSION['id_user'])) $message .= "<a href='home.php' class='home_link'>";
 
-            $message .= "
+            /*$message .= "
                             <img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>
                             <p class='pageName'>" . $this->title . "</p>
                             </a>
-                        </div>";
+                        </div>";*/
 
+            $message .= "<img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>";
 
+            if (isset($_SESSION['id_user'])) $message .= "</a></div>";
+            else $message .= "</div>";
 
 
             if(isset($_SESSION['id_user']))
                 $message .= "
                     <div class='right'>
-                        <div class='header_menu_item header_drop_btn'>
-                            <a href='profile.php'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
-                        </div>
-                        <div class='header_drop_content'>
-                            <div class='header_sub_menu_item'>
-                                <a href=''>Friends</a>
-                            </div>
-                            <div class='header_sub_menu_item'>
-                                <a href=''>Settings</a>
-                            </div>
-                            <div class='header_sub_menu_item'>
-                                <a href='scripts/logout.php'>Logout</a>
-                            </div>
-                        </div>
-                        <div class='header_menu_item'>
-                            <a href=''>Messages</a>
-                        </div>
-                        <div class='header_menu_item'>
-                            <a href=''>Notifications</a>
+                        <div class='header_menu_div'>
+                            <ul class='menu_ul'>
+                           
+                                <li class='header_menu_li border_left' id='header_menu_drop_btn'>
+                                    <p class='header_menu_a'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</p>
+                                </li>
+                                
+                                <div id='header_drop_content'>
+                                    <a class='header_menu_a' href=''>Friends</a>
+                                    
+                                    <a class='header_menu_a' href=''>Settings</a>
+
+                                    <a class='header_menu_a' href='scripts/logout.php'>Logout</a>
+                                </div>
+                                
+                                <li class='header_menu_li border_left'>
+                                    <a class='header_menu_a' href=''>Messages</a>
+                                </li>
+                                
+                                <li class='header_menu_li'>
+                                    <a class='header_menu_a' href=''>Notifications</a>
+                                </li>
+                                
+                            </ul>
                         </div>
                     </div>";
 
@@ -109,8 +117,12 @@
             echo "<h1 class='pageTitle'>" . $title . "</h1>";
         }
 
-        public function displayBodyEnd(){
-            echo "</div></body></html>";
+            public function displayBodyEnd(){
+            $script = "<script src='js/jquery-3.4.1.min.js'></script>";
+
+            $script .= "<script src='js/menu.js'></script>";
+
+            echo $script . "</div></div></body></html>";
         }
     }
 ?>

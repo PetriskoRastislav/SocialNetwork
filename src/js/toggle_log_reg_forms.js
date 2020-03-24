@@ -10,7 +10,7 @@ function showRegForm() {
     reg_button.classList.add("logreg_active");
 }
 
-function showLogForm(event) {
+function showLogForm() {
     let log = document.getElementById("login");
     let reg = document.getElementById("registration");
     let log_button = document.getElementById("log_button");

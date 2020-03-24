@@ -24,3 +24,21 @@ h2 {
 h3 {
     color: rgb(200, 200, 200);
 }
+
+/* formatting of common links */
+
+a.common:link {
+    color: rgb(100, 200, 100);
+}
+
+a.common:visited {
+    color: rgb(100, 200, 100);
+}
+
+a.common:hover {
+    color: rgb(100, 200, 100);
+}
+
+a.common:active {
+    color: rgb(100, 200, 100);
+}

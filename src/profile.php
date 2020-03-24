@@ -10,7 +10,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "user", array());
+$page->displayHead( "", array());
 $page->displayBodyStart();
 
 //echo "<p class='spacing'>User's id: " . $_SESSION['id_user'] . "</p>";
