@@ -1,8 +1,27 @@
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-/*function showDrop() {
-    document.getElementById("header_drop_content").classList.toggle("header_drop_content_show");
-}*/
+
+
+document.getElementById("header_menu_drop_btn").addEventListener("click", function(){
+    let drop_content = document.getElementById('header_drop_content');
+    let drop_btn = document.getElementById('header_menu_drop_btn');
+    let arrow = document.getElementById('arrow_btn_menu');
+
+    if(drop_content.style.display === 'block'){
+        drop_content.style.display = 'none';
+        drop_btn.classList.remove('header_menu_drop_btn_active');
+        arrow.classList.remove('up_arrow');
+        arrow.classList.add('down_arrow');
+    }
+    else{
+        drop_content.style.display = 'block';
+        drop_btn.classList.add('header_menu_drop_btn_active');
+        arrow.classList.remove('down_arrow');
+        arrow.classList.add('up_arrow');
+    }
+});
+
+
+
+
 
 /*function showDropContent(){
     let drop_content = document.getElementById('header_drop_content');
@@ -17,7 +36,22 @@ toggle between hiding and showing the dropdown content */
     }
 }*/
 
-window.onclick = function(e) {
+/*window.addEventListener('click', function (){
+    let drop_content = document.getElementById('header_drop_content');
+    let drop_btn = document.getElementById('header_menu_drop_btn');
+    let arrow = document.getElementById('arrow_btn_menu');
+
+    if(drop_content.style.display === 'block'){
+        drop_content.style.display = 'none';
+        drop_btn.classList.remove('header_menu_drop_btn_active');
+        arrow.classList.remove('up_arrow');
+        arrow.classList.add('down_arrow');
+    }
+
+});*/
+
+
+/*window.onclick = function(e) {
     let drop_btn = document.getElementById('header_menu_drop_btn');
     let drop_content = document.getElementById("header_drop_content");
 
@@ -38,12 +72,41 @@ window.onclick = function(e) {
         }
     }
 
-};
+};*/
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+/*function showDrop() {
+    document.getElementById("header_drop_content").classList.toggle("header_drop_content_show");
+}*/
 
 /*$(document).ready(function(){*/
-
-
 
     /*window.onclick = function(event) {
         let drop_content = document.getElementById('header_drop_content');

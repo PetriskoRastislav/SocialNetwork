@@ -84,8 +84,8 @@
                         <div class='header_menu_div'>
                             <ul class='menu_ul'>
                                 
-                                <li class='header_menu_li' id='header_menu_drop_btn'>
-                                    <p class='header_menu_a'><i class='arrow up_arrow'></i></p>
+                                <li class='header_menu_li drop_btn' id='header_menu_drop_btn'>
+                                    <p class='header_menu_a'><i class='arrow down_arrow' id='arrow_btn_menu'></i></p>
                                 </li>
                                 
                                 <div id='header_drop_content'>
