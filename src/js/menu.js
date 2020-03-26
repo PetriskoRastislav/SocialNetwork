@@ -1,5 +1,6 @@
 
 
+
 document.getElementById("header_menu_drop_btn").addEventListener("click", function(){
     let drop_content = document.getElementById('header_drop_content');
     let drop_btn = document.getElementById('header_menu_drop_btn');
@@ -19,8 +20,86 @@ document.getElementById("header_menu_drop_btn").addEventListener("click", functi
     }
 });
 
+/*document.addEventListener('click', function(event) {
+
+    //if (event.target !== document.getElementById('#arrow_btn_menu')) {
+        console.log("here i am");
+
+        let drop_content = document.getElementById("header_drop_content");
 
 
+        if(drop_content.style.display === 'block'){
+
+            let drop_btn = document.getElementById('header_menu_drop_btn');
+            let arrow = document.getElementById('arrow_btn_menu');
+
+            drop_content.style.display = 'none';
+            drop_btn.classList.remove('header_menu_drop_btn_active');
+            arrow.classList.remove('up_arrow');
+            arrow.classList.add('down_arrow');
+        }
+    //}
+}, true);*/
+
+
+
+
+
+/*$(document).ready(function(){
+    // Show hide popover
+    $(".header_menu_drop_btn").click(function(){
+        let drop_content = document.getElementById('header_drop_content');
+        let drop_btn = document.getElementById('header_menu_drop_btn');
+        let arrow = document.getElementById('arrow_btn_menu');
+
+        if(drop_content.style.display === 'block'){
+            drop_content.style.display = 'none';
+            drop_btn.classList.remove('header_menu_drop_btn_active');
+            arrow.classList.remove('up_arrow');
+            arrow.classList.add('down_arrow');
+        }
+        else{
+            drop_content.style.display = 'block';
+            drop_btn.classList.add('header_menu_drop_btn_active');
+            arrow.classList.remove('down_arrow');
+            arrow.classList.add('up_arrow');
+        }
+    });
+});*/
+
+
+/*$(window).on("click", function(event){
+    let $trigger = $(".header_menu_drop_btn");
+    let drop_content = document.getElementById('header_drop_content');
+    let drop_btn = document.getElementById('header_menu_drop_btn');
+    let arrow = document.getElementById('arrow_btn_menu');
+
+    //if($trigger !== event.target && !$trigger.has(event.target).length){
+
+        drop_content.style.display = 'none';
+        drop_btn.classList.remove('header_menu_drop_btn_active');
+        arrow.classList.remove('up_arrow');
+        arrow.classList.add('down_arrow');
+    //}
+});*/
+
+
+
+
+
+/*document.getElementById('div_main').addEventListener('click', function (){
+    let drop_content = document.getElementById('header_drop_content');
+    let drop_btn = document.getElementById('header_menu_drop_btn');
+    let arrow = document.getElementById('arrow_btn_menu');
+
+    if(drop_content.style.display === 'block'){
+        drop_content.style.display = 'none';
+        drop_btn.classList.remove('header_menu_drop_btn_active');
+        arrow.classList.remove('up_arrow');
+        arrow.classList.add('down_arrow');
+    }
+
+});*/
 
 
 /*function showDropContent(){
@@ -35,20 +114,6 @@ document.getElementById("header_menu_drop_btn").addEventListener("click", functi
         drop_btn.classList.add('header_menu_drop_btn_active');
     }
 }*/
-
-/*window.addEventListener('click', function (){
-    let drop_content = document.getElementById('header_drop_content');
-    let drop_btn = document.getElementById('header_menu_drop_btn');
-    let arrow = document.getElementById('arrow_btn_menu');
-
-    if(drop_content.style.display === 'block'){
-        drop_content.style.display = 'none';
-        drop_btn.classList.remove('header_menu_drop_btn_active');
-        arrow.classList.remove('up_arrow');
-        arrow.classList.add('down_arrow');
-    }
-
-});*/
 
 
 /*window.onclick = function(e) {
@@ -144,7 +209,7 @@ toggle between hiding and showing the dropdown content */
 
 
 /*window.onclick = function(e) {
-    if (!e.target.addEventListene)) {
+    if (!e.target.addEventListener)) {
         let myDropdown = document.getElementById("header_drop_content");
         if (myDropdown.classList.contains('show')) {
             myDropdown.classList.remove('show');

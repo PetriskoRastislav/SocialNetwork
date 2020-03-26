@@ -132,8 +132,10 @@
     position: absolute;
     width: 6em;
     background-color: rgb(170, 170, 170);
-    top: 3.3em;
-    right: 3.9em;
+    top: 3em;
+    right: 4em;
+    transition: 0.3s;
+    z-index: 999;
     /*border: solid 0.2em rgb(0, 150, 0);*/
 }
 
@@ -173,6 +175,8 @@
 }
 
 
+/* line height */
+
 
 /*.header_sub_menu_item {
     font-family: Cambria, Georgia, serif;
@@ -194,7 +198,7 @@
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
-    transition: 0.7s;
+    transition: 0.4s;
 }
 
 .up_arrow {

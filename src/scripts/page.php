@@ -89,7 +89,7 @@
                                 </li>
                                 
                                 <div id='header_drop_content'>
-                                    <a class='header_menu_a' href=''>Friends</a>
+                                    <a class='header_menu_a' href='#'>Friends</a>
                                     
                                     <a class='header_menu_a' href='user_settings.php'>Settings</a>
 
