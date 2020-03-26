@@ -101,7 +101,7 @@
                                 </li>
                                 
                                 <li class='header_menu_li border_left'>
-                                    <a class='header_menu_a header_menu_a_img' href='messages.php'><img class='header_menu_img' src='srcPictures/icons8-message-100.png' alt='message icon'></a>
+                                    <a class='header_menu_a header_menu_a_img' href='messages.php'><img class='header_menu_img' src='srcPictures/icons8-group-message-100.png' alt='message icon'></a>
                                 </li>
                                 
                                 <li class='header_menu_li'>
