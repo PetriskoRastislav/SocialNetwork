@@ -3,8 +3,8 @@
 
     session_start();
 
-    if(isset($_SESSION['id_user'])){
-        header('Location: user.php');
+    if(isset($_SESSION['id_user'])) {
+        header('Location: profile.php');
         exit();
     }
 

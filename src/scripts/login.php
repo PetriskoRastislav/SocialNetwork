@@ -22,7 +22,7 @@ try {
     $db = db_connect();
     mysqli_set_charset($db,"utf8");
 
-    $stmt = $db->prepare("SELECT id_users, password FROM users WHERE email = ?");
+    $stmt = $db->prepare("SELECT id_user, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->bind_result($id, $pass_hash);
@@ -39,8 +39,21 @@ try {
         throw new Exception("Unknown email.");
     }
 
+    $stmt->free_result();
+
+    $stmt = $db->prepare("SELECT name, surname FROM users WHERE id_user = ?");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $stmt->bind_result($firstname, $surname);
+    $stmt->fetch();
+
+    $_SESSION['name'] = $firstname;
+    $_SESSION['surname'] = $surname;
+
+    $stmt->free_result();
+
     // Redirecting user to his profile page
-    header("Location: ../user.php");
+    header("Location: ../profile.php");
     exit();
 
 }
