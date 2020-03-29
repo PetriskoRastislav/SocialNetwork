@@ -28,7 +28,7 @@ try {
     }
 
     // Checks the password length.
-    if(strlen($password1) > 10){
+    if(strlen($password1) < 10){
         throw new Exception("pswd_len");
     }
 
