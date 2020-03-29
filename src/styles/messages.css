@@ -48,36 +48,72 @@
     display: inline-block;
 }
 
-/* styles for labels with names of users */
+#list_users {
+    background-color: rgb(70, 70, 70);
+}
 
-.user {
+/* header of list of users */
+
+#list_users_header {
+    height: 3em;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+#list_users_header_title{
+    box-sizing: border-box;
     display: inline-block;
+    float: left;
     font-family: Cambria, Georgia, serif;
     color: rgb(210, 210, 210);
     text-align: center;
     line-height: 1.6em;
     padding: 0.5em 1em;
+    font-size: 1.2em;
+    font-weight: bolder;
+}
+
+#start_new_conversation {
+    box-sizing: border-box;
+    display: inline-block;
+    float: right;
+    width: auto;
+    margin: 0;
+    padding: 0.4em 0.6em;
+    height: 3em;
+    background-color: rgb(70, 70, 70);
+}
+
+#start_new_conversation:hover {
+    cursor: pointer;
+    background-color: rgb(90, 90, 90);
+}
+
+/* styles for labels with names of users */
+
+
+
+.user {
+    box-sizing: border-box;
+    display: inline-block;
+    font-family: Cambria, Georgia, serif;
+    color: rgb(210, 210, 210);
+    text-align: left;
+    line-height: 1.6em;
+    padding: 0.5em 1em;
     font-size: 1.1em;
+    clear: both;
 }
 
 .list_users_item {
     height: 3em;
     width: 100%;
+    clear: both;
 }
 
 .list_users_item:hover {
     cursor: pointer;
-    background-color: rgb(70, 70, 70);
+    background-color: rgb(90, 90, 90);
 }
-
- .list_users_header {
-     display: inline-block;
-     font-family: Cambria, Georgia, serif;
-     color: rgb(210, 210, 210);
-     text-align: center;
-     line-height: 1.6em;
-     padding: 0.5em 1em;
-     font-size: 1.2em;
-     font-weight: bolder;
- }
 

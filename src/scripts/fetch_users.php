@@ -23,7 +23,6 @@ try {
     $statement->bind_param("ii", $_SESSION['id_user'], $_SESSION['id_user']);
     $statement->execute();
     $statement->bind_result($id_user, $name, $surname, $last_active);
-    //$result = $statement->fetch();
 
     $output = "";
 
@@ -32,15 +31,15 @@ try {
         $time_now = date("Y-m-d H:i:s");
 
         if ($last_active > $time_now) {
-            $status = "<span class='active_mark'></span>";
+            $status = " <span class='active_mark'></span>";
         } else {
             $status = "";
         }
 
         $output .= "
-        <div class='list_users_item'>
+        <div class='list_users_item' id_user_to='" . $id_user . "'>
             <span class='user'>" .
-            $name . " " . $surname . " " . $status .
+            $name . " " . $surname . $status .
             "</span>
         </div>
     ";
