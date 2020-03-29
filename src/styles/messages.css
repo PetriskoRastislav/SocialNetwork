@@ -1,0 +1,83 @@
+
+.main_content {
+    margin: 0;
+    padding: 0;
+}
+
+/* division for list of users with whom logged user had conversation */
+
+#list_users {
+    min-height: 10em;
+    height: 100%;
+    width: 25%;
+    position: fixed;
+    top: 3em;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
+    float: right;
+    overflow-x: hidden;
+
+}
+
+/* division for conversations */
+
+#conversations {
+    margin-left: 28%;
+    width: 75%;
+    height: 100%;
+    min-height: 10em;
+    position: fixed;
+    top: 3em;
+    right: 0;
+    padding: 0;
+    display: block;
+    float: right;
+    overflow-x: hidden;
+}
+
+/* mark of active user */
+
+.active_mark {
+    background-color: rgb(100, 200, 0);
+    width: 0.6em;
+    height: 0.6em;
+    border-radius: 50%;
+    margin-left: 0.3em;
+    display: inline-block;
+}
+
+/* styles for labels with names of users */
+
+.user {
+    display: inline-block;
+    font-family: Cambria, Georgia, serif;
+    color: rgb(210, 210, 210);
+    text-align: center;
+    line-height: 1.6em;
+    padding: 0.5em 1em;
+    font-size: 1.1em;
+}
+
+.list_users_item {
+    height: 3em;
+    width: 100%;
+}
+
+.list_users_item:hover {
+    cursor: pointer;
+    background-color: rgb(70, 70, 70);
+}
+
+ .list_users_header {
+     display: inline-block;
+     font-family: Cambria, Georgia, serif;
+     color: rgb(210, 210, 210);
+     text-align: center;
+     line-height: 1.6em;
+     padding: 0.5em 1em;
+     font-size: 1.2em;
+     font-weight: bolder;
+ }
+

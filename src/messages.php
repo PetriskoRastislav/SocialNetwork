@@ -10,11 +10,27 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "messages", array());
+$page->displayHead( "messages", array("styles/messages.css"));
 $page->displayBodyStart();
 
+?>
 
 
-$page->displayBodyEnd();
+<div id="list_users">
+    <div id="list_users_header"><span class="list_users_header">Koverzácie</span></div>
+    <div id="list_users_list"></div>
+</div>
+
+<div id="conversations">
+</div>
+
+
+
+
+
+
+<?php
+
+$page->displayBodyEnd(array("js/messages.js"));
 
 ?>
