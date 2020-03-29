@@ -37,7 +37,7 @@ try {
         }
 
         $output .= "
-        <div class='list_users_item' id_user_to='" . $id_user . "'>
+        <div class='list_users_item' id_user_to='" . $id_user . "' name_user_to='" . $name . $surname . "'>
             <span class='user'>" .
             $name . " " . $surname . $status .
             "</span>

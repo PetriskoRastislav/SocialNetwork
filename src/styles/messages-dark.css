@@ -1,0 +1,31 @@
+/* Chat containers */
+
+.message {
+    border: 0.2em solid rgb(120, 120, 120);
+    background-color: rgb(90, 90, 90);
+}
+
+.message_my {
+    border-color: rgb(90, 90, 90);
+    background-color: rgb(60, 60, 60);
+}
+
+/* style of the test of the message */
+
+.message p {
+    color: rgb(220, 220, 220);
+}
+
+/* Style time text */
+
+.message .time {
+    float: right;
+    color: rgb(180, 180, 180);
+}
+
+/* Style time text */
+
+.message_my .time {
+    float: left;
+    color: rgb(180, 180, 180);
+}
