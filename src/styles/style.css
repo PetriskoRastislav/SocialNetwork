@@ -116,26 +116,22 @@
     z-index: 999;
 }
 
-#header_drop_content .header_menu_a {
-    background-color: rgb(230, 230, 230);
-}
-#header_drop_content .header_menu_a:hover {
-    background-color: rgb(250, 250, 250);
-    color: rgb(0, 0, 0);
-}
 
 #header_drop_content .header_menu_a {
+    background-color: rgb(230, 230, 230);
     border-left: solid 0.1em rgb(170, 170, 170);
     border-right: solid 0.1em rgb(170, 170, 170);
     border-top: solid 0.1em rgb(170, 170, 170);
+    width: 6em;
 }
 
 #header_drop_content .header_menu_a:last-child {
     border-bottom: solid 0.1em rgb(170, 170, 170);
 }
 
-#header_drop_content .header_menu_a{
-    width: 6em;
+#header_drop_content .header_menu_a:hover {
+    background-color: rgb(250, 250, 250);
+    color: rgb(0, 0, 0);
 }
 
 .border_left {
