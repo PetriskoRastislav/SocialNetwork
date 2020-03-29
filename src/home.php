@@ -15,6 +15,6 @@ $page->displayBodyStart();
 
 
 
-$page->displayBodyEnd();
+$page->displayBodyEnd(array());
 
 ?>

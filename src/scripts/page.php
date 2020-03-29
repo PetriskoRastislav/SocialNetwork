@@ -121,12 +121,18 @@
             echo "<h1 class='pageTitle'>" . $title . "</h1>";
         }
 
-            public function displayBodyEnd(){
-            $script = "<script src='js/jquery-3.4.1.min.js'></script>";
+        public function displayBodyEnd($scripts){
+            echo "<script src='js/jquery-3.4.1.min.js'></script>";
+            echo "<script src='js/menu.js'></script>";
 
-            $script .= "<script src='js/menu.js'></script>";
+            $script = @reset($scripts);
 
-            echo $script . "</div></div></body></html>";
+            while ($script){
+                echo "<script src='" . $script . "'></script>";
+                $script = next($scripts);
+            }
+
+            echo "</div></div></body></html>";
         }
     }
 ?>
