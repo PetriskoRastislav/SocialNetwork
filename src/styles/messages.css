@@ -57,6 +57,7 @@
     width: 100%;
     display: block;
     box-sizing: border-box;
+    background-color: rgb(215, 215, 215);
 }
 
 #list_users_header_title{
@@ -80,7 +81,7 @@
     margin: 0;
     padding: 0.4em 0.6em;
     height: 3em;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(215, 215, 215);
     transition: 0.3s;
 }
 
@@ -101,6 +102,9 @@
     padding: 0.5em 1em;
     font-size: 1.1em;
     clear: both;
+    transition: 0.3s;
+    width: 100%;
+    height: 100%;
 }
 
 .list_users_item {

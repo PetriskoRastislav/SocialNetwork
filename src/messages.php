@@ -10,7 +10,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "messages", array("styles/messages.css"));
+$page->displayHead( "messages", array("styles/messages.css", "styles/messages-dark.css"));
 $page->displayBodyStart();
 
 ?>
@@ -29,6 +29,30 @@ $page->displayBodyStart();
 </div>
 
 <div id="conversations">
+
+    <div class="message">
+        <img class="avatar" src="" alt="Avatar">
+        <p>Hello. How are you today?</p>
+        <span class="time">11:00</span>
+    </div>
+
+    <div class="message message_my">
+        <img class="avatar" src="" alt="Avatar">
+        <p>Hey! I'm fine. Thanks for asking!</p>
+        <span class="time">11:01</span>
+    </div>
+
+    <div class="message">
+        <img class="avatar" src="" alt="Avatar">
+        <p>Sweet! So, what do you wanna do today?</p>
+        <span class="time">11:02</span>
+    </div>
+
+    <div class="message message_my">
+        <img class="avatar" src="" alt="Avatar">
+        <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+        <span class="time">11:05</span>
+    </div>
 </div>
 
 

@@ -1,3 +1,38 @@
+
+#conversations {
+    background-color: rgb(54, 57, 63);
+}
+
+#list_users {
+    background-color: rgb(74, 77, 83);
+}
+
+#list_users_header {
+    background-color: rgb(64, 67, 73);
+}
+
+#list_users_header_title{
+    color: rgb(210, 210, 210);
+}
+
+#start_new_conversation {
+    background-color: rgb(64, 67, 73);
+}
+
+#start_new_conversation:hover {
+    background-color: rgb(94, 97, 103);
+}
+
+.user {
+    color: rgb(210, 210, 210);
+}
+
+.list_users_item:hover {
+    background-color: rgb(104, 107, 113);
+    color: rgb(245, 245, 245);
+}
+
+
 /* Chat containers */
 
 .message {
