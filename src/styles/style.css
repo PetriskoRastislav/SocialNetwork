@@ -16,7 +16,7 @@
     /*background-color: rgb(220, 20, 60);*/
     /*background-color: rgb(158, 27, 50);*/
     /*background-color: rgb(255, 0, 79);*/
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(200, 200, 200);
     height: 3em;
     width: 100%;
 }
@@ -52,7 +52,6 @@
 .header_menu_div {
     position: relative;
     display: inline-block;
-    background-color: rgb(150, 150, 150);
     height: 3em;
 }
 
@@ -65,7 +64,7 @@
 }
 
 .header_menu_li {
-    background-color: rgb(150, 150, 150);
+    background-color: rgb(210, 210, 210);
     margin: 0;
     padding: 0;
     font-family: Cambria, Georgia, serif;
@@ -80,28 +79,26 @@
     font-size: 1.1em;
     padding: 0.75em 1.5em 0.75em 1.5em;
     width: auto;
-    background-color: rgb(170, 170, 170);
-    color: rgb(30, 100, 30);
+    background-color: rgb(210, 210, 210);
+    color: rgb(20, 20, 20);
     display: block;
     text-align: left;
     text-decoration: none;
     transition: 0.5s;
     height: 1.25em;
+    cursor: pointer;
 }
 
-.header_menu_li:hover, .header_menu_drop_btn_active {
-    background-color: rgb(200, 200, 200);
-}
+/*.header_menu_li:hover, .header_menu_drop_btn_active {
+    background-color: rgb(230, 230, 230);
+}*/
 
 .header_menu_li:hover .header_menu_a, .header_menu_drop_btn_active .header_menu_a {
-    background-color: rgb(200, 200, 200);
-    color: rgb(0, 70, 0);
+    background-color: rgb(230, 230, 230);
+    color: rgb(0, 0, 0);
 }
 
-.header_menu_a:hover {
-    background-color: rgb(200, 200, 200);
-    color: rgb(0, 70, 0);
-}
+/* drop content of menu */
 
 .drop_btn {
     cursor: pointer;
@@ -112,7 +109,7 @@
     display: none;
     position: absolute;
     width: 6em;
-    background-color: rgb(170, 170, 170);
+    background-color: rgb(220, 220, 220);
     top: 3em;
     right: 4em;
     transition: 0.3s;
@@ -120,13 +117,21 @@
 }
 
 #header_drop_content .header_menu_a {
-    border-left: solid 0.1em rgb(100, 190, 100);
-    border-right: solid 0.1em rgb(100, 190, 100);
-    border-top: solid 0.1em rgb(100, 190, 100);
+    background-color: rgb(230, 230, 230);
+}
+#header_drop_content .header_menu_a:hover {
+    background-color: rgb(250, 250, 250);
+    color: rgb(0, 0, 0);
+}
+
+#header_drop_content .header_menu_a {
+    border-left: solid 0.1em rgb(170, 170, 170);
+    border-right: solid 0.1em rgb(170, 170, 170);
+    border-top: solid 0.1em rgb(170, 170, 170);
 }
 
 #header_drop_content .header_menu_a:last-child {
-    border-bottom: solid 0.1em rgb(100, 190, 100);
+    border-bottom: solid 0.1em rgb(170, 170, 170);
 }
 
 #header_drop_content .header_menu_a{
@@ -134,7 +139,7 @@
 }
 
 .border_left {
-    border-left: 0.2em rgb(0, 90, 0) solid;
+    border-left: 0.2em rgb(90, 90, 90) solid;
 }
 
 .header_drop_content_show {
