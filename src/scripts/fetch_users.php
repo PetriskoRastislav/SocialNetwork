@@ -28,7 +28,8 @@ try {
 
     while ($statement->fetch()) {
 
-        $time_now = date("Y-m-d H:i:s");
+        $time_now = strtotime(date('Y-m-d H:i:s') . '-5 seconds');
+        $time_now = date('Y-m-d H:i:s', $time_now);
 
         if ($last_active > $time_now) {
             $status = " <span class='active_mark'></span>";

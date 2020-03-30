@@ -29,7 +29,7 @@ $page->displayBodyStart();
 </div>
 
 <div id="conversation">
-    
+
 </div>
 
 <div id="chat_control">

@@ -124,6 +124,7 @@
         public function displayBodyEnd($scripts){
             echo "<script src='js/jquery-3.4.1.min.js'></script>";
             echo "<script src='js/menu.js'></script>";
+            echo "<script src='js/js.js'></script>";
 
             $script = @reset($scripts);
 
