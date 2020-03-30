@@ -1,8 +1,4 @@
 
-#conversations {
-    background-color: rgb(54, 57, 63);
-}
-
 #list_users {
     background-color: rgb(74, 77, 83);
 }
@@ -30,6 +26,16 @@
 .list_users_item:hover {
     background-color: rgb(104, 107, 113);
     color: rgb(245, 245, 245);
+}
+
+/* styles for chat / messages */
+
+#conversation {
+    background-color: rgb(54, 57, 63);
+}
+
+#chat_control {
+    background-color: rgb(75, 75, 75);
 }
 
 
@@ -63,4 +69,10 @@
 .message_my .time {
     float: left;
     color: rgb(180, 180, 180);
+}
+
+/* style for chat control */
+
+#message {
+
 }

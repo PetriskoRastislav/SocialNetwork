@@ -4,39 +4,48 @@
     padding: 0;
 }
 
-/* division for list of users with whom logged user had conversation */
+/* layout of messages section */
 
 #list_users {
-    min-height: 10em;
-    height: 100%;
+    display: block;
+    box-sizing: border-box;
     width: 25%;
     position: fixed;
     top: 3em;
+    bottom: 0;
     left: 0;
-    margin: 0;
+    right: 75%;
     padding: 0;
-    display: block;
-    float: right;
-    overflow-x: hidden;
+    overflow-y: scroll;
     background-color: rgb(230, 230, 230);
 }
 
-/* division for conversations */
-
-#conversations {
-    margin-left: 28%;
+#conversation {
+    display: block;
+    box-sizing: border-box;
     width: 75%;
-    height: 100%;
-    min-height: 10em;
     position: fixed;
     top: 3em;
+    bottom: 4em;
     right: 0;
-    padding: 0;
-    display: block;
-    float: right;
-    overflow-x: hidden;
+    left: 25%;
+    overflow-y: scroll;
     background-color: rgb(250, 250, 250);
 }
+
+#chat_control {
+    display: block;
+    box-sizing: border-box;
+    width: 75%;
+    position: fixed;
+    bottom: 0;
+    left: 25%;
+    right: 0;
+    height: 4em;
+    background-color: rgb(230, 230, 230);
+}
+
+/* styles */
 
 /* mark of active user */
 
@@ -120,7 +129,9 @@
 }
 
 
-/* styles for chat / messages */
+/* conversation*/
+
+
 
 /* Chat containers */
 
@@ -192,3 +203,20 @@
     color: rgb(43, 43, 43);
 }
 
+/* style for chat control */
+
+
+
+#message {
+    box-sizing: border-box;
+    margin: 1em 1em;
+    float: left;
+    width: 80%;
+    max-width: 60em;
+    height: 3em;
+    padding: 0.5em;
+    min-height: 3em;
+    /*background-color: ;
+    color: ;*/
+
+}
