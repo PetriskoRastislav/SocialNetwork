@@ -28,36 +28,17 @@ $page->displayBodyStart();
     <div id="list_users_list"></div>
 </div>
 
-<div id="conversations">
+<div id="conversation">
 
-    <div class="message">
-        <img class="avatar" src="" alt="Avatar">
-        <p>Hello. How are you today?</p>
-        <span class="time">11:00</span>
-    </div>
+    
 
-    <div class="message message_my">
-        <img class="avatar" src="" alt="Avatar">
-        <p>Hey! I'm fine. Thanks for asking!</p>
-        <span class="time">11:01</span>
-    </div>
-
-    <div class="message">
-        <img class="avatar" src="" alt="Avatar">
-        <p>Sweet! So, what do you wanna do today?</p>
-        <span class="time">11:02</span>
-    </div>
-
-    <div class="message message_my">
-        <img class="avatar" src="" alt="Avatar">
-        <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-        <span class="time">11:05</span>
-    </div>
 </div>
 
-
-
-
+<div id="chat_control">
+    <textarea name="message" id="message_to_send" cols="" rows="" placeholder="Tvoja správa ..."></textarea>
+    <img id="send_button" class="chat_control_button" src="srcPictures/icons8-send-100.png" alt="send icon" />
+    <img id="plus_button" class="chat_control_button" src="srcPictures/icons8-plus-100.png" alt="plus icon" />
+</div>
 
 
 <?php

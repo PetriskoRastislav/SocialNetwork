@@ -17,7 +17,7 @@
     right: 75%;
     padding: 0;
     overflow-y: scroll;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(235, 235, 235);
 }
 
 #conversation {
@@ -42,7 +42,7 @@
     left: 25%;
     right: 0;
     height: 4em;
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(210, 210, 210);
 }
 
 /* styles */
@@ -205,18 +205,34 @@
 
 /* style for chat control */
 
-
-
-#message {
+#message_to_send {
     box-sizing: border-box;
-    margin: 1em 1em;
+    margin: 1em 0.25em 1em 1em;
     float: left;
     width: 80%;
     max-width: 60em;
     height: 3em;
     padding: 0.5em;
     min-height: 3em;
+    position: relative;
     /*background-color: ;
     color: ;*/
+}
 
+.chat_control_button {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    float: left;
+    height: 3em;
+    width: auto;
+    padding: 0.25em;
+    margin: 0.5em 0.25em;
+    transition: 0.3s;
+    background-color: rgb(210, 210, 210);
+}
+
+.chat_control_button:hover {
+    cursor: pointer;
+    background-color: rgb(185, 185, 185);
 }

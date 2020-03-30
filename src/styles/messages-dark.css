@@ -73,6 +73,14 @@
 
 /* style for chat control */
 
-#message {
+#message_to_send {
 
+}
+
+.chat_control_button {
+    background-color: rgb(75, 75, 75);
+}
+
+.chat_control_button:hover {
+    background-color: rgb(110, 110, 110);
 }
