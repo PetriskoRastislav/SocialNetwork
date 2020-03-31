@@ -6,7 +6,7 @@ session_start();
 
 try {
 
-    // Connection to database.
+    /* Connection to database. */
     $db = db_connect();
     mysqli_set_charset($db, "utf8");
 

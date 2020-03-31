@@ -86,6 +86,9 @@ $(document).ready(function() {
         $("#conversation_header").html(conversation_header);
 
         fetch_user_chat(id_user_to);
+
+        let send_button = $("#send_button");
+        send_button.attr("id_user_to", id_user_to);
     }
 
 
@@ -104,10 +107,23 @@ $(document).ready(function() {
     }
 
 
-    /*$(document).on('click', '#start_new_conversation', function(){
+    /* will send message into a database */
+    $(document).on("click", "#send_button", function () {
+        let id_user_to = $(this).attr("id_user_to");
+        let message = $("#message_to_send").val();
 
-        $(this).style.
-    });*/
+        $.ajax({
+            url: "scripts/send_message.php",
+            method: "POST",
+            data: {
+                id_user_to: id_user_to,
+                message: message,
+            },
+            success: function(){
+                $("#message_to_send").val("");
+            }
+        })
+    });
 
 
 
