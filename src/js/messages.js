@@ -43,15 +43,13 @@ $(document).ready(function() {
 
                 for(let i = 0; i < ret_data.length; i += 4){
 
-                    console.log(ret_data[i] + " " + ret_data[i + 1] + " " + ret_data[i + 2] + " " + ret_data[i + 3]);
-
                     let el = $("#active_mark_" + ret_data[i]);
                     let el2 = $("#user_last_active");
 
-                    if(el2.hasClass(ret_data[i]) && ret_data[i + 1] === "online"){
+                    if(el2.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && el2.text() !== "Aktívny"){
                         el2.html("Aktívny");
                     }
-                    else if(el2.hasClass(ret_data[i]) && ret_data[i + 1] === "offline"){
+                    else if(el2.hasClass(ret_data[i]) && ret_data[i + 1] === "offline" && el2.text() === "Aktívny"){
                         el2.html("Naposledy aktívny " + ret_data[i + 2] + " " + ret_data[i + 3]);
                         $(".list_users_item[id_user_to='" + ret_data[i] + "']").attr("last_active", ret_data[i + 2] + " " + ret_data[i + 3]);
                     }
@@ -139,7 +137,7 @@ $(document).ready(function() {
 
 
     /* will refresh chat */
-    /*function refresh_chat(){
+    function refresh_chat(){
         let id_user_to = $("#send_button").attr("id_user_to");
 
         if(id_user_to > 0) {
@@ -156,7 +154,7 @@ $(document).ready(function() {
                 }
             });
         }
-    }*/
+    }
 
 
 
