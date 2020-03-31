@@ -88,7 +88,7 @@ try {
                 $status = "offline";
             }
 
-            $output .= $id_user . " " . $status . " ";
+            $output .= $id_user . " " . $status . " " . $last_active . " ";
         }
 
         $statement->free_result();

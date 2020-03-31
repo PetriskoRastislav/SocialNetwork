@@ -5,10 +5,14 @@ $(document).ready(function() {
     /* periodically update */
 
     setInterval(function() {
-
-        fetch_users_refresh();
+        refresh_user_list();
+        //refresh_chat();
     }, 2000);
-
+/*
+    setInterval(function () {
+        refresh_chat();
+    }, 500);
+    */
 
     /* will fetch users from with whom had logged user conversations from database */
     function fetch_users_all() {
@@ -21,13 +25,13 @@ $(document).ready(function() {
             success: function (data) {
                 $("#list_users_list").html(data);
             }
-        })
+        });
     }
 
 
     /* will refresh users list, what means it will refresh active marks
-    and will display notification of new message if any is sent */
-    function fetch_users_refresh(){
+    and will display notification of new message if any is there */
+    function refresh_user_list(){
         $.ajax({
             url: "scripts/fetch_users.php",
             method: "POST",
@@ -37,12 +41,19 @@ $(document).ready(function() {
             success: function(data){
                 let ret_data = data.toString().split(" ");
 
-                for(let i = 0; i < ret_data.length; i += 2){
+                for(let i = 0; i < ret_data.length; i += 4){
+
+                    console.log(ret_data[i] + " " + ret_data[i + 1] + " " + ret_data[i + 2] + " " + ret_data[i + 3]);
+
                     let el = $("#active_mark_" + ret_data[i]);
                     let el2 = $("#user_last_active");
 
                     if(el2.hasClass(ret_data[i]) && ret_data[i + 1] === "online"){
                         el2.html("Aktívny");
+                    }
+                    else if(el2.hasClass(ret_data[i]) && ret_data[i + 1] === "offline"){
+                        el2.html("Naposledy aktívny " + ret_data[i + 2] + " " + ret_data[i + 3]);
+                        $(".list_users_item[id_user_to='" + ret_data[i] + "']").attr("last_active", ret_data[i + 2] + " " + ret_data[i + 3]);
                     }
 
                     if(el.hasClass("active_mark") && ret_data[i + 1] === "online") {
@@ -63,7 +74,7 @@ $(document).ready(function() {
 
                 }
             }
-        })
+        });
     }
 
 
@@ -98,12 +109,13 @@ $(document).ready(function() {
             url: "scripts/fetch_user_chat.php",
             method: "POST",
             data: {
+                mode: "all",
                 id_user_to: id_user_to,
             },
             success: function (data) {
                 $("#conversation").html(data);
             }
-        })
+        });
     }
 
 
@@ -122,8 +134,29 @@ $(document).ready(function() {
             success: function(){
                 $("#message_to_send").val("");
             }
-        })
+        });
     });
+
+
+    /* will refresh chat */
+    /*function refresh_chat(){
+        let id_user_to = $("#send_button").attr("id_user_to");
+
+        if(id_user_to > 0) {
+
+            $.ajax({
+                url: "scripts/fetch_user_chat.php",
+                method: "POST",
+                data: {
+                    mode: "refresh",
+                    id_user_to: id_user_to,
+                },
+                success: function (data) {
+                    $("#conversation").append(data);
+                }
+            });
+        }
+    }*/
 
 
 
