@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         refresh_user_list();
-        //refresh_chat();
+        refresh_chat();
     }, 2000);
 /*
     setInterval(function () {
@@ -114,6 +114,24 @@ $(document).ready(function() {
                 $("#conversation").html(data);
             }
         });
+        write_last_message_id(id_user_to);
+    }
+
+
+    /* will write id of the last fetched message into a conversation_header */
+    function write_last_message_id(id_user_to){
+        $.ajax({
+            url: "scripts/fetch_user_chat.php",
+            method: "POST",
+            data: {
+                mode: "id_message",
+                id_user_to: id_user_to,
+            },
+            success: function (data) {
+                console.log(data);
+                $("#conversation_header").attr("last_message", data);
+            }
+        });
     }
 
 
@@ -122,23 +140,26 @@ $(document).ready(function() {
         let id_user_to = $(this).attr("id_user_to");
         let message = $("#message_to_send").val();
 
-        $.ajax({
-            url: "scripts/send_message.php",
-            method: "POST",
-            data: {
-                id_user_to: id_user_to,
-                message: message,
-            },
-            success: function(){
-                $("#message_to_send").val("");
-            }
-        });
+        if(message !== ""){
+            $.ajax({
+                url: "scripts/send_message.php",
+                method: "POST",
+                data: {
+                    id_user_to: id_user_to,
+                    message: message,
+                },
+                success: function(){
+                    $("#message_to_send").val("");
+                }
+            });
+        }
     });
 
 
     /* will refresh chat */
     function refresh_chat(){
         let id_user_to = $("#send_button").attr("id_user_to");
+        let last_message_id = $("#conversation_header").attr("last_message");
 
         if(id_user_to > 0) {
 
@@ -148,14 +169,15 @@ $(document).ready(function() {
                 data: {
                     mode: "refresh",
                     id_user_to: id_user_to,
+                    last_message_id: last_message_id
                 },
                 success: function (data) {
                     $("#conversation").append(data);
                 }
             });
+
+            write_last_message_id(id_user_to);
         }
     }
-
-
 
 });
