@@ -30,6 +30,10 @@
 
 /* styles for chat / messages */
 
+#conversation_header {
+    background-color: rgb(70, 70, 70);
+}
+
 #conversation {
     background-color: rgb(54, 57, 63);
 }
@@ -40,6 +44,14 @@
 
 
 /* Chat containers */
+
+#conversation_header p {
+    color: rgb(220, 220, 220);
+}
+
+#conversation_header .time {
+    color: rgb(180, 180, 180);
+}
 
 .message {
     border: 0.2em solid rgb(120, 120, 120);

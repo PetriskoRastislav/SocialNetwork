@@ -28,6 +28,10 @@ $page->displayBodyStart();
     <div id="list_users_list"></div>
 </div>
 
+<div id="conversation_header">
+
+</div>
+
 <div id="conversation">
 
 </div>
