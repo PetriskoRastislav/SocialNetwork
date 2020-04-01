@@ -173,8 +173,10 @@ $(document).ready(function() {
                     last_message_id: last_message_id
                 },
                 success: function (data) {
-                    $("#conversation").append(data);
-                    scroll_chat();
+                    if(data.length > 0) {
+                        $("#conversation").append(data);
+                        scroll_chat();
+                    }
                 }
             });
 
@@ -185,7 +187,8 @@ $(document).ready(function() {
 
     /* auto scroll to the bottom of a conversation */
     function scroll_chat(){
-        $("#conversation").animate({ scrollTop: $("#conversation")[0].scrollHeight }, "slow");
+        let chat = $("#conversation");
+        chat.animate({ scrollTop: chat[0].scrollHeight }, "slow");
     }
 
 
