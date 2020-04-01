@@ -112,7 +112,7 @@ $(document).ready(function() {
             },
             success: function (data) {
                 $("#conversation").html(data);
-                scroll_chat();
+                scroll_chat(true);
             }
         });
         write_last_message_id(id_user_to);
@@ -150,7 +150,7 @@ $(document).ready(function() {
                 },
                 success: function(){
                     $("#message_to_send").val("");
-                    refresh_chat();
+                    refresh_chat(true);
                 }
             });
         }
@@ -175,7 +175,7 @@ $(document).ready(function() {
                 success: function (data) {
                     if(data.length > 0) {
                         $("#conversation").append(data);
-                        scroll_chat();
+                        scroll_chat(false);
                     }
                 }
             });
@@ -186,9 +186,21 @@ $(document).ready(function() {
 
 
     /* auto scroll to the bottom of a conversation */
-    function scroll_chat(){
+    function scroll_chat(force){
         let chat = $("#conversation");
-        chat.animate({ scrollTop: chat[0].scrollHeight }, "slow");
+
+        let actual_position = chat.scrollTop();
+        let down_position = chat[0].scrollHeight;
+
+        console.log(actual_position + " " + down_position);
+
+        if(actual_position === down_position) {
+            chat.animate({scrollTop: chat[0].scrollHeight}, "slow");
+        }
+
+        if(force){
+            chat.animate({scrollTop: chat[0].scrollHeight}, "slow");
+        }
     }
 
 
