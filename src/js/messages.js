@@ -6,13 +6,13 @@ $(document).ready(function() {
 
     setInterval(function() {
         refresh_user_list();
-        refresh_chat();
+        //refresh_chat();
     }, 2000);
-/*
+
     setInterval(function () {
         refresh_chat();
     }, 500);
-    */
+
 
     /* will fetch users from with whom had logged user conversations from database */
     function fetch_users_all() {
@@ -151,7 +151,7 @@ $(document).ready(function() {
                 },
                 success: function(){
                     $("#message_to_send").val("");
-                    refresh_chat(true);
+                    //refresh_chat();
                 }
             });
         }
