@@ -91,6 +91,7 @@ $(document).ready(function() {
         let conversation_header = "<img class='avatar' src='' alt='Avatar' />";
         conversation_header += "<p>" + name_user_to + "</p>";
         conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Naposledy aktívny " + last_active + "</span>";
+        conversation_header += "<img id='conversation_close_button' src='srcPictures/icons8-no-100.png' alt='send icon' />";
 
         $("#conversation_header").html(conversation_header);
 
@@ -190,11 +191,9 @@ $(document).ready(function() {
         let chat = $("#conversation");
 
         let actual_position = chat.scrollTop();
-        let down_position = chat[0].scrollHeight;
+        let down_position = chat[0].scrollHeight - chat.height();
 
-        console.log(actual_position + " " + down_position);
-
-        if(actual_position === down_position) {
+        if(down_position - actual_position < 650) {
             chat.animate({scrollTop: chat[0].scrollHeight}, "slow");
         }
 
@@ -202,6 +201,13 @@ $(document).ready(function() {
             chat.animate({scrollTop: chat[0].scrollHeight}, "slow");
         }
     }
+
+
+    /* will clear conversation and conversation header sections */
+    $(document).on("click", "#conversation_close_button", function () {
+        $("#conversation_header").html("");
+        $("#conversation").html("");
+    });
 
 
 
