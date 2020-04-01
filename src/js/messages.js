@@ -129,7 +129,6 @@ $(document).ready(function() {
                 id_user_to: id_user_to,
             },
             success: function (data) {
-                console.log(data);
                 $("#conversation_header").attr("last_message", data);
             }
         });
