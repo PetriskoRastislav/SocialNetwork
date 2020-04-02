@@ -36,7 +36,7 @@ try {
         while ($statement->fetch()) {
 
             /* will determine wheter particular user is still active or not */
-            $time_now = strtotime(date('Y-m-d H:i:s') . '-5 seconds');
+            $time_now = strtotime(date('Y-m-d H:i:s') . '-3 seconds');
             $time_now = date('Y-m-d H:i:s', $time_now);
 
             if ($last_active > $time_now) {
@@ -45,11 +45,19 @@ try {
                 $status = " <span class='' id='active_mark_" . $id_user . "'></span>";
             }
 
+            $mes_count = get_unseen_messages_notification($id_user, $_SESSION['id_user']);
+            if ($mes_count > 0 ) {
+                $mes_notification = " <span class='mes_not_chat' id='mes_not_" . $id_user . "' ></span>";
+            }
+            else {
+                $mes_notification = " <span class='' id='mes_not_" . $id_user . "' ></span>";
+            }
+
             /* will create list item of the list of users */
             $output .= "
                 <div class='list_users_item' id_user_to='" . $id_user . "' name_user_to='" . $name . " " . $surname . "' last_active='" . $last_active . "'>
                     <span class='user'>" .
-                        $name . " " . $surname . $status .
+                        $name . " " . $surname . $status . $mes_notification .
                         "</span>
                 </div>
             ";
@@ -88,7 +96,9 @@ try {
                 $status = "offline";
             }
 
-            $output .= $id_user . " " . $status . " " . $last_active . " ";
+            $mes_count = get_unseen_messages_notification($id_user, $_SESSION['id_user']);
+
+            $output .= $id_user . " " . $status . " " . $last_active . " " . $mes_count . " ";
         }
 
         $statement->free_result();
@@ -101,6 +111,40 @@ try {
 catch (Exception $ex){
     $ex->getMessage();
     exit();
+}
+
+/* will return number of unseen messages from a particular user */
+function get_unseen_messages_notification($id_user_sender, $id_user_receiver){
+
+    try{
+
+        /* Connection to database. */
+        $db = db_connect();
+        mysqli_set_charset($db, "utf8");
+
+        $query = "
+            SELECT id_message
+            FROM messages
+            WHERE id_user_sender = ? AND id_user_receiver = ? AND status = 'unseen'";
+        $statement = $db->prepare($query);
+        $statement->bind_param("ii", $id_user_sender, $id_user_receiver);
+        $statement->execute();
+        $statement->bind_result($id);
+
+        $num_of_notifications = 0;
+
+        while($statement->fetch()){
+            if($id > 0 ) $num_of_notifications += 1;
+        }
+
+        return $num_of_notifications;
+
+    }
+    catch (Exception $ex){
+        $ex->getMessage();
+        return 0;
+    }
+
 }
 
 ?>

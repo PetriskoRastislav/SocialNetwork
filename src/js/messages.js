@@ -6,8 +6,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         refresh_user_list();
-        //refresh_chat();
-    }, 2000);
+    }, 1000);
 
     setInterval(function () {
         refresh_chat();
@@ -41,33 +40,44 @@ $(document).ready(function() {
             success: function(data){
                 let ret_data = data.toString().split(" ");
 
-                for(let i = 0; i < ret_data.length; i += 4){
+                for(let i = 0; i < ret_data.length; i += 5){
 
-                    let el = $("#active_mark_" + ret_data[i]);
-                    let el2 = $("#user_last_active");
+                    /* console.log(ret_data[i] + " " + ret_data[i + 1] + " " + ret_data[i + 2] + " " + ret_data[i + 3] + " " + ret_data[i + 4]); */
 
-                    if(el2.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && el2.text() !== "Aktívny"){
-                        el2.html("Aktívny");
+
+                    let last_active_sign = $("#user_last_active");
+                    let active_mark = $("#active_mark_" + ret_data[i]);
+                    let new_message_notification = $("#mes_not_" + ret_data[i]);
+
+
+                    /* label with last active time or with sign active in chat header */
+
+                    if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Aktívny"){
+                        last_active_sign.html("Aktívny");
                     }
-                    else if(el2.hasClass(ret_data[i]) && ret_data[i + 1] === "offline" && el2.text() === "Aktívny"){
-                        el2.html("Naposledy aktívny " + ret_data[i + 2] + " " + ret_data[i + 3]);
+                    else if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline" && last_active_sign.text() === "Aktívny"){
+                        last_active_sign.html("Naposledy aktívny " + ret_data[i + 2] + " " + ret_data[i + 3]);
                         $(".list_users_item[id_user_to='" + ret_data[i] + "']").attr("last_active", ret_data[i + 2] + " " + ret_data[i + 3]);
                     }
 
-                    if(el.hasClass("active_mark") && ret_data[i + 1] === "online") {
 
-                    }
-                    else if(el.hasClass("active_mark") && ret_data[i + 1] === "offline"){
-                        el.removeClass("active_mark");
-                    }
-                    else if(!el.hasClass("active_mark") && ret_data[i + 1] === "online"){
-                        el.addClass("active_mark");
-                    }
-                    else if(!el.hasClass("active_mark") && ret_data[i + 1] === "offline"){
+                    /* active mark in the list of conversations */
 
+                    if(active_mark.hasClass("active_mark") && ret_data[i + 1] === "offline"){
+                        active_mark.removeClass("active_mark");
                     }
-                    else{
-                        //console.log("someone or something has fucked up.")
+                    else if(!active_mark.hasClass("active_mark") && ret_data[i + 1] === "online"){
+                        active_mark.addClass("active_mark");
+                    }
+
+
+                    /* mark of a new unread message in the list of conversations */
+
+                    if(ret_data[i + 4] === "0" && new_message_notification.hasClass("mes_not_chat")){
+                        new_message_notification.removeClass("mes_not_chat");
+                    }
+                    else if(ret_data[i + 4] !== "0" && !new_message_notification.hasClass("mes_not_chat")) {
+                        new_message_notification.addClass("mes_not_chat");
                     }
 
                 }
