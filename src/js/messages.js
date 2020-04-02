@@ -240,4 +240,15 @@ $(document).ready(function() {
     });
 
 
+    /* will send message also after clicking on Enter */
+    $(document).on("keyup", "#message_to_send", function (event) {
+
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            $("#send_button").click();
+        }
+
+    });
+
+
 });
