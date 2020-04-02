@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     setInterval(function() {
         update_last_active();
-    }, 2000);
+    }, 1500);
 
 
     /* will update time of last activity of user in database */
@@ -12,7 +12,7 @@ $(document).ready(function() {
             success: function () {
 
             }
-        })
+        });
     }
 
 });

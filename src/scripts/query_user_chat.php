@@ -97,7 +97,7 @@ try {
         /* will fetch all messages newer then message with given id */
 
         $id_user_to = $_POST['id_user_to'];
-        $last_message = $_POST['last_message_id'];
+        @$last_message = $_POST['last_message_id'];
 
         $query = "
             SELECT * 

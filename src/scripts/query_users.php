@@ -15,7 +15,7 @@ try {
     $mode = $_POST['mode'];
 
 
-    if($mode == "all") {
+    if ($mode == "all") {
 
         /* fetch all users with whom had logged user communication with all data */
 
@@ -36,7 +36,7 @@ try {
         while ($statement->fetch()) {
 
             /* will determine wheter particular user is still active or not */
-            $time_now = strtotime(date('Y-m-d H:i:s') . '-3 seconds');
+            $time_now = strtotime(date('Y-m-d H:i:s') . '-5 seconds');
             $time_now = date('Y-m-d H:i:s', $time_now);
 
             if ($last_active > $time_now) {
@@ -68,7 +68,7 @@ try {
         print $output;
 
     }
-    else if($mode == "refresh"){
+    else if ($mode == "refresh") {
 
         /* will only fetch last_active data and will make notification when user has new message */
 

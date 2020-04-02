@@ -6,18 +6,20 @@ session_start();
 
 try {
 
-    // Connection to database.
+    /* Connection to database */
     $db = db_connect();
     mysqli_set_charset($db, "utf8");
 
-    // will update time of last activity of logged user
+    /* will update time of last activity of logged user */
+
+    $time_now = date("Y-m-d H:i:s");
 
     $query = "
         UPDATE users
-        SET last_active = now()
+        SET last_active = ?
         WHERE id_user = ?";
     $statement = $db->prepare($query);
-    $statement->bind_param("i", $_SESSION['id_user']);
+    $statement->bind_param("si", $time_now, $_SESSION['id_user']);
     $statement->execute();
 
 }
