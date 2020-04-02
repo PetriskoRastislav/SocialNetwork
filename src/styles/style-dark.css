@@ -14,12 +14,12 @@
 /* style settings for menu */
 
 .header_menu_li {
-    background-color: rgb(60, 60, 60);
+    background-color: rgb(40, 40, 40);
 }
 
 .header_menu_a {
-    background-color: rgb(60, 60, 60);
-    color: rgb(180, 180, 180);
+    background-color: rgb(40, 40, 40);
+    color: rgb(190, 190, 190);
 }
 
 /*.header_menu_li:hover, .header_menu_drop_btn_active {
@@ -27,37 +27,37 @@
 }*/
 
 .header_menu_li:hover .header_menu_a, .header_menu_drop_btn_active .header_menu_a {
-    background-color: rgb(40, 40, 40);
-    color: rgb(220, 220, 220);
+    background-color: rgb(70, 70, 70);
+    color: rgb(230, 230, 230);
 }
 
 
 /* drop content of menu */
 
 #header_drop_content {
-    background-color: rgb(60, 60, 60);
+    background-color: rgb(40, 40, 40);
 }
 
 #header_drop_content .header_menu_a {
-    background-color: rgb(60, 60, 60);
-    border-left: solid 0.1em rgb(140, 140, 140);
-    border-right: solid 0.1em rgb(140, 140, 140);
-    border-top: solid 0.1em rgb(140, 140, 140);
+    background-color: rgb(40, 40, 40);
+    border-left-color:  rgb(140, 140, 140);
+    border-right-color: rgb(140, 140, 140);
+    border-top-color: rgb(140, 140, 140);
     width: 6em;
 }
 
 #header_drop_content .header_menu_a:last-child {
-    border-bottom: solid 0.1em rgb(140, 140, 140);
+    border-bottom-color: rgb(140, 140, 140);
 }
 
 #header_drop_content .header_menu_a:hover {
-    background-color: rgb(40, 40, 40);
+    background-color: rgb(70, 70, 70);
     color: rgb(230, 230, 230);
 }
 
 
 .border_left {
-    border-left: solid 0.2em rgb(140, 140, 140);
+    border-left-color: rgb(140, 140, 140);
 }
 
 /* formatting of body */
