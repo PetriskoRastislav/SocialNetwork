@@ -34,20 +34,27 @@ try {
 
         while ($statement->fetch()) {
             if ($id_user_to == $id_user_sender) {
-                $output .= "<div class='message'>";
-            } else {
-                $output .= "<div class='message message_my'>";
+                $output .= "<div class='message' id='" . $id_message . "'>";
+            }
+            else {
+                $output .= "<div class='my_mes_wrap'><img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
+                $output .= "<div class='message message_my' id='" . $id_message . "'>";
             }
 
             $output .= "<img class='avatar' src='' alt='Avatar' />";
 
             if ($status == "unseen" || $status == "seen") {
                 $output .= "<p>" . $message . "</p>";
-            } else {
+            }
+            else {
                 $output .= "<p>Message has been removed</p>";
             }
 
             $output .= "<span class='time'>" . $time . "</span></div>";
+
+            if ($id_user_to != $id_user_sender) {
+                $output .= "</div>";
+            }
         }
 
         $statement->free_result();
@@ -109,7 +116,9 @@ try {
         while ($statement->fetch()) {
             if ($id_user_to == $id_user_sender) {
                 $output .= "<div class='message'>";
-            } else {
+            }
+            else {
+                $output .= "<div class='my_mes_wrap'><img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
                 $output .= "<div class='message message_my'>";
             }
 
@@ -117,11 +126,16 @@ try {
 
             if ($status == "unseen" || $status == "seen") {
                 $output .= "<p>" . $message . "</p>";
-            } else {
+            }
+            else {
                 $output .= "<p>Message has been removed</p>";
             }
 
             $output .= "<span class='time'>" . $time . "</span></div>";
+
+            if ($id_user_to != $id_user_sender) {
+                $output .= "</div>";
+            }
         }
 
         $statement->free_result();
