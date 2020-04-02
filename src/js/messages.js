@@ -16,7 +16,7 @@ $(document).ready(function() {
     /* will fetch users from with whom had logged user conversations from database */
     function fetch_users_all() {
         $.ajax({
-            url: "scripts/fetch_users.php",
+            url: "scripts/query_users.php",
             method: "POST",
             data: {
                 mode: "all",
@@ -32,7 +32,7 @@ $(document).ready(function() {
     and will display notification of new message if any is there */
     function refresh_user_list(){
         $.ajax({
-            url: "scripts/fetch_users.php",
+            url: "scripts/query_users.php",
             method: "POST",
             data: {
                 mode: "refresh",
@@ -115,7 +115,7 @@ $(document).ready(function() {
     /* will fetch chat of particular user */
     function fetch_user_chat(id_user_to){
         $.ajax({
-            url: "scripts/fetch_user_chat.php",
+            url: "scripts/query_user_chat.php",
             method: "POST",
             data: {
                 mode: "all",
@@ -133,7 +133,7 @@ $(document).ready(function() {
     /* will write id of the last fetched message into a conversation_header */
     function write_last_message_id(id_user_to){
         $.ajax({
-            url: "scripts/fetch_user_chat.php",
+            url: "scripts/query_user_chat.php",
             method: "POST",
             data: {
                 mode: "id_message",
@@ -176,7 +176,7 @@ $(document).ready(function() {
         if(id_user_to > 0) {
 
             $.ajax({
-                url: "scripts/fetch_user_chat.php",
+                url: "scripts/query_user_chat.php",
                 method: "POST",
                 data: {
                     mode: "refresh",
@@ -219,6 +219,25 @@ $(document).ready(function() {
         $("#conversation").html("");
     });
 
+
+    /* will "remove" message of a logged user */
+    $(document).on("click", ".remove_message", function () {
+        let id_message = $(this).attr("id");
+        id_message = id_message.split("_");
+        id_message = id_message[2];
+
+        $.ajax({
+            url: "scripts/query_user_chat.php",
+            method: "POST",
+            data: {
+                mode: "remove_message",
+                id_message: id_message,
+            },
+            success: function () {
+
+            },
+        })
+    });
 
 
 });

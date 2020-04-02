@@ -71,6 +71,14 @@
     background-color: rgb(60, 60, 60);
 }
 
+.remove_message {
+    background-color: rgb(54, 57, 63);
+}
+
+.remove_message:hover {
+    background-color: rgb(84, 87, 93);
+}
+
 /* style of the test of the message */
 
 .message p {

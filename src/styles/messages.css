@@ -207,7 +207,7 @@
     background-color: rgb(241, 241, 241);
     border-radius: 5px;
     padding: 0.625em;
-    margin: 1em 4em 1em 1em;
+    margin: 1em 5em 1em 1em;
 }
 
 .message_my {
@@ -268,6 +268,28 @@
 .message_my .time {
     float: left;
     color: rgb(43, 43, 43);
+}
+
+.my_mes_wrap:hover .remove_message{
+    display: block;
+}
+
+.remove_message {
+    box-sizing: border-box;
+    display: none;
+    position: absolute;
+    height: 3em;
+    width: auto;
+    padding: 0.25em;
+    margin: 0 0 0 0.625em;
+    transition: 0.3s;
+    background-color: rgb(250, 250, 250);
+}
+
+.remove_message:hover {
+    display: block;
+    cursor: pointer;
+    background-color: rgb(185, 185, 185);
 }
 
 /* style for chat control */

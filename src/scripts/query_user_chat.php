@@ -92,7 +92,7 @@ try {
 
         print $output;
     }
-    else if($mode == "refresh"){
+    else if ($mode == "refresh") {
 
         /* will fetch all messages newer then message with given id */
 
@@ -149,6 +149,21 @@ try {
         $statement->execute();
 
         print $output;
+
+    }
+    else if ($mode == "remove_message") {
+
+        /* will "remove" particular message of logged user from chat */
+
+        $id_message = $_POST['id_message'];
+
+        $query = "
+            UPDATE messages
+            SET status = 'deleted'
+            WHERE id_user_sender = ? AND id_message = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("ii", $_SESSION['id_user'], $id_message);
+        $statement->execute();
 
     }
 
