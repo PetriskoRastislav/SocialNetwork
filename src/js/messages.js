@@ -151,6 +151,8 @@ $(document).ready(function() {
         let id_user_to = $(this).attr("id_user_to");
         let message = $("#message_to_send").val();
 
+        message = message.trim();
+
         if(message !== ""){
             $.ajax({
                 url: "scripts/send_message.php",
@@ -165,6 +167,17 @@ $(document).ready(function() {
                 }
             });
         }
+    });
+
+
+    /* will send message also after clicking on Enter */
+    $(document).on("keyup", "#message_to_send", function (event) {
+
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            $("#send_button").click();
+        }
+
     });
 
 
@@ -215,7 +228,9 @@ $(document).ready(function() {
 
     /* will clear conversation and conversation header sections */
     $(document).on("click", "#conversation_close_button", function () {
-        $("#conversation_header").html("");
+        let con_head = $("#conversation_header");
+        con_head.html("");
+        con_head.removeAttr("last_message");
         $("#conversation").html("");
     });
 
@@ -240,15 +255,8 @@ $(document).ready(function() {
     });
 
 
-    /* will send message also after clicking on Enter */
-    $(document).on("keyup", "#message_to_send", function (event) {
 
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            $("#send_button").click();
-        }
-
-    });
+    /* will search for a particular user */
 
 
 });
