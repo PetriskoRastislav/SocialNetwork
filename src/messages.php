@@ -22,7 +22,8 @@ $page->displayBodyStart();
         <span id="list_users_header_title">
             Koverzácie
         </span>
-        <img id="start_new_conversation" src="srcPictures/icons8-new-message-100.png" alt="start new conversation"/>
+        <input id="search_user_con_list" name="search_user_conversation_list" type="text" placeholder="username" >
+        <div id="search_result_con_list"></div>
     </div>
 
     <div id="list_users_list"></div>

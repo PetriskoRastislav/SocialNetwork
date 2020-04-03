@@ -19,12 +19,32 @@
 
 /* styles for a button to start a new conversation */
 
-#start_new_conversation {
+/*#start_new_conversation {
     background-color: rgb(64, 67, 73);
 }
 
 #start_new_conversation:hover {
     background-color: rgb(94, 97, 103);
+}*/
+
+/* styles for field to search users in conversations */
+
+#search_user_con_list {
+    background-color: rgb(50, 50, 50);
+    color: rgb(220, 220, 220);
+    border-color: rgb(110, 110, 110);
+}
+
+#search_user_con_list:focus {
+    background-color: rgb(60, 60, 60);
+    border-color: rgb(250, 250, 250);
+}
+
+
+/* div with results of search */
+
+#search_result_con_list {
+    background-color: rgb(84, 87, 93);
 }
 
 
