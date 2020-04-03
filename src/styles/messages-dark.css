@@ -1,7 +1,12 @@
 
+/* list with conversations */
+
 #list_users {
     background-color: rgb(74, 77, 83);
 }
+
+
+/* header of list */
 
 #list_users_header {
     background-color: rgb(64, 67, 73);
@@ -11,6 +16,9 @@
     color: rgb(210, 210, 210);
 }
 
+
+/* styles for a button to start a new conversation */
+
 #start_new_conversation {
     background-color: rgb(64, 67, 73);
 }
@@ -19,39 +27,45 @@
     background-color: rgb(94, 97, 103);
 }
 
-.user {
-    color: rgb(210, 210, 210);
-}
+
+/* styles for labels with names of users */
 
 .list_users_item:hover {
     background-color: rgb(104, 107, 113);
     color: rgb(245, 245, 245);
 }
 
-/* styles for chat / messages */
+
+/* span with name of user */
+
+.user {
+    color: rgb(210, 210, 210);
+}
+
+
+
+/* header of active conversation */
 
 #conversation_header {
     background-color: rgb(70, 70, 70);
 }
 
-#conversation {
-    background-color: rgb(54, 57, 63);
-}
 
-#chat_control {
-    background-color: rgb(75, 75, 75);
-}
-
-
-/* Chat containers */
+/* style for name of user */
 
 #conversation_header p {
     color: rgb(220, 220, 220);
 }
 
+
+/* time when was use last active */
+
 #conversation_header .time {
     color: rgb(180, 180, 180);
 }
+
+
+/* button, will clear conversation and conversation header sections */
 
 #conversation_close_button {
     background-color: rgb(70, 70, 70);
@@ -60,6 +74,17 @@
 #conversation_close_button:hover {
     background-color: rgb(100, 100, 100);
 }
+
+
+
+/* section with messages of active conversation */
+
+#conversation {
+    background-color: rgb(54, 57, 63);
+}
+
+
+/* styles for message bubbles */
 
 .message {
     border-color: rgb(120, 120, 120);
@@ -71,6 +96,27 @@
     background-color: rgb(60, 60, 60);
 }
 
+
+/* style of the test of the message */
+
+.message p {
+    color: rgb(220, 220, 220);
+}
+
+
+/* Style time text */
+
+.message .time {
+    color: rgb(180, 180, 180);
+}
+
+.message_my .time {
+    color: rgb(180, 180, 180);
+}
+
+
+/* button to remove message */
+
 .remove_message {
     background-color: rgb(54, 57, 63);
 }
@@ -79,39 +125,30 @@
     background-color: rgb(84, 87, 93);
 }
 
-/* style of the test of the message */
 
-.message p {
-    color: rgb(220, 220, 220);
-}
-
-/* Style time text */
-
-.message .time {
-    float: right;
-    color: rgb(180, 180, 180);
-}
-
-/* Style time text */
-
-.message_my .time {
-    float: left;
-    color: rgb(180, 180, 180);
-}
 
 /* style for chat control */
 
+#chat_control {
+    background-color: rgb(75, 75, 75);
+}
+
+
+/* input for message */
 
 #message_to_send {
     background-color: rgb(50, 50, 50);
     color: rgb(220, 220, 220);
-    border: 2px solid rgb(110, 110, 110);
+    border-color: rgb(110, 110, 110);
 }
 
 #message_to_send:focus {
     background-color: rgb(60, 60, 60);
-    border: 2px solid rgb(250, 250, 250);
+    border-color: rgb(250, 250, 250);
 }
+
+
+/* buttons in chat control section */
 
 .chat_control_button {
     background-color: rgb(75, 75, 75);
