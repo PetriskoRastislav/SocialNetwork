@@ -106,6 +106,36 @@ try {
         print $output;
 
     }
+    else if ($mode == "find_user") {
+
+        /* will return result of searching for a user */
+
+        $value = $_POST['value'];
+
+        $query = "
+            SELECT *
+            FROM users
+            WHERE name LIKE ? 
+            OR surname LIKE ? 
+            OR email LIKE ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("sss", $value, $value, $value);
+        $statement->execute();
+        $statement->bind_result($id, $email, $name, $surname, $profile_picture);
+
+        $output = "";
+
+        while ($statement->fetch()){
+            $output .= "
+                <div id='search_result_" . $id . "' class='search_result_item'>
+                    <img class='avatar' src='' alt='Avatar' />
+                    <p>" . $name . " " . $surname . "</p>
+                </div>";
+        }
+
+        print $output;
+
+    }
 
 }
 catch (Exception $ex){

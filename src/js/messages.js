@@ -257,6 +257,22 @@ $(document).ready(function() {
 
 
     /* will search for a particular user */
+    $(document).on("change", "#search_user_con_list", function () {
+        let value = $(this).val();
 
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "find_user",
+                value: "value",
+            },
+            success: function (data) {
+                let search_result = $("#search_result_con_list");
+                search_result.html(data);
+                search_result.addClass(".visible");
+            },
+        });
+    });
 
 });
