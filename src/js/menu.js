@@ -1,23 +1,26 @@
+$(document).ready(function() {
 
 
+    $(document).on("click", "#header_menu_drop_btn",  function () {
 
-document.getElementById("header_menu_drop_btn").addEventListener("click", function(){
-    let drop_content = document.getElementById('header_drop_content');
-    let drop_btn = document.getElementById('header_menu_drop_btn');
-    let arrow = document.getElementById('arrow_btn_menu');
+        let drop_content = $("#header_drop_content");
+        let drop_btn = $("#header_menu_drop_btn");
+        let arrow = $("#arrow_btn_menu");
 
-    if(drop_content.style.display === 'block'){
-        drop_content.style.display = 'none';
-        drop_btn.classList.remove('header_menu_drop_btn_active');
-        arrow.classList.remove('up_arrow');
-        arrow.classList.add('down_arrow');
-    }
-    else{
-        drop_content.style.display = 'block';
-        drop_btn.classList.add('header_menu_drop_btn_active');
-        arrow.classList.remove('down_arrow');
-        arrow.classList.add('up_arrow');
-    }
+        if (drop_content.hasClass("header_menu_drop_show")) {
+            drop_content.removeClass("header_menu_drop_show");
+            drop_btn.removeClass("header_menu_drop_btn_active");
+            arrow.removeClass("up_arrow");
+            arrow.addClass("down_arrow");
+        }
+        else {
+            drop_content.addClass("header_menu_drop_show");
+            drop_btn.addClass("header_menu_drop_btn_active");
+            arrow.removeClass("down_arrow");
+            arrow.addClass("up_arrow");
+        }
+    });
+
 });
 
 /*document.addEventListener('click', function(event) {

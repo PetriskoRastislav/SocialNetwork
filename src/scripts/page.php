@@ -88,7 +88,7 @@
                                     <p class='header_menu_a'><i class='arrow down_arrow' id='arrow_btn_menu'></i></p>
                                 </li>
                                 
-                                <div id='header_drop_content'>
+                                <div id='header_drop_content' class='header_menu_drop_hide'>
                                     <a class='header_menu_a' href='#'>Friends</a>
                                     
                                     <a class='header_menu_a' href='user_settings.php'>Settings</a>
