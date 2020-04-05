@@ -106,6 +106,21 @@ try {
         print $output;
 
     }
+    else if ($mode == "update_active") {
+
+        /* will update time of last activity of logged user */
+
+        $time_now = date("Y-m-d H:i:s");
+
+        $query = "
+        UPDATE users
+        SET last_active = ?
+        WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("si", $time_now, $_SESSION['id_user']);
+        $statement->execute();
+
+    }
     else if ($mode == "find_user") {
 
         /* will return result of searching for a user */
@@ -113,21 +128,21 @@ try {
         $value = $_POST['value'];
 
         $query = "
-            SELECT *
+            SELECT id_user, email, name, surname, profile_picture, last_active
             FROM users
             WHERE name LIKE ? 
-            OR surname LIKE ? 
-            OR email LIKE ?";
+            OR surname LIKE ?";
         $statement = $db->prepare($query);
-        $statement->bind_param("sss", $value, $value, $value);
+        $val = "%" . $value . "%";
+        $statement->bind_param("ss", $val, $val);
         $statement->execute();
-        $statement->bind_result($id, $email, $name, $surname, $profile_picture);
+        $statement->bind_result($id, $email, $name, $surname, $profile_picture, $last_active);
 
         $output = "";
 
         while ($statement->fetch()){
             $output .= "
-                <div id='search_result_" . $id . "' class='search_result_item'>
+                <div id='search_result_" . $id . "' class='search_result_item' name_user_to='" . $name . " " . $surname . "' last_active='" . $last_active . "'>
                     <img class='avatar' src='' alt='Avatar' />
                     <p>" . $name . " " . $surname . "</p>
                 </div>";

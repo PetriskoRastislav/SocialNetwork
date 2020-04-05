@@ -8,7 +8,11 @@ $(document).ready(function() {
     /* will update time of last activity of user in database */
     function update_last_active(){
         $.ajax({
-            url: "scripts/update_last_active.php",
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "update_active",
+            },
             success: function () {
 
             }
