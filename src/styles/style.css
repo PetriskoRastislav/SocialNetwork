@@ -108,7 +108,6 @@
 
 #header_drop_content {
     box-sizing: border-box;
-    display: none;
     position: absolute;
     width: 6em;
     background-color: rgb(220, 220, 220);
@@ -116,6 +115,14 @@
     right: 4em;
     transition: 0.3s;
     z-index: 999;
+}
+
+.header_menu_drop_hide {
+    display: none;
+}
+
+.header_menu_drop_show {
+    display: block;
 }
 
 

@@ -23,7 +23,8 @@ $page->displayBodyStart();
             Koverzácie
         </span>
         <input id="search_user_con_list" name="search_user_conversation_list" type="text" placeholder="username" >
-        <div id="search_result_con_list"></div>
+        <img src="srcPictures/icons8-delete-100.png" alt="clear" class="clear_search_users">
+        <div id="search_result_con_list" class="search_result_con_list"></div>
     </div>
 
     <div id="list_users_list"></div>

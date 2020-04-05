@@ -10,6 +10,7 @@ $(document).ready(function() {
 
     setInterval(function () {
         refresh_chat();
+
     }, 500);
 
 
@@ -257,22 +258,76 @@ $(document).ready(function() {
 
 
     /* will search for a particular user */
-    $(document).on("change", "#search_user_con_list", function () {
-        let value = $(this).val();
+    $(document).on("keyup", "#search_user_con_list", function (event) {
 
-        $.ajax({
-            url: "scripts/query_users.php",
-            method: "POST",
-            data: {
-                mode: "find_user",
-                value: "value",
-            },
-            success: function (data) {
-                let search_result = $("#search_result_con_list");
-                search_result.html(data);
-                search_result.addClass(".visible");
-            },
-        });
+        if ((event.type === "keydown" || event.type === "keyup") && event.which === 27) {
+            $("#search_result_con_list").removeClass("visible");
+        }
+        else if( (event.which >= 68 && event.which <= 90) || event.which === 8 || event.which === 46){
+
+            let value = $(this).val();
+
+            if (value !== "") {
+                $(".clear_search_users").addClass("clear_search_users_visible");
+            }
+            else if (value === undefined) {
+                $(".clear_search_users").removeClass("clear_search_users_visible");
+            }
+
+            $.ajax({
+                url: "scripts/query_users.php",
+                method: "POST",
+                data: {
+                    mode: "find_user",
+                    value: value,
+                },
+                success: function (data) {
+                    let result = $("#search_result_con_list");
+                    result.html(data);
+                    result.addClass("visible");
+
+                },
+            });
+        }
+    });
+
+
+    /* will display div with search result on focus on a search input */
+    $(document).on("focus", "#search_user_con_list", function () {
+        $("#search_result_con_list").addClass("visible");
+    });
+
+
+    /* will hide div with a search result on a blur of a search input */
+    $(document).on("blur", "#search_user_con_list", function () {
+        if ($("#search_user_con_list").val().toString() === "") {
+            $("#search_result_con_list").removeClass("visible");
+            $(".clear_search_users").removeClass("clear_search_users_visible");
+        }
+    });
+
+
+    /* will clear search field for searching users in conversations header */
+    $(document).on("click", ".clear_search_users", function () {
+        $("#search_user_con_list").val("");
+        $(this).removeClass("clear_search_users_visible");
+        let result = $("#search_result_con_list");
+        result.removeClass("visible");
+        result.html("");
+    });
+
+
+    /* after clicking on a user of a result list will open conversation with him */
+    $(document).on("click", ".search_result_item", function () {
+
+        let id_user_to = $(this).attr("id").split("_")[2];
+        let name_user_to = $(this).attr("name_user_to");
+        let last_active = $(this).attr("last_active");
+
+        $(".clear_search_users").click();
+        create_chat(id_user_to, name_user_to, last_active);
+
+        console.log(id_user_to);
     });
 
 });
