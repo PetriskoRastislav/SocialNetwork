@@ -10,7 +10,7 @@ try {
     $db = db_connect();
     mysqli_set_charset($db, "utf8");
 
-    /* will insert message into a database and refresh chat */
+    /* will insert message into a database */
 
     $id_user_to = $_POST['id_user_to'];
     $message = $_POST['message'];

@@ -12,31 +12,32 @@ session_start();
 
 try {
 
-    // Checks if all form line has been filled.
+    /* Checks if all form line has been filled. */
     if(!filled_out($_POST)){
         throw new Exception("form");
     }
 
-    // Checks if email has a proper format.
+    /* Checks if email has a proper format. */
     if(!valid_email($email)){
         throw new Exception("email");
     }
 
-    // Checks if the passwords are same.
+    /* Checks if the passwords are same. */
     if($password1 != $password2){
         throw new Exception("pswd_same");
     }
 
-    // Checks the password length.
+    /* Checks the password length. */
     if(strlen($password1) < 10){
         throw new Exception("pswd_len");
     }
 
-    // Connection to database.
+    /* Connection to database. */
     $db = db_connect();
     mysqli_set_charset($db,"utf8");
 
-    // Checks whether user with same email has already been registered.
+
+    /* Checks whether user with same email has already been registered. */
     $result = $db->query("SELECT * FROM `users` WHERE email = ' . $email . '");
     if (!$result) {
         throw new Exception("Failed to execute query.");
@@ -47,7 +48,8 @@ try {
 
     unset($result);
 
-    // Registering new user
+
+    /* Registration of new user */
     $stmt = $db->prepare("INSERT INTO users (email, name, surname, password, registered, last_active) VALUES (?, ?, ?, ?, ?, ?)");
     $password_hash = password_hash($password1, PASSWORD_ARGON2ID);
     $time_now = date("Y-m-d H:i:s");
@@ -58,7 +60,7 @@ try {
         throw new Exception("Failed to register new user.");
     }
 
-    // Fetching id of a registered user
+    /* Fetching id of a newly registered user */
     $stmt = $db->prepare("SELECT users.id_user FROM users WHERE users.email = ?");
     $stmt->bind_param("s",$email);
     $stmt->execute();
@@ -67,12 +69,12 @@ try {
     $stmt->close();
     $db->close();
 
-    // Storing id in SESSION variable
+    /* Storing id in SESSION variable */
     $_SESSION['id_user'] = $id;
     $_SESSION['name'] = $name;
     $_SESSION['surname'] = $surname;
 
-    // Redirecting user to his profile page
+    /* Redirecting user to his profile page */
     header("Location: ../profile.php");
 
     exit();

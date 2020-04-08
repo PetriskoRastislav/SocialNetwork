@@ -9,12 +9,12 @@ session_start();
 
 try {
 
-    // Checks if all form line has been filled.
+    /* Checks if all form line has been filled. */
     if(!filled_out($_POST)){
         throw new Exception("form");
     }
 
-    // Checks if email has a proper format.
+    /* Checks if email has a proper format. */
     if(!valid_email($email)){
         throw new Exception("email");
     }
@@ -22,6 +22,7 @@ try {
     $db = db_connect();
     mysqli_set_charset($db,"utf8");
 
+    /* Will verify user's credentials  */
     $stmt = $db->prepare("SELECT id_user, password FROM users WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
@@ -29,7 +30,7 @@ try {
     $stmt->fetch();
 
     if(password_verify($password, $pass_hash)) {
-        // Storing id in SESSION variable
+        /* Storing id in SESSION variable */
         $_SESSION['id_user'] = $id;
     }
     else if($id > 0) {
@@ -40,6 +41,8 @@ try {
     }
 
     $stmt->free_result();
+
+    /* Fetch id of a logged user */
 
     $stmt = $db->prepare("SELECT name, surname FROM users WHERE id_user = ?");
     $stmt->bind_param("i", $id);
@@ -52,7 +55,7 @@ try {
 
     $stmt->free_result();
 
-    // Redirecting user to his profile page
+    /* Redirecting user to his profile page */
     header("Location: ../profile.php");
     exit();
 

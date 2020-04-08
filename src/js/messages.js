@@ -2,8 +2,8 @@ $(document).ready(function() {
 
     fetch_users_all();
 
-    /* periodically update */
 
+    /* periodical update */
     setInterval(function() {
         refresh_user_list();
     }, 1000);
@@ -156,9 +156,10 @@ $(document).ready(function() {
 
         if(message !== ""){
             $.ajax({
-                url: "scripts/send_message.php",
+                url: "scripts/query_user_chat.php",
                 method: "POST",
                 data: {
+                    mode: "send_message",
                     id_user_to: id_user_to,
                     message: message,
                 },

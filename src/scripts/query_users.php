@@ -14,17 +14,15 @@ try {
     /* will determine the mode in which will proceed script */
     $mode = $_POST['mode'];
 
-
+    /* fetch all users with whom had logged user communication with all data */
     if ($mode == "all") {
 
-        /* fetch all users with whom had logged user communication with all data */
-
         $query = "
-        SELECT DISTINCT id_user, name, surname, last_active
-        FROM users
-        JOIN messages ON 
-        (users.id_user = messages.id_user_sender AND messages.id_user_receiver = ?)
-        OR (users.id_user = messages.id_user_receiver AND messages.id_user_sender = ?)";
+            SELECT DISTINCT id_user, name, surname, last_active
+            FROM users
+            JOIN messages ON 
+            (users.id_user = messages.id_user_sender AND messages.id_user_receiver = ?)
+            OR (users.id_user = messages.id_user_receiver AND messages.id_user_sender = ?)";
 
         $statement = $db->prepare($query);
         $statement->bind_param("ii", $_SESSION['id_user'], $_SESSION['id_user']);
@@ -35,7 +33,7 @@ try {
 
         while ($statement->fetch()) {
 
-            /* will determine wheter particular user is still active or not */
+            /* will determine whether particular user is still active or not */
             $time_now = strtotime(date('Y-m-d H:i:s') . '-5 seconds');
             $time_now = date('Y-m-d H:i:s', $time_now);
 
@@ -68,9 +66,10 @@ try {
         print $output;
 
     }
-    else if ($mode == "refresh") {
 
-        /* will only fetch last_active data and will make notification when user has new message */
+
+    /* will only fetch last_active data, will create marker of active user and notification when user has new message */
+    else if ($mode == "refresh") {
 
         $query = "
             SELECT DISTINCT users.id_user, users.last_active
@@ -106,24 +105,40 @@ try {
         print $output;
 
     }
-    else if ($mode == "update_active") {
 
-        /* will update time of last activity of logged user */
+
+    /* will update time of last activity of logged user */
+    else if ($mode == "update_active") {
 
         $time_now = date("Y-m-d H:i:s");
 
+        /* fetches old timestamps */
         $query = "
-        UPDATE users
-        SET last_active = ?
-        WHERE id_user = ?";
+            SELECT registered
+            FROM users
+            WHERE id_user = ?";
         $statement = $db->prepare($query);
-        $statement->bind_param("si", $time_now, $_SESSION['id_user']);
+        $statement->bind_param("i", $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($registerd);
+        $statement->fetch();
+
+        /* will update last active timestamp */
+        $query = "
+            UPDATE users
+            SET last_active = ?, registered = ?
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("ssi", $time_now, $registerd, $_SESSION['id_user']);
         $statement->execute();
 
-    }
-    else if ($mode == "find_user") {
+        $statement->free_result();
 
-        /* will return result of searching for a user */
+    }
+
+
+    /* will return result of searching for a user */
+    else if ($mode == "find_user") {
 
         $value = $_POST['value'];
 
@@ -157,6 +172,7 @@ catch (Exception $ex){
     $ex->getMessage();
     exit();
 }
+
 
 /* will return number of unseen messages from a particular user */
 function get_unseen_messages_notification($id_user_sender, $id_user_receiver){
