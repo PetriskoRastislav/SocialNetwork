@@ -34,6 +34,10 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
     `profile_picture` CHAR(128),
     `location` CHAR(100),
     `gender` ENUM('male', 'female', 'other'),
+    `day_of_birth` CHAR(2),
+    `month_of_birth` CHAR(2),
+    `year_of_birth` CHAR(15),
+    `color_mode` ENUM('dark', 'light') DEFAULT 'dark' NOT NULL,
     `registered` CHAR(19) NOT NULL,
     `last_active` CHAR(19) NOT NULL
 )
