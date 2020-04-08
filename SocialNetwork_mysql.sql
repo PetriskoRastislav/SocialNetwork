@@ -31,31 +31,48 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
     `name` CHAR(40) NOT NULL,
     `surname` CHAR(40) NOT NULL,
     `password` CHAR(97) NOT NULL,
-    `profile_picture` LONGBLOB DEFAULT NULL,
-    `cover_picture` LONGBLOB DEFAULT NULL,
-    `registered` TIMESTAMP NOT NULL,
-    `last_active` TIMESTAMP NOT NULL
+    `profile_picture` CHAR(128),
+    `location` CHAR(100),
+    `gender` ENUM('male', 'female', 'other'),
+    `registered` CHAR(19) NOT NULL,
+    `last_active` CHAR(19) NOT NULL
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 /* Table to store friend relationships between users */
 
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`friends`(
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`friends` (
 	`id_user_1` INT UNSIGNED NOT NULL,
-    `id_user_2` INT UNSIGNED NOT NULL
+    `id_user_2` INT UNSIGNED NOT NULL,
+    `time` CHAR(19) NOT NULL
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+/* Table to store posts of users */
+
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`posts` (
+	`id_post` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_user` INT NOT NULL,
+    `name_post` CHAR(100),
+    `text_post` TEXT,
+    `time` CHAR(19) NOT NULL,
+    `picture_post` CHAR(128)
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = ut8;
+
 /* Table to store messages between two users */
 
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`messages`(
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`messages` (
 	`id_message` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`id_user_sender` INT UNSIGNED NOT NULL,
     `id_user_receiver` INT UNSIGNED NOT NULL,
     `message` TEXT NOT NULL,
-    `time` TIMESTAMP,
+    `time_sent` CHAR(19) NOT NULL,
+    `time_seen` CHAR(19),
+    `time_deleted` CHAR(19),
     `status` enum('seen', 'unseen', 'deleted') NOT NULL DEFAULT 'unseen'
 )
 ENGINE = InnoDB
@@ -63,21 +80,35 @@ DEFAULT CHARACTER SET = utf8;
 
 /* Table to store groups and informations about them */
 
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`groups`(
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`groups` (
 	`id_group` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `group_name` CHAR(60) NOT NULL,
-    `created` TIMESTAMP NOT NULL,
-    `last_active` TIMESTAMP NOT NULL
+    `created` CHAR(19) NOT NULL,
+    `last_active` CHAR(19) NOT NULL
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+/* table for storing posts in groups */
+
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_posts` (
+	`id_group_post` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_group` INT NOT NULL,
+    `id_user` INT NOT NULL,
+    `name_post` CHAR(100),
+    `text_post` TEXT,
+    `time` CHAR(19) NOT NULL,
+    `picture_post` CHAR(128)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 /* Table to store members of a particular group */
 
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_members`(
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_members` (
 	`id_group` INT UNSIGNED NOT NULL,
     `id_user` INT UNSIGNED NOT NULL,
-    `joined` TIMESTAMP NOT NULL,
+    `joined` CHAR(19) NOT NULL,
     `rights` ENUM('member', 'admin', 'owner') NOT NULL DEFAULT 'member'
 )
 ENGINE = InnoDB
@@ -87,22 +118,22 @@ DEFAULT CHARACTER SET = utf8;
  but can be also created without affinity to any group.
  One group can own multiple group chats, for example for all members, for adminstartors and owners, and etc. */
 
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chats`(
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chats` (
 	`id_group_chat` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `group_chat_name` CHAR(60) NOT NULL,
     `group_affinity` INT UNSIGNED, 
-    `created` TIMESTAMP NOT NULL,
-    `last_active` TIMESTAMP NOT NULL
+    `created` CHAR(19) NOT NULL,
+    `last_active` CHAR(19) NOT NULL
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 /* Table for storing members of particular group chat */
 
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chat_members`(
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chat_members` (
 	`id_group_chat` INT UNSIGNED NOT NULL,
     `id_user` INT UNSIGNED NOT NULL,
-    `joined` TIMESTAMP NOT NULL,
+    `joined` CHAR(19) NOT NULL,
     `rights` ENUM('member', 'admin', 'owner') NOT NULL DEFAULT 'member',
     `last_message_seen` INT UNSIGNED
 )
@@ -111,12 +142,13 @@ DEFAULT CHARACTER SET = utf8;
 
 /* Table for storing messages in particular group chats */
 
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chat_messages`(
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_chat_messages` (
 	`id_group_chat_message` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `id_user_sender` INT UNSIGNED NOT NULL,
     `id_group_chat` INT UNSIGNED NOT NULL,
     `message` TEXT NOT NULL,
-    `time` TIMESTAMP,
+    `time` CHAR(19) NOT NULL,
+    `time_deleted` CHAR(19),
     `status` enum('recorded' , 'deleted') NOT NULL DEFAULT 'recorded'
 )
 ENGINE = InnoDB
@@ -128,8 +160,13 @@ DEFAULT CHARACTER SET = utf8;
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_1`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_2`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 
+ALTER TABLE `SocialNetwork`.`posts` ADD FOREIGN KEY (`id_user`) REFERENCES `SocialNetwork`.`users`(`id_user`);
+
 ALTER TABLE `SocialNetwork`.`messages` ADD FOREIGN KEY (`id_user_sender`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 ALTER TABLE `SocialNetwork`.`messages` ADD FOREIGN KEY (`id_user_receiver`) REFERENCES `SocialNetwork`.`users`(`id_user`);
+
+ALTER TABLE `SocialNetwork`.`group_posts` ADD FOREIGN KEY (`id_group`) REFERENCES `SocialNetwrok`.`groups`(`id_group`);
+ALTER TABLE `SocialNetwork`.`group_posts` ADD FOREIGN KEY (`id_user`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 
 ALTER TABLE `SocialNetwork`.`group_members` ADD FOREIGN KEY (`id_group`) REFERENCES `SocialNetwork`.`groups`(`id_group`);
 ALTER TABLE `SocialNetwork`.`group_members` ADD FOREIGN KEY (`id_user`) REFERENCES `SocialNetwork`.`users`(`id_user`);
