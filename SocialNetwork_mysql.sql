@@ -54,14 +54,14 @@ DEFAULT CHARACTER SET = utf8;
 
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`posts` (
 	`id_post` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `id_user` INT NOT NULL,
+    `id_user_author` INT UNSIGNED NOT NULL,
     `name_post` CHAR(100),
     `text_post` TEXT,
     `time` CHAR(19) NOT NULL,
     `picture_post` CHAR(128)
 )
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = ut8;
+DEFAULT CHARACTER SET = utf8;
 
 /* Table to store messages between two users */
 
@@ -94,7 +94,7 @@ DEFAULT CHARACTER SET = utf8;
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_posts` (
 	`id_group_post` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `id_group` INT NOT NULL,
-    `id_user` INT NOT NULL,
+    `id_user_author` INT UNSIGNED NOT NULL,
     `name_post` CHAR(100),
     `text_post` TEXT,
     `time` CHAR(19) NOT NULL,
@@ -160,13 +160,13 @@ DEFAULT CHARACTER SET = utf8;
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_1`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_2`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 
-ALTER TABLE `SocialNetwork`.`posts` ADD FOREIGN KEY (`id_user`) REFERENCES `SocialNetwork`.`users`(`id_user`);
+ALTER TABLE `SocialNetwork`.`posts` ADD FOREIGN KEY (`id_user_author`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 
 ALTER TABLE `SocialNetwork`.`messages` ADD FOREIGN KEY (`id_user_sender`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 ALTER TABLE `SocialNetwork`.`messages` ADD FOREIGN KEY (`id_user_receiver`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 
 ALTER TABLE `SocialNetwork`.`group_posts` ADD FOREIGN KEY (`id_group`) REFERENCES `SocialNetwrok`.`groups`(`id_group`);
-ALTER TABLE `SocialNetwork`.`group_posts` ADD FOREIGN KEY (`id_user`) REFERENCES `SocialNetwork`.`users`(`id_user`);
+ALTER TABLE `SocialNetwork`.`group_posts` ADD FOREIGN KEY (`id_user_author`) REFERENCES `SocialNetwrok`.`groups`(`id_group`);
 
 ALTER TABLE `SocialNetwork`.`group_members` ADD FOREIGN KEY (`id_group`) REFERENCES `SocialNetwork`.`groups`(`id_group`);
 ALTER TABLE `SocialNetwork`.`group_members` ADD FOREIGN KEY (`id_user`) REFERENCES `SocialNetwork`.`users`(`id_user`);
