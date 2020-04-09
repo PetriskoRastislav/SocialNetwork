@@ -57,7 +57,7 @@ try {
                 <div class='list_users_item' id_user_to='" . $id_user . "' name_user_to='" . $name . " " . $surname . "' last_active='" . $last_active . "'>
                     <span class='user'>" .
                         $name . " " . $surname . $status . $mes_notification .
-                        "</span>
+                    "</span>
                 </div>
             ";
         }
@@ -69,8 +69,47 @@ try {
     }
 
 
+    /* will fetch only a list od conversations and wil pass them to js script, which will rfresh list */
+    else if ($mode == "refresh_list") {
+
+
+        $query = "
+            SELECT DISTINCT id_user, name, surname, last_active
+            FROM users
+            JOIN messages ON 
+            (users.id_user = messages.id_user_sender AND messages.id_user_receiver = ?)
+            OR (users.id_user = messages.id_user_receiver AND messages.id_user_sender = ?)";
+
+        $statement = $db->prepare($query);
+        $statement->bind_param("ii", $_SESSION['id_user'], $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($id_user, $name, $surname, $last_active);
+
+        $output = "";
+
+        while ($statement->fetch()) {
+
+            $output .= $id_user . "|";
+            $status = " <span class='' id='active_mark_" . $id_user . "'></span>";
+            $mes_notification = " <span class='' id='mes_not_" . $id_user . "' ></span>";
+
+            $output .= "
+                <div class='list_users_item' id_user_to='" . $id_user . "' name_user_to='" . $name . " " . $surname . "' last_active='" . $last_active . "'>
+                    <span class='user'>" .
+                        $name . " " . $surname . $status . $mes_notification .
+                    "</span>
+                </div>
+            ";
+
+            $output .= "|";
+        }
+
+        print $output;
+    }
+
+
     /* will only fetch last_active data, will create marker of active user and notification when user has new message */
-    else if ($mode == "refresh") {
+    else if ($mode == "refresh_marks") {
 
         $query = "
             SELECT DISTINCT users.id_user, users.last_active

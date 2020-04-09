@@ -37,12 +37,42 @@ $(document).ready(function() {
             url: "scripts/query_users.php",
             method: "POST",
             data: {
-                mode: "refresh",
+                mode: "refresh_list",
+            },
+            success: function (data) {
+                let ret_data = data.toString().split("|");
+                let list = $("#list_users_list");
+
+                for (let i = 0; i < ret_data.length; i += 2) {
+
+                    /*console.log(ret_data[i] + " " + ret_data[i + 1]);*/
+
+                    try {
+
+                        let id_list_item = $(".list_users_item[id_user_to=" + ret_data[i] + "]").attr("id_user_to");
+                        if (!(id_list_item > 0)) {
+                            console.log(id_list_item);
+                            list.append(ret_data[i + 1]);
+                        }
+                    }
+                    catch (ex) {
+
+                    }
+                }
+            }
+        });
+
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "refresh_marks",
             },
             success: function(data){
                 let ret_data = data.toString().split(" ");
 
-                for(let i = 0; i < ret_data.length; i += 5){
+                for (let i = 0; i < ret_data.length; i += 5) {
 
                     /* console.log(ret_data[i] + " " + ret_data[i + 1] + " " + ret_data[i + 2] + " " + ret_data[i + 3] + " " + ret_data[i + 4]); */
 

@@ -64,7 +64,8 @@ try {
     $stmt = $db->prepare("SELECT users.id_user FROM users WHERE users.email = ?");
     $stmt->bind_param("s",$email);
     $stmt->execute();
-    $id = $stmt->fetch();
+    $stmt->bind_result($id);
+    $stmt->fetch();
 
     $stmt->close();
     $db->close();

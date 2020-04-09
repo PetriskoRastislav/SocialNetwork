@@ -12,6 +12,7 @@ try {
     /* Logging off */
 
     unset($_SESSION['id_user']);
+    unset($_SESSION);
     $result_dest = session_destroy();
 
     /* Verifying of logging off */
