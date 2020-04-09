@@ -149,7 +149,6 @@ $(document).ready(function() {
                 },
                 success: function(){
                     $("#message_to_send").val("");
-                    refresh_chat();
                 }
             });
         }
@@ -311,6 +310,24 @@ $(document).ready(function() {
         create_chat(id_user_to, name_user_to, last_active);
 
         console.log(id_user_to);
+    });
+
+
+    /* after clicking on a message will display complete time information */
+    $(document).on("click", ".mes_wrap", function () {
+        let id_mes = $(this).attr("id").split("_")[1];
+        let time_info = $("#mes_" + id_mes + " .mes_time_info");
+
+        console.log(time_info);
+
+        if (time_info.hasClass("mes_time_info_show")) {
+            time_info.removeClass("mes_time_info_show");
+            $(this).removeClass("mes_wrap_active");
+        }
+        else {
+            time_info.addClass("mes_time_info_show");
+            $(this).addClass("mes_wrap_active");
+        }
     });
 
 });

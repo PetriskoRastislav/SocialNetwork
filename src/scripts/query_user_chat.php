@@ -65,7 +65,7 @@ try {
 
             $output .= "
                 <div class='mes_time_info'>
-                    <p>Sent at: " . $time_sent . ",";
+                    <p class='time'>Sent at: " . $time_sent . ",";
 
             if ($time_seen != null ){
                 $output .= " Seen at: " . $time_seen . ",";
@@ -150,7 +150,7 @@ try {
                 if ($status != 'deleted') {
                     $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
                 }
-                $output .= "   <div class='message message_my'>";
+                $output .= "<div class='message message_my'>";
             }
 
             $output .= "<img class='avatar' src='' alt='Avatar' />";
@@ -168,7 +168,7 @@ try {
 
             $output .= "
                 <div class='mes_time_info'>
-                    <p>Sent at: " . $time_sent . ",";
+                    <p class='time'>Sent at: " . $time_sent . ",";
 
             if ($time_seen != null ){
                 $output .= " Seen at: " . $time_seen . ",";

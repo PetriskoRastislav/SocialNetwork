@@ -94,13 +94,6 @@
 }
 
 
-/* time when was use last active */
-
-#conversation_header .time {
-    color: rgb(180, 180, 180);
-}
-
-
 /* button, will clear conversation and conversation header sections */
 
 #conversation_close_button {
@@ -117,6 +110,17 @@
 
 #conversation {
     background-color: rgb(54, 57, 63);
+}
+
+
+/* styles for a time info */
+
+.time {
+    color: rgb(200, 200, 200);
+}
+
+.message_my .time {
+    color: rgb(200, 200, 200);
 }
 
 
@@ -137,17 +141,6 @@
 
 .message p {
     color: rgb(220, 220, 220);
-}
-
-
-/* Style time text */
-
-.message .time {
-    color: rgb(180, 180, 180);
-}
-
-.message_my .time {
-    color: rgb(180, 180, 180);
 }
 
 
