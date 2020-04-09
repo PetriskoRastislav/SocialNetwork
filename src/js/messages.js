@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 
     setInterval(function () {
-        refresh_chat();
+        refresh_chat(false);
     }, 500);
 
 
@@ -136,9 +136,11 @@ $(document).ready(function() {
         let id_user_to = $(this).attr("id_user_to");
         let message = $("#message_to_send").val();
 
+        console.log(id_user_to);
+
         message = message.trim();
 
-        if(message !== ""){
+        if(message !== "" && id_user_to > 0){
             $.ajax({
                 url: "scripts/query_user_chat.php",
                 method: "POST",
@@ -149,6 +151,18 @@ $(document).ready(function() {
                 },
                 success: function(){
                     $("#message_to_send").val("");
+                    let last_message_id = -1;
+                    try {
+                        last_message_id = $("#conversation div.mes_wrap:last").attr("id").split("_")[1];
+                    }
+                    catch (ex){
+                    }
+
+                    if (last_message_id === -1){
+                        refresh_chat(true);
+                        console.log("here");
+                    }
+
                 }
             });
         }
@@ -165,7 +179,7 @@ $(document).ready(function() {
 
 
     /* will refresh chat */
-    function refresh_chat(){
+    function refresh_chat(force){
         let id_user_to = $("#send_button").attr("id_user_to");
         let last_message_id = -1;
 
@@ -175,7 +189,7 @@ $(document).ready(function() {
         catch (ex){
         }
 
-        if(id_user_to > 0 && last_message_id >= 0) {
+        if ((id_user_to > 0 && last_message_id >= 0) || force) {
 
             $.ajax({
                 url: "scripts/query_user_chat.php",
@@ -245,7 +259,7 @@ $(document).ready(function() {
         if ((event.type === "keydown" || event.type === "keyup") && event.which === 27) {
             $("#search_result_con_list").removeClass("visible");
         }
-        else if( (event.which >= 68 && event.which <= 90) || event.which === 8 || event.which === 46){
+        else if( !(event.which === 13 || event.which === 27)){
 
             let value = $(this).val();
 
@@ -308,8 +322,6 @@ $(document).ready(function() {
 
         $(".clear_search_users").click();
         create_chat(id_user_to, name_user_to, last_active);
-
-        console.log(id_user_to);
     });
 
 

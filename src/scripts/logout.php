@@ -7,7 +7,7 @@ try {
 
     /* Storing the id of a user to verify that user was successfully logged off */
 
-    $old_user = $_SESSION['valid_user'];
+    $old_user = $_SESSION['id_user'];
 
     /* Logging off */
 
