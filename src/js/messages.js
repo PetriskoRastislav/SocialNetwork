@@ -4,13 +4,14 @@ $(document).ready(function() {
 
 
     /* periodical update */
+
     setInterval(function() {
         refresh_user_list();
     }, 1000);
 
+
     setInterval(function () {
         refresh_chat();
-
     }, 500);
 
 
@@ -127,23 +128,6 @@ $(document).ready(function() {
                 scroll_chat(true);
             }
         });
-        write_last_message_id(id_user_to);
-    }
-
-
-    /* will write id of the last fetched message into a conversation_header */
-    function write_last_message_id(id_user_to){
-        $.ajax({
-            url: "scripts/query_user_chat.php",
-            method: "POST",
-            data: {
-                mode: "id_message",
-                id_user_to: id_user_to,
-            },
-            success: function (data) {
-                $("#conversation_header").attr("last_message", data);
-            }
-        });
     }
 
 
@@ -165,7 +149,7 @@ $(document).ready(function() {
                 },
                 success: function(){
                     $("#message_to_send").val("");
-                    //refresh_chat();
+                    refresh_chat();
                 }
             });
         }
@@ -174,21 +158,25 @@ $(document).ready(function() {
 
     /* will send message also after clicking on Enter */
     $(document).on("keyup", "#message_to_send", function (event) {
-
         if (event.keyCode === 13) {
             event.preventDefault();
             $("#send_button").click();
         }
-
     });
 
 
     /* will refresh chat */
     function refresh_chat(){
         let id_user_to = $("#send_button").attr("id_user_to");
-        let last_message_id = $("#conversation_header").attr("last_message");
+        let last_message_id = -1;
 
-        if(id_user_to > 0) {
+        try {
+            last_message_id = $("#conversation div.mes_wrap:last").attr("id").split("_")[1];
+        }
+        catch (ex){
+        }
+
+        if(id_user_to > 0 && last_message_id >= 0) {
 
             $.ajax({
                 url: "scripts/query_user_chat.php",
@@ -205,8 +193,6 @@ $(document).ready(function() {
                     }
                 }
             });
-
-            write_last_message_id(id_user_to);
         }
     }
 
@@ -230,18 +216,15 @@ $(document).ready(function() {
 
     /* will clear conversation and conversation header sections */
     $(document).on("click", "#conversation_close_button", function () {
-        let con_head = $("#conversation_header");
-        con_head.html("");
-        con_head.removeAttr("last_message");
+        $("#conversation_header").html("");
+        $("#send_button").removeAttr("id_user_to");
         $("#conversation").html("");
     });
 
 
     /* will "remove" message of a logged user */
     $(document).on("click", ".remove_message", function () {
-        let id_message = $(this).attr("id");
-        id_message = id_message.split("_");
-        id_message = id_message[2];
+        let id_message = $(this).attr("id").split("_")[2];
 
         $.ajax({
             url: "scripts/query_user_chat.php",
@@ -255,7 +238,6 @@ $(document).ready(function() {
             },
         })
     });
-
 
 
     /* will search for a particular user */

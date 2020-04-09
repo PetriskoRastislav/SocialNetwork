@@ -22,25 +22,32 @@ try {
         $id_user_to = $_POST['id_user_to'];
 
         $query = "
-            SELECT * 
+            SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
             FROM messages
             WHERE (id_user_sender = ? AND id_user_receiver = ?)
             OR (id_user_sender = ? AND id_user_receiver = ?)
             ORDER BY id_message ASC";
         $statement = $db->prepare($query);
-        $statement->bind_param("iiii", $id_user_to, $_SESSION['id_user'], $_SESSION['id_user'], $id_user_to);
+        $statement->bind_param("iiii", $id_user_to, $_SESSION['id_user'],
+            $_SESSION['id_user'], $id_user_to);
         $statement->execute();
-        $statement->bind_result($id_message, $id_user_sender, $id_user_receiver, $message, $time, $status);
+        $statement->bind_result($id_message, $id_user_sender, $id_user_receiver, $message, $time_sent, $time_seen, $time_deleted, $status);
 
         $output = "";
 
         while ($statement->fetch()) {
             if ($id_user_to == $id_user_sender) {
-                $output .= "<div class='message' id='" . $id_message . "'>";
+                $output .= "
+                    <div id='mes_" . $id_message . "' class='mes_wrap'>
+                    <div class='message'>";
             }
             else {
-                $output .= "<div class='my_mes_wrap'><img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
-                $output .= "<div class='message message_my' id='" . $id_message . "'>";
+                $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
+
+                if ($status != 'deleted') {
+                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
+                }
+                $output .= "   <div class='message message_my'>";
             }
 
             $output .= "<img class='avatar' src='' alt='Avatar' />";
@@ -52,21 +59,35 @@ try {
                 $output .= "<p>Message has been removed</p>";
             }
 
-            $output .= "<span class='time'>" . $time . "</span></div>";
+            $output .= "
+                <span class='time'>" . $time_sent . "</span>
+                </div>";
 
-            if ($id_user_to != $id_user_sender) {
-                $output .= "</div>";
+            $output .= "
+                <div class='mes_time_info'>
+                    <p>Sent at: " . $time_sent . ",";
+
+            if ($time_seen != null ){
+                $output .= " Seen at: " . $time_seen . ",";
             }
+
+            if ($time_deleted != null ){
+                $output .= " Deleted at: " . $time_deleted . ",";
+            }
+
+            $output .= "</p></div></div>";
+
         }
 
         $statement->free_result();
+        $time_now = date("Y-m-d H:i:s");
 
         $query = "
             UPDATE messages
-            SET status = 'seen', time = ?
+            SET status = 'seen', time_sent = ?, time_seen = ?, time_deleted = ?
             WHERE id_user_sender = ? AND id_user_receiver = ? AND status = 'unseen'";
         $statement = $db->prepare($query);
-        $statement->bind_param("sii", $time, $id_user_to, $_SESSION['id_user']);
+        $statement->bind_param("sssii", $time_sent, $time_now, $time_deleted,  $id_user_to, $_SESSION['id_user']);
         $statement->execute();
 
         print $output;
@@ -101,29 +122,35 @@ try {
     else if ($mode == "refresh") {
 
         $id_user_to = $_POST['id_user_to'];
-        @$last_message = $_POST['last_message_id'];
+        $last_message = $_POST['last_message_id'];
 
         $query = "
-            SELECT * 
+            SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
             FROM messages
             WHERE (id_user_sender = ? AND id_user_receiver = ? AND id_message > ?)
             OR (id_user_sender = ? AND id_user_receiver = ? AND id_message > ?)
             ORDER BY id_message ASC";
         $statement = $db->prepare($query);
-        $statement->bind_param("iiiiii", $id_user_to, $_SESSION['id_user'],
-            $last_message, $_SESSION['id_user'], $id_user_to, $last_message);
+        $statement->bind_param("iiiiii", $id_user_to, $_SESSION['id_user'], $last_message,
+            $_SESSION['id_user'], $id_user_to, $last_message);
         $statement->execute();
-        $statement->bind_result($id_message, $id_user_sender, $id_user_receiver, $message, $time, $status);
+        $statement->bind_result($id_message, $id_user_sender, $id_user_receiver, $message, $time_sent, $time_seen, $time_deleted, $status);
 
         $output = "";
 
         while ($statement->fetch()) {
             if ($id_user_to == $id_user_sender) {
-                $output .= "<div class='message'>";
+                $output .= "
+                    <div id='mes_" . $id_message . "' class='mes_wrap'>
+                    <div class='message'>";
             }
             else {
-                $output .= "<div class='my_mes_wrap'><img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
-                $output .= "<div class='message message_my'>";
+                $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
+
+                if ($status != 'deleted') {
+                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
+                }
+                $output .= "   <div class='message message_my'>";
             }
 
             $output .= "<img class='avatar' src='' alt='Avatar' />";
@@ -135,21 +162,35 @@ try {
                 $output .= "<p>Message has been removed</p>";
             }
 
-            $output .= "<span class='time'>" . $time . "</span></div>";
+            $output .= "
+                <span class='time'>" . $time_sent . "</span>
+                </div>";
 
-            if ($id_user_to != $id_user_sender) {
-                $output .= "</div>";
+            $output .= "
+                <div class='mes_time_info'>
+                    <p>Sent at: " . $time_sent . ",";
+
+            if ($time_seen != null ){
+                $output .= " Seen at: " . $time_seen . ",";
             }
+
+            if ($time_deleted != null ){
+                $output .= " Deleted at: " . $time_deleted . ",";
+            }
+
+            $output .= "</p></div></div>";
+
         }
 
         $statement->free_result();
+        $time_now = date("Y-m-d H:i:s");
 
         $query = "
             UPDATE messages
-            SET status = 'seen', time = ?
+            SET status = 'seen', time_sent = ?, time_seen = ?, time_deleted = ?
             WHERE id_user_sender = ? AND id_user_receiver = ? AND status = 'unseen'";
         $statement = $db->prepare($query);
-        $statement->bind_param("sii", $time, $id_user_to, $_SESSION['id_user']);
+        $statement->bind_param("sssii", $time_sent, $time_now, $time_deleted,  $id_user_to, $_SESSION['id_user']);
         $statement->execute();
 
         print $output;
@@ -161,30 +202,16 @@ try {
     else if ($mode == "remove_message") {
 
         $id_message = $_POST['id_message'];
-
-        /* fetches old timestamps */
-        $query = "
-            SELECT time_sent, time_seen
-            FROM messages
-            WHERE id_user_sender = ? AND id_message = ?";
-        $statement = $db->prepare($query);
-        $statement->bind_param("ii", $_SESSION['id_user'], $id_message);
-        $statement->execute();
-        $statement->bind_result($time_sent, $time_seen);
-        $statement->fetch();
-
         $time_now = date("Y-m-d H:i:s");
 
         /* will update row in database */
         $query = "
             UPDATE messages
-            SET status = 'deleted', time_sent = ?, time_seen = ?, time_delted = ?
+            SET status = 'deleted', time_deleted = ?
             WHERE id_user_sender = ? AND id_message = ?";
         $statement = $db->prepare($query);
-        $statement->bind_param("sssii", $time_sent, $time_seen, $time_now, $_SESSION['id_user'], $id_message);
+        $statement->bind_param("sii", $time_now, $_SESSION['id_user'], $id_message);
         $statement->execute();
-
-        $statement->free_result();
 
     }
 

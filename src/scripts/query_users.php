@@ -12,7 +12,8 @@ try {
 
 
     /* will determine the mode in which will proceed script */
-    $mode = $_POST['mode'];
+    $mode = $_POST["mode"];
+
 
     /* fetch all users with whom had logged user communication with all data */
     if ($mode == "all") {
@@ -112,24 +113,12 @@ try {
 
         $time_now = date("Y-m-d H:i:s");
 
-        /* fetches old timestamps */
-        $query = "
-            SELECT registered
-            FROM users
-            WHERE id_user = ?";
-        $statement = $db->prepare($query);
-        $statement->bind_param("i", $_SESSION['id_user']);
-        $statement->execute();
-        $statement->bind_result($registerd);
-        $statement->fetch();
-
-        /* will update last active timestamp */
         $query = "
             UPDATE users
-            SET last_active = ?, registered = ?
+            SET last_active = ?
             WHERE id_user = ?";
         $statement = $db->prepare($query);
-        $statement->bind_param("ssi", $time_now, $registerd, $_SESSION['id_user']);
+        $statement->bind_param("si", $time_now, $_SESSION['id_user']);
         $statement->execute();
 
         $statement->free_result();
@@ -174,7 +163,7 @@ catch (Exception $ex){
 }
 
 
-/* will return number of unseen messages from a particular user */
+/* will return number of unseen messages send from a particular user to logged user */
 function get_unseen_messages_notification($id_user_sender, $id_user_receiver){
 
     try{
