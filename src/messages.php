@@ -20,7 +20,7 @@ $page->displayBodyStart();
 
     <div id="list_users_header">
         <span id="list_users_header_title">
-            Koverzácie
+            Chats
         </span>
         <input id="search_user_con_list" name="search_user_conversation_list" type="text" placeholder="username" >
         <img src="srcPictures/icons8-delete-100.png" alt="clear" class="clear_search_users">
