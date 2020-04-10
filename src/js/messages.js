@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     setInterval(function () {
         refresh_chat(false);
-    }, 500);
+    }, 400);
 
 
     /* will fetch users from with whom had logged user conversations from database */
@@ -45,8 +45,6 @@ $(document).ready(function() {
 
                 for (let i = 0; i < ret_data.length; i += 2) {
 
-                    /*console.log(ret_data[i] + " " + ret_data[i + 1]);*/
-
                     try {
 
                         let id_list_item = $(".list_users_item[id_user_to=" + ret_data[i] + "]").attr("id_user_to");
@@ -62,7 +60,6 @@ $(document).ready(function() {
             }
         });
 
-
         $.ajax({
             url: "scripts/query_users.php",
             method: "POST",
@@ -73,9 +70,6 @@ $(document).ready(function() {
                 let ret_data = data.toString().split(" ");
 
                 for (let i = 0; i < ret_data.length; i += 5) {
-
-                    /* console.log(ret_data[i] + " " + ret_data[i + 1] + " " + ret_data[i + 2] + " " + ret_data[i + 3] + " " + ret_data[i + 4]); */
-
 
                     let last_active_sign = $("#user_last_active");
                     let active_mark = $("#active_mark_" + ret_data[i]);
@@ -166,8 +160,6 @@ $(document).ready(function() {
         let id_user_to = $(this).attr("id_user_to");
         let message = $("#message_to_send").val();
 
-        console.log(id_user_to);
-
         message = message.trim();
 
         if(message !== "" && id_user_to > 0){
@@ -190,7 +182,6 @@ $(document).ready(function() {
 
                     if (last_message_id === -1){
                         refresh_chat(true);
-                        console.log("here");
                     }
 
                 }
@@ -225,7 +216,7 @@ $(document).ready(function() {
                 url: "scripts/query_user_chat.php",
                 method: "POST",
                 data: {
-                    mode: "refresh",
+                    mode: "load_new_messages",
                     id_user_to: id_user_to,
                     last_message_id: last_message_id
                 },
@@ -234,7 +225,33 @@ $(document).ready(function() {
                         $("#conversation").append(data);
                         scroll_chat(false);
                     }
-                }
+                },
+            });
+        }
+
+        if (id_user_to > 0) {
+
+            $.ajax({
+                url: "scripts/query_user_chat.php",
+                method: "POST",
+                data: {
+                    mode: "refresh_messages",
+                    id_user_to: id_user_to,
+                },
+                success: function (data) {
+                    let ret_data = data.toString().split("|");
+
+                    for (let i = 0; i < ret_data.length; i += 2) {
+
+                        console.log(ret_data[i] + " " + ret_data[i + 1]);
+
+                        try {
+                            $("#mes_" + ret_data[i]).replaceWith(ret_data[i + 1]);
+                        } catch (ex) {
+
+                        }
+                    }
+                },
             });
         }
     }
@@ -356,19 +373,22 @@ $(document).ready(function() {
 
 
     /* after clicking on a message will display complete time information */
-    $(document).on("click", ".mes_wrap", function () {
-        let id_mes = $(this).attr("id").split("_")[1];
+    $(document).on("click", ".message", function () {
+        let id_mes = $(this).parent().attr("id").split("_")[1];
+
+        console.log(id_mes);
+
         let time_info = $("#mes_" + id_mes + " .mes_time_info");
 
         console.log(time_info);
 
         if (time_info.hasClass("mes_time_info_show")) {
             time_info.removeClass("mes_time_info_show");
-            $(this).removeClass("mes_wrap_active");
+            $(this).parent().removeClass("mes_wrap_active");
         }
         else {
             time_info.addClass("mes_time_info_show");
-            $(this).addClass("mes_wrap_active");
+            $(this).parent().addClass("mes_wrap_active");
         }
     });
 

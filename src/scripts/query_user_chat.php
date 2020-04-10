@@ -119,7 +119,7 @@ try {
 
 
     /* will fetch all messages newer then message with given id */
-    else if ($mode == "refresh") {
+    else if ($mode == "load_new_messages") {
 
         $id_user_to = $_POST['id_user_to'];
         $last_message = $_POST['last_message_id'];
@@ -183,6 +183,7 @@ try {
         }
 
         $statement->free_result();
+
         $time_now = date("Y-m-d H:i:s");
 
         $query = "
@@ -194,6 +195,82 @@ try {
         $statement->execute();
 
         print $output;
+
+    }
+
+
+    /* will fetch messages modified later then given time */
+    else if ($mode == "refresh_messages") {
+
+        $id_user_to = $_POST['id_user_to'];
+        $time = strtotime(date('Y-m-d H:i:s') . '-600 seconds');
+        $time = date('Y-m-d H:i:s', $time);
+
+        $query = "
+            SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
+            FROM messages
+            WHERE (id_user_sender = ? AND id_user_receiver = ? AND (time_seen > ? OR time_deleted > ?))
+            OR (id_user_sender = ? AND id_user_receiver = ? AND (time_seen > ? OR time_deleted > ?))
+            ORDER BY id_message ASC";
+        $statement = $db->prepare($query);
+        $statement->bind_param("iissiiss",
+            $id_user_to,$_SESSION['id_user'], $time, $time,
+            $_SESSION['id_user'], $id_user_to, $time, $time);
+        $statement->execute();
+        $statement->bind_result($id_message, $id_user_sender, $id_user_receiver, $message, $time_sent, $time_seen, $time_deleted, $status);
+
+        $output = "";
+
+        while ($statement->fetch()) {
+
+            $output .= "|";
+
+            if ($id_user_to == $id_user_sender) {
+                $output .= "
+                    <div id='mes_" . $id_message . "' class='mes_wrap'>
+                    <div class='message'>";
+            }
+            else {
+                $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
+
+                if ($status != 'deleted') {
+                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
+                }
+                $output .= "<div class='message message_my'>";
+            }
+
+            $output .= "<img class='avatar' src='' alt='Avatar' />";
+
+            if ($status == "unseen" || $status == "seen") {
+                $output .= "<p>" . $message . "</p>";
+            }
+            else {
+                $output .= "<p>Message has been removed</p>";
+            }
+
+            $output .= "
+                <span class='time'>" . $time_sent . "</span>
+                </div>";
+
+            $output .= "
+                <div class='mes_time_info'>
+                    <p class='time'>Sent at: " . $time_sent . ",";
+
+            if ($time_seen != null ){
+                $output .= " Seen at: " . $time_seen . ",";
+            }
+
+            if ($time_deleted != null ){
+                $output .= " Deleted at: " . $time_deleted . ",";
+            }
+
+            $output .= "</p></div></div>";
+
+            $output .= "|";
+
+        }
+
+        $statement->free_result();
 
     }
 
