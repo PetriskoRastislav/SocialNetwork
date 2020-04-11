@@ -1,0 +1,513 @@
+
+.main_content {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+/* layout of messages sub page */
+
+
+/* list with conversations */
+
+#list_users {
+    display: block;
+    box-sizing: border-box;
+    width: 25%;
+    position: fixed;
+    top: 3em;
+    bottom: 0;
+    left: 0;
+    right: 75%;
+    padding: 0;
+    overflow-y: scroll;
+    background-color: rgb(235, 235, 235);
+    z-index: 0;
+}
+
+
+/* header of active conversation */
+
+#conversation_header {
+    display: block;
+    box-sizing: border-box;
+    height: 3.5em;
+    width: 75%;
+    position: fixed;
+    top: 3em;
+    right: 0;
+    left: 25%;
+    overflow: hidden;
+    background-color: rgb(235, 235, 235);
+    padding: 0.625em;
+}
+
+
+/* section with messages of active conversation */
+
+#conversation {
+    display: block;
+    box-sizing: border-box;
+    width: 75%;
+    position: fixed;
+    top: 6.5em;
+    bottom: 4em;
+    right: 0;
+    left: 25%;
+    overflow-y: scroll;
+    background-color: rgb(250, 250, 250);
+}
+
+
+/* section with input to sending messages and etc. */
+
+#chat_control {
+    display: block;
+    box-sizing: border-box;
+    width: 75%;
+    position: fixed;
+    bottom: 0;
+    left: 25%;
+    right: 0;
+    height: 4em;
+    background-color: rgb(210, 210, 210);
+}
+
+
+
+/* list of conversations */
+
+
+/* marks */
+
+.active_mark {
+    background-color: rgb(100, 200, 0);
+    width: 0.625em;
+    height: 0.625em;
+    border-radius: 50%;
+    margin-left: 0.3125em;
+    display: inline-block;
+}
+
+.mes_not_chat {
+    background-color: rgb(200, 50, 50);
+    width: 0.625em;
+    height: 0.625em;
+    border-radius: 50%;
+    margin-left: 0.3125em;
+    display: inline-block;
+}
+
+
+/* header of list */
+
+#list_users_header {
+    height: 6em;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+    background-color: rgb(215, 215, 215);
+}
+
+#list_users_header_title{
+    box-sizing: border-box;
+    display: inline-block;
+    float: left;
+    font-family: Cambria, Georgia, serif;
+    color: rgb(20, 20, 20);
+    text-align: center;
+    line-height: 1.625em;
+    padding: 0.5em 1em;
+    font-size: 1.1875em;
+    font-weight: bolder;
+}
+
+
+/* styles for a button to start a new conversation */
+
+/*#start_new_conversation {
+    box-sizing: border-box;
+    display: inline-block;
+    float: right;
+    width: auto;
+    margin: 0;
+    padding: 0.375em 0.625em;
+    height: 3em;
+    background-color: rgb(215, 215, 215);
+    transition: 0.3s;
+}
+
+#start_new_conversation:hover {
+    cursor: pointer;
+    background-color: rgb(190, 190, 190);
+}*/
+
+
+/* styles for field to search users in conversations */
+
+#search_user_con_list {
+    box-sizing: border-box;
+    width: 85%;
+    height: 2.5em;
+    margin: 0.25em 7% 0.75em 3%;
+    padding: 0.3125em 0.5em 0.3125em 0.5em;
+    font-family: 'Arial', Helvetica, sans-serif;
+    line-height: 1.25em;
+    background-color: rgb(240, 240, 240);
+    color: rgb(0, 0, 0);
+    border: 0.125em solid rgb(200, 200, 200);
+    outline: none;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    resize: none;
+}
+
+#search_user_con_list:focus {
+    background-color: rgb(250,250,250);
+    border-color: rgb(0, 0, 0);
+}
+
+
+/* button to clear search field */
+
+.clear_search_users {
+    position: absolute;
+    top: 3.25em;
+    left: 90%;
+    box-sizing: border-box;
+    height: 1.75em;
+    width: 1.75em;
+    padding: 0.25em;
+    background-color: rgb(215, 215, 215);
+    display: none;
+}
+
+.clear_search_users_visible {
+    display: block;
+}
+
+.clear_search_users:hover {
+    cursor: pointer;
+    background-color: rgb(235, 235, 235);
+}
+
+
+/* div with results of search */
+
+.search_result_con_list {
+    display: none;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    width: 25%;
+    position: fixed;
+    top: 9em;
+    right: 0;
+    margin-right: 75%;
+    background-color: rgb(225, 225, 225);
+    min-height: 0;
+    height: auto;
+    z-index: 999;
+    transition: 0.4s;
+}
+
+.visible {
+    display: block;
+    position: fixed;
+    top: 9em;
+    left: 0;
+    width: 25%;
+    margin-right: 75%;
+    z-index: 999;
+}
+
+/* button to clear search field */
+
+.search_result_item {
+    box-sizing: border-box;
+    height: 3em;
+    width: 100%;
+    font-family: 'Arial', Helvetica, sans-serif;
+    text-align: left;
+    font-size: 1em;
+    font-weight: normal;
+    color: rgb(20, 20, 20);
+    padding: 0.4375em;
+    border-top: solid 0.125em rgb(150, 150, 150);
+    transition: 0.4s;
+}
+
+.search_result_item:last-child {
+    border-bottom: solid 0.125em rgb(150, 150, 150);
+}
+
+.search_result_item:hover {
+    cursor: pointer;
+    background-color: rgb(190, 190, 190);
+}
+
+
+/* styles for labels with names of users */
+
+.list_users_item {
+    height: 3em;
+    width: 100%;
+    clear: both;
+    transition: 0.3s;
+}
+
+.list_users_item:hover {
+    cursor: pointer;
+    background-color: rgb(190, 190, 190);
+}
+
+
+/* span with name of user */
+
+.user {
+    box-sizing: border-box;
+    display: inline-block;
+    font-family: 'Cambria', Georgia, serif;
+    color: rgb(20, 20, 20);
+    text-align: left;
+    line-height: 1.6em;
+    padding: 0.5em 1em;
+    font-size: 1.1em;
+    clear: both;
+    transition: 0.3s;
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* conversation header*/
+
+
+/* style for avatar */
+
+.avatar {
+    float: left;
+    max-width: 3.75em;
+    width: 100%;
+    margin-right: 1.5em;
+    border-radius: 50%;
+}
+
+
+/* styles for time informations */
+
+.time {
+    font-family: 'Arial', Helvetica, sans-serif;
+    font-size: 0.8em;
+    font-weight: lighter;
+    float: left;
+    color: rgb(60, 60, 60);
+}
+
+/* style for name of user */
+
+#conversation_header p {
+    font-family: 'Arial', Helvetica, sans-serif;
+    text-align: left;
+    font-size: 1em;
+    font-weight: normal;
+    color: rgb(20, 20, 20);
+}
+
+
+/* time when was use last active */
+
+#conversation_header .time {
+    padding-top: 0.4em;
+}
+
+
+/* button, will clear conversation and conversation header sections */
+
+#conversation_close_button {
+    box-sizing: border-box;
+    display: block;
+    position: fixed;
+    top: 3em;
+    right: 0;
+    height: 3em;
+    width: auto;
+    padding: 0.25em;
+    margin: 0.25em 0.5em;
+    transition: 0.3s;
+    background-color: rgb(235, 235, 235);
+}
+
+#conversation_close_button:hover {
+    cursor: pointer;
+    background-color: rgb(200, 200, 200);
+}
+
+
+
+/* chat */
+
+
+/* detail time info */
+
+.mes_time_info {
+    display: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.mes_time_info p {
+    box-sizing: border-box;
+    clear: both;
+    text-align: center;
+    display: block;
+    width: 100%;
+}
+
+.mes_time_info_show {
+    display: block;
+    margin: 0.3125em auto 0.3125em auto;
+}
+
+.mes_wrap_active {
+    margin-bottom: 1.75em;
+}
+
+/* styles for message bubbles */
+
+.message {
+    border: 0.125em solid rgb(222, 222, 222);
+    background-color: rgb(241, 241, 241);
+    border-radius: 5px;
+    padding: 0.625em;
+    margin: 0.5em 5em 0.5em 1em;
+}
+
+.message_my {
+    margin: 0.5em 1em 0.5em 5em;
+    border-color: rgb(204, 204, 204);
+    background-color: rgb(221, 221, 221);
+}
+
+/* Clear floats */
+.message::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+
+/* Style for avatars */
+
+.message_my .avatar {
+    float: right;
+    margin-left: 1.5em;
+    margin-right:0;
+}
+
+
+/* style for the text of the message */
+
+.message p {
+    font-family: 'Arial', Helvetica, sans-serif;
+    text-align: left;
+    font-size: 1em;
+    font-weight: normal;
+    color: rgb(20, 20, 20);
+}
+
+.message_my p {
+    text-align: right;
+}
+
+
+/* Style time text */
+
+.message .time {
+    float: right;
+}
+
+.message_my .time {
+    float: left;
+    color: rgb(43, 43, 43);
+}
+
+
+/* button to remove message */
+
+.my_mes_wrap:hover .remove_message{
+    display: block;
+}
+
+.remove_message {
+    box-sizing: border-box;
+    display: none;
+    position: absolute;
+    height: 3em;
+    width: auto;
+    padding: 0.25em;
+    margin: 0 0 0 0.625em;
+    transition: 0.3s;
+    background-color: rgb(250, 250, 250);
+}
+
+.remove_message:hover {
+    display: block;
+    cursor: pointer;
+    background-color: rgb(220, 220, 220);
+}
+
+
+
+/* style for chat control */
+
+
+/* input for message */
+
+#message_to_send {
+    box-sizing: border-box;
+    margin: 1em 0.25em 1em 1em;
+    float: left;
+    width: 80%;
+    max-width: 60em;
+    height: 3em;
+    position: relative;
+    padding: 0.375em 0.5em 0.375em 0.5em;
+    transition: 0.5s;
+    -webkit-transition: 0.5s;
+    outline: none;
+    font-family: 'Arial', Helvetica, sans-serif;
+    line-height: 1.25em;
+    background-color: rgb(240, 240, 240);
+    color: rgb(0, 0, 0);
+    border: 0.125em solid rgb(200, 200, 200);
+    resize: none;
+}
+
+#message_to_send:focus {
+    background-color: rgb(250,250,250);
+    border-color: rgb(0, 0, 0);
+}
+
+
+/* buttons in chat control section */
+
+.chat_control_button {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    float: left;
+    height: 3em;
+    width: auto;
+    padding: 0.25em;
+    margin: 0.5em 0.25em;
+    transition: 0.3s;
+    background-color: rgb(210, 210, 210);
+}
+
+.chat_control_button:hover {
+    cursor: pointer;
+    background-color: rgb(185, 185, 185);
+}

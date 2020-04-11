@@ -94,10 +94,8 @@
 
 </div>
 
-<script src="js/toggle_log_reg_forms.js"></script>
-
 <?php
-    $page->displayBodyEnd();
+    $page->displayBodyEnd(array("js/toggle_log_reg_forms.js"));
 ?>
 
 

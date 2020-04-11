@@ -1,35 +1,49 @@
 <?php
 
-require_once('scripts.php');
-session_start();
+try {
 
-// Ukládáme si původní hodnotu relační proměnné, abychom dále mohli
-// zjistit, jestli byl uživatel přihlášený.
-$old_user = $_SESSION['valid_user'];
+    require_once('scripts.php');
+    session_start();
 
-unset($_SESSION['id_user']);
-$result_dest = session_destroy();
+    /* Storing the id of a user to verify that user was successfully logged off */
 
-// Začneme vypisovat kód HTML.
+    $old_user = $_SESSION['id_user'];
 
-if (!empty($old_user)) {
-    if ($result_dest) {
+    /* Logging off */
 
-        // Uživatel byl přihlášený a nyní se odhlásil.
-        //echo 'Byl/a jste úspěšně odhlášen/a.<br>';
+    unset($_SESSION['id_user']);
+    unset($_SESSION);
+    $result_dest = session_destroy();
+
+    /* Verifying of logging off */
+
+    if (!empty($old_user)) {
+        if ($result_dest) {
+
+            /* user was successfully logged off, now will be redirected to a login/register page */
+
+            header('Location: ../index.php');
+            exit();
+
+        } else {
+
+            /* Logging off has failed */
+
+            throw new Exception("Failed to log off");
+        }
+    }
+    else {
+
+        /* User wasn't logged in  but somehow managed to get here so we will send him back */
+
         header('Location: ../index.php');
         exit();
-
-    } else {
-
-        // Uživatel byl přihlášený, ale nyní se ho nepodařilo zcela odhlásit.
-        echo 'Odhlašování selhalo.<br>';
     }
-} else {
 
-    // Uživatel nebyl přihlášený, ale dostal se nějakým způsobem na tuto
-    // stránku.
-    header('Location: ../index.php');
+}
+catch (Exception $ex) {
+    echo $ex->getMessage();
+
     exit();
 }
 

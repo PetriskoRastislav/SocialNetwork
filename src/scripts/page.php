@@ -1,8 +1,12 @@
 <?php
     class Page{
 
+
+        /* title of a page */
         private $title = "SocialNetwork";
 
+
+        /* will display html header */
         public function displayHead($titleA, $styles = null){
             $this->displayDeclaration();
             $this->displayHeadTitle($titleA);
@@ -10,17 +14,23 @@
             $this->displayStyles($styles);
         }
 
+
+        /* will display declaration of a html file */
         private function displayDeclaration(){
             echo "<!DOCTYPE html>" .
             "<html lang='sk'>" .
             "<head>";
         }
 
+
+        /* will display title of a page */
         private function displayHeadTitle($titleA){
             echo
                 "<title>" . $this->title . " - " . $titleA . "</title>";
         }
 
+
+        /* will display meta information of a page */
         private function displayMeta(){
             ?>
             <meta charset="UTF-8">
@@ -29,6 +39,8 @@
             <?php
         }
 
+
+        /* will display default and additional styles */
         private function displayStyles($styles){
             echo "<link rel='stylesheet' href='styles/reset.css'>";
             echo "<link rel='stylesheet' href='styles/style.css'>";
@@ -43,6 +55,8 @@
             echo "</head>";
         }
 
+
+        /* will display start of a body and menu */
         public function displayBodyStart(){
             echo "<body>";
             echo "<div id='page'>";
@@ -50,6 +64,8 @@
             echo "<div class='main_content'>";
         }
 
+
+        /* will display header of a webpage, logo, menu, etc. */
         public function displayHeader(){
             /*$message = "
                 <div class='pageHeader'>
@@ -88,7 +104,7 @@
                                     <p class='header_menu_a'><i class='arrow down_arrow' id='arrow_btn_menu'></i></p>
                                 </li>
                                 
-                                <div id='header_drop_content'>
+                                <div id='header_drop_content' class='header_menu_drop_hide'>
                                     <a class='header_menu_a' href='#'>Friends</a>
                                     
                                     <a class='header_menu_a' href='user_settings.php'>Settings</a>
@@ -117,16 +133,27 @@
             echo $message;
         }
 
+
+        /* will display title / heading of a webpage */
         public function displayTitle($title){
             echo "<h1 class='pageTitle'>" . $title . "</h1>";
         }
 
-            public function displayBodyEnd(){
-            $script = "<script src='js/jquery-3.4.1.min.js'></script>";
 
-            $script .= "<script src='js/menu.js'></script>";
+        /* will display end of a body and will attach default and additional javascript sctipts */
+        public function displayBodyEnd($scripts){
+            echo "<script src='js/jquery-3.4.1.min.js'></script>";
+            echo "<script src='js/menu.js'></script>";
+            echo "<script src='js/js.js'></script>";
 
-            echo $script . "</div></div></body></html>";
+            $script = @reset($scripts);
+
+            while ($script){
+                echo "<script src='" . $script . "'></script>";
+                $script = next($scripts);
+            }
+
+            echo "</div></div></body></html>";
         }
     }
 ?>

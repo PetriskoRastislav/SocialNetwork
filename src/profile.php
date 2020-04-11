@@ -15,6 +15,6 @@ $page->displayBodyStart();
 
 //echo "<p class='spacing'>User's id: " . $_SESSION['id_user'] . "</p>";
 
-$page->displayBodyEnd();
+$page->displayBodyEnd(array());
 
 ?>
