@@ -15,6 +15,11 @@ try {
 
     $mode = $_POST['mode'];
 
+    $delimiter = "|";
+
+    $time_limit = strtotime(date('Y-m-d H:i:s') . '-30 minutes');
+    $time_limit = date('Y-m-d H:i:s', $time_limit);
+
 
     /* will fetch entire chat with particular user from database */
     if($mode == "all") {
@@ -37,20 +42,20 @@ try {
 
         while ($statement->fetch()) {
             if ($id_user_to == $id_user_sender) {
-                $output .= "
-                    <div id='mes_" . $id_message . "' class='mes_wrap'>
-                    <div class='message'>";
+                $output .=
+                    "<div id='mes_" . $id_message . "' class='mes_wrap'>" .
+                    "<div class='message'>";
             }
             else {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
-                if ($status != 'deleted') {
-                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
+                if ($status != 'deleted' && $time_sent > $time_limit) {
+                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button'>";
                 }
-                $output .= "   <div class='message message_my'>";
+                $output .= "<div class='message message_my'>";
             }
 
-            $output .= "<img class='avatar' src='' alt='Avatar' />";
+            $output .= "<img class='avatar' src='' alt='Avatar'>";
 
             if ($status == "unseen" || $status == "seen") {
                 $output .= "<p>" . $message . "</p>";
@@ -59,13 +64,13 @@ try {
                 $output .= "<p>Message has been removed</p>";
             }
 
-            $output .= "
-                <span class='time'>" . $time_sent . "</span>
-                </div>";
+            $output .=
+                "<span class='time'>" . $time_sent . "</span>".
+                "</div>";
 
-            $output .= "
-                <div class='mes_time_info'>
-                    <p class='time'>Sent at: " . $time_sent . ",";
+            $output .=
+                "<div class='mes_time_info'>" .
+                "<p class='time'>Sent at: " . $time_sent . ",";
 
             if ($time_seen != null ){
                 $output .= " Seen at: " . $time_seen . ",";
@@ -140,20 +145,20 @@ try {
 
         while ($statement->fetch()) {
             if ($id_user_to == $id_user_sender) {
-                $output .= "
-                    <div id='mes_" . $id_message . "' class='mes_wrap'>
-                    <div class='message'>";
+                $output .=
+                    "<div id='mes_" . $id_message . "' class='mes_wrap'>" .
+                    "<div class='message'>";
             }
             else {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
-                if ($status != 'deleted') {
-                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
+                if ($status != 'deleted' && $time_sent > $time_limit) {
+                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button'>";
                 }
                 $output .= "<div class='message message_my'>";
             }
 
-            $output .= "<img class='avatar' src='' alt='Avatar' />";
+            $output .= "<img class='avatar' src='' alt='Avatar'>";
 
             if ($status == "unseen" || $status == "seen") {
                 $output .= "<p>" . $message . "</p>";
@@ -162,13 +167,13 @@ try {
                 $output .= "<p>Message has been removed</p>";
             }
 
-            $output .= "
-                <span class='time'>" . $time_sent . "</span>
-                </div>";
+            $output .=
+                "<span class='time'>" . $time_sent . "</span>" .
+                "</div>";
 
-            $output .= "
-                <div class='mes_time_info'>
-                    <p class='time'>Sent at: " . $time_sent . ",";
+            $output .=
+                "<div class='mes_time_info'>" .
+                "<p class='time'>Sent at: " . $time_sent . ",";
 
             if ($time_seen != null ){
                 $output .= " Seen at: " . $time_seen . ",";
@@ -203,8 +208,6 @@ try {
     else if ($mode == "refresh_messages") {
 
         $id_user_to = $_POST['id_user_to'];
-        $time = strtotime(date('Y-m-d H:i:s') . '-600 seconds');
-        $time = date('Y-m-d H:i:s', $time);
 
         $query = "
             SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
@@ -214,8 +217,8 @@ try {
             ORDER BY id_message ASC";
         $statement = $db->prepare($query);
         $statement->bind_param("iissiiss",
-            $id_user_to,$_SESSION['id_user'], $time, $time,
-            $_SESSION['id_user'], $id_user_to, $time, $time);
+            $id_user_to,$_SESSION['id_user'], $time_limit, $time_limit,
+            $_SESSION['id_user'], $id_user_to, $time_limit, $time_limit);
         $statement->execute();
         $statement->bind_result($id_message, $id_user_sender, $id_user_receiver, $message, $time_sent, $time_seen, $time_deleted, $status);
 
@@ -223,54 +226,53 @@ try {
 
         while ($statement->fetch()) {
 
-            $output .= "|";
+            $output .= $id_message . $delimiter;
 
             if ($id_user_to == $id_user_sender) {
-                $output .= "
-                    <div id='mes_" . $id_message . "' class='mes_wrap'>
-                    <div class='message'>";
+                $output .= '<div class="message">';
             }
             else {
-                $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
-                if ($status != 'deleted') {
-                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button' />";
+                if ($status != 'deleted' && $time_sent > $time_limit) {
+                    $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="srcPictures/icons8-deleted-message-100.png" alt="delete message button">';
                 }
-                $output .= "<div class='message message_my'>";
+                $output .= '<div class="message message_my">';
             }
 
-            $output .= "<img class='avatar' src='' alt='Avatar' />";
+            $output .= '<img class="avatar" src="" alt="Avatar">';
 
             if ($status == "unseen" || $status == "seen") {
                 $output .= "<p>" . $message . "</p>";
             }
             else {
-                $output .= "<p>Message has been removed</p>";
+                $output .= '<p>Message has been removed</p>';
             }
 
-            $output .= "
-                <span class='time'>" . $time_sent . "</span>
-                </div>";
+            $output .=
+                '<span class="time">' . $time_sent . '</span>' .
+                '</div>';
 
-            $output .= "
-                <div class='mes_time_info'>
-                    <p class='time'>Sent at: " . $time_sent . ",";
+            $output .=
+                '<div class="mes_time_info">' .
+                '<p class="time">Sent at: ' . $time_sent . ',';
 
             if ($time_seen != null ){
-                $output .= " Seen at: " . $time_seen . ",";
+                $output .= ' Seen at: ' . $time_seen . ',';
             }
 
             if ($time_deleted != null ){
-                $output .= " Deleted at: " . $time_deleted . ",";
+                $output .= ' Deleted at: ' . $time_deleted . ',';
             }
 
-            $output .= "</p></div></div>";
+            $output .= '</p></div>';
 
-            $output .= "|";
+            $output .= $delimiter;
 
         }
 
         $statement->free_result();
+
+        print $output;
 
     }
 
@@ -314,6 +316,14 @@ try {
 catch (Exception $ex){
     $ex->getMessage();
     exit();
+}
+
+
+/* will process common fetched messages with common format of output */
+function process_fetched_messages ($statement) {
+
+
+
 }
 
 ?>

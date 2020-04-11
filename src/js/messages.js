@@ -243,17 +243,66 @@ $(document).ready(function() {
 
                     for (let i = 0; i < ret_data.length; i += 2) {
 
-                        console.log(ret_data[i] + " " + ret_data[i + 1]);
+                        if (ret_data [i] > 0) {
 
-                        try {
-                            $("#mes_" + ret_data[i]).replaceWith(ret_data[i + 1]);
-                        } catch (ex) {
+                            try {
+                                let old_message = $("#mes_" + ret_data[i]);
+                                let old_message_content = old_message.html();
+                                let new_message_content = ret_data[i + 1].toString();
 
+                                let new_message_content_alt = new_message_content.replace("mes_time_info", "mes_time_info mes_time_info_show");
+
+                                //old_message_content = old_message_content.replace(/[\u000d]/g, ' ');
+                                //new_message_content = new_message_content.replace(/[\u000a]/g, ' ');
+
+                                //console.log(ret_data[i]);
+
+
+                                //console.log();
+
+                                /*if ( !( old_message_content.is(ret_data[i + 1])) ) {
+                                    old_message.html(ret_data[i + 1]);
+                                }*/
+
+                                /*if ( ( old_message_content.localeCompare( ret_data[i + 1] ) >= 1 ) ) {
+                                    old_message.html(ret_data[i + 1]);
+                                }*/
+
+                                /*if ( ( old_message_content.localeCompare( new_message_content ) !== 0 ) ) {
+                                    old_message.html(ret_data[i + 1]);
+                                }*/
+
+                                if (!(strings_equal(old_message_content, new_message_content)) && !(strings_equal(old_message_content, new_message_content_alt))) {
+                                    console.log(old_message_content);
+                                    console.log(new_message_content);
+                                    console.log((new_message_content_alt));
+
+                                    old_message.html(ret_data[i + 1]);
+                                    old_message.removeClass("mes_wrap_active");
+                                }
+                            } catch (ex) {
+                                console.log(ex.message);
+                            }
                         }
                     }
                 },
             });
         }
+    }
+
+
+    /* verifies whether two strings are identical */
+    function strings_equal (string1, string2) {
+        for (let i = 0; i < string1.length; i++) {
+            //console.log(string1.charCodeAt(i) + " " + string2.charCodeAt(i));
+            if (string1.charCodeAt(i) !== string2.charCodeAt(i)) {
+                /*console.log("false " + i + " " + string1.charCodeAt(i) + " " + string1.charAt(i) + " " + string2.charCodeAt(i) + " " + string2.charAt(i) +
+                    " | " + string1.slice(i - 10, i) + " | " + string1.charAt(i) + " | " + string1.slice(i, i + 10) +
+                    " | " + string2.slice(i - 10, i) + " | " + string2.charAt(i) + " | " + string2.slice(i, i + 10) + " |");*/
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -376,11 +425,7 @@ $(document).ready(function() {
     $(document).on("click", ".message", function () {
         let id_mes = $(this).parent().attr("id").split("_")[1];
 
-        console.log(id_mes);
-
         let time_info = $("#mes_" + id_mes + " .mes_time_info");
-
-        console.log(time_info);
 
         if (time_info.hasClass("mes_time_info_show")) {
             time_info.removeClass("mes_time_info_show");

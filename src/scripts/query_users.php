@@ -203,7 +203,7 @@ catch (Exception $ex){
 
 
 /* will return number of unseen messages send from a particular user to logged user */
-function get_unseen_messages_notification($id_user_sender, $id_user_receiver){
+function get_unseen_messages_notification ($id_user_sender, $id_user_receiver) {
 
     try{
 
