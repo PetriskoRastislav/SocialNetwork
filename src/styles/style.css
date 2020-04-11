@@ -32,7 +32,8 @@
 .pageLogo {
     width: auto;
     height: 2.7em;
-    padding: 0.15em;
+    /*padding: 0.15em;*/
+    padding: 0.15em 0;
     position: relative;
 
 }
@@ -276,8 +277,6 @@ a.common:active {
 /* formatting of .main_content */
 
 .main_content {
-    margin-bottom: 0.9375em; /* 15px */
-    margin-top: 0.9375em; /* 15px */
-    padding-left: 0.625em; /* 10px */
-    padding-right: 0.625em; /* 10px */
+    margin: 0.75em 1em 0.75em 1em;
+    padding: 0;
 }

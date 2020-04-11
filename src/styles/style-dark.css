@@ -75,7 +75,8 @@ p {
 /* formatting of headings */
 
 h1 {
-    border-bottom: solid rgb(180, 180, 180) 0.0625em;
+    /*border-bottom: solid rgb(180, 180, 180) 0.0625em;*/
+    border-bottom: solid rgb(120, 120, 120) 0.0625em;
     color: rgb(200, 200, 200);
 }
 
