@@ -31,15 +31,16 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
     `name` CHAR(40) NOT NULL,
     `surname` CHAR(40) NOT NULL,
     `password` CHAR(97) NOT NULL,
+    `registered` CHAR(19) NOT NULL,
+    `last_active` CHAR(19) NOT NULL,
+    `color_mode` ENUM('dark', 'light') DEFAULT 'dark' NOT NULL,
     `profile_picture` CHAR(128),
+    `bio` TEXT,
     `location` CHAR(100),
     `gender` ENUM('male', 'female', 'other'),
     `day_of_birth` CHAR(2),
     `month_of_birth` CHAR(2),
-    `year_of_birth` CHAR(15),
-    `color_mode` ENUM('dark', 'light') DEFAULT 'dark' NOT NULL,
-    `registered` CHAR(19) NOT NULL,
-    `last_active` CHAR(19) NOT NULL
+    `year_of_birth` CHAR(15)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -50,19 +51,6 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`friends` (
 	`id_user_1` INT UNSIGNED NOT NULL,
     `id_user_2` INT UNSIGNED NOT NULL,
     `time` CHAR(19) NOT NULL
-)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-/* Table to store posts of users */
-
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`posts` (
-	`id_post` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `id_user_author` INT UNSIGNED NOT NULL,
-    `name_post` CHAR(100),
-    `text_post` TEXT,
-    `time` CHAR(19) NOT NULL,
-    `picture_post` CHAR(128)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -89,20 +77,6 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`groups` (
     `group_name` CHAR(60) NOT NULL,
     `created` CHAR(19) NOT NULL,
     `last_active` CHAR(19) NOT NULL
-)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-/* table for storing posts in groups */
-
-CREATE TABLE IF NOT EXISTS `SocialNetwork`.`group_posts` (
-	`id_group_post` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `id_group` INT NOT NULL,
-    `id_user_author` INT UNSIGNED NOT NULL,
-    `name_post` CHAR(100),
-    `text_post` TEXT,
-    `time` CHAR(19) NOT NULL,
-    `picture_post` CHAR(128)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
