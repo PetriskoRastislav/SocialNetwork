@@ -138,13 +138,8 @@ DEFAULT CHARACTER SET = utf8;
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_1`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_2`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 
-ALTER TABLE `SocialNetwork`.`posts` ADD FOREIGN KEY (`id_user_author`) REFERENCES `SocialNetwork`.`users`(`id_user`);
-
 ALTER TABLE `SocialNetwork`.`messages` ADD FOREIGN KEY (`id_user_sender`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 ALTER TABLE `SocialNetwork`.`messages` ADD FOREIGN KEY (`id_user_receiver`) REFERENCES `SocialNetwork`.`users`(`id_user`);
-
-ALTER TABLE `SocialNetwork`.`group_posts` ADD FOREIGN KEY (`id_group`) REFERENCES `SocialNetwrok`.`groups`(`id_group`);
-ALTER TABLE `SocialNetwork`.`group_posts` ADD FOREIGN KEY (`id_user_author`) REFERENCES `SocialNetwrok`.`groups`(`id_group`);
 
 ALTER TABLE `SocialNetwork`.`group_members` ADD FOREIGN KEY (`id_group`) REFERENCES `SocialNetwork`.`groups`(`id_group`);
 ALTER TABLE `SocialNetwork`.`group_members` ADD FOREIGN KEY (`id_user`) REFERENCES `SocialNetwork`.`users`(`id_user`);
