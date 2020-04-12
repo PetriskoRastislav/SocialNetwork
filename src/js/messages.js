@@ -21,7 +21,7 @@ $(document).ready(function() {
             url: "scripts/query_users.php",
             method: "POST",
             data: {
-                mode: "all",
+                mode: "all"
             },
             success: function (data) {
                 $("#list_users_list").html(data);
@@ -37,7 +37,7 @@ $(document).ready(function() {
             url: "scripts/query_users.php",
             method: "POST",
             data: {
-                mode: "refresh_list",
+                mode: "refresh_list"
             },
             success: function (data) {
                 let ret_data = data.toString().split("|");
@@ -64,7 +64,7 @@ $(document).ready(function() {
             url: "scripts/query_users.php",
             method: "POST",
             data: {
-                mode: "refresh_marks",
+                mode: "refresh_marks"
             },
             success: function(data){
                 let ret_data = data.toString().split(" ");
@@ -145,7 +145,7 @@ $(document).ready(function() {
             method: "POST",
             data: {
                 mode: "all",
-                id_user_to: id_user_to,
+                id_user_to: id_user_to
             },
             success: function (data) {
                 $("#conversation").html(data);
@@ -169,7 +169,7 @@ $(document).ready(function() {
                 data: {
                     mode: "send_message",
                     id_user_to: id_user_to,
-                    message: message,
+                    message: message
                 },
                 success: function(){
                     $("#message_to_send").val("");
@@ -236,7 +236,7 @@ $(document).ready(function() {
                 method: "POST",
                 data: {
                     mode: "refresh_messages",
-                    id_user_to: id_user_to,
+                    id_user_to: id_user_to
                 },
                 success: function (data) {
                     let ret_data = data.toString().split("|");
@@ -252,31 +252,7 @@ $(document).ready(function() {
 
                                 let new_message_content_alt = new_message_content.replace("mes_time_info", "mes_time_info mes_time_info_show");
 
-                                //old_message_content = old_message_content.replace(/[\u000d]/g, ' ');
-                                //new_message_content = new_message_content.replace(/[\u000a]/g, ' ');
-
-                                //console.log(ret_data[i]);
-
-
-                                //console.log();
-
-                                /*if ( !( old_message_content.is(ret_data[i + 1])) ) {
-                                    old_message.html(ret_data[i + 1]);
-                                }*/
-
-                                /*if ( ( old_message_content.localeCompare( ret_data[i + 1] ) >= 1 ) ) {
-                                    old_message.html(ret_data[i + 1]);
-                                }*/
-
-                                /*if ( ( old_message_content.localeCompare( new_message_content ) !== 0 ) ) {
-                                    old_message.html(ret_data[i + 1]);
-                                }*/
-
                                 if (!(strings_equal(old_message_content, new_message_content)) && !(strings_equal(old_message_content, new_message_content_alt))) {
-                                    console.log(old_message_content);
-                                    console.log(new_message_content);
-                                    console.log((new_message_content_alt));
-
                                     old_message.html(ret_data[i + 1]);
                                     old_message.removeClass("mes_wrap_active");
                                 }
@@ -285,7 +261,7 @@ $(document).ready(function() {
                             }
                         }
                     }
-                },
+                }
             });
         }
     }
@@ -294,7 +270,6 @@ $(document).ready(function() {
     /* verifies whether two strings are identical */
     function strings_equal (string1, string2) {
         for (let i = 0; i < string1.length; i++) {
-            //console.log(string1.charCodeAt(i) + " " + string2.charCodeAt(i));
             if (string1.charCodeAt(i) !== string2.charCodeAt(i)) {
                 /*console.log("false " + i + " " + string1.charCodeAt(i) + " " + string1.charAt(i) + " " + string2.charCodeAt(i) + " " + string2.charAt(i) +
                     " | " + string1.slice(i - 10, i) + " | " + string1.charAt(i) + " | " + string1.slice(i, i + 10) +
@@ -340,11 +315,11 @@ $(document).ready(function() {
             method: "POST",
             data: {
                 mode: "remove_message",
-                id_message: id_message,
+                id_message: id_message
             },
             success: function () {
 
-            },
+            }
         })
     });
 
@@ -371,14 +346,14 @@ $(document).ready(function() {
                 method: "POST",
                 data: {
                     mode: "find_user",
-                    value: value,
+                    value: value
                 },
                 success: function (data) {
                     let result = $("#search_result_con_list");
                     result.html(data);
                     result.addClass("visible");
 
-                },
+                }
             });
         }
     });
