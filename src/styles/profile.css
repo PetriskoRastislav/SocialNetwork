@@ -2,7 +2,7 @@
 	margin-top: 0;
 }
 
-.namer {
+.profile_name {
 	margin-top: 0;
 	margin-bottom: 0;
 }
@@ -13,21 +13,32 @@
 	padding-bottom: 0.5em;
 }
 
-.image_informations {
+.left_column {
 	box-sizing: border-box;
 	float:left;
 	margin: 0;
 	padding: 0 0 0 0;
-	width: 15em;
+	width: 20%;
+	max-width: 15em;
 	/*background-color: green;*/
 	border-left: 0.0625em solid rgb(220 220 220);
 	border-right: 0.0625em solid rgb(220 220 220);
 }
 
-.bio {
+.right_column {
 	box-sizing: border-box;
 	float:right;
-	background-color: red;
+	/*background-color: red;*/
+	width: /*67.3em*/ 76%;
+	max-width: 67.3em;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+.bio {
+	/*margin: auto;*/
+	width: 100%;
+	margin-top: 2em;
 }
 
 .informations {

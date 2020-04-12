@@ -113,7 +113,7 @@
                                 </div>
                                 
                                 <li class='header_menu_li border_left'>
-                                    <a class='header_menu_a' href='profile.php'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
+                                    <a class='header_menu_a' href='profile.php?id=" . $_SESSION['id_user'] . "'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
                                 </li>
                                 
                                 <li class='header_menu_li border_left'>
