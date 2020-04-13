@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
     `profile_picture` CHAR(128),
     `bio` TEXT,
     `location` CHAR(100),
-    `gender` ENUM('male', 'female', 'other'),
+    `gender` ENUM('male', 'female', 'other') DEFAULT 'other',
     `day_of_birth` CHAR(2),
     `month_of_birth` CHAR(2),
     `year_of_birth` CHAR(15)
