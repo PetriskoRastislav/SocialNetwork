@@ -2,16 +2,16 @@
 	width: 49%;
 	float: left;
 	margin-bottom: 0;
-	border-bottom: 0.125em solid rgb(120 120 120);
+	border-bottom: 0.125em solid rgb(120, 120, 120);
 }
 
 .friend:nth-child(even) {
-	border-left: 0.125em solid rgb(120 120 120);
+	border-left: 0.125em solid rgb(120, 120, 120);
 }
 
 .friend:nth-child(-n+2) {
 	margin-top: 1em;
-	border-top: 0.125em solid rgb(120 120 120);
+	border-top: 0.125em solid rgb(120, 120, 120);
 }
 
 .friend_avatar {

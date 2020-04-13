@@ -105,7 +105,7 @@
                                 </li>
                                 
                                 <div id='header_drop_content' class='header_menu_drop_hide'>
-                                    <a class='header_menu_a' href='#'>Friends</a>
+                                    <a class='header_menu_a' href='friends.php?user=me'>Friends</a>
                                     
                                     <a class='header_menu_a' href='user_settings.php'>Settings</a>
 
@@ -113,7 +113,7 @@
                                 </div>
                                 
                                 <li class='header_menu_li border_left'>
-                                    <a class='header_menu_a' href='profile.php?id=" . $_SESSION['id_user'] . "'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
+                                    <a class='header_menu_a' href='profile.php?user=me'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
                                 </li>
                                 
                                 <li class='header_menu_li border_left'>

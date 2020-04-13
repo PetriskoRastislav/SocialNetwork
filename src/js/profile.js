@@ -8,7 +8,7 @@ $(document).ready( function () {
         method: "POST",
         data: {
             mode: "get_profile_left_info",
-            user_id: url.get('id')
+            user_id: url.get('user')
         },
         success: process_profile_data
     });
@@ -19,10 +19,35 @@ $(document).ready( function () {
         method: "POST",
         data: {
             mode: "get_profile_profile_info",
-            user_id: url.get('id')
+            user_id: url.get('user')
         },
         success: process_profile_data
     });
+
+    if (url.get('user') === "me") {
+        /*let write_message = $(".requests_image[title='Write a Message']");
+        write_message.addClass("requests_image_dis");
+        write_message.removeClass("requests_image_en");*/
+
+        let request_friendship = $(".requests_image[title='Request Friendship']");
+        request_friendship.addClass("requests_image_dis");
+        request_friendship.removeClass("requests_image_en");
+        request_friendship.attr("title", "Wanna be friend with yourself? I guess it won't work.");
+    }
+    else {
+        $(".requests_image[title='Request Friendship']").on("click", function () {
+
+        });
+    }
+
+    $(".requests_image[title='Write a Message']").on("click", function () {
+        window.location.href = "messages.php?user=" + url.get('user');
+    });
+
+    $(".requests_image[title='Friends']").on("click", function () {
+        window.location.href = "friends.php?user=" + url.get('user');
+    });
+
 
     document.getElementsByTagName("html")[0].style.visibility = "visible";
 

@@ -200,6 +200,7 @@ try {
     else if ($mode == "get_profile_left_info") {
 
         $id_user = $_POST['user_id'];
+        if ($id_user == "me") $id_user = $_SESSION['id_user'];
 
         $query =
             "SELECT profile_picture, last_active, gender, location, registered, day_of_birth, month_of_birth, year_of_birth
@@ -267,6 +268,7 @@ try {
     else if ($mode == "get_profile_profile_info") {
 
         $id_user = $_SESSION['id_user'];
+        if ($id_user == "me") $id_user = $_SESSION['id_user'];
 
         $query =
             "SELECT name, surname, bio

@@ -3,6 +3,14 @@
 }
 
 .left_column {
-	border-left: 0.0625em solid rgb(20 20 20);
-	border-right: 0.0625em solid rgb(20 20 20);
+	border-left: 0.0625em solid rgb(20, 20, 20);
+	border-right: 0.0625em solid rgb(20, 20, 20);
+}
+
+.requests_image_en:hover {
+	background-color: rgb(104, 107, 113);
+}
+
+.requests_image_dis:hover {
+	background-color: rgb(54, 57, 63);
 }
