@@ -1,9 +1,3 @@
-$(document).on("load",  function() {
-
-
-});
-
-
 $(document).ready( function () {
 
     let url = new URLSearchParams(window.location.search);
@@ -16,18 +10,7 @@ $(document).ready( function () {
             mode: "get_profile_left_info",
             user_id: url.get('id')
         },
-        success: function (data) {
-
-            data = data.toString().split("|");
-
-            for (let i = 0; i < data.length; i += 2) {
-                if (data[i] === "#info_profile_picture") {
-                    $(data[i]).attr("src", data[i + 1]);
-                } else {
-                    $(data[i]).html(data[i + 1]);
-                }
-            }
-        }
+        success: process_profile_data
     });
 
     /* fills center part with data */
@@ -38,20 +21,16 @@ $(document).ready( function () {
             mode: "get_profile_profile_info",
             user_id: url.get('id')
         },
-        success: function (data) {
-            data = data.toString().split("|");
-            
-            for (let i = 0; i < data.length; i += 2) {
-                $(data[i]).html(data[i + 1]);
-            }
-        }
-    })
+        success: process_profile_data
+    });
+
+    document.getElementsByTagName("html")[0].style.visibility = "visible";
 
 });
 
 
 /* will split up data from php and put html data into a correspondent element */
-/*function process_profile_data (data) {
+function process_profile_data (data) {
     data = data.toString().split("|");
 
     for (let i = 0; i < data.length; i += 2) {
@@ -61,4 +40,4 @@ $(document).ready( function () {
             $(data[i]).html(data[i + 1]);
         }
     }
-}*/
+}

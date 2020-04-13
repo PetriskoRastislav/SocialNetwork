@@ -215,6 +215,6 @@ $page->displayBodyStart();
 
 <?php
 
-$page->displayBodyEnd(array());
+$page->displayBodyEnd(array("js/user_settings.php"));
 
 ?>

@@ -286,7 +286,7 @@ try {
 
         if ($bio == null) {
             if ($id_user == $_SESSION['id_user']) {
-                $output .= "No biography written yet. Write it <a class='common_link' href='user_settings.php?id=" . $id_user . "#user_bio'>now</a>.";
+                $output .= "No biography written yet. Write it <a class='common' href='user_settings.php?id=" . $id_user . "#user_bio'>now</a>!";
             }
             else {
 
