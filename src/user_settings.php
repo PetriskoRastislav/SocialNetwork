@@ -109,22 +109,68 @@ $page->displayBodyStart();
 					<label for="location" class="info_tag_setting">Type your new Location</label>
 					<input type="text" class="value_setting input_form" name="location" placeholder="Enter your new location" maxlength="100">
 				</li>
-				<!--<li>
-					<label for="gender" class="info_tag_setting">Choose your new Gender</label>
-					<input type="radio" class="value_setting input_form" name="gender" checked="checked">
-					<label for="gender">Other</label>
-					<input type="radio" class="value_setting input_form" name="gender">
-					<label for="gender">Male</label>
-					<input type="radio" class="value_setting input_form" name="gender">
-					<label for="gender">Female</label>
-				</li>-->
 				<li>
-					<label for="day_of_birthday" class="info_tag_setting">Type your new Day of Birthday</label>
-					<input type="text" class="value_setting input_form" name="day_of_birthday" placeholder="Enter your new day of birthday" maxlength="2">
+					<label for="gender" class="info_tag_setting">Choose your new Gender</label>
+					<select class="select_input">
+	    				<option value="0">Other</option>
+	    				<option value="1">Male</option>
+	   					<option value="2">Female</option>
+					</select>
 				</li>
 				<li>
-					<label for="month_of_birthday" class="info_tag_setting">Type your new Day of Birthday</label>
-					<input type="text" class="value_setting input_form" name="month_of_birthday" placeholder="Enter your new month of birthday" maxlength="2">
+					<label for="day_of_birthday" class="info_tag_setting">Type your new Day of Birthday</label>
+					<select class="select_input">
+	    				<option value="0">--</option>
+	    				<option value="1">01</option>
+	   					<option value="2">02</option>
+	   					<option value="3">03</option>
+	   					<option value="4">04</option>
+	   					<option value="5">05</option>
+	   					<option value="6">06</option>
+	   					<option value="7">07</option>
+	   					<option value="8">08</option>
+	   					<option value="9">09</option>
+	   					<option value="10">10</option>
+	   					<option value="11">11</option>
+	   					<option value="12">12</option>
+	   					<option value="13">13</option>
+	   					<option value="14">14</option>
+	   					<option value="15">15</option>
+	   					<option value="16">16</option>
+	   					<option value="17">17</option>
+	   					<option value="18">18</option>
+	   					<option value="19">19</option>
+	   					<option value="20">20</option>
+	   					<option value="21">21</option>
+	   					<option value="22">22</option>
+	   					<option value="23">23</option>
+	   					<option value="24">24</option>
+	   					<option value="25">25</option>
+	   					<option value="26">26</option>
+	   					<option value="27">27</option>
+	   					<option value="28">28</option>
+	   					<option value="29">29</option>
+	   					<option value="30">30</option>
+	   					<option value="31">31</option>
+					</select>
+				</li>
+				<li>
+					<label for="month_of_birthday" class="info_tag_setting">Type your new Month of Birthday</label>
+					<select class="select_input">
+	    				<option value="0">--</option>
+	    				<option value="1">01</option>
+	   					<option value="2">02</option>
+	   					<option value="3">03</option>
+	   					<option value="4">04</option>
+	   					<option value="5">05</option>
+	   					<option value="6">06</option>
+	   					<option value="7">07</option>
+	   					<option value="8">08</option>
+	   					<option value="9">09</option>
+	   					<option value="10">10</option>
+	   					<option value="11">11</option>
+	   					<option value="12">12</option>
+	   				</select>
 				</li>
 				<li>
 					<label for="year_of_birthday" class="info_tag_setting">Type your new Year of Birthday</label>
@@ -138,7 +184,13 @@ $page->displayBodyStart();
 		<h2>Change the Theme</h2>
 			<ul>
 				<li>
-					<label for="theme" class="info_tag_setting">Choose your new Theme</label>
+					<label for="theme" class="info_tag_setting">Enable Dark Theme</label>
+				</li>
+				<li>
+					<label class="switch">
+						<input type="checkbox">
+  						<span class="slider round"></span>
+					</label>
 				</li>
 			</ul>
 			<input type="button" value="Change" class="spacing_form button_form_submit button_setting">
