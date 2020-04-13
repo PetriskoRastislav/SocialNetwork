@@ -18,8 +18,8 @@ try {
     /* fetch all users with whom had logged user communication with all data */
     if ($mode == "all") {
 
-        $query = "
-            SELECT DISTINCT id_user, name, surname, last_active
+        $query =
+            "SELECT DISTINCT id_user, name, surname, last_active
             FROM users
             JOIN messages ON 
             (users.id_user = messages.id_user_sender AND messages.id_user_receiver = ?)
@@ -73,8 +73,8 @@ try {
     else if ($mode == "refresh_list") {
 
 
-        $query = "
-            SELECT DISTINCT id_user, name, surname, last_active
+        $query =
+            "SELECT DISTINCT id_user, name, surname, last_active
             FROM users
             JOIN messages ON 
             (users.id_user = messages.id_user_sender AND messages.id_user_receiver = ?)
@@ -111,8 +111,8 @@ try {
     /* will only fetch last_active data, will create marker of active user and notification when user has new message */
     else if ($mode == "refresh_marks") {
 
-        $query = "
-            SELECT DISTINCT users.id_user, users.last_active
+        $query =
+            "SELECT DISTINCT users.id_user, users.last_active
             FROM users
             JOIN messages ON
             (users.id_user = messages.id_user_sender AND messages.id_user_receiver = ?)
@@ -152,8 +152,8 @@ try {
 
         $time_now = date("Y-m-d H:i:s");
 
-        $query = "
-            UPDATE users
+        $query =
+            "UPDATE users
             SET last_active = ?
             WHERE id_user = ?";
         $statement = $db->prepare($query);
@@ -170,8 +170,8 @@ try {
 
         $value = $_POST['value'];
 
-        $query = "
-            SELECT id_user, email, name, surname, profile_picture, last_active
+        $query =
+            "SELECT id_user, email, name, surname, profile_picture, last_active
             FROM users
             WHERE name LIKE ? 
             OR surname LIKE ?";
@@ -197,27 +197,25 @@ try {
 
 
     /* will return information of a profile to the left info panel of profile page */
-    else if ($mode = "get_profile_left_info") {
+    else if ($mode == "get_profile_left_info") {
 
-        $id_user = $_POST['id'];
+        $id_user = $_POST['user_id'];
 
-        $query = "
-            SELECT profile_picture, last_active, gender, location, registered, day_of_birth, month_of_birth, year_of_birth
+        $query =
+            "SELECT profile_picture, last_active, gender, location, registered, day_of_birth, month_of_birth, year_of_birth
             FROM users
             WHERE id_user = ?";
         $statement = $db->prepare($query);
-        $statement->bind_param("i", $id);
+        $statement->bind_param("i", $id_user);
         $statement->execute();
-        $statement->bind_result($profile_picture, $last_active, $gender, $location, $registered, $day_of_birth,
-            $month_of_bith, $year_of_birth);
+        $statement->bind_result($profile_picture, $last_active, $gender, $location, $registered, $day_of_birth, $month_of_bith, $year_of_birth);
         $statement->fetch();
 
         $output = "";
 
         if ($profile_picture == null) {
             $output .= "#info_profile_picture|" . "srcPictures/blank-profile-picture-png-8.png";
-        }
-        else {
+        } else {
             $output .= "#info_profile_picture|" . "usersPictures/" . $profile_picture . "|";
         }
 
@@ -225,26 +223,77 @@ try {
 
         $output .= "|#info_gender|" . $gender;
 
-        $output .= "|#info_location|" . $location;
+        $output .= "|#info_location|";
+        if ($location == null) {
+            $output .= "---";
+        }
+        else {
+            $output .= $location;
+        }
 
         $output .= "|#info_registered|" . process_to_only_date($registered);
 
         $output .= "|#info_date_of_birth|";
 
-        if ($day_of_birth != null) {
-            $output .= $day_of_birth . ".";
+        if ($day_of_birth == null && $month_of_bith == null && $year_of_birth == null) {
+            $output .= "---";
+        }
+        else {
+
+            if ($day_of_birth != null) {
+                $output .= $day_of_birth . ".";
+            }
+
+            if ($day_of_birth != null || $year_of_birth != null) {
+                $output .= " ";
+            }
+
+            if ($month_of_bith != null) {
+                $output .= process_month($month_of_bith);
+            }
+
+            if ($month_of_bith != null && $year_of_birth != null) {
+                $output .= $year_of_birth;
+            }
+
         }
 
-        if ($day_of_birth != null || $year_of_birth != null) {
-            $output .= " ";
-        }
+        print $output;
 
-        if ($month_of_bith != null) {
-            $output .= process_month($month_of_bith);
-        }
+    }
 
-        if ($month_of_bith != null && $year_of_birth != null){
-            $output .= $year_of_birth;
+
+    /* will return name of a user and his biography */
+    else if ($mode == "get_profile_profile_info") {
+
+        $id_user = $_SESSION['id_user'];
+
+        $query =
+            "SELECT name, surname, bio
+            FROM users
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $id_user);
+        $statement->execute();
+        $statement->bind_result($name, $surname, $bio);
+        $statement->fetch();
+
+        $output = "";
+
+        $output .= ".profile_name h1|" . $name . " " . $surname . "'s Profile";
+
+        $output .= "|#profile_bio|";
+
+        if ($bio == null) {
+            if ($id_user == $_SESSION['id_user']) {
+                $output .= "No biography written yet. Write it <a class='common_link' href='user_settings.php?id=" . $id_user . "#user_bio'>now</a>.";
+            }
+            else {
+
+            }
+        }
+        else {
+            $output .= $bio;
         }
 
         print $output;
@@ -325,30 +374,30 @@ function process_to_only_date ($timestamp) {
 
     $date[1] = process_month($date[1]);
 
-    return  $date[0] . ". " . $date[1] . " " . $date[2];
+    return  $date[2] . ". " . $date[1] . " " . $date[0];
 }
 
 
 function process_last_active ($timestamp) {
-    $date = explode(" ", $timestamp);
+    $date = explode(' ', $timestamp);
     $time = explode(":", $date[1]);
     $date = explode("-", $date[0]);
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-7 days');
     $time_limit = date('Y-m-d H:i:s', $time_limit);
 
-    if ($timestamp > $time_limit) {
+    if ($timestamp < $time_limit) {
         return process_to_only_date($timestamp);
     }
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 day');
     $time_limit = date('Y-m-d H:i:s', $time_limit);
 
-    if ($timestamp > $time_limit) {
-        $day_la = $date[0];
+    if ($timestamp < $time_limit) {
+        $day_la = $date[3];
         $time_limit = explode(" ", $time_limit);
         $date_l = explode("-", $time_limit[0]);
-        $day_l = $date_l[0];
+        $day_l = $date_l[3];
 
         $day_la = intval($day_la, 10);
         $day_l = intval($day_l, 10);
@@ -359,7 +408,7 @@ function process_last_active ($timestamp) {
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 hour');
     $time_limit = date('Y-m-d H:i:s', $time_limit);
 
-    if ($timestamp > $time_limit) {
+    if ($timestamp < $time_limit) {
         $hour_la = $time[0];
         $time_limit = explode(" ", $time_limit);
         $time_l = explode(":", $time_limit[1]);
@@ -374,7 +423,7 @@ function process_last_active ($timestamp) {
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 minute');
     $time_limit = date('Y-m-d H:i:s', $time_limit);
 
-    if ($timestamp > $time_limit) {
+    if ($timestamp < $time_limit) {
         $minute_la = $time[1];
         $time_limit = explode(" ", $time_limit);
         $time_l = explode(":", $time_limit[1]);
@@ -386,7 +435,7 @@ function process_last_active ($timestamp) {
         return ($minute_la - $minute_l) . " minutes";
     }
     else {
-        $second_la = $time[3];
+        $second_la = $time[2];
         $time_limit = explode(" ", $time_limit);
         $time_l = explode(":", $time_limit[1]);
         $second_l = $time_l[2];
