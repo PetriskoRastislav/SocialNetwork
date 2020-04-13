@@ -20,36 +20,41 @@ $page->displayBodyStart();
 </div>
 
 <div class='left_column'>
-	<img class="image" src="srcPictures/defaultpicture.png" title="Avatar">
+
+    <img id="info_profile_picture" class="image" src="" title="Avatar" alt="Avatar">
+
 	<div class="requests">
-		<img class="requests_image" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">
-		<img class="requests_image" src="srcPictures/icons8-add-user-group-man-man-100.png" title="Request Frienship" alt="Request Frienship">
-		<img class="requests_image" src="srcPictures/icons8-user-100.png" title="Profile" alt="Profile">
+        <img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">
+        <img class="requests_image requests_image_en" src="srcPictures/icons8-add-user-group-man-man-100.png" title="Request Friendship" alt="Request Friendship">
+		<img class="requests_image requests_image_en" src="srcPictures/icons8-user-100.png" title="Profile" alt="Profile">
 	</div>
-	<ul class="informations">
-		<li>
-			<span class="info_tag">Last Online</span>
-			<span class="value">Now</span>
-		</li>
-		<li>
-			<span  class="info_tag">Gender</span>
-			<span class="value">Male</span>
-		</li>
-		<li>
-			<span class="info_tag">Location</span>
-			<span class="value">Motherfucking Earth</span>
-		</li>
-		<li>
-			<span class="info_tag">Registered</span>
-			<span class="value">17.6.1873</span></li>
-		<li>
-			<span class="info_tag">Date of Birth</span>
-			<span class="value">13.6.1728 BC</span>
-		</li>
-	</ul>
+
+    <ul class="informations">
+        <li>
+            <span class="info_tag">Last Online</span>
+            <span id="info_last_active" class="value"></span>
+        </li>
+        <li>
+            <span class="info_tag">Gender</span>
+            <span id="info_gender" class="value"></span>
+        </li>
+        <li>
+            <span class="info_tag">Location</span>
+            <span id="info_location" class="value"></span>
+        </li>
+        <li>
+            <span class="info_tag">Registered</span>
+            <span id="info_registered" class="value"></span>
+        </li>
+        <li>
+            <span class="info_tag">Date of Birth</span>
+            <span id="info_date_of_birth" class="value"></span>
+        </li>
+    </ul>
 </div>
 
 <div class='right_column'>
+
 	<div class="friend">
 		<img class="friend_avatar" src="srcPictures/defaultpicture.png" title="Friend's Avatar" alt="Friend's Avatar">
 		<ul class="informations">
@@ -119,6 +124,6 @@ $page->displayBodyStart();
 
 <?php
 
-$page->displayBodyEnd(array());
+$page->displayBodyEnd(array("js/profile_functions.js", "js/friends.js"));
 
 ?>

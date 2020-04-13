@@ -12,6 +12,7 @@ if (!isset($_SESSION['id_user'])) {
 $page = new Page();
 $page->displayHead( "'s Profile", array("styles/profile.css", "styles/profile-dark.css"));
 $page->displayBodyStart();
+
 ?>
 
 <div class='profile_name'>
@@ -19,12 +20,15 @@ $page->displayBodyStart();
 </div>
 
 <div class='left_column'>
-	<img id="info_profile_picture" class="image" src="srcPictures/defaultpicture.png" title="Avatar" alt="Avatar">
+
+	<img id="info_profile_picture" class="image" src="" title="Avatar" alt="Avatar">
+
 	<div class="requests">
 		<img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">
 		<img class="requests_image requests_image_en" src="srcPictures/icons8-add-user-group-man-man-100.png" title="Request Friendship" alt="Request Friendship">
 		<img class="requests_image requests_image_en" src="srcPictures/icons8-user-account-100.png" title="Friends" alt="Friends">
 	</div>
+
 	<ul class="informations">
 		<li>
             <span class="info_tag">Last Online</span>
@@ -55,6 +59,6 @@ $page->displayBodyStart();
 
 
 <?php
-$page->displayBodyEnd(array("js/profile.js"));
+$page->displayBodyEnd(array("js/profile_functions.js", "js/profile.js"));
 
 ?>

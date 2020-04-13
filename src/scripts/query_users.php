@@ -199,7 +199,7 @@ try {
     /* will return information of a profile to the left info panel of profile page */
     else if ($mode == "get_profile_left_info") {
 
-        $id_user = $_POST['user_id'];
+        $id_user = $_SESSION['id_user'];
         if ($id_user == "me") $id_user = $_SESSION['id_user'];
 
         $query =
@@ -297,6 +297,96 @@ try {
         else {
             $output .= $bio;
         }
+
+        print $output;
+
+    }
+
+
+    /* will return heading of page with someone's friends */
+    else if ($mode == "get_profile_friend_page_heading") {
+
+        $id_user = $_SESSION['id_user'];
+        if ($id_user == "me") $id_user = $_SESSION['id_user'];
+
+        $query =
+            "SELECT name, surname
+            FROM users
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $id_user);
+        $statement->execute();
+        $statement->bind_result($name, $surname);
+        $statement->fetch();
+
+        $output = "";
+
+        $output .= ".profile_name h1|" . $name . " " . $surname . "'s Friends";
+
+        print $output;
+
+    }
+
+
+    /* will return list of particular user's friends */
+    else if ($mode == "get_profile_friends_list") {
+
+        $id_user = $_SESSION['id_user'];
+        if ($id_user == "me") $id_user = $_SESSION['id_user'];
+
+        $query =
+            "SELECT DISTINCT name, surname, profile_picture, last_active, gender, location
+            FROM users
+            JOIN friends
+            ON ((friends.id_user_1 = ? AND friends.id_user_2 = users.id_user)
+            OR (friends.id_user_2 = users.id_user AND friends.id_user_2 = ?))";
+        $statement = $db->prepare($query);
+        $statement->bind_param("ii", $id_user, $id_user);
+        $statement->execute();
+        $statement->bind_result($name, $surname, $profile_picture, $last_active, $gender, $location);
+
+        $output = "";
+
+        while ($statement->fetch()) {
+            $output .= '<div class="friend">';
+
+            if ($profile_picture == null) {
+                $output .= '<img class="friend_avatar" src="srcPictures/blank-profile-picture-png-8.png" title="' . $name .
+                    ' ' . $surname . '\'s Avatar" alt="' . $name . ' ' . $surname . '\'s Avatar">';
+            }
+            else {
+                $output .= '<img class="friend_avatar" src="usersPictures/' . $profile_picture . '" title="' . $name .
+                    ' ' . $surname . '\'s Avatar" alt="' . $name . ' ' . $surname . '\'s Avatar">';
+            }
+
+            $output .=  '<ul class="informations">' .
+                '<li>' .
+                '<span class="info_tag_friend">Name</span>' .
+                '<span class="value_friend">' . $name . ' ' . $surname . '</span>' .
+                '</li>' .
+                '<li>' .
+                '<span class="info_tag_friend">Last Online</span>' .
+                '<span class="value_friend">' . process_last_active($last_active) . '</span>' .
+                '</li>' .
+                '<li>' .
+                '<span class="info_tag_friend">Gender</span>' .
+                '<span class="value_friend">' . $gender . '</span>' .
+                '</li>' .
+                '<li>' .
+                '<span class="info_tag_friend">Location</span>';
+
+            if ($location == null) {
+                $output .= '<span class="value_friend">---</span>';
+            }
+            else {
+                $output .= '<span class="value_friend">' . $location . '</span>';
+            }
+
+            $output .= '</li>' .
+                '</ul>' .
+                '</div>';
+
+	    }
 
         print $output;
 
@@ -404,7 +494,7 @@ function process_last_active ($timestamp) {
         $day_la = intval($day_la, 10);
         $day_l = intval($day_l, 10);
 
-        return ($day_la - $day_l) . " days";
+        return ($day_l - $day_la) . " days";
     }
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 hour');
@@ -419,7 +509,7 @@ function process_last_active ($timestamp) {
         $hour_la = intval($hour_la, 10);
         $hour_l = intval($hour_l, 10);
 
-        return ($hour_la - $hour_l) . " hours";
+        return ($hour_l - $hour_la) . " hours";
     }
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 minute');
@@ -434,7 +524,7 @@ function process_last_active ($timestamp) {
         $minute_la = intval($minute_la);
         $minute_l = intval($minute_l);
 
-        return ($minute_la - $minute_l) . " minutes";
+        return ($minute_l - $minute_la) . " minutes";
     }
     else {
         $second_la = $time[2];
@@ -445,7 +535,7 @@ function process_last_active ($timestamp) {
         $second_la = intval($second_la);
         $second_l = intval($second_l);
 
-        $second_diff = ($second_la - $second_l);
+        $second_diff = ($second_l - $second_la);
 
         if ($second_diff > 6) {
             return $second_diff . " seconds";

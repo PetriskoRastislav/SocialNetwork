@@ -1,68 +1,26 @@
+
+let url = new URLSearchParams(window.location.search);
+
+
+/* fills left panel with informations */
+get_profile_left_info(url.get('user'));
+
+
+/* fills center part with data */
+get_profile_profile_info(url.get('user'));
+
+
+/* function simulating button with links */
+left_panel_buttons();
+
+$(".requests_image[title='Friends']").on("click", function () {
+    window.location.href = "friends.php?user=" + url.get('user');
+});
+
+
+/* displaying document after everything is ready */
 $(document).ready( function () {
-
-    let url = new URLSearchParams(window.location.search);
-
-    /* fills left panel with informations */
-    $.ajax({
-        url: "scripts/query_users.php",
-        method: "POST",
-        data: {
-            mode: "get_profile_left_info",
-            user_id: url.get('user')
-        },
-        success: process_profile_data
-    });
-
-    /* fills center part with data */
-    $.ajax({
-        url: "scripts/query_users.php",
-        method: "POST",
-        data: {
-            mode: "get_profile_profile_info",
-            user_id: url.get('user')
-        },
-        success: process_profile_data
-    });
-
-    if (url.get('user') === "me") {
-        /*let write_message = $(".requests_image[title='Write a Message']");
-        write_message.addClass("requests_image_dis");
-        write_message.removeClass("requests_image_en");*/
-
-        let request_friendship = $(".requests_image[title='Request Friendship']");
-        request_friendship.addClass("requests_image_dis");
-        request_friendship.removeClass("requests_image_en");
-        request_friendship.attr("title", "Wanna be friend with yourself? I guess it won't work.");
-    }
-    else {
-        $(".requests_image[title='Request Friendship']").on("click", function () {
-
-        });
-    }
-
-    $(".requests_image[title='Write a Message']").on("click", function () {
-        window.location.href = "messages.php?user=" + url.get('user');
-    });
-
-    $(".requests_image[title='Friends']").on("click", function () {
-        window.location.href = "friends.php?user=" + url.get('user');
-    });
-
 
     document.getElementsByTagName("html")[0].style.visibility = "visible";
 
 });
-
-
-/* will split up data from php and put html data into a correspondent element */
-function process_profile_data (data) {
-    data = data.toString().split("|");
-
-    for (let i = 0; i < data.length; i += 2) {
-        if (data[i] === "#info_profile_picture") {
-            $(data[i]).attr("src", data[i + 1]);
-        } else {
-            $(data[i]).html(data[i + 1]);
-        }
-    }
-}
