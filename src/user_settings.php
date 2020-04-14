@@ -71,7 +71,8 @@ $page->displayBodyStart();
                     <input type="password" class="value_setting input_form" name="password_new_again" id="password_new_again" placeholder="Enter your new password again" maxlength="97">
                 </li>
 			</ul>
-		<input type="button" value="Change" class="spacing_form button_form_submit button_setting">
+		    <input id="change_pass_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
+            <div id="res_pass" class="settings_result"><p></p></div>
 		<hr>
 
 		<h2>Change Name</h2>
@@ -85,7 +86,8 @@ $page->displayBodyStart();
 					<input id="surname" type="text" class="value_setting input_form" name="surname" placeholder="Enter your new surname" maxlength="40">
 				</li>
 			</ul>
-			<input type="button" value="Change" class="spacing_form button_form_submit button_setting">
+            <input id="change_name_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
+            <div id="res_name" class="settings_result"><p></p></div>
 		<hr>
 
 		<h2>Change Email</h2>
@@ -95,7 +97,8 @@ $page->displayBodyStart();
 					<input type="email" id="email" class="value_setting input_form" name="email" placeholder="Enter your new email" maxlength="100">
 				</li>
 			</ul>
-			<input type="button" value="Change" class="spacing_form button_form_submit button_setting">	
+			<input id="change_email_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
+            <div id="res_mail" class="settings_result"><p></p></div>
 		<hr>
 
 		<h2>Change Profile Picture</h2>
@@ -105,7 +108,8 @@ $page->displayBodyStart();
 					<input type="file" class="value_setting" name="profile_pic" id="profile_pic">
 				</li>
 			</ul>
-			<input type="button" value="Change" class="spacing_form button_form_submit button_setting">	
+			<input id="change_pic_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
+            <div id="res_pic" class="settings_result"><p></p></div>
 		<hr>
 
 		<h2>Change Profile Details</h2>
@@ -182,7 +186,8 @@ $page->displayBodyStart();
 					<input type="text" class="value_setting input_form" id="year_of_birth" name="year_of_birth" placeholder="Enter your new year of birthday" maxlength="15">
 				</li>
 			</ul>
-			<input type="button" value="Change" class="spacing_form button_form_submit button_setting">
+			<input id="change_info_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
+            <div id="res_info" class="settings_result"><p></p></div>
 		<hr>
 
 
@@ -198,7 +203,8 @@ $page->displayBodyStart();
 					</label>
 				</li>
 			</ul>
-			<input type="button" value="Change" class="spacing_form button_form_submit button_setting">
+			<input id="change_theme_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
+            <div id="res_theme" class="settings_result"><p></p></div>
 		<hr>
 
 		<h2>Change the Biography</h2>
@@ -211,15 +217,18 @@ $page->displayBodyStart();
 				</li>
 			</ul>
 			
-			<input type="button" value="Change" class="spacing_form button_form_submit button_setting">
+			<input id="change_bio_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
+            <div id="res_bio" class="settings_result"><p></p></div>
 		<hr>
 
-		<input type="button" value="Change ALL" class="spacing_form button_form_submit button_setting">
+		<input id="change_all_button" type="button" value="Change ALL" class="spacing_form button_form_submit button_setting">
+        <div id="res_all" class="settings_result"><p></p></div>
+
 	</div>
 </div>
 
 <?php
 
-$page->displayBodyEnd(array("js/profile_functions.js", "js/user_settings.js"));
+$page->displayBodyEnd(array("js/validate_inputs.js", "js/profile_functions.js", "js/user_settings.js"));
 
 ?>

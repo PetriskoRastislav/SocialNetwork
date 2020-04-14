@@ -164,3 +164,33 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+
+/* div with result from script */
+
+.settings_result {
+	position: relative;
+	display: block;
+	box-sizing: border-box;
+	width: 100%;
+	height: auto;
+	padding: 0.5em;
+	display: none;
+}
+
+.settings_result_pos {
+	border: 0.125em solid rgb(0, 150, 0);
+	background-color: rgb(80, 230, 80);
+	display: block;
+}
+
+.settings_result_neg {
+	border: 0.125em solid rgb(200, 0, 0);
+	background-color: rgb(250, 150, 150);
+	display: block;
+}
+
+.settings_result p {
+	text-align: center;
+	font-size: 1em;
+}
