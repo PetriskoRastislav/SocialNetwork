@@ -1,6 +1,7 @@
 <?php
 
 require_once('db_connect.php');
+require_once('data_valid.php');
 
 session_start();
 
@@ -199,7 +200,7 @@ try {
     /* will return information of a profile to the left info panel of profile page */
     else if ($mode == "get_profile_left_info") {
 
-        $id_user = $_SESSION['id_user'];
+        $id_user = $_POST['id_user'];
         if ($id_user == "me") $id_user = $_SESSION['id_user'];
 
         $query =
@@ -267,7 +268,7 @@ try {
     /* will return name of a user and his biography */
     else if ($mode == "get_profile_profile_info") {
 
-        $id_user = $_SESSION['id_user'];
+        $id_user = $_POST['id_user'];
         if ($id_user == "me") $id_user = $_SESSION['id_user'];
 
         $query =
@@ -306,7 +307,7 @@ try {
     /* will return heading of page with someone's friends */
     else if ($mode == "get_profile_friend_page_heading") {
 
-        $id_user = $_SESSION['id_user'];
+        $id_user = $_POST['id_user'];
         if ($id_user == "me") $id_user = $_SESSION['id_user'];
 
         $query =
@@ -331,7 +332,7 @@ try {
     /* will return list of particular user's friends */
     else if ($mode == "get_profile_friends_list") {
 
-        $id_user = $_SESSION['id_user'];
+        $id_user = $_POST['id_user'];
         if ($id_user == "me") $id_user = $_SESSION['id_user'];
 
         $query =
@@ -394,7 +395,7 @@ try {
 
 
     /* will return data into a some of user's settings */
-    else if ($mode == "settings_fill_change_name") {
+    else if ($mode == "settings_fill") {
 
         $query =
             "SELECT name, surname, email, location, gender, day_of_birth, month_of_birth, year_of_birth, color_mode, bio
@@ -421,6 +422,28 @@ try {
         if ($bio != null) $output .= "|textarea[name='biography']|value|" . $bio;
 
         print $output;
+
+    }
+
+
+    /* will change name of user */
+    else if ($mode == "change_name") {
+
+        $name = $_POST['name'];
+        $surname = $_POST['surname'];
+
+        //if(!validate_string($name, 40) || !validate_string($surname, 40)) print "false";
+
+        $query =
+            "UPDATE users
+            SET name = ?, surname = ?
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("ssi", $name, $surname, $_SESSION['id_user']);
+
+        if ($statement->execute()) print "true";
+        else print "false";
+
 
     }
 
@@ -504,9 +527,14 @@ function process_to_only_date ($timestamp) {
 
 /* from timestamp will create time how long hasn't been active */
 function process_last_active ($timestamp) {
-    $date = explode(' ', $timestamp);
+    $date = explode(" ", $timestamp);
     $time = explode(":", $date[1]);
     $date = explode("-", $date[0]);
+
+    $timestamp_now = date('Y-m-d H:i:s');
+    $date_now = explode(" ", $timestamp_now);
+    $time_now = explode(":", $date_now[1]);
+    $date_now = explode("-", $date_now[0]);
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-7 days');
     $time_limit = date('Y-m-d H:i:s', $time_limit);
@@ -519,56 +547,80 @@ function process_last_active ($timestamp) {
     $time_limit = date('Y-m-d H:i:s', $time_limit);
 
     if ($timestamp < $time_limit) {
-        $day_la = $date[3];
-        $time_limit = explode(" ", $time_limit);
-        $date_l = explode("-", $time_limit[0]);
-        $day_l = $date_l[3];
+        $year_la = $date[0];
+        $month_la = $date[1];
+        $day_la = intval($date[2], 10);
+        $hour_la = intval($time[0], 10);
 
-        $day_la = intval($day_la, 10);
-        $day_l = intval($day_l, 10);
+        $year_n = $date_now[0];
+        $month_n = $date_now[1];
+        $day_n = intval($date_now[2], 10);
+        $hour_n = intval($time_now[0], 10);
 
-        return ($day_l - $day_la) . " days";
+        $hour_la = $hour_la + ($day_la + get_days_in_month($month_la, $year_la)) * 24;
+        $hour_n = $hour_n + ($day_n + get_days_in_month($month_n, $year_n)) * 24;
+
+        $hour_diff = ($hour_n - $hour_la);
+        $day_diff = (int) ($hour_diff / 24);
+
+        if ($day_diff > 1) return $day_diff . " days";
+        else return $day_diff . " day";
     }
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 hour');
     $time_limit = date('Y-m-d H:i:s', $time_limit);
 
     if ($timestamp < $time_limit) {
-        $hour_la = $time[0];
-        $time_limit = explode(" ", $time_limit);
-        $time_l = explode(":", $time_limit[1]);
-        $hour_l = $time_l[0];
+        $day_la = intval($date[2], 10);
+        $hour_la = intval($time[0], 10);
+        $minute_la = intval($time[1], 10);
 
-        $hour_la = intval($hour_la, 10);
-        $hour_l = intval($hour_l, 10);
+        $day_n = intval($date_now[2], 10);
+        $hour_n = intval($time_now[0], 10);
+        $minute_n = intval($time_now[2], 10);
 
-        return ($hour_l - $hour_la) . " hours";
+        $minute_la = $minute_la + (($hour_la + ($day_la * 24)) * 60);
+        $minute_n = $minute_n + (($hour_n + ($day_n * 24)) * 60);
+
+        $minute_diff = ($minute_n - $minute_la);
+        $hour_diff = (int) ($minute_diff / 60);
+
+        if ($hour_diff > 1) return $hour_diff . " hours";
+        else return $hour_diff . " hour";
     }
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 minute');
     $time_limit = date('Y-m-d H:i:s', $time_limit);
 
     if ($timestamp < $time_limit) {
-        $minute_la = $time[1];
-        $time_limit = explode(" ", $time_limit);
-        $time_l = explode(":", $time_limit[1]);
-        $minute_l = $time_l[1];
+        $hour_la = intval($time[0], 10);
+        $minute_la = intval($time[1], 10);
+        $second_la = intval($time[2], 10);
 
-        $minute_la = intval($minute_la);
-        $minute_l = intval($minute_l);
+        $hour_n = intval($time_now[0], 10);
+        $minute_n = intval($time_now[1], 10);
+        $second_n = intval($time_now[2], 10);
 
-        return ($minute_l - $minute_la) . " minutes";
+        $second_la = $second_la + (($minute_la + ($hour_la * 60)) * 60);
+        $second_n = $second_n + (($minute_n + ($hour_n * 60)) * 60);
+
+        $second_diff = ($second_n - $second_la);
+        $minute_diff = (int) ($second_diff / 60);
+
+        if ($minute_diff > 1) return $minute_diff . " minutes";
+        return $minute_diff . " minute";
     }
     else {
-        $second_la = $time[2];
-        $time_limit = explode(" ", $time_limit);
-        $time_l = explode(":", $time_limit[1]);
-        $second_l = $time_l[2];
+        $minute_la = intval($time[1], 10);
+        $second_la = intval($time[2], 10);
 
-        $second_la = intval($second_la);
-        $second_l = intval($second_l);
+        $minute_n = intval($time_now[1], 10);
+        $second_n = intval($time_now[2], 10);
 
-        $second_diff = ($second_l - $second_la);
+        $second_la = $second_la + ($minute_la * 60);
+        $second_n = $second_n + ($minute_n * 60);
+
+        $second_diff = ($second_n - $second_la);
 
         if ($second_diff > 6) {
             return $second_diff . " seconds";
@@ -579,6 +631,31 @@ function process_last_active ($timestamp) {
 
     }
 
+}
+
+
+/* returns number of days in particular month */
+function get_days_in_month ($month, $year) {
+    $year = intval($year, 10);
+
+    switch ($month){
+        case "01":
+        case "03":
+        case "05":
+        case "07":
+        case "08":
+        case "10":
+        case "12":
+            return 31;
+        case "04":
+        case "06":
+        case "09":
+        case "11":
+            return 30;
+        case "02":
+            if ($year % 4 == 0) return 29;
+            else return 28;
+    }
 }
 
 ?>

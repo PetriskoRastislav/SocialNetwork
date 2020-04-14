@@ -7,7 +7,7 @@ function get_profile_left_info (id_user) {
         method: "POST",
         data: {
             mode: "get_profile_left_info",
-            user_id: id_user
+            id_user: id_user
         },
         success: process_profile_data
     });
@@ -21,7 +21,7 @@ function get_profile_profile_info (id_user) {
         method: "POST",
         data: {
             mode: "get_profile_profile_info",
-            user_id: id_user
+            id_user: id_user
         },
         success: process_profile_data
     });
@@ -35,7 +35,7 @@ function get_profile_friends_list (id_user) {
         method: "POST",
         data: {
             mode: "get_profile_friends_list",
-            user_id: id_user
+            id_user: id_user
         },
         success: function (data) {
             $(".right_column").html(data.toString());
@@ -51,7 +51,7 @@ function get_profile_friend_page_heading (id_user) {
         method: "POST",
         data: {
             mode: "get_profile_friend_page_heading",
-            user_id: id_user
+            id_user: id_user
         },
         success: process_profile_data
     });
@@ -83,6 +83,7 @@ function left_panel_buttons () {
 
 /* will split up data from php and put html data into a correspondent element */
 function process_profile_data (data) {
+
     data = data.toString().split("|");
 
     for (let i = 0; i < data.length; i += 2) {
