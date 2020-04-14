@@ -19,9 +19,11 @@ $(document).ready( function () {
 
 
     /* will change name, surname of user */
-    /*$("#change_name_button").on("click", function () {
-        let name = $("#name").attr("value").toString().trim();
-        let surname = $("#surname").attr("value").toString().trim();
+    $("#change_name_button").on("click", function () {
+        let name = $("#name").val().toString().trim();
+        let surname = $("#surname").val().toString().trim();
+
+        console.log(name + " " + surname);
 
         if (validate_string(name, 40) && validate_string(surname, 40)){
             $.ajax({
@@ -37,7 +39,7 @@ $(document).ready( function () {
 
                     console.log(data);
 
-                    if (data === "true") {
+                    if (data == 1) {
                         $("#res_name").addClass("settings_result_pos");
                         $("#res_name p").html("Successfully changed.");
                     }
@@ -48,7 +50,7 @@ $(document).ready( function () {
                 }
             });
         }
-    });*/
+    });
 
 
 });

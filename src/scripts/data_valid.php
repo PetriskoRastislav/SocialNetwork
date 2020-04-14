@@ -28,4 +28,14 @@ function validate_string($string, $length) {
     else return true;
 }
 
+
+/* validate */
+function validate_year ($year) {
+    if (preg_match('/[a-zA-Z0-9\.\,\-\_\ ]+/', $year)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 ?>

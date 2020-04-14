@@ -340,7 +340,7 @@ try {
             FROM users
             JOIN friends
             ON ((friends.id_user_1 = ? AND friends.id_user_2 = users.id_user)
-            OR (friends.id_user_2 = users.id_user AND friends.id_user_2 = ?))";
+            OR (friends.id_user_1 = users.id_user AND friends.id_user_2 = ?))";
         $statement = $db->prepare($query);
         $statement->bind_param("ii", $id_user, $id_user);
         $statement->execute();
@@ -426,13 +426,48 @@ try {
     }
 
 
+    /* will change password of user */
+    else if ($mode = "change_password") {
+
+        $password_old = $_POST['password_old'];
+        $password_new = $_POST['password_new'];
+        $password_new_again = $_POST['password_new_again'];
+
+        if ($password_new != $password_new_again) print 0;
+
+        $query =
+            "SELECT password
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($password);
+        $statement->fetch();
+
+        if ( !(password_verify($password_old, $password)) ) print 0;
+
+        $statement->free_result();
+
+        $password_new_hash = password_hash($password_new, PASSWORD_ARGON2ID);
+
+        $query =
+            "UPDATE users
+            SET password = ?
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("si", $password_new_hash, $_SESSION['id_user']);
+        print $statement->execute();
+
+    }
+
+
     /* will change name of user */
-    /*else if ($mode == "change_name") {
+    else if ($mode == "change_name") {
 
         $name = $_POST['name'];
         $surname = $_POST['surname'];
 
-        //if(!validate_string($name, 40) || !validate_string($surname, 40)) print "false";
+        if(!validate_string($name, 40) || !validate_string($surname, 40)) print 0;
 
         $query =
             "UPDATE users
@@ -440,11 +475,102 @@ try {
             WHERE id_user = ?";
         $statement = $db->prepare($query);
         $statement->bind_param("ssi", $name, $surname, $_SESSION['id_user']);
+        print $statement->execute();
 
-        if ($statement->execute()) print "true";
-        else print "false";
+    }
 
-    }*/
+
+    /* will change email of user */
+    else if ($mode == "change_email") {
+
+        $email = $_POST['email'];
+
+        if (!(valid_email($email))) print 0;
+
+        $query =
+            "UPDATE users
+            SET email = ?
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("si", $email, $_SESSION['id_user']);
+        print $statement->execute();
+
+    }
+
+
+    /* will change profile picture of user */
+    else if ($mode == "change_pic") {
+
+        
+
+    }
+
+
+    /* will change other information about user */
+    else if ($mode == "change_profile_det") {
+
+        $location = $_POST['location'];
+        $gender = $_POST['gender'];
+        $day_of_birth = $_POST['day_of_birth'];
+        $month_of_birth = $_POST['month_of_birth'];
+        $year_of_birth = $_POST['year_of_birth'];
+
+        if (!validate_string($location, 100)) print 0;
+        if (!($gender == "male" || $gender == "female" || $gender == "other")) print 0;
+        if ($day_of_birth != "--") {
+            $day = intval($day_of_birth, 10);
+            if(!($day >= 1 && $day <= 31)) print 0;
+        }
+        if ($month_of_birth != "--") {
+            $month = intval($month_of_birth, 10);
+            if(!($month >= 1 && $month <= 12)) print 0;
+        }
+        if (!validate_year($year_of_birth)) print 0;
+
+        $query =
+            "UPDATE users
+            SET location = ?, gender = ?, day_of_birth = ?, month_of_birth = ?, year_of_birth = ?
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("sssssi", $loaction, $gender, $day_of_birth, $month_of_bith, $year_of_birth, $_SESSION['id_user']);
+        print $statement->execute();
+
+    }
+
+
+    /* will change user's theme */
+    else if ($mode == "change_theme") {
+
+        $theme = $_POST['theme'];
+
+        if (!($theme == "dark" || $theme == "light")) print 0;
+
+        $query =
+            "UPDATE users
+            SET color_mode = ?
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("si", $theme, $_SESSION['id_user']);
+        print $statement->execute();
+
+    }
+
+
+    /* will change biography of user */
+    else if ($mode == "change_bio") {
+
+        $bio = $_POST['bio'];
+
+        $query =
+            "UPDATE users
+            SET bio = ?
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("si", $bio, $_SESSION['id_user']);
+        print $statement->execute();
+
+    }
+
 
 }
 catch (Exception $ex){
