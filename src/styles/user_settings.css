@@ -64,12 +64,12 @@ input[type=file] {
 	font-family: 'Arial', Helvetica, sans-serif;
 }
 
-label[for=bio] {
+label[for=biography] {
 	width: 100%;
 	text-align: center;
 }
 
-#user_bio{
+#biography{
 	width: 50%;
 	margin-left: 24%;
 	margin-top: 1em;
@@ -78,7 +78,7 @@ label[for=bio] {
     border: 2px solid rgb(200, 200, 200);
 }
 
-#user_bio:focus {
+#biography:focus {
 	outline: none;
     border: 2px solid rgb(0, 0, 0);
 }
@@ -104,11 +104,6 @@ label[for=bio] {
 .switch {
 	margin: 0.625em 0.875% 0.5em 0.875em;
 }
-
-
-
-
-
 
 
 /* The switch - the box around the slider */

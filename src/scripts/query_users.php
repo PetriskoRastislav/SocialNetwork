@@ -69,7 +69,7 @@ try {
     }
 
 
-    /* will fetch only a list od conversations and wil pass them to js script, which will rfresh list */
+    /* will fetch only a list od conversations and wil pass them to js script, which will refresh list */
     else if ($mode == "refresh_list") {
 
 
@@ -392,6 +392,38 @@ try {
 
     }
 
+
+    /* will return data into a some of user's settings */
+    else if ($mode == "settings_fill_change_name") {
+
+        $query =
+            "SELECT name, surname, email, location, gender, day_of_birth, month_of_birth, year_of_birth, color_mode, bio
+            FROM users
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($name,$surname, $email, $location, $gender,
+            $day_of_birth, $month_of_birth, $year_of_birth, $color_mode, $bio);
+        $statement->fetch();
+
+        $output =
+            "input[name='name']|value|" . $name .
+            "|input[name='surname']|value|" . $surname .
+            "|input[name='email']|value|" . $email .
+            "|select[name='gender']|value|" . $gender;
+
+        if ($location != null) $output .= "|input[name='location']|value|" . $location;
+        if ($day_of_birth != null) $output .= "|select[name='day_of_birth']|value|" . $day_of_birth;
+        if ($month_of_birth != null) $output .= "|select[name='month_of_birth']|value|" . $month_of_birth;
+        if ($year_of_birth != null) $output .= "|input[name='year_of_birth']|value|" . $year_of_birth;
+        if ($color_mode == "dark") $output .= "|input[name='change_theme']|checked|true";
+        if ($bio != null) $output .= "|textarea[name='biography']|value|" . $bio;
+
+        print $output;
+
+    }
+
 }
 catch (Exception $ex){
     $ex->getMessage();
@@ -470,6 +502,7 @@ function process_to_only_date ($timestamp) {
 }
 
 
+/* from timestamp will create time how long hasn't been active */
 function process_last_active ($timestamp) {
     $date = explode(' ', $timestamp);
     $time = explode(":", $date[1]);
