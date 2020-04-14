@@ -58,26 +58,70 @@ function get_profile_friend_page_heading (id_user) {
 }
 
 
-function left_panel_buttons () {
-    if (url.get('user') === "me") {
-        /*let write_message = $(".requests_image[title='Write a Message']");
-        write_message.addClass("requests_image_dis");
-        write_message.removeClass("requests_image_en");*/
+/* will generate buttons in left column of profile and affiliated pages */
+function left_panel_buttons (page) {
 
-        let request_friendship = $(".requests_image[title='Request Friendship']");
-        request_friendship.addClass("requests_image_dis");
-        request_friendship.removeClass("requests_image_en");
-        request_friendship.attr("title", "Wanna be friend with yourself? I guess it won't work.");
-    }
-    else {
-        $(".requests_image[title='Request Friendship']").on("click", function () {
+    let buttons = '';
 
-        });
+    if (page === "settings") {
+        buttons +=
+            '<a href="messages.php?user=' + url.get("me") + '" class="requests_a">' +
+            '<img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">' +
+            '</a>' +
+            '<a href="profile.php?user=' + url.get("me") + '" class="requests_a">' +
+            '<img class="requests_image requests_image_en" src="srcPictures/icons8-user-100.png" title="Profile" alt="Profile">' +
+            '</a>';
     }
 
-    $(".requests_image[title='Write a Message']").on("click", function () {
-        window.location.href = "messages.php?user=" + url.get('user');
-    });
+    if (page === "profile") {
+        buttons +=
+            '<a href="messages.php?user=' + url.get("user") + '" class="requests_a">' +
+            '<img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">' +
+            '</a>';
+
+        if (url.get('user') === "me") {
+            buttons +=
+                '<img class="requests_image requests_image_dis" src="srcPictures/icons8-add-user-group-man-man-100.png"' +
+                ' title="Wanna be friend with yourself? I guess it won\'t work." alt="Request Friendship">';
+        }
+        else {
+            buttons +=
+                '<img class="requests_image requests_image_en" src="srcPictures/icons8-add-user-group-man-man-100.png"' +
+                ' title="Request Friendship" alt="Request Friendship">';
+        }
+
+        buttons +=
+            '<a href="friends.php?user=' + url.get("user") + '" class="requests_a">' +
+            '<img class="requests_image requests_image_en" src="srcPictures/icons8-user-account-100.png" title="Friends" alt="Friends">' +
+            '</a>';
+    }
+
+    if (page === "friends") {
+        buttons +=
+            '<a href="messages.php?user=' + url.get("user") + '" class="requests_a">' +
+            '<img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">' +
+            '</a>';
+
+        if (url.get('user') === "me") {
+            buttons +=
+                '<img class="requests_image requests_image_dis" src="srcPictures/icons8-add-user-group-man-man-100.png"' +
+                ' title="Wanna be friend with yourself? I guess it won\'t work." alt="Request Friendship">';
+        }
+        else {
+            buttons +=
+                '<img class="requests_image requests_image_en" src="srcPictures/icons8-add-user-group-man-man-100.png"' +
+                ' title="Request Friendship" alt="Request Friendship">';
+        }
+
+        buttons +=
+            '<a href="profile.php?user=' + url.get("user") + '" class="requests_a">' +
+            '<img class="requests_image requests_image_en" src="srcPictures/icons8-user-100.png" title="Profile" alt="Profile">' +
+            '</a>';
+
+    }
+
+
+    $(".requests").html(buttons);
 }
 
 

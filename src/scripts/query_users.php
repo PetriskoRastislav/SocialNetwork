@@ -427,7 +427,7 @@ try {
 
 
     /* will change name of user */
-    else if ($mode == "change_name") {
+    /*else if ($mode == "change_name") {
 
         $name = $_POST['name'];
         $surname = $_POST['surname'];
@@ -444,8 +444,7 @@ try {
         if ($statement->execute()) print "true";
         else print "false";
 
-
-    }
+    }*/
 
 }
 catch (Exception $ex){
@@ -657,5 +656,6 @@ function get_days_in_month ($month, $year) {
             else return 28;
     }
 }
+
 
 ?>

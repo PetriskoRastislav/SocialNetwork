@@ -5,12 +5,8 @@ let url = new URLSearchParams(window.location.search);
 get_profile_left_info("me");
 
 
-/* function simulating button with links */
-left_panel_buttons();
-
-$(".requests_image[title='Profile']").on("click", function () {
-    window.location.href = "profile.php?user=" + url.get('user');
-});
+/* fills left panel with buttons */
+left_panel_buttons("settings");
 
 
 /* will fill some of the forms */
@@ -23,7 +19,7 @@ $(document).ready( function () {
 
 
     /* will change name, surname of user */
-    $("#change_name_button").on("click", function () {
+    /*$("#change_name_button").on("click", function () {
         let name = $("#name").attr("value").toString().trim();
         let surname = $("#surname").attr("value").toString().trim();
 
@@ -52,7 +48,8 @@ $(document).ready( function () {
                 }
             });
         }
-    });
+    });*/
+
 
 });
 

@@ -14,12 +14,8 @@ get_profile_friend_page_heading(url.get('user'));
 get_profile_friends_list(url.get('user'));
 
 
-/* function simulating button with links */
-left_panel_buttons();
-
-$(".requests_image[title='Profile']").on("click", function () {
-    window.location.href = "profile.php?user=" + url.get('user');
-});
+/* fills left panel with buttons */
+left_panel_buttons("friends");
 
 
 /* displaying document after everything is ready */

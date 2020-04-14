@@ -24,9 +24,11 @@ $page->displayBodyStart();
 	<img id="info_profile_picture" class="image" src="" title="Avatar" alt="Avatar">
 
 	<div class="requests">
+        <!--
 		<img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">
 		<img class="requests_image requests_image_en" src="srcPictures/icons8-add-user-group-man-man-100.png" title="Request Friendship" alt="Request Friendship">
 		<img class="requests_image requests_image_en" src="srcPictures/icons8-user-account-100.png" title="Friends" alt="Friends">
+        -->
 	</div>
 
 	<ul class="informations">

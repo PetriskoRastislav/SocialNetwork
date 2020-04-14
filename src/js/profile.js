@@ -10,12 +10,8 @@ get_profile_left_info(url.get('user'));
 get_profile_profile_info(url.get('user'));
 
 
-/* function simulating button with links */
-left_panel_buttons();
-
-$(".requests_image[title='Friends']").on("click", function () {
-    window.location.href = "friends.php?user=" + url.get('user');
-});
+/* fills left panel with buttons */
+left_panel_buttons("profile");
 
 
 /* displaying document after everything is ready */
