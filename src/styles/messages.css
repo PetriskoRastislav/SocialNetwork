@@ -313,6 +313,15 @@
 }
 
 
+.search_result_item .avatar {
+    height: 2em;
+}
+
+#conversation_header .avatar {
+    height: 2.5em
+}
+
+
 /* styles for time informations */
 
 .time {

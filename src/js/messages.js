@@ -7,6 +7,7 @@ $(document).ready(function() {
     /* periodical update */
 
     setInterval(function() {
+        if ( $(""))
         refresh_user_list();
     }, 1000);
 
@@ -31,7 +32,7 @@ $(document).ready(function() {
                 success: function (data) {
                     data = data.toString().split("|");
 
-                    create_chat(data[0], data[1], data[2]);
+                    create_chat(data[0], data[1], data[2], data[3]);
                 }
             });
         }
@@ -73,7 +74,7 @@ $(document).ready(function() {
                         let id_list_item = $(".list_users_item[id_user_to=" + ret_data[i] + "]").attr("id_user_to");
                         if (!(id_list_item > 0)) {
                             console.log(id_list_item);
-                            list.append(ret_data[i + 1]);
+                            list.prepend(ret_data[i + 1]);
                         }
                     }
                     catch (ex) {
@@ -90,9 +91,9 @@ $(document).ready(function() {
                 mode: "refresh_marks"
             },
             success: function(data){
-                let ret_data = data.toString().split(" ");
+                let ret_data = data.toString().split("|");
 
-                for (let i = 0; i < ret_data.length; i += 5) {
+                for (let i = 0; i < ret_data.length; i += 4) {
 
                     let last_active_sign = $("#user_last_active");
                     let active_mark = $("#active_mark_" + ret_data[i]);
@@ -101,12 +102,11 @@ $(document).ready(function() {
 
                     /* label with last active time or with sign active in chat header */
 
-                    if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Active"){
+                    if (last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Active"){
                         last_active_sign.html("Active");
                     }
-                    else if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline" && last_active_sign.text() === "Active"){
-                        last_active_sign.html("Last active " + ret_data[i + 2] + " " + ret_data[i + 3]);
-                        $(".list_users_item[id_user_to='" + ret_data[i] + "']").attr("last_active", ret_data[i + 2] + " " + ret_data[i + 3]);
+                    else if (last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline") {
+                        last_active_sign.html("Last active " + ret_data[i + 2]);
                     }
 
 
@@ -122,10 +122,10 @@ $(document).ready(function() {
 
                     /* mark of a new unread message in the list of conversations */
 
-                    if(ret_data[i + 4] === "0" && new_message_notification.hasClass("mes_not_chat")){
+                    if(ret_data[i + 3] === "0" && new_message_notification.hasClass("mes_not_chat")){
                         new_message_notification.removeClass("mes_not_chat");
                     }
-                    else if(ret_data[i + 4] !== "0" && !new_message_notification.hasClass("mes_not_chat")) {
+                    else if(ret_data[i + 3] !== "0" && !new_message_notification.hasClass("mes_not_chat")) {
                         new_message_notification.addClass("mes_not_chat");
                     }
 
@@ -138,16 +138,33 @@ $(document).ready(function() {
     /* will display chat with particular user */
     $(document).on('click', '.list_users_item', function() {
         let id_user_to = $(this).attr("id_user_to");
-        let name_user_to = $(this).attr("name_user_to");
-        let last_active = $(this).attr("last_active");
-        create_chat(id_user_to, name_user_to, last_active);
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "get_username",
+                id_user: id_user_to
+            },
+            success: function (data) {
+                data = data.toString().split("|");
+
+                create_chat(data[0], data[1], data[2], data[3]);
+            }
+        });
     });
 
 
     /* will create content in conversations section */
-    function create_chat(id_user_to, name_user_to, last_active){
+    function create_chat(id_user_to, name_user_to, last_active, profile_picture){
 
-        let conversation_header = "<img class='avatar' src='' alt='Avatar' />";
+        let conversation_header = "";
+        if (profile_picture === "null") {
+            conversation_header += "<img class='avatar' src='usersPictures/" + profile_picture + "' alt='Avatar'>";
+        }
+        else {
+            conversation_header += "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+        }
         conversation_header += "<p>" + name_user_to + "</p>";
         conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Last active " + last_active + "</span>";
         conversation_header += "<img id='conversation_close_button' src='srcPictures/icons8-no-100.png' alt='send icon' />";
@@ -409,13 +426,23 @@ $(document).ready(function() {
 
     /* after clicking on a user from a result list of search will open conversation with him */
     $(document).on("click", ".search_result_item", function () {
-
         let id_user_to = $(this).attr("id").split("_")[2];
-        let name_user_to = $(this).attr("name_user_to");
-        let last_active = $(this).attr("last_active");
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "get_username",
+                id_user: id_user_to
+            },
+            success: function (data) {
+                data = data.toString().split("|");
+
+                create_chat(data[0], data[1], data[2], data[3]);
+            }
+        });
 
         $(".clear_search_users").click();
-        create_chat(id_user_to, name_user_to, last_active);
     });
 
 

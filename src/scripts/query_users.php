@@ -20,7 +20,7 @@ try {
     if ($mode == "all") {
 
         $query =
-            "SELECT DISTINCT id_user, name, surname, last_active
+            "SELECT DISTINCT id_user, name, surname, profile_picture, last_active
             FROM users
             JOIN messages ON 
             (users.id_user = messages.id_user_sender AND messages.id_user_receiver = ?)
@@ -29,7 +29,7 @@ try {
         $statement = $db->prepare($query);
         $statement->bind_param("ii", $_SESSION['id_user'], $_SESSION['id_user']);
         $statement->execute();
-        $statement->bind_result($id_user, $name, $surname, $last_active);
+        $statement->bind_result($id_user, $name, $surname, $profile_picture, $last_active);
 
         $output = "";
 
@@ -38,6 +38,13 @@ try {
             /* will determine whether particular user is still active or not */
             $time_now = strtotime(date('Y-m-d H:i:s') . '-6 seconds');
             $time_now = date('Y-m-d H:i:s', $time_now);
+
+            if ($profile_picture != null) {
+                $profile_pic = "<img class='avatar avatar-small' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+            }
+            else {
+                $profile_pic = "<img class='avatar avatar-list' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+            }
 
             if ($last_active > $time_now) {
                 $status = " <span class='active_mark' id='active_mark_" . $id_user . "'></span>";
@@ -54,9 +61,10 @@ try {
             }
 
             /* will create list item of the list of users */
-            $output .= "
-                <div class='list_users_item' id_user_to='" . $id_user . "' name_user_to='" . $name . " " . $surname . "' last_active='" . $last_active . "'>
-                    <span class='user'>" .
+            $output .=
+                "<div class='list_users_item' id_user_to='" . $id_user . "'>" .
+                    $profile_pic .
+                    "<span class='user'>" .
                         $name . " " . $surname . $status . $mes_notification .
                     "</span>
                 </div>
@@ -70,12 +78,12 @@ try {
     }
 
 
-    /* will fetch only a list od conversations and wil pass them to js script, which will refresh list */
+    /* will fetch only a list of conversations and will pass them to js script, which will refresh list */
     else if ($mode == "refresh_list") {
 
 
         $query =
-            "SELECT DISTINCT id_user, name, surname, last_active
+            "SELECT DISTINCT id_user, name, surname, last_active, profile_picture
             FROM users
             JOIN messages ON 
             (users.id_user = messages.id_user_sender AND messages.id_user_receiver = ?)
@@ -84,19 +92,28 @@ try {
         $statement = $db->prepare($query);
         $statement->bind_param("ii", $_SESSION['id_user'], $_SESSION['id_user']);
         $statement->execute();
-        $statement->bind_result($id_user, $name, $surname, $last_active);
+        $statement->bind_result($id_user, $name, $surname, $last_active, $profile_picture);
 
         $output = "";
 
         while ($statement->fetch()) {
 
             $output .= $id_user . "|";
+
+            if ($profile_picture != null) {
+                $profile_pic = "<img class='avatar avatar-list' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+            }
+            else {
+                $profile_pic = "<img class='avatar avatar-list' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+            }
+
             $status = " <span class='' id='active_mark_" . $id_user . "'></span>";
             $mes_notification = " <span class='' id='mes_not_" . $id_user . "' ></span>";
 
             $output .= "
-                <div class='list_users_item' id_user_to='" . $id_user . "' name_user_to='" . $name . " " . $surname . "' last_active='" . $last_active . "'>
-                    <span class='user'>" .
+                <div class='list_users_item' id_user_to='" . $id_user . "'>".
+                    $profile_pic .
+                    "<span class='user'>" .
                         $name . " " . $surname . $status . $mes_notification .
                     "</span>
                 </div>
@@ -138,7 +155,7 @@ try {
 
             $mes_count = get_unseen_messages_notification($id_user, $_SESSION['id_user']);
 
-            $output .= $id_user . " " . $status . " " . $last_active . " " . $mes_count . " ";
+            $output .= $id_user . "|" . $status . "|" . process_last_active($last_active) . "|" . $mes_count . "|";
         }
 
         $statement->free_result();
@@ -173,16 +190,16 @@ try {
         if ($id == "me") $id = $_SESSION['id_user'];
 
         $query =
-            "SELECT id_user, name, surname, last_active
+            "SELECT id_user, name, surname, last_active, profile_picture
             FROM users
             WHERE id_user = ?";
         $statement = $db->prepare($query);
         $statement->bind_param("i", $id);
         $statement->execute();
-        $statement->bind_result($id_user, $name, $surname, $last_active);
+        $statement->bind_result($id_user, $name, $surname, $last_active, $profile_picture);
         $statement->fetch();
 
-        $result = $id_user . "|" . $name . " " . $surname . "|" . process_last_active($last_active);
+        $result = $id_user . "|" . $name . " " . $surname . "|" . process_last_active($last_active) . "|" . $profile_picture;
 
         print $result;
 
@@ -208,10 +225,18 @@ try {
         $output = "";
 
         while ($statement->fetch()){
+
+            if ($profile_picture != null) {
+                $profile_pic = "<img class='avatar avatar-small' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+            }
+            else {
+                $profile_pic = "<img class='avatar avatar-list' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+            }
+
             $output .= "
-                <div id='search_result_" . $id . "' class='search_result_item' name_user_to='" . $name . " " . $surname . "' last_active='" . $last_active . "'>
-                    <img class='avatar' src='' alt='Avatar' />
-                    <p>" . $name . " " . $surname . "</p>
+                <div id='search_result_" . $id . "' class='search_result_item'>".
+                    $profile_pic .
+                    "<p>" . $name . " " . $surname . "</p>
                 </div>";
         }
 
