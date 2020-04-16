@@ -102,11 +102,11 @@ $(document).ready(function() {
 
                     /* label with last active time or with sign active in chat header */
 
-                    if (last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Active"){
-                        last_active_sign.html("Active");
+                    if (last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Online"){
+                        last_active_sign.html("Online");
                     }
                     else if (last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline") {
-                        last_active_sign.html("Last active " + ret_data[i + 2]);
+                        last_active_sign.html("Last online " + ret_data[i + 2]);
                     }
 
 
@@ -165,8 +165,8 @@ $(document).ready(function() {
         else {
             conversation_header += "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
         }
-        conversation_header += "<p>" + name_user_to + "</p>";
-        conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Last active " + last_active + "</span>";
+        conversation_header += "<p><a class='common' href='profile.php?user=" + id_user_to + "'>" + name_user_to + "</a></p>";
+        conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Last online " + last_active + "</span>";
         conversation_header += "<img id='conversation_close_button' src='srcPictures/icons8-no-100.png' alt='send icon' />";
 
         $("#conversation_header").html(conversation_header);
