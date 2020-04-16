@@ -26,7 +26,7 @@
         /* will display title of a page */
         private function displayHeadTitle($titleA){
             echo
-                "<title>" . $this->title . " - " . $titleA . "</title>";
+                "<title>" . $titleA . " - " . $this->title . "</title>";
         }
 
 

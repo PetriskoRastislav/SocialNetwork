@@ -23,19 +23,10 @@ function valid_email($address) {
 
 
 /* will validate whether strings has required max length */
-function validate_string($string, $length) {
+function valid_string($string, $length) {
     if (strlen($string) > $length) return false;
     else return true;
 }
 
-
-/* validate */
-function validate_year ($year) {
-    if (preg_match('/[a-zA-Z0-9\.\,\-\_\ ]+/', $year)) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 ?>

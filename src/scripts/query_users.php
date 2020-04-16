@@ -243,7 +243,7 @@ try {
         else {
 
             if ($day_of_birth != null) {
-                $output .= $day_of_birth . ".";
+                $output .= intval($day_of_birth, 10) . ".";
             }
 
             if ($day_of_birth != null || $year_of_birth != null) {
@@ -254,7 +254,11 @@ try {
                 $output .= process_month($month_of_bith);
             }
 
-            if ($month_of_bith != null && $year_of_birth != null) {
+            if (($month_of_bith != null || $day_of_birth != null) && $year_of_birth != null) {
+                $output .= " ";
+            }
+
+            if ($year_of_birth != null) {
                 $output .= $year_of_birth;
             }
 
@@ -290,9 +294,6 @@ try {
         if ($bio == null) {
             if ($id_user == $_SESSION['id_user']) {
                 $output .= "No biography written yet. Write it <a class='common' href='user_settings.php?id=" . $id_user . "#user_bio'>now</a>!";
-            }
-            else {
-
             }
         }
         else {
@@ -415,11 +416,12 @@ try {
             "|select[name='gender']|value|" . $gender;
 
         if ($location != null) $output .= "|input[name='location']|value|" . $location;
-        if ($day_of_birth != null) $output .= "|select[name='day_of_birth']|value|" . $day_of_birth;
-        if ($month_of_birth != null) $output .= "|select[name='month_of_birth']|value|" . $month_of_birth;
+        if ($gender != null) $output .= "|select[name='gender'] option[value='" . $gender . "']|selected|";
+        if ($day_of_birth != null) $output .= "|select[name='day_of_birth'] option[value='" . $day_of_birth . "']|selected|";
+        if ($month_of_birth != null) $output .= "|select[name='month_of_birth'] option[value='" . $month_of_birth . "']|selected|";
         if ($year_of_birth != null) $output .= "|input[name='year_of_birth']|value|" . $year_of_birth;
         if ($color_mode == "dark") $output .= "|input[name='change_theme']|checked|true";
-        if ($bio != null) $output .= "|textarea[name='biography']|value|" . $bio;
+        if ($bio != null) $output .= "|textarea[name='biography']||" . $bio;
 
         print $output;
 
@@ -427,16 +429,19 @@ try {
 
 
     /* will change password of user */
-    else if ($mode = "change_password") {
+    else if ($mode == "change_password") {
+
+        $result = "pass|";
 
         $password_old = $_POST['password_old'];
         $password_new = $_POST['password_new'];
         $password_new_again = $_POST['password_new_again'];
 
-        if ($password_new != $password_new_again) print 0;
+        if ($password_new != $password_new_again) print $result .= 0;
 
         $query =
             "SELECT password
+            FROM users
             WHERE id_user = ?";
         $statement = $db->prepare($query);
         $statement->bind_param("i", $_SESSION['id_user']);
@@ -444,7 +449,7 @@ try {
         $statement->bind_result($password);
         $statement->fetch();
 
-        if ( !(password_verify($password_old, $password)) ) print 0;
+        if ( !(password_verify($password_old, $password)) ) print $result .= 0;
 
         $statement->free_result();
 
@@ -456,7 +461,7 @@ try {
             WHERE id_user = ?";
         $statement = $db->prepare($query);
         $statement->bind_param("si", $password_new_hash, $_SESSION['id_user']);
-        print $statement->execute();
+        print $result .= $statement->execute();
 
     }
 
@@ -464,10 +469,12 @@ try {
     /* will change name of user */
     else if ($mode == "change_name") {
 
+        $result = "name|";
+
         $name = $_POST['name'];
         $surname = $_POST['surname'];
 
-        if(!validate_string($name, 40) || !validate_string($surname, 40)) print 0;
+        if(!valid_string($name, 40) || !valid_string($surname, 40)) print $result .= 0;
 
         $query =
             "UPDATE users
@@ -475,7 +482,7 @@ try {
             WHERE id_user = ?";
         $statement = $db->prepare($query);
         $statement->bind_param("ssi", $name, $surname, $_SESSION['id_user']);
-        print $statement->execute();
+        print $result .= $statement->execute();
 
     }
 
@@ -483,9 +490,11 @@ try {
     /* will change email of user */
     else if ($mode == "change_email") {
 
+        $result = "mail|";
+
         $email = $_POST['email'];
 
-        if (!(valid_email($email))) print 0;
+        if (!(valid_email($email))) print $result .= "0";
 
         $query =
             "UPDATE users
@@ -493,21 +502,39 @@ try {
             WHERE id_user = ?";
         $statement = $db->prepare($query);
         $statement->bind_param("si", $email, $_SESSION['id_user']);
-        print $statement->execute();
+        print $result .= $statement->execute();
 
     }
 
 
     /* will change profile picture of user */
-    else if ($mode == "change_pic") {
+    /*else if ($mode == "change_pic") {
 
-        
+        $result = "pic|";
 
-    }
+        if ($_FILES['profile_pic']['error'] > 0) print 0;
+        if ($_FILES['profile_pic']['type'] != "image/jpeg" || $_FILES['profile_pic']['type'] != "image/png") print $result .= 0;
+
+        $uploaded_file = "C:/xampp/htdocs/SocialNetwork/src/usersPictures/" . $_FILES['profile_pic']['name'];
+
+        if (is_uploaded_file( $_FILES['profile_pic']['tmp_name'] )) {
+            if ( !move_uploaded_file($_FILES['profile_pic']['tmp_name'], $uploaded_file) ) {
+                print $result .= 0;
+            }
+        }
+        else {
+            print $result .= 0;
+        }
+
+
+
+    }*/
 
 
     /* will change other information about user */
     else if ($mode == "change_profile_det") {
+
+        $result = "info|";
 
         $location = $_POST['location'];
         $gender = $_POST['gender'];
@@ -515,25 +542,28 @@ try {
         $month_of_birth = $_POST['month_of_birth'];
         $year_of_birth = $_POST['year_of_birth'];
 
-        if (!validate_string($location, 100)) print 0;
-        if (!($gender == "male" || $gender == "female" || $gender == "other")) print 0;
+        if (!valid_string($location, 100)) print $result .= 0;
+        if (!($gender == "male" || $gender == "female" || $gender == "other")) print $result .= 0;
         if ($day_of_birth != "--") {
             $day = intval($day_of_birth, 10);
-            if(!($day >= 1 && $day <= 31)) print 0;
+            if(!($day >= 1 && $day <= 31)) print $result .= 0;
         }
         if ($month_of_birth != "--") {
             $month = intval($month_of_birth, 10);
-            if(!($month >= 1 && $month <= 12)) print 0;
+            if(!($month >= 1 && $month <= 12)) print $result .= 0;
         }
-        if (!validate_year($year_of_birth)) print 0;
+        if ($year_of_birth != null){
+            $year = intval($year_of_birth, 10);
+            if(!($year >= 1900 && $year <= intval(date("Y"), 10))) print $result .= 0;
+        }
 
         $query =
             "UPDATE users
             SET location = ?, gender = ?, day_of_birth = ?, month_of_birth = ?, year_of_birth = ?
             WHERE id_user = ?";
         $statement = $db->prepare($query);
-        $statement->bind_param("sssssi", $loaction, $gender, $day_of_birth, $month_of_bith, $year_of_birth, $_SESSION['id_user']);
-        print $statement->execute();
+        $statement->bind_param("sssssi", $location, $gender, $day_of_birth, $month_of_birth, $year_of_birth, $_SESSION['id_user']);
+        print $result .= $statement->execute();
 
     }
 
@@ -541,9 +571,11 @@ try {
     /* will change user's theme */
     else if ($mode == "change_theme") {
 
+        $result = "theme|";
+
         $theme = $_POST['theme'];
 
-        if (!($theme == "dark" || $theme == "light")) print 0;
+        if (!($theme == "dark" || $theme == "light")) print $result .= 0;
 
         $query =
             "UPDATE users
@@ -551,13 +583,15 @@ try {
             WHERE id_user = ?";
         $statement = $db->prepare($query);
         $statement->bind_param("si", $theme, $_SESSION['id_user']);
-        print $statement->execute();
+        print $result .= $statement->execute();
 
     }
 
 
     /* will change biography of user */
     else if ($mode == "change_bio") {
+
+        $result = "bio|";
 
         $bio = $_POST['bio'];
 
@@ -567,7 +601,7 @@ try {
             WHERE id_user = ?";
         $statement = $db->prepare($query);
         $statement->bind_param("si", $bio, $_SESSION['id_user']);
-        print $statement->execute();
+        print $result .= $statement->execute();
 
     }
 
@@ -634,6 +668,7 @@ function process_month ($month) {
         case "10": return "october";
         case "11": return "november";
         case "12": return "december";
+        default: return false;
     }
 
 }
@@ -646,7 +681,7 @@ function process_to_only_date ($timestamp) {
 
     $date[1] = process_month($date[1]);
 
-    return  $date[2] . ". " . $date[1] . " " . $date[0];
+    return intval($date[2],10) . ". " . $date[1] . " " . $date[0];
 }
 
 
@@ -780,6 +815,7 @@ function get_days_in_month ($month, $year) {
         case "02":
             if ($year % 4 == 0) return 29;
             else return 28;
+        default: return false;
     }
 }
 

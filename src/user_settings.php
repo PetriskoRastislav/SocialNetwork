@@ -166,26 +166,26 @@ $page->displayBodyStart();
 					</select>
 				</li>
 				<li>
-					<label for="month_of_birth" class="info_tag_setting">Type your new Month of Birthday</label>
+					<label for="month_of_birth" class="info_tag_setting">Type your Month of Birthday</label>
 					<select id="month_of_birth" name="month_of_birth" class="select_input">
 	    				<option value="--">--</option>
-	    				<option value="01">01</option>
-	   					<option value="02">02</option>
-	   					<option value="03">03</option>
-	   					<option value="04">04</option>
-	   					<option value="05">05</option>
-	   					<option value="06">06</option>
-	   					<option value="07">07</option>
-	   					<option value="08">08</option>
-	   					<option value="09">09</option>
-	   					<option value="10">10</option>
-	   					<option value="11">11</option>
-	   					<option value="12">12</option>
+	    				<option value="01">January</option>
+	   					<option value="02">February</option>
+	   					<option value="03">March</option>
+	   					<option value="04">April</option>
+	   					<option value="05">May</option>
+	   					<option value="06">June</option>
+	   					<option value="07">July</option>
+	   					<option value="08">August</option>
+	   					<option value="09">September</option>
+	   					<option value="10">October</option>
+	   					<option value="11">November</option>
+	   					<option value="12">December</option>
 	   				</select>
 				</li>
 				<li>
-					<label for="year_of_birth" class="info_tag_setting">Type your new Year of Birthday</label>
-					<input type="text" class="value_setting input_form" id="year_of_birth" name="year_of_birth" placeholder="Enter your new year of birthday" maxlength="15">
+					<label for="year_of_birth" class="info_tag_setting">Type your Year of Birth</label>
+					<input type="text" class="value_setting input_form" id="year_of_birth" name="year_of_birth" placeholder="Enter your year of birt" maxlength="4">
 				</li>
 			</ul>
 			<input id="change_info_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">

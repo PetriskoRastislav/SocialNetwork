@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `SocialNetwork`.`users` (
     `gender` ENUM('male', 'female', 'other') DEFAULT 'other' NOT NULL,
     `day_of_birth` CHAR(2),
     `month_of_birth` CHAR(2),
-    `year_of_birth` CHAR(15)
+    `year_of_birth` CHAR(4)
 )
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

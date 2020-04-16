@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+
+    update_last_active();
+
+
     setInterval(function() {
         update_last_active();
     }, 1500);
