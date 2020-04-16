@@ -13,7 +13,7 @@ function valid_email (email) {
 }
 
 
-/*  */
+/* will validate format of and range */
 function valid_year (year) {
     let y = parseInt(year, 10);
     let d = new Date();
@@ -22,7 +22,7 @@ function valid_year (year) {
 }
 
 
-/*  */
+/* will validate if password contains lowercase letter, uppercase letter, digit, and symbol (not letter nor digit) */
 function valid_password (password) {
     let regex = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}/;
     return regex.test(password);

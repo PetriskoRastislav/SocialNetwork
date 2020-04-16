@@ -166,6 +166,29 @@ try {
     }
 
 
+    /* will return id, username, and last_active of a user with given id */
+    else if ($mode == "get_username") {
+
+        $id = $_POST['id_user'];
+        if ($id == "me") $id = $_SESSION['id_user'];
+
+        $query =
+            "SELECT id_user, name, surname, last_active
+            FROM users
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $id);
+        $statement->execute();
+        $statement->bind_result($id_user, $name, $surname, $last_active);
+        $statement->fetch();
+
+        $result = $id_user . "|" . $name . " " . $surname . "|" . process_last_active($last_active);
+
+        print $result;
+
+    }
+
+
     /* will return result of searching for a user */
     else if ($mode == "find_user") {
 
@@ -725,8 +748,8 @@ function process_last_active ($timestamp) {
         $hour_diff = ($hour_n - $hour_la);
         $day_diff = (int) ($hour_diff / 24);
 
-        if ($day_diff > 1) return $day_diff . " days";
-        else return $day_diff . " day";
+        if ($day_diff > 1) return $day_diff . " days ago";
+        else return $day_diff . " day ago";
     }
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 hour');
@@ -747,8 +770,8 @@ function process_last_active ($timestamp) {
         $minute_diff = ($minute_n - $minute_la);
         $hour_diff = (int) ($minute_diff / 60);
 
-        if ($hour_diff > 1) return $hour_diff . " hours";
-        else return $hour_diff . " hour";
+        if ($hour_diff > 1) return $hour_diff . " hours ago";
+        else return $hour_diff . " hour ago";
     }
 
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-1 minute');
@@ -769,8 +792,8 @@ function process_last_active ($timestamp) {
         $second_diff = ($second_n - $second_la);
         $minute_diff = (int) ($second_diff / 60);
 
-        if ($minute_diff > 1) return $minute_diff . " minutes";
-        return $minute_diff . " minute";
+        if ($minute_diff > 1) return $minute_diff . " minutes ago";
+        return $minute_diff . " minute ago";
     }
     else {
         $minute_la = intval($time[1], 10);
@@ -785,7 +808,7 @@ function process_last_active ($timestamp) {
         $second_diff = ($second_n - $second_la);
 
         if ($second_diff > 6) {
-            return $second_diff . " seconds";
+            return $second_diff . " seconds ago";
         }
         else {
             return "now";

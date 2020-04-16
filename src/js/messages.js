@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     fetch_users_all();
+    open_chat();
 
 
     /* periodical update */
@@ -13,6 +14,28 @@ $(document).ready(function() {
     setInterval(function () {
         refresh_chat(false);
     }, 400);
+
+
+    /* opens a conversation to a user whom id is contained in link */
+    function open_chat() {
+        let url = new URLSearchParams(window.location.search);
+
+        if (url.get('user') > 0) {
+            $.ajax({
+                url: "scripts/query_users.php",
+                method: "POST",
+                data: {
+                    mode: "get_username",
+                    id_user: url.get('user')
+                },
+                success: function (data) {
+                    data = data.toString().split("|");
+
+                    create_chat(data[0], data[1], data[2]);
+                }
+            });
+        }
+    }
 
 
     /* will fetch users from with whom had logged user conversations from database */
@@ -78,11 +101,11 @@ $(document).ready(function() {
 
                     /* label with last active time or with sign active in chat header */
 
-                    if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Aktívny"){
-                        last_active_sign.html("Aktívny");
+                    if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Active"){
+                        last_active_sign.html("Active");
                     }
-                    else if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline" && last_active_sign.text() === "Aktívny"){
-                        last_active_sign.html("Naposledy aktívny " + ret_data[i + 2] + " " + ret_data[i + 3]);
+                    else if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline" && last_active_sign.text() === "Active"){
+                        last_active_sign.html("Last active " + ret_data[i + 2] + " " + ret_data[i + 3]);
                         $(".list_users_item[id_user_to='" + ret_data[i] + "']").attr("last_active", ret_data[i + 2] + " " + ret_data[i + 3]);
                     }
 
@@ -113,7 +136,7 @@ $(document).ready(function() {
 
 
     /* will display chat with particular user */
-    $(document).on('click', '.list_users_item', function(){
+    $(document).on('click', '.list_users_item', function() {
         let id_user_to = $(this).attr("id_user_to");
         let name_user_to = $(this).attr("name_user_to");
         let last_active = $(this).attr("last_active");
@@ -126,7 +149,7 @@ $(document).ready(function() {
 
         let conversation_header = "<img class='avatar' src='' alt='Avatar' />";
         conversation_header += "<p>" + name_user_to + "</p>";
-        conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Naposledy aktívny " + last_active + "</span>";
+        conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Last active " + last_active + "</span>";
         conversation_header += "<img id='conversation_close_button' src='srcPictures/icons8-no-100.png' alt='send icon' />";
 
         $("#conversation_header").html(conversation_header);
@@ -384,7 +407,7 @@ $(document).ready(function() {
     });
 
 
-    /* after clicking on a user of a result list will open conversation with him */
+    /* after clicking on a user from a result list of search will open conversation with him */
     $(document).on("click", ".search_result_item", function () {
 
         let id_user_to = $(this).attr("id").split("_")[2];
