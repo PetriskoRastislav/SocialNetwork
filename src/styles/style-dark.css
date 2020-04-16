@@ -43,7 +43,6 @@
     border-left-color:  rgb(140, 140, 140);
     border-right-color: rgb(140, 140, 140);
     border-top-color: rgb(140, 140, 140);
-    width: 6em;
 }
 
 #header_drop_content .header_menu_a:last-child {
@@ -76,7 +75,7 @@ p {
 
 h1 {
     /*border-bottom: solid rgb(180, 180, 180) 0.0625em;*/
-    border-bottom: solid rgb(120, 120, 120) 0.0625em;
+    border-bottom-color: rgb(120, 120, 120);
     color: rgb(200, 200, 200);
 }
 
@@ -91,17 +90,17 @@ h3 {
 /* formatting of common links */
 
 a.common:link {
-    color: rgb(100, 200, 100);
+    color: rgb(100, 220, 100);
 }
 
 a.common:visited {
-    color: rgb(100, 200, 100);
+    color: rgb(100, 220, 100);
 }
 
 a.common:hover {
-    color: rgb(100, 200, 100);
+    color: rgb(100, 220, 100);
 }
 
 a.common:active {
-    color: rgb(100, 200, 100);
+    color: rgb(100, 220, 100);
 }

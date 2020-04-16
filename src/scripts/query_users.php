@@ -337,7 +337,7 @@ try {
         if ($id_user == "me") $id_user = $_SESSION['id_user'];
 
         $query =
-            "SELECT DISTINCT name, surname, profile_picture, last_active, gender, location
+            "SELECT DISTINCT id_user, name, surname, profile_picture, last_active, gender, location
             FROM users
             JOIN friends
             ON ((friends.id_user_1 = ? AND friends.id_user_2 = users.id_user)
@@ -345,7 +345,7 @@ try {
         $statement = $db->prepare($query);
         $statement->bind_param("ii", $id_user, $id_user);
         $statement->execute();
-        $statement->bind_result($name, $surname, $profile_picture, $last_active, $gender, $location);
+        $statement->bind_result($id_user, $name, $surname, $profile_picture, $last_active, $gender, $location);
 
         $output = "";
 
@@ -364,7 +364,9 @@ try {
             $output .=  '<ul class="informations">' .
                 '<li>' .
                 '<span class="info_tag_friend">Name</span>' .
+                '<a href="profile.php?user=' . $id_user . '" class="common">' .
                 '<span class="value_friend">' . $name . ' ' . $surname . '</span>' .
+                '</a>' .
                 '</li>' .
                 '<li>' .
                 '<span class="info_tag_friend">Last Online</span>' .

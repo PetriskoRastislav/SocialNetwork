@@ -65,10 +65,10 @@ function left_panel_buttons (page) {
 
     if (page === "settings") {
         buttons +=
-            '<a href="messages.php?user=' + url.get("me") + '" class="requests_a">' +
+            '<a href="messages.php?user=me" class="requests_a">' +
             '<img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">' +
             '</a>' +
-            '<a href="profile.php?user=' + url.get("me") + '" class="requests_a">' +
+            '<a href="profile.php?user=me" class="requests_a">' +
             '<img class="requests_image requests_image_en" src="srcPictures/icons8-user-100.png" title="Profile" alt="Profile">' +
             '</a>';
     }
