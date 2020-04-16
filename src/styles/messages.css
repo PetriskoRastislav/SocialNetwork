@@ -251,7 +251,7 @@
 /* styles for labels with names of users */
 
 .list_users_item {
-    height: 3em;
+    height: 3.7em;
     width: 100%;
     clear: both;
     transition: 0.3s;
@@ -272,12 +272,17 @@
     color: rgb(20, 20, 20);
     text-align: left;
     line-height: 1.6em;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.5em;
     font-size: 1.1em;
-    clear: both;
+    /*clear: right;*/
+    float: left;
     transition: 0.3s;
-    width: 100%;
+    width: auto;
     height: 100%;
+}
+
+.user::after {
+    clear: both;
 }
 
 
@@ -289,10 +294,22 @@
 
 .avatar {
     float: left;
-    max-width: 3.75em;
-    width: 100%;
+    height: 2em;
+    width: auto;
     margin-right: 1.5em;
     border-radius: 50%;
+}
+
+.avatar-list {
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    height: 2.7em;
+    width: auto;
+}
+
+.list_users_item .avatar-list {
+    margin: 0.5em;
 }
 
 

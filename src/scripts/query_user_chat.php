@@ -26,8 +26,45 @@ try {
 
         $id_user_to = $_POST['id_user_to'];
 
-        $query = "
-            SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
+
+        /* fetching of users' avatars */
+        $query =
+            "SELECT id_user, profile_picture
+            FROM users
+            WHERE (id_user = ? OR id_user = ?)";
+        $statement = $db->prepare($query);
+        $statement->bind_param("ii", $id_user_to, $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($id_user, $profile_picture);
+
+        $profile_pic_me = "";
+        $profile_pic_theirs = "";
+
+        while ($statement->fetch()){
+            if($id_user == $_SESSION['id_user']){
+
+                if ($profile_picture != null) {
+                    $profile_pic_me .= "<img class='avatar' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                }
+                else {
+                    $profile_pic_me .= "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                }
+            }
+            else {
+                if ($profile_picture != null) {
+                    $profile_pic_theirs .= "<img class='avatar' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                }
+                else {
+                    $profile_pic_theirs .= "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                }
+            }
+        }
+        $statement->free_result();
+
+
+        /* fetching messages */
+        $query =
+            "SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status
             FROM messages
             WHERE (id_user_sender = ? AND id_user_receiver = ?)
             OR (id_user_sender = ? AND id_user_receiver = ?)
@@ -44,7 +81,8 @@ try {
             if ($id_user_to == $id_user_sender) {
                 $output .=
                     "<div id='mes_" . $id_message . "' class='mes_wrap'>" .
-                    "<div class='message'>";
+                    "<div class='message'>" .
+                    $profile_pic_theirs;
             }
             else {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
@@ -52,10 +90,11 @@ try {
                 if ($status != 'deleted' && $time_sent > $time_limit) {
                     $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button'>";
                 }
-                $output .= "<div class='message message_my'>";
+                $output .=
+                    "<div class='message message_my'>" .
+                    $profile_pic_me;
             }
 
-            $output .= "<img class='avatar' src='' alt='Avatar'>";
 
             if ($status == "unseen" || $status == "seen") {
                 $output .= "<p>" . $message . "</p>";
@@ -129,6 +168,43 @@ try {
         $id_user_to = $_POST['id_user_to'];
         $last_message = $_POST['last_message_id'];
 
+
+        /* fetching of users' avatars */
+        $query =
+            "SELECT id_user, profile_picture
+            FROM users
+            WHERE (id_user = ? OR id_user = ?)";
+        $statement = $db->prepare($query);
+        $statement->bind_param("ii", $id_user_to, $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($id_user, $profile_picture);
+
+        $profile_pic_me = "";
+        $profile_pic_theirs = "";
+
+        while ($statement->fetch()){
+            if($id_user == $_SESSION['id_user']){
+
+                if ($profile_picture != null) {
+                    $profile_pic_me .= "<img class='avatar' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                }
+                else {
+                    $profile_pic_me .= "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                }
+            }
+            else {
+                if ($profile_picture != null) {
+                    $profile_pic_theirs .= "<img class='avatar' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                }
+                else {
+                    $profile_pic_theirs .= "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                }
+            }
+        }
+        $statement->free_result();
+
+
+        /* fetching messages */
         $query = "
             SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
             FROM messages
@@ -147,7 +223,8 @@ try {
             if ($id_user_to == $id_user_sender) {
                 $output .=
                     "<div id='mes_" . $id_message . "' class='mes_wrap'>" .
-                    "<div class='message'>";
+                    "<div class='message'>" .
+                    $profile_pic_theirs;
             }
             else {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
@@ -155,10 +232,11 @@ try {
                 if ($status != 'deleted' && $time_sent > $time_limit) {
                     $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button'>";
                 }
-                $output .= "<div class='message message_my'>";
+                $output .=
+                    "<div class='message message_my'>" .
+                    $profile_pic_me;
             }
 
-            $output .= "<img class='avatar' src='' alt='Avatar'>";
 
             if ($status == "unseen" || $status == "seen") {
                 $output .= "<p>" . $message . "</p>";
@@ -209,6 +287,43 @@ try {
 
         $id_user_to = $_POST['id_user_to'];
 
+
+        /* fetching of users' avatars */
+        $query =
+            "SELECT id_user, profile_picture
+            FROM users
+            WHERE (id_user = ? OR id_user = ?)";
+        $statement = $db->prepare($query);
+        $statement->bind_param("ii", $id_user_to, $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($id_user, $profile_picture);
+
+        $profile_pic_me = "";
+        $profile_pic_theirs = "";
+
+        while ($statement->fetch()){
+            if($id_user == $_SESSION['id_user']){
+
+                if ($profile_picture != null) {
+                    $profile_pic_me .= '<img class="avatar" src="usersPictures/' . $profile_picture . '" alt="Avatar">';
+                }
+                else {
+                    $profile_pic_me .= '<img class="avatar" src="srcPictures/blank-profile-picture-png-8.png" alt="Avatar">';
+                }
+            }
+            else {
+                if ($profile_picture != null) {
+                    $profile_pic_theirs .= '<img class="avatar" src="usersPictures/' . $profile_picture . '" alt="Avatar">';
+                }
+                else {
+                    $profile_pic_theirs .= '<img class="avatar" src="srcPictures/blank-profile-picture-png-8.png" alt="Avatar">';
+                }
+            }
+        }
+        $statement->free_result();
+
+
+        /* fetching messages */
         $query = "
             SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
             FROM messages
@@ -229,17 +344,16 @@ try {
             $output .= $id_message . $delimiter;
 
             if ($id_user_to == $id_user_sender) {
-                $output .= '<div class="message">';
+                $output .= '<div class="message">' . $profile_pic_theirs;
             }
             else {
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
                     $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="srcPictures/icons8-deleted-message-100.png" alt="delete message button">';
                 }
-                $output .= '<div class="message message_my">';
+                $output .= '<div class="message message_my">' . $profile_pic_me;
             }
 
-            $output .= '<img class="avatar" src="" alt="Avatar">';
 
             if ($status == "unseen" || $status == "seen") {
                 $output .= "<p>" . $message . "</p>";
@@ -318,12 +432,5 @@ catch (Exception $ex){
     exit();
 }
 
-
-/* will process common fetched messages with common format of output */
-function process_fetched_messages ($statement) {
-
-
-
-}
 
 ?>
