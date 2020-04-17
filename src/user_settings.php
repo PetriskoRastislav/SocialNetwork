@@ -15,21 +15,27 @@ $page->displayBodyStart();
 
 ?>
 
+<!-- heading of page -->
+
 <div class='profile_name'>
 	<h1 class="users_name">Settings</h1>
 </div>
 
+<!-- left column with informations about user -->
+
 <div class='left_column'>
 
-	<img id="info_profile_picture" class="image" src="srcPictures/defaultpicture.png" title="Avatar"  alt="Avatar">
+    <!-- user's profile picture -->
+
+	<img id="info_profile_picture" class="profile_picture" src="" title="Avatar" alt="Avatar">
+
+    <!-- buttons for profile control -->
 
     <div class="requests">
-        <!--
-        <img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">
-        <img class="requests_image requests_image_en" src="srcPictures/icons8-add-user-group-man-man-100.png" title="Request Friendship" alt="Request Friendship">
-        <img class="requests_image requests_image_en" src="srcPictures/icons8-user-100.png" title="Profile" alt="Profile">
-        -->
+
     </div>
+
+    <!-- informations about user -->
 
     <ul class="informations">
         <li>
@@ -55,8 +61,12 @@ $page->displayBodyStart();
     </ul>
 </div>
 
+<!-- main content of a page -->
+
 <div class='right_column'>
 	<div>
+
+        <!-- division for changing password -->
 
 		<h2>Change Password</h2>
 			<ul>
@@ -77,7 +87,9 @@ $page->displayBodyStart();
             <div id="res_pass" class="settings_result"><p></p></div>
 		<hr>
 
-		<h2>Change Name</h2>
+        <!-- division for changing name -->
+
+        <h2>Change Name</h2>
 			<ul>
 				<li>
 					<label for="name" class="info_tag_setting">Type your new Name</label>
@@ -92,6 +104,8 @@ $page->displayBodyStart();
             <div id="res_name" class="settings_result"><p></p></div>
 		<hr>
 
+        <!-- division for changing email -->
+
 		<h2>Change Email</h2>
 			<ul>
 				<li>
@@ -103,6 +117,8 @@ $page->displayBodyStart();
             <div id="res_mail" class="settings_result"><p></p></div>
 		<hr>
 
+        <!-- division for changing profile picture -->
+
 		<h2>Change Profile Picture</h2>
 			<ul>
 				<li>
@@ -110,9 +126,11 @@ $page->displayBodyStart();
 					<input type="file" class="value_setting" name="profile_pic" id="profile_pic">
 				</li>
 			</ul>
-			<input id="change_pic_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
+			<input id="change_pic_button" type="button" value="Change" class="spacing_form button_form_submit button_setting" accept="image/jpeg image/png">
             <div id="res_pic" class="settings_result"><p></p></div>
 		<hr>
+
+        <!-- division for changing other informations about user -->
 
 		<h2>Change Profile Details</h2>
 			<ul>
@@ -192,6 +210,7 @@ $page->displayBodyStart();
             <div id="res_info" class="settings_result"><p></p></div>
 		<hr>
 
+        <!-- division for changing theme (dark / light) -->
 
 		<h2>Change the Theme</h2>
 			<ul>
@@ -208,6 +227,8 @@ $page->displayBodyStart();
 			<input id="change_theme_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
             <div id="res_theme" class="settings_result"><p></p></div>
 		<hr>
+
+        <!-- division for changing biography -->
 
 		<h2>Change the Biography</h2>
 			<ul>

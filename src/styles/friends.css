@@ -1,3 +1,6 @@
+
+/* styles for a div with info about one friend */
+
 .friend {
 	width: 49%;
 	float: left;
@@ -14,12 +17,16 @@
 	border-top: 0.125em solid rgb(120, 120, 120);
 }
 
+/* styles for a friend's avatar */
+
 .friend_avatar {
 	width: auto;
 	height: 6em;
 	float: left;
 	margin: 0.5em;
 }
+
+/* name of a info in div */
 
 .info_tag_friend {
 	float: left;
@@ -29,9 +36,15 @@
 	margin-top: 0.06125em;
 }
 
+/* value of a info on div */
+
 .value_friend {
 	float: right;
 	width: 35%;
 	clear: right;
 	margin-top: 0.06125em;
+}
+
+a .value_friend:hover {
+	text-decoration: underline;
 }

@@ -1,11 +1,12 @@
-.informations {
-	color: rgb(210, 210, 210);
-}
+
+/* styles for a left column with profile picture and informations about user */
 
 .left_column {
-	border-left: 0.0625em solid rgb(160, 160, 160);
-	border-right: 0.0625em solid rgb(160, 160, 160);
+	border-left-color: rgb(160, 160, 160);
+	border-right-color: rgb(160, 160, 160);
 }
+
+/* buttons for profile control */
 
 .requests_image_en:hover {
 	background-color: rgb(104, 107, 113);
@@ -14,3 +15,10 @@
 .requests_image_dis:hover {
 	background-color: rgb(54, 57, 63);
 }
+
+/* list with information about user */
+
+.informations {
+	color: rgb(210, 210, 210);
+}
+

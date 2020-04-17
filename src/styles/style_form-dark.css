@@ -3,11 +3,11 @@
 .input_form {
     background-color: rgb(54, 57, 63);
     color: rgb(210, 210, 210);
-    border: 2px solid rgb(110, 110, 110);
+    border-color: rgb(110, 110, 110);
 }
 
 .input_form:focus {
-    border: 2px solid rgb(250, 250, 250);
+    border-color: rgb(250, 250, 250);
 }
 
 /* formatting of textarea */
@@ -15,11 +15,11 @@
 .text_area_form {
     background-color: rgb(54, 57, 63);
     color: rgb(210, 210, 210);
-    border: 2px solid rgb(110, 110, 110);
+    border-color: rgb(110, 110, 110);
 }
 
 .text_area_form:focus {
-    border: 2px solid rgb(250, 250, 250);
+    border-color: rgb(250, 250, 250);
 }
 
 /* formatting of selects */
@@ -27,11 +27,11 @@
 .select_form-dark {
     background-color: rgb(54, 57, 63);
     color: rgb(210, 210, 210);
-    border: 2px solid rgb(110, 110, 110);
+    border-color: rgb(110, 110, 110);
 }
 
 .select_form-dark:focus {
-    border: 2px solid rgb(250, 250, 250);
+    border-color: rgb(250, 250, 250);
 }
 
 /* formatting of buttons */

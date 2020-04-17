@@ -15,21 +15,27 @@ $page->displayBodyStart();
 
 ?>
 
+<!-- heading of page -->
+
 <div class='profile_name'>
 	<h1 class="users_name">'s Friends</h1>
 </div>
 
+<!-- left column with informations about user -->
+
 <div class='left_column'>
 
-    <img id="info_profile_picture" class="image" src="" title="Avatar" alt="Avatar">
+    <!-- user's profile picture -->
 
-	<div class="requests">
-        <!--
-        <img class="requests_image requests_image_en" src="srcPictures/icons8-new-message-100.png" title="Write a Message" alt="Write a Message">
-        <img class="requests_image requests_image_en" src="srcPictures/icons8-add-user-group-man-man-100.png" title="Request Friendship" alt="Request Friendship">
-		<img class="requests_image requests_image_en" src="srcPictures/icons8-user-100.png" title="Profile" alt="Profile">
-		-->
-	</div>
+    <img id="info_profile_picture" class="profile_picture" src="" title="Avatar" alt="Avatar">
+
+    <!-- buttons for profile control -->
+
+    <div class="requests">
+
+    </div>
+
+    <!-- informations about user -->
 
     <ul class="informations">
         <li>
@@ -54,6 +60,8 @@ $page->displayBodyStart();
         </li>
     </ul>
 </div>
+
+<!-- main content of a page -->
 
 <div class='right_column'>
 

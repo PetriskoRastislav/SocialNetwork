@@ -1,22 +1,30 @@
+
+/* font color for a label */
+
 label {
     color: rgb(210, 210, 210);
 }
 
-#user_bio {
+/* colors for a textarea biography */
+
+#biography {
     background-color: rgb(54, 57, 63);
     color: rgb(210, 210, 210);
     border-color: rgb(110, 110, 110);
 }
 
-#user_bio:focus {
+#biography:focus {
     background-color: rgb(60, 60, 60);
     border-color: rgb(250, 250, 250);
 }
 
+
+/* colors for selects */
+
 .select_input {
 	background-color: rgb(54, 57, 63);
     color: rgb(210, 210, 210);
-    border: 2px solid rgb(110, 110, 110);
+    border-color: rgb(110, 110, 110);
 }
 
 .select_input:focus {
