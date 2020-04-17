@@ -88,9 +88,9 @@
 
 #header_drop_content {
     box-sizing: border-box;
-    position: fixed;
+    position: absolute;
     top: 3em;
-    right: 1em;
+    right: 0em;
     height: auto;
     z-index: 999;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;

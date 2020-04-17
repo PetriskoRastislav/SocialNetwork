@@ -1,6 +1,10 @@
 
 /* Styles for web-page */
 
+* {
+    outline: none;
+}
+
 /* font-family: Cambria, Georgia, serif; */
 
 .right {

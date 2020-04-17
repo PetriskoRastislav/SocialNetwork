@@ -266,7 +266,7 @@ try {
         if ($profile_picture == null) {
             $output .= "#info_profile_picture|" . "srcPictures/blank-profile-picture-png-8.png";
         } else {
-            $output .= "#info_profile_picture|" . "usersPictures/" . $profile_picture . "|";
+            $output .= "#info_profile_picture|" . "usersPictures/" . $profile_picture;
         }
 
         $output .= "|#info_last_active|" . process_last_active($last_active);
@@ -555,30 +555,6 @@ try {
         print $result .= $statement->execute();
 
     }
-
-
-    /* will change profile picture of user */
-    /*else if ($mode == "change_pic") {
-
-        $result = "pic|";
-
-        if ($_FILES['profile_pic']['error'] > 0) print 0;
-        if ($_FILES['profile_pic']['type'] != "image/jpeg" || $_FILES['profile_pic']['type'] != "image/png") print $result .= 0;
-
-        $uploaded_file = "C:/xampp/htdocs/SocialNetwork/src/usersPictures/" . $_FILES['profile_pic']['name'];
-
-        if (is_uploaded_file( $_FILES['profile_pic']['tmp_name'] )) {
-            if ( !move_uploaded_file($_FILES['profile_pic']['tmp_name'], $uploaded_file) ) {
-                print $result .= 0;
-            }
-        }
-        else {
-            print $result .= 0;
-        }
-
-
-
-    }*/
 
 
     /* will change other information about user */

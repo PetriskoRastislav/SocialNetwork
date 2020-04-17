@@ -120,14 +120,19 @@ $page->displayBodyStart();
         <!-- division for changing profile picture -->
 
 		<h2>Change Profile Picture</h2>
-			<ul>
-				<li>
-					<label for="profile_pic" class="info_tag_setting">Choose your new Profile Picture</label>
-					<input type="file" class="value_setting" name="profile_pic" id="profile_pic">
-				</li>
-			</ul>
-			<input id="change_pic_button" type="button" value="Change" class="spacing_form button_form_submit button_setting" accept="image/jpeg image/png">
-            <div id="res_pic" class="settings_result"><p></p></div>
+            <form method="post" enctype="multipart/form-data" id="change_pic">
+                <ul>
+                    <li>
+                        <div id="preview"><img src="srcPictures/defaultpicture.png" alt="Upload image preview"></div>
+                    </li>
+                    <li>
+                        <label for="profile_pic" class="info_tag_setting">Choose your new Profile Picture</label>
+                        <input type="file" class="value_setting" name="profile_pic" id="profile_pic" accept="image/*">
+                    </li>
+                </ul>
+                <input id="change_pic_button" type="button" value="Change" class="spacing_form button_form_submit button_setting" accept="image/jpeg image/png">
+                <div id="res_pic" class="settings_result"><p></p></div>
+            </form>
 		<hr>
 
         <!-- division for changing other informations about user -->

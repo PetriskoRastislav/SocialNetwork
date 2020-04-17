@@ -94,8 +94,38 @@ $(document).ready( function () {
 
 
     /* changes profile picture */
-    $("#change_pic_button").on("click", function () {
+    $("#change_pic_button").on("click", function (event) {
 
+        event.preventDefault();
+        let form_data = new FormData($("#change_pic")[0]);
+
+        $.ajax({
+            url: "scripts/upload_profile_img.php",
+            type: "POST",
+            data: form_data,
+            processData: false,
+            cache: false,
+            contentType: false,
+            success: function(data) {
+                console.log(data.toString());
+
+                data = data.toString().split("|");
+
+                if (data[0] === "0") {
+                    display_warning("pic", data[1]);
+                }
+                else {
+                    // view uploaded file.
+                    $("#preview img").attr("src", data);
+                    $("#change_pic")[0].reset();
+                }
+            },
+            error: function (data) {
+                display_warning("pic", data);
+            }
+        });
+
+        $(this).blur();
     });
 
 
@@ -197,8 +227,6 @@ function fill_forms () {
 /* display result of changing information about profile in selected div */
 function display_result (data) {
 
-    console.log(data.toString());
-
     data = data.toString().split("|");
 
     if (data[1] === "1") {
@@ -227,7 +255,7 @@ function display_result (data) {
 }
 
 
-/*  */
+/* will display warning when is something wrong with data in inputs */
 function display_warning (where, warning) {
     $('#res_' + where).removeClass("settings_result_pos");
     $("#res_" + where).addClass("settings_result_neg");
