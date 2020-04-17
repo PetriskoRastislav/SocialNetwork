@@ -9,7 +9,7 @@
     }
 
     $page = new Page();
-    $page->displayHead( "login", array("styles/style_form.css", "styles/style_form-dark.css"));
+    $page->displayHead( "login", array("styles/style_form"));
     $page->displayBodyStart();
 ?>
 

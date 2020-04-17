@@ -22,12 +22,19 @@ try {
     $db = db_connect();
     mysqli_set_charset($db,"utf8");
 
+
     /* Will verify user's credentials  */
-    $stmt = $db->prepare("SELECT id_user, password FROM users WHERE email = ?");
+
+    $query =
+        "SELECT id_user, password
+        FROM users
+        WHERE email = ?";
+    $stmt = $db->prepare($query);
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $stmt->bind_result($id, $pass_hash);
     $stmt->fetch();
+
 
     if(password_verify($password, $pass_hash)) {
         /* Storing id in SESSION variable */
@@ -40,20 +47,28 @@ try {
         throw new Exception("Unknown email.");
     }
 
+
     $stmt->free_result();
 
-    /* Fetch id of a logged user */
 
-    $stmt = $db->prepare("SELECT name, surname FROM users WHERE id_user = ?");
+    /* Fetch id of a logged user */
+    $query =
+        "SELECT name, surname, color_mode 
+        FROM users 
+        WHERE id_user = ?";
+    $stmt = $db->prepare($query);
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    $stmt->bind_result($firstname, $surname);
+    $stmt->bind_result($firstname, $surname, $color_mode);
     $stmt->fetch();
 
     $_SESSION['name'] = $firstname;
     $_SESSION['surname'] = $surname;
+    $_SESSION['color_mode'] = $color_mode;
 
     $stmt->free_result();
+    $stmt->close();
+    $db->close();
 
     /* Redirecting user to his profile page */
     header("Location: ../profile.php?user=me");

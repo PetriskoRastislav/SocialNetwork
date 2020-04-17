@@ -20,7 +20,7 @@ if (!isset($_SESSION['id_user'])) {
 $page = new Page();
 
 /* vypíše html hlavičku */
-/* napr. $page->displayHead( "messages", array("styles/messages.css", "styles/messages-dark.css")); */
+/* napr. $page->displayHead( "messages", array("styles/messages")); */
 /* napr. $page->displayHead( "", array()); */
 
 $page->displayHead( /* titul stránky, (to čo je napísane hore na lište okna/stránky) */"", array(/* tu sa vymenujú dodatočné súbory css, ktoré potrebuješ na konkrétnu stránku */));

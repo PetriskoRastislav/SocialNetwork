@@ -3,8 +3,8 @@
 }
 
 .left_column {
-	border-left: 0.0625em solid rgb(20, 20, 20);
-	border-right: 0.0625em solid rgb(20, 20, 20);
+	border-left: 0.0625em solid rgb(160, 160, 160);
+	border-right: 0.0625em solid rgb(160, 160, 160);
 }
 
 .requests_image_en:hover {

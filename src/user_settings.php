@@ -10,7 +10,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "Settings", array("styles/profile.css", "styles/profile-dark.css", "styles/style_form.css", "styles/style_form-dark.css", "styles/user_settings.css", "styles/user_settings-dark.css"));
+$page->displayHead( "Settings", array("styles/profile", "styles/style_form", "styles/user_settings"));
 $page->displayBodyStart();
 
 ?>

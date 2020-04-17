@@ -38,11 +38,18 @@ try {
 
 
     /* Checks whether user with same email has already been registered. */
-    $result = $db->query("SELECT * FROM `users` WHERE email = ' . $email . '");
-    if (!$result) {
-        throw new Exception("Failed to execute query.");
-    }
-    if ($result->num_rows > 0) {
+    $query =
+        "SELECT id_user
+        FROM users
+        WHERE email = ?";
+    $statement = $db->prepare($query);
+    $statement->bind_param("s", $email);
+    $statement->execute();
+    $statement->bind_result($id_user);
+    $statement->fetch();
+
+
+    if ($id_user > 0) {
         throw new Exception("User with same email address already registered.");
     }
 
@@ -50,7 +57,10 @@ try {
 
 
     /* Registration of new user */
-    $stmt = $db->prepare("INSERT INTO users (email, name, surname, password, registered, last_active) VALUES (?, ?, ?, ?, ?, ?)");
+    $query =
+        "INSERT INTO users (email, name, surname, password, registered, last_active)
+        VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = $db->prepare($query);
     $password_hash = password_hash($password1, PASSWORD_ARGON2ID);
     $time_now = date("Y-m-d H:i:s");
     $stmt->bind_param("ssssss", $email, $name, $surname, $password_hash, $time_now, $time_now);
@@ -61,12 +71,17 @@ try {
     }
 
     /* Fetching id of a newly registered user */
-    $stmt = $db->prepare("SELECT users.id_user FROM users WHERE users.email = ?");
+    $query =
+        "SELECT id_user, color_mode
+        FROM users
+        WHERE email = ?";
+    $stmt = $db->prepare($query);
     $stmt->bind_param("s",$email);
     $stmt->execute();
-    $stmt->bind_result($id);
+    $stmt->bind_result($id, $color_mode);
     $stmt->fetch();
 
+    $stmt->free_result();
     $stmt->close();
     $db->close();
 
@@ -74,6 +89,7 @@ try {
     $_SESSION['id_user'] = $id;
     $_SESSION['name'] = $name;
     $_SESSION['surname'] = $surname;
+    $_SESSION['color_mode'] = $color_mode;
 
     /* Redirecting user to his profile page */
     header("Location: ../profile.php?user=me");

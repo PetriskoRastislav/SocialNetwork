@@ -10,7 +10,7 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "messages", array("styles/messages.css", "styles/messages-dark.css"));
+$page->displayHead( "messages", array("styles/messages"));
 $page->displayBodyStart();
 
 ?>

@@ -42,13 +42,41 @@
 
         /* will display default and additional styles */
         private function displayStyles($styles){
-            echo "<link rel='stylesheet' href='styles/reset.css'>";
-            echo "<link rel='stylesheet' href='styles/style.css'>";
-            echo "<link rel='stylesheet' href='styles/style-dark.css'>";
 
+            if ( !( isset($_SESSION['color_mode']) ) ){
+                $_SESSION['color_mode'] = "dark";
+            }
+
+            /* default styles */
+            $def_styles = array(
+                "styles/reset",
+                "styles/style",
+                "styles/menu"
+            );
+
+            $def_style = @reset($def_styles);
+
+            while ($def_style){
+                echo "<link rel='stylesheet' href='" . $def_style . ".css'>";
+
+                if ($_SESSION['color_mode'] == "dark" && $def_style != "styles/reset"){
+                    echo "<link rel='stylesheet' href='" . $def_style . "-dark.css'>";
+                }
+
+                $def_style = next($def_styles);
+            }
+
+
+            /* extra styles */
             $style = @reset($styles);
+
             while ($style){
-                echo "<link rel='stylesheet' href='" . $style . "'>";
+                echo "<link rel='stylesheet' href='" . $style . ".css'>";
+
+                if ($_SESSION['color_mode'] == "dark"){
+                    echo "<link rel='stylesheet' href='" . $style . "-dark.css'>";
+                }
+
                 $style = next($styles);
             }
 
@@ -67,13 +95,6 @@
 
         /* will display header of a webpage, logo, menu, etc. */
         public function displayHeader(){
-            /*$message = "
-                <div class='pageHeader'>
-                    <div class='left pageHeader'>
-                        <img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>
-                        <p class='pageName'>" . $this->title . "</p>
-                    </div>
-                    <div class='right pageHeader'>";*/
 
             $message = "
                 <div class='pageHeader'>
@@ -82,13 +103,7 @@
 
             if (isset($_SESSION['id_user'])) $message .= "<a href='home.php' class='home_link'>";
 
-            /*$message .= "
-                            <img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>
-                            <p class='pageName'>" . $this->title . "</p>
-                            </a>
-                        </div>";*/
-
-            $message .= "<img class='pageLogo' src='srcPictures/defaultpicture.png' alt='logo'>";
+            $message .= "<img class='pageLogo' src='srcPictures/defaultpicture.png' alt='Page logo'>";
 
             if (isset($_SESSION['id_user'])) $message .= "</a></div>";
             else $message .= "</div>";
@@ -104,24 +119,47 @@
                                     <p class='header_menu_a'><i class='arrow down_arrow' id='arrow_btn_menu'></i></p>
                                 </li>
                                 
-                                <div id='header_drop_content' class='header_menu_drop_hide'>
-                                    <a class='header_menu_a' href='friends.php?user=me'>Friends</a>
+                                <ul id='header_drop_content' class='header_menu_drop_hide'>
+                                
+                                    <a href='friends.php?user=me' class='header_menu_drop_a'>
+                                        <li class='header_drop_item header_drop_item_border'>
+                                            <img class='header_menu_img_drop' src='srcPictures/icons8-user-account-100.png' alt='Friends icon'>
+                                            <p class='header_drop_p'>Friends</p>
+                                        </li>
+                                    </a>
                                     
-                                    <a class='header_menu_a' href='user_settings.php'>Settings</a>
-
-                                    <a class='header_menu_a' href='scripts/logout.php'>Logout</a>
-                                </div>
+                                    <a href='user_settings.php' class='header_menu_drop_a'>
+                                        <li class='header_drop_item header_drop_item_border'>
+                                            <img class='header_menu_img_drop' src='srcPictures/icons8-settings-100.png' alt='Settings icon'>
+                                            <p class='header_drop_p'>Settings</p>
+                                        </li>
+                                    </a>
+                                    
+                                    <a href='scripts/logout.php' class='header_menu_drop_a'>
+                                        <li class='header_drop_item header_drop_item_border_last'> 
+                                            <img class='header_menu_img_drop' src='srcPictures/icons8-exit-100.png' alt='Logout icon'>
+                                            <p class='header_drop_p'>Logout</p>
+                                        </li>
+                                    </a>
+                                    
+                                </ul>
                                 
                                 <li class='header_menu_li border_left'>
-                                    <a class='header_menu_a' href='profile.php?user=me'>" . $_SESSION['name'] . " " . $_SESSION['surname'] . "</a>
+                                    <a class='header_menu_a' href='profile.php?user=me'>" .
+                                        $_SESSION['name'] . " " . $_SESSION['surname'] .
+                                    "</a>
                                 </li>
                                 
                                 <li class='header_menu_li border_left'>
-                                    <a class='header_menu_a header_menu_a_img' href='messages.php'><img class='header_menu_img' src='srcPictures/icons8-group-message-100.png' alt='message icon'></a>
+                                    <a class='header_menu_a header_menu_a_img' href='messages.php'>
+                                        <img class='header_menu_img' src='srcPictures/icons8-group-message-100.png' alt='Messages icon'>
+                                    </a>
                                 </li>
                                 
                                 <li class='header_menu_li'>
-                                    <p class='header_menu_a'>Notifications</p>
+                                    <a class='header_menu_a header_menu_a_img' href='messages.php'>
+                                        <img class='header_menu_img' src='srcPictures/icons8-notification-100.png' alt='Notification icon'>
+                                    </a>
                                 </li>
                                 
                             </ul>
