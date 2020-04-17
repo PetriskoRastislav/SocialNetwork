@@ -80,9 +80,9 @@ function left_panel_buttons (page) {
             '</a>';
 
         if (url.get('user') === "me") {
-            buttons +=
+            /*buttons +=
                 '<img class="requests_image requests_image_dis" src="srcPictures/icons8-add-user-group-man-man-100.png"' +
-                ' title="Wanna be friend with yourself? I guess it won\'t work." alt="Request Friendship">';
+                ' title="Wanna be friend with yourself? I guess it won\'t work." alt="Request Friendship">';*/
         }
         else {
             buttons +=
