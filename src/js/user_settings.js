@@ -205,6 +205,19 @@ function display_result (data) {
         $('#res_' + data[0]).removeClass("settings_result_neg");
         $("#res_" + data[0]).addClass("settings_result_pos");
         $("#res_" + data[0] + " p").html("Successfully changed.");
+
+        if(data[0] === "theme") {
+            $.ajax({
+                url: "scripts/query_users.php",
+                method: "POST",
+                data: {
+                    mode: "update_theme"
+                },
+                success: function () {
+                    location.reload();
+                }
+            });
+        }
     }
     else {
         $('#res_' + data[0]).removeClass("settings_result_pos");

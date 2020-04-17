@@ -656,6 +656,28 @@ try {
     }
 
 
+    /* will update theme in $_SESSION */
+    else if ($mode == "update_theme") {
+
+        $query =
+            "SELECT color_mode
+            FROM users
+            WHERE id_user = ?";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($color_mode);
+        $statement->fetch();
+
+        $_SESSION['color_mode'] = $color_mode;
+
+        $stmt->free_result();
+        $stmt->close();
+        $db->close();
+
+    }
+
+
 }
 catch (Exception $ex){
     $ex->getMessage();

@@ -7,7 +7,7 @@
 
 
         /* will display html header */
-        public function displayHead($titleA, $styles = null){
+        public function displayHead($titleA, $styles = null) {
             $this->displayDeclaration();
             $this->displayHeadTitle($titleA);
             $this->displayMeta();
@@ -16,7 +16,7 @@
 
 
         /* will display declaration of a html file */
-        private function displayDeclaration(){
+        private function displayDeclaration() {
             echo "<!DOCTYPE html>" .
             "<html lang='sk'>" .
             "<head>";
@@ -24,14 +24,14 @@
 
 
         /* will display title of a page */
-        private function displayHeadTitle($titleA){
+        private function displayHeadTitle($titleA) {
             echo
                 "<title>" . $titleA . " - " . $this->title . "</title>";
         }
 
 
         /* will display meta information of a page */
-        private function displayMeta(){
+        private function displayMeta() {
             ?>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -41,7 +41,7 @@
 
 
         /* will display default and additional styles */
-        private function displayStyles($styles){
+        private function displayStyles($styles) {
 
             if ( !( isset($_SESSION['color_mode']) ) ){
                 $_SESSION['color_mode'] = "dark";
@@ -85,7 +85,7 @@
 
 
         /* will display start of a body and menu */
-        public function displayBodyStart(){
+        public function displayBodyStart() {
             echo "<body>";
             echo "<div id='page'>";
             $this->displayHeader();
@@ -93,8 +93,8 @@
         }
 
 
-        /* will display header of a webpage, logo, menu, etc. */
-        public function displayHeader(){
+        /* will display header of a web-page, logo, menu, etc. */
+        public function displayHeader() {
 
             $message = "
                 <div class='pageHeader'>
@@ -172,14 +172,14 @@
         }
 
 
-        /* will display title / heading of a webpage */
-        public function displayTitle($title){
+        /* will display title / heading of a web-page */
+        public function displayTitle($title) {
             echo "<h1 class='pageTitle'>" . $title . "</h1>";
         }
 
 
-        /* will display end of a body and will attach default and additional javascript sctipts */
-        public function displayBodyEnd($scripts){
+        /* will display end of a body and will attach default and additional javascript scripts */
+        public function displayBodyEnd($scripts) {
             echo "<script src='js/jquery-3.4.1.min.js'></script>";
             echo "<script src='js/menu.js'></script>";
             echo "<script src='js/js.js'></script>";
