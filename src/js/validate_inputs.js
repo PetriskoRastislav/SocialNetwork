@@ -1,8 +1,8 @@
 
 /* will validate length of strings */
-function valid_string (string, length) {
-    if (string.length > length) return false;
-    else return true;
+function string_has_length (string, length) {
+    if (string.length >= length) return true;
+    else return false;
 }
 
 
@@ -25,5 +25,32 @@ function valid_year (year) {
 /* will validate if password contains lowercase letter, uppercase letter, digit, and symbol (not letter nor digit) */
 function valid_password (password) {
     let regex = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}/;
+    return regex.test(password);
+}
+
+
+/* validates if password contains lowercase letter */
+function valid_pas_low_l (password) {
+    let regex = /[a-z]+/g;
+    return regex.test(password);
+}
+
+
+/* validates if password contains uppercase letter */
+function valid_pas_up_l (password) {
+    let regex = /[A-Z]+/g;
+    return regex.test(password);
+}
+
+/* validates if password contains digit */
+function valid_pas_d (password) {
+    let regex = /[0-9]+/g;
+    return regex.test(password);
+}
+
+
+/* validates if password contains symbol (anything but digit or letter) */
+function valid_pas_s (password) {
+    let regex = /[^a-zA-Z0-9]+/g;
     return regex.test(password);
 }

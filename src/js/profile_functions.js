@@ -128,8 +128,6 @@ function left_panel_buttons (page) {
 /* will split up data from php and put html data into a correspondent element */
 function process_profile_data (data) {
 
-    console.log(data.toString());
-
     data = data.toString().split("|");
 
     for (let i = 0; i < data.length; i += 2) {

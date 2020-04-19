@@ -256,3 +256,33 @@ input:checked + .slider:before {
 	text-align: center;
 	font-size: 1em;
 }
+
+
+/* validation before sending */
+
+.stat {
+	box-sizing: border-box;
+	width: 2em;
+	height: 2em;
+	padding: 0.125em;
+}
+
+.display_icon {
+	display: block;
+}
+
+.hide_icon {
+	display: none;
+}
+
+#pass_new_status {
+	position: relative;
+	top: 1.5em;
+	left: 0;
+}
+
+#pass_new_again_status {
+	position: relative;
+	top: 1.875em;
+	left: 0;
+}

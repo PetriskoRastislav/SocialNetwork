@@ -73,14 +73,17 @@ $page->displayBodyStart();
 				<li>
 					<label for="password_old" class="info_tag_setting">Type your old Password</label>
 					<input type="password" class="value_setting input_form" name="password_old" id="password_old" placeholder="Enter your old password" maxlength="97">
+                    <img id="pass_old_status" src="" alt="" class="stat">
 				</li>
 				<li>
 					<label for="password_new" class="info_tag_setting">Type your new Password</label>
 					<input type="password" class="value_setting input_form" name="password_new" id="password_new" placeholder="Enter your new password" maxlength="97">
+                    <img id="pass_new_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat">
 				</li>
 				<li>
 					<label for="password_new_again" class="info_tag_setting">Type your new Password again</label>
                     <input type="password" class="value_setting input_form" name="password_new_again" id="password_new_again" placeholder="Enter your new password again" maxlength="97">
+                    <img id="pass_new_again_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat"">
                 </li>
 			</ul>
 		    <input id="change_pass_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
@@ -92,11 +95,11 @@ $page->displayBodyStart();
         <h2>Change Name</h2>
 			<ul>
 				<li>
-					<label for="name" class="info_tag_setting">Type your new Name</label>
+					<label for="name" class="info_tag_setting">Change your Name</label>
 					<input id="name" type="text" class="value_setting input_form" name="name" placeholder="Enter your new name" maxlength="40">
 				</li>
 				<li>
-					<label for="surname" class="info_tag_setting">Type your new Surname</label>
+					<label for="surname" class="info_tag_setting">Change your Surname</label>
 					<input id="surname" type="text" class="value_setting input_form" name="surname" placeholder="Enter your new surname" maxlength="40">
 				</li>
 			</ul>
@@ -109,8 +112,9 @@ $page->displayBodyStart();
 		<h2>Change Email</h2>
 			<ul>
 				<li>
-					<label for="email" class="info_tag_setting">Type your new Email</label>
+					<label for="email" class="info_tag_setting">Change your Email</label>
 					<input type="email" id="email" class="value_setting input_form" name="email" placeholder="Enter your new email" maxlength="100">
+                    <img id="mail_status" src="" alt="" class="stat">
 				</li>
 			</ul>
 			<input id="change_email_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
@@ -140,11 +144,11 @@ $page->displayBodyStart();
 		<h2>Change Profile Details</h2>
 			<ul>
 				<li>
-					<label for="location" class="info_tag_setting">Type your new Location</label>
+					<label for="location" class="info_tag_setting">Change your Location</label>
 					<input id="location" type="text" class="value_setting input_form" name="location" placeholder="Enter your new location" maxlength="100">
 				</li>
 				<li>
-					<label for="gender" class="info_tag_setting">Choose your new Gender</label>
+					<label for="gender" class="info_tag_setting">Change your Gender</label>
 					<select id="gender" name="gender" class="select_input">
 	    				<option value="other">Other</option>
 	    				<option value="male">Male</option>
@@ -152,7 +156,7 @@ $page->displayBodyStart();
 					</select>
 				</li>
 				<li>
-					<label for="day_of_birth" class="info_tag_setting">Type your new Day of Birthday</label>
+					<label for="day_of_birth" class="info_tag_setting">Change your Day of Birth</label>
 					<select id="day_of_birth" name="day_of_birth" class="select_input">
 	    				<option value="--">--</option>
 	    				<option value="01">01</option>
@@ -189,7 +193,7 @@ $page->displayBodyStart();
 					</select>
 				</li>
 				<li>
-					<label for="month_of_birth" class="info_tag_setting">Type your Month of Birthday</label>
+					<label for="month_of_birth" class="info_tag_setting">Change your Month of Birth</label>
 					<select id="month_of_birth" name="month_of_birth" class="select_input">
 	    				<option value="--">--</option>
 	    				<option value="01">January</option>
@@ -207,7 +211,7 @@ $page->displayBodyStart();
 	   				</select>
 				</li>
 				<li>
-					<label for="year_of_birth" class="info_tag_setting">Type your Year of Birth</label>
+					<label for="year_of_birth" class="info_tag_setting">Change your Year of Birth</label>
 					<input type="text" class="value_setting input_form" id="year_of_birth" name="year_of_birth" placeholder="Enter your year of birt" maxlength="4">
 				</li>
 			</ul>
@@ -238,7 +242,7 @@ $page->displayBodyStart();
 		<h2>Change the Biography</h2>
 			<ul>
 				<li>
-					<label for="biography" class="info_tag_setting">Type something about you</label>
+					<label for="biography" class="info_tag_setting">Write something about you</label>
 				</li>
 				<li>
 					<textarea name="biography" id="biography" cols="50" rows="5" placeholder="Write something about you"></textarea>

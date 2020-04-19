@@ -49,12 +49,76 @@ $(document).ready( function () {
     });
 
 
+    /* validates password at the same time as user is typing */
+    $("#password_new").on("keyup", function (event) {
+        event.preventDefault();
+
+        if ( !valid_pas_low_l( $(this).val().toString() ) ) {
+            display_warning("pass", "pass_new", "New password doesn't contain lowercase letter.");
+        }
+
+        if ( !valid_pas_up_l( $(this).val().toString() ) ) {
+            display_warning("pass", "pass_new", "New password doesn't contain uppercase letter.");
+        }
+
+        if ( !valid_pas_d( $(this).val().toString() ) ) {
+            display_warning("pass", "pass_new", "New password doesn't contain digit.");
+        }
+
+        if ( !valid_pas_s( $(this).val().toString() ) ) {
+            display_warning("pass", "pass_new", "New password doesn't contain symbol (anything but digit or letter).");
+        }
+
+        if ( !string_has_length( $(this).val().toString(), 10) ) {
+            display_warning("pass", "pass_new", "New password doesn't meet minimum length. Minimal length is 10 characters.");
+        }
+
+        if ( valid_password( $(this).val().toString() ) ) {
+            display_ack("pass", "pass_new", "New password has valid format.");
+        }
+    });
+
+
+    /* validates confirming password format at the same time as user is typing */
+    $("#password_new_again").on("keyup", function (event) {
+        event.preventDefault();
+
+        if ( !valid_pas_low_l( $(this).val().toString() ) ) {
+            display_warning("pass", "pass_new_again", "Confirming password doesn't contain lowercase letter.");
+        }
+
+        if ( !valid_pas_up_l( $(this).val().toString() ) ) {
+            display_warning("pass", "pass_new_again", "Confirming password doesn't contain uppercase letter.");
+        }
+
+        if ( !valid_pas_d( $(this).val().toString() ) ) {
+            display_warning("pass", "pass_new_again", "Confirming password doesn't contain digit.");
+        }
+
+        if ( !valid_pas_s( $(this).val().toString() ) ) {
+            display_warning("pass", "pass_new_again", "Confirming password doesn't contain symbol (anything but digit or letter)");
+        }
+
+        if ( !string_has_length( $(this).val().toString(), 10) ) {
+            display_warning("pass", "pass_new_again", "Confirming password doesn't meet minimum length. Minimal length is 10 characters.");
+        }
+
+        if (!($(this).val().toString() === $("#password_new").val().toString())){
+            display_warning("pass", "pass_new_again", "Confirming password and New password aren't same.");
+        }
+
+        if ( valid_password( $(this).val().toString() ) && ($(this).val().toString() === $("#password_new").val().toString())) {
+            display_ack("pass", "pass_new_again", "Confirming password has valid format.");
+        }
+    });
+
+
     /* will change name, surname of user */
     $("#change_name_button").on("click", function () {
         let name = $("#name").val().toString().trim();
         let surname = $("#surname").val().toString().trim();
 
-        if (valid_string(name, 40) && valid_string(surname, 40)){
+        if (string_has_length(name, 40) && string_has_length(surname, 40)){
             $.ajax({
                 url: "scripts/query_users.php",
                 method: "POST",
@@ -88,7 +152,20 @@ $(document).ready( function () {
             });
         }
         else {
-            display_warning("mail", "Email has wrong format.");
+            display_warning("mail", "Email has invalid format.");
+        }
+    });
+
+
+    /* validates email format at the same time as user is typing */
+    $("#email").on("keyup", function (event) {
+        event.preventDefault();
+
+        if ( valid_email( $(this).val().toString() ) ) {
+            display_ack("mail", "mail", "Email has valid format.");
+        }
+        else {
+            display_warning("mail", "mail", "Email has invalid format.");
         }
     });
 
@@ -129,6 +206,24 @@ $(document).ready( function () {
     });
 
 
+    /* displays preview of a image intended to be uploaded */
+    $("#profile_pic").on("change", function () {
+        readURL(this);
+    });
+
+    function readURL (input) {
+        if (input.files && input.files[0]) {
+            let reader = new FileReader();
+
+            reader.onload = function (event) {
+                $("#preview img").attr("src", event.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
     /* changes information  */
     $("#change_info_button").on("click", function () {
         let location = $("#location").val().toString().trim();
@@ -137,7 +232,7 @@ $(document).ready( function () {
         let month_of_birth = $("#month_of_birth").val().toString();
         let year_of_birth = $("#year_of_birth").val().toString().trim();
 
-        if (valid_string(location, 100)) {
+        if (string_has_length(location, 100)) {
             if (valid_year(year_of_birth)) {
                 $.ajax({
                     url: "scripts/query_users.php",
@@ -256,8 +351,32 @@ function display_result (data) {
 
 
 /* will display warning when is something wrong with data in inputs */
-function display_warning (where, warning) {
-    $('#res_' + where).removeClass("settings_result_pos");
-    $("#res_" + where).addClass("settings_result_neg");
-    $("#res_" + where + " p").html(warning);
+function display_warning (where, stat, warning) {
+    let w = "#res_" + where;
+
+    $(w).removeClass("settings_result_pos");
+    $(w).addClass("settings_result_neg");
+
+    let status = $("#" + stat + "_status");
+    status.addClass("display_icon");
+    status.attr("src", "srcPictures/icons8-checked-no-100.png");
+    status.attr("alt", "Input has invalid format.");
+
+    $(w + " p").html(warning);
+}
+
+
+/* displays acknowledgement when data in input has valid email */
+function display_ack (where, stat, ack) {
+    let w = "#res_" + where;
+
+    $(w).removeClass("settings_result_neg");
+    //$(w).addClass("settings_result_pos");
+
+    let status = $("#" + stat + "_status");
+    status.addClass("display_icon");
+    status.attr("src", "srcPictures/icons8-checked-100.png");
+    status.attr("alt", "Input has valid format.");
+
+    //$(w + " p").html(ack);
 }
