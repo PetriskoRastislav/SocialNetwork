@@ -15,8 +15,6 @@ try {
 
     $mode = $_POST['mode'];
 
-    $delimiter = "|";
-
     $time_limit = strtotime(date('Y-m-d H:i:s') . '-30 minutes');
     $time_limit = date('Y-m-d H:i:s', $time_limit);
 
@@ -28,6 +26,7 @@ try {
 
 
         /* fetching of users' avatars */
+
         $query =
             "SELECT id_user, profile_picture
             FROM users
@@ -44,25 +43,33 @@ try {
             if($id_user == $_SESSION['id_user']){
 
                 if ($profile_picture != null) {
-                    $profile_pic_me .= "<img class='avatar' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                     $img = "user_pictures/" . $profile_picture;
                 }
                 else {
-                    $profile_pic_me .= "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                    $img = "src_pictures/blank-profile-picture-png-8.png";
                 }
+
+                $img = "background-image: url('" . $img . "');";
+                $profile_pic_me .= '<div class="avatar" style="' . $img . '"></div>';
             }
             else {
                 if ($profile_picture != null) {
-                    $profile_pic_theirs .= "<img class='avatar' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                   $img = "user_pictures/" . $profile_picture;
                 }
                 else {
-                    $profile_pic_theirs .= "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                    $img = "src_pictures/blank-profile-picture-png-8.png";
                 }
+
+                $img = "background-image: url('" . $img . "');";
+                $profile_pic_theirs .= '<div class="avatar" style="' . $img . '"></div>';
             }
         }
         $statement->free_result();
+        $statement->close();
 
 
         /* fetching messages */
+
         $query =
             "SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status
             FROM messages
@@ -88,7 +95,7 @@ try {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
-                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button'>";
+                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='src_pictures/icons8-deleted-message-100.png' alt='delete message button'>";
                 }
                 $output .=
                     "<div class='message message_my'>" .
@@ -124,6 +131,11 @@ try {
         }
 
         $statement->free_result();
+        $statement->close();
+
+
+        /* updates status of message to seen */
+
         $time_now = date("Y-m-d H:i:s");
 
         $query = "
@@ -135,6 +147,12 @@ try {
         $statement->execute();
 
         print $output;
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
 
     }
 
@@ -159,6 +177,13 @@ try {
         $output = $id;
 
         print $output;
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
+
     }
 
 
@@ -170,6 +195,7 @@ try {
 
 
         /* fetching of users' avatars */
+
         $query =
             "SELECT id_user, profile_picture
             FROM users
@@ -186,25 +212,33 @@ try {
             if($id_user == $_SESSION['id_user']){
 
                 if ($profile_picture != null) {
-                    $profile_pic_me .= "<img class='avatar' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                    $img = "user_pictures/" . $profile_picture;
                 }
                 else {
-                    $profile_pic_me .= "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                    $img = "src_pictures/blank-profile-picture-png-8.png";
                 }
+
+                $img = "background-image: url('" . $img . "');";
+                $profile_pic_me .= '<div class="avatar" style="' . $img . '"></div>';
             }
             else {
                 if ($profile_picture != null) {
-                    $profile_pic_theirs .= "<img class='avatar' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                    $img = "user_pictures/" . $profile_picture;
                 }
                 else {
-                    $profile_pic_theirs .= "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                    $img = "src_pictures/blank-profile-picture-png-8.png";
                 }
+
+                $img = "background-image: url('" . $img . "');";
+                $profile_pic_theirs .= '<div class="avatar" style="' . $img . '"></div>';
             }
         }
         $statement->free_result();
+        $statement->close();
 
 
         /* fetching messages */
+
         $query = "
             SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
             FROM messages
@@ -230,7 +264,7 @@ try {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
-                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='srcPictures/icons8-deleted-message-100.png' alt='delete message button'>";
+                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='src_pictures/icons8-deleted-message-100.png' alt='delete message button'>";
                 }
                 $output .=
                     "<div class='message message_my'>" .
@@ -266,6 +300,10 @@ try {
         }
 
         $statement->free_result();
+        $statement->close();
+
+
+        /* updates status of message to seen */
 
         $time_now = date("Y-m-d H:i:s");
 
@@ -279,6 +317,12 @@ try {
 
         print $output;
 
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
+
     }
 
 
@@ -289,6 +333,7 @@ try {
 
 
         /* fetching of users' avatars */
+
         $query =
             "SELECT id_user, profile_picture
             FROM users
@@ -305,25 +350,33 @@ try {
             if($id_user == $_SESSION['id_user']){
 
                 if ($profile_picture != null) {
-                    $profile_pic_me .= '<img class="avatar" src="usersPictures/' . $profile_picture . '" alt="Avatar">';
+                    $img = "user_pictures/" . $profile_picture;
                 }
                 else {
-                    $profile_pic_me .= '<img class="avatar" src="srcPictures/blank-profile-picture-png-8.png" alt="Avatar">';
+                    $img = "src_pictures/blank-profile-picture-png-8.png";
                 }
+
+                $img = "background-image: url('" . $img . "');";
+                $profile_pic_me .= '<div class="avatar" style="' . $img . '"></div>';
             }
             else {
                 if ($profile_picture != null) {
-                    $profile_pic_theirs .= '<img class="avatar" src="usersPictures/' . $profile_picture . '" alt="Avatar">';
+                    $img = "user_pictures/" . $profile_picture;
                 }
                 else {
-                    $profile_pic_theirs .= '<img class="avatar" src="srcPictures/blank-profile-picture-png-8.png" alt="Avatar">';
+                    $img = "src_pictures/blank-profile-picture-png-8.png";
                 }
+
+                $img = "background-image: url('" . $img . "');";
+                $profile_pic_theirs .= '<div class="avatar" style="' . $img . '"></div>';
             }
         }
         $statement->free_result();
+        $statement->close();
 
 
         /* fetching messages */
+
         $query = "
             SELECT id_message, id_user_sender, id_user_receiver, message, time_sent, time_seen, time_deleted, status 
             FROM messages
@@ -341,7 +394,7 @@ try {
 
         while ($statement->fetch()) {
 
-            $output .= $id_message . $delimiter;
+            $output .= $id_message . "|";
 
             if ($id_user_to == $id_user_sender) {
                 $output .= '<div class="message">' . $profile_pic_theirs;
@@ -349,7 +402,7 @@ try {
             else {
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
-                    $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="srcPictures/icons8-deleted-message-100.png" alt="delete message button">';
+                    $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="src_pictures/icons8-deleted-message-100.png" alt="delete message button">';
                 }
                 $output .= '<div class="message message_my">' . $profile_pic_me;
             }
@@ -380,13 +433,18 @@ try {
 
             $output .= '</p></div>';
 
-            $output .= $delimiter;
+            $output .= "|";
 
         }
 
         $statement->free_result();
 
         print $output;
+
+        $statement->close();
+        $db->close();
+
+        exit();
 
     }
 
@@ -397,7 +455,6 @@ try {
         $id_message = $_POST['id_message'];
         $time_now = date("Y-m-d H:i:s");
 
-        /* will update row in database */
         $query = "
             UPDATE messages
             SET status = 'deleted', time_deleted = ?
@@ -405,6 +462,12 @@ try {
         $statement = $db->prepare($query);
         $statement->bind_param("sii", $time_now, $_SESSION['id_user'], $id_message);
         $statement->execute();
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
 
     }
 
@@ -423,6 +486,12 @@ try {
         $statement = $db->prepare($query);
         $statement->bind_param("iiss", $_SESSION['id_user'], $id_user_to, $message, $time_now);
         $statement->execute();
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
     }
 
 

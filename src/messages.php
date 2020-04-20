@@ -10,40 +10,45 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "messages", array("styles/messages"));
+$page->displayHead( "Messages", array("styles/messages"));
 $page->displayBodyStart();
 
 ?>
 
+<!-- list of conversations -->
 
 <div id="list_users">
+
+    <!-- header of list of conversation with bar to search users -->
 
     <div id="list_users_header">
         <span id="list_users_header_title">
             Chats
         </span>
-        <input id="search_user_con_list" name="search_user_conversation_list" type="text" placeholder="username" >
-        <img src="srcPictures/icons8-delete-100.png" alt="clear" class="clear_search_users">
+        <input id="search_user_con_list" name="search_user_conversation_list" type="text" placeholder="Search users ..." >
+        <img src="src_pictures/icons8-delete-100.png" alt="clear" class="clear_search_users">
         <div id="search_result_con_list" class="search_result_con_list"></div>
     </div>
+
+    <!-- list of conversations -->
 
     <div id="list_users_list"></div>
 </div>
 
-<div id="conversation_header">
+<!-- header of chat with name of user and some info -->
 
-</div>
+<div id="conversation_header"></div>
 
-<div id="conversation">
+<!-- chat with user -->
 
-</div>
+<div id="conversation"></div>
+
+<!-- bar with chat controls (textarea for message, button to send) -->
 
 <div id="chat_control">
-    <textarea name="message" id="message_to_send" cols="" rows="" placeholder="Tvoja správa ..."></textarea>
-    <img id="send_button" class="chat_control_button" src="srcPictures/icons8-send-100.png" alt="send icon" />
-    <img id="plus_button" class="chat_control_button" src="srcPictures/icons8-plus-100.png" alt="plus icon" />
+    <textarea name="message" id="message_to_send" cols="" rows="" placeholder="Your message ..."></textarea>
+    <img id="send_button" class="chat_control_button" src="src_pictures/icons8-send-100.png" alt="send icon" />
 </div>
-
 
 <?php
 
