@@ -11,12 +11,12 @@ try {
 
     /* Checks if all form line has been filled. */
     if(!filled_out($_POST)){
-        throw new Exception("form");
+        die ("log|0|Some of inputs are missing.");
     }
 
     /* Checks if email has a proper format. */
     if(!valid_email($email)){
-        throw new Exception("email");
+        die ("log|0|Email has invalid format.");
     }
 
     $db = db_connect();
@@ -41,10 +41,10 @@ try {
         $_SESSION['id_user'] = $id;
     }
     else if($id > 0) {
-        throw new Exception("Wrong password.");
+        die ("log|0|Incorrect password.");
     }
     else {
-        throw new Exception("Unknown email.");
+        die ("log|0|Unknown email.");
     }
 
 
@@ -71,16 +71,13 @@ try {
     $db->close();
 
     /* Redirecting user to his profile page */
-    header("Location: ../profile.php?user=me");
-    exit();
+    print $_SESSION['id_user'];
+    exit ();
 
 }
 catch (Exception $ex) {
-
-    echo $ex->getMessage();
-
-    exit();
+    print $ex->getMessage();
+    exit ();
 }
-
 
 ?>

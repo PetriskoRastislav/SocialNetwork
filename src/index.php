@@ -4,12 +4,12 @@
     session_start();
 
     if(isset($_SESSION['id_user'])) {
-        header('Location: profile.php');
+        header("Location: profile.php?user=" . $_SESSION['id_user']);
         exit();
     }
 
     $page = new Page();
-    $page->displayHead( "login", array("styles/style_form", "styles/index"));
+    $page->displayHead( "Login", array("styles/style_form", "styles/index"));
     $page->displayBodyStart();
 ?>
 

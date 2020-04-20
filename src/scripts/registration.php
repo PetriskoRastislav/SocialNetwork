@@ -5,31 +5,56 @@ require_once('scripts.php');
 $name = $_POST['name'];
 $surname = $_POST['surname'];
 $email = $_POST['email'];
-$password1 = $_POST['password1'];
-$password2 = $_POST['password2'];
+$password = $_POST['password'];
+$password_again = $_POST['password_confirm'];
 
 session_start();
 
 try {
 
     /* Checks if all form line has been filled. */
-    if(!filled_out($_POST)){
-        throw new Exception("form");
+    if (!filled_out($_POST)) {
+        die ("reg|0|Some of inputs are missing.");
     }
+
+    /* checks length of name */
+    if (!string_isn_t_longer($name, 40)) {
+        die ("reg|0|Name is longer than it's allowed. Max allowed length is 40 characters.");
+    }
+
+    /* checks length of surname */
+    if (!string_isn_t_longer($surname, 40)) {
+        die ("reg|0|Surname is longer than it's allowed. Max allowed length is 40 characters.");
+    }
+
 
     /* Checks if email has a proper format. */
-    if(!valid_email($email)){
-        throw new Exception("email");
+    if (!valid_email($email)) {
+        die ("reg|0|Email has invalid format.");
     }
+
+
+    /* checks length of email */
+    if (!string_isn_t_longer($email, 100)) {
+        die ("reg|0|Email is longer than it's allowed. Max allowed length is 100 characters.");
+    }
+
 
     /* Checks if the passwords are same. */
-    if($password1 != $password2){
-        throw new Exception("pswd_same");
+    if ($password != $password_again) {
+        die ("reg|0|Confirming password doesn't match Password.");
     }
 
+
+    /* checks if password contain required characters */
+    if (!valid_password($password)) {
+        die ("reg|0|Password has invalid format.");
+    }
+
+
     /* Checks the password length. */
-    if(strlen($password1) < 10){
-        throw new Exception("pswd_len");
+    if (!string_has_length($password, 10)) {
+        die ("reg|0|Password doesn't meet minimum length. Minimal length is 10 characters.");
     }
 
     /* Connection to database. */
@@ -50,39 +75,43 @@ try {
 
 
     if ($id_user > 0) {
-        throw new Exception("User with same email address already registered.");
+        die ("reg|0|User with same email address has already registered.");
     }
 
-    unset($result);
+
+    $statement->free_result();
 
 
     /* Registration of new user */
+
+    $password_hash = password_hash($password, PASSWORD_ARGON2ID);
+    $time_now = date("Y-m-d H:i:s");
+
     $query =
         "INSERT INTO users (email, name, surname, password, registered, last_active)
         VALUES (?, ?, ?, ?, ?, ?)";
-    $stmt = $db->prepare($query);
-    $password_hash = password_hash($password1, PASSWORD_ARGON2ID);
-    $time_now = date("Y-m-d H:i:s");
-    $stmt->bind_param("ssssss", $email, $name, $surname, $password_hash, $time_now, $time_now);
-    $stmt->execute();
+    $statement = $db->prepare($query);
+    $statement->bind_param("ssssss", $email, $name, $surname, $password_hash, $time_now, $time_now);
+    $statement->execute();
 
-    if(!$stmt->affected_rows > 0){
-        throw new Exception("Failed to register new user.");
+    if(!$statement->affected_rows > 0){
+        die ("reg|0|Failed to register new user.");
     }
+
 
     /* Fetching id of a newly registered user */
     $query =
         "SELECT id_user, color_mode
         FROM users
         WHERE email = ?";
-    $stmt = $db->prepare($query);
-    $stmt->bind_param("s",$email);
-    $stmt->execute();
-    $stmt->bind_result($id, $color_mode);
-    $stmt->fetch();
+    $statement = $db->prepare($query);
+    $statement->bind_param("s",$email);
+    $statement->execute();
+    $statement->bind_result($id, $color_mode);
+    $statement->fetch();
 
-    $stmt->free_result();
-    $stmt->close();
+    $statement->free_result();
+    $statement->close();
     $db->close();
 
     /* Storing id in SESSION variable */
@@ -92,9 +121,9 @@ try {
     $_SESSION['color_mode'] = $color_mode;
 
     /* Redirecting user to his profile page */
-    header("Location: ../profile.php?user=me");
-
+    print $_SESSION['id_user'];
     exit();
+
 }
 catch (Exception $ex) {
     echo $ex->getMessage();
