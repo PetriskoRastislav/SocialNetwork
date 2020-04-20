@@ -78,12 +78,12 @@ $page->displayBodyStart();
 				<li>
 					<label for="password_new" class="info_tag_setting">Type your new Password</label>
 					<input type="password" class="value_setting input_form" name="password_new" id="password_new" placeholder="Enter your new password">
-                    <img id="pass_new_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat">
+                    <img id="pass_new_status" src="" alt="" class="stat">
 				</li>
 				<li>
 					<label for="password_new_again" class="info_tag_setting">Type your new Password again</label>
                     <input type="password" class="value_setting input_form" name="password_new_again" id="password_new_again" placeholder="Enter your new password again">
-                    <img id="pass_new_again_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat">
+                    <img id="pass_new_again_status" src="" alt="" class="stat">
                 </li>
 			</ul>
 		    <input id="change_pass_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">

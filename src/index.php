@@ -34,19 +34,19 @@
             <label for="email_reg">Email</label>
         </p>
         <input required class="spacing_form input_form" type="email" name="email_reg" id="email_reg" placeholder="Email" maxlength="100"/>
-        <img id="email_reg_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat">
+        <img id="email_reg_status" src="" alt="" class="stat">
 
         <p class="spacing_form">
             <label for="password_reg">Password</label>
         </p>
         <input required class="spacing_form input_form" type="password" name="password_reg" id="password_reg" placeholder="Password" />
-        <img id="pass_reg_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat">
+        <img id="pass_reg_status" src="" alt="" class="stat">
 
         <p class="spacing_form">
             <label for="password_reg_again">Confirm your password</label>
         </p>
         <input required class="spacing_form input_form" type="password" name="password_reg_again" id="password_reg_again" placeholder="Confirm password" />
-        <img id="pass_reg_again_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat">
+        <img id="pass_reg_again_status" src="" alt="" class="stat">
 
         <div id="res_reg" class="form_result spacing_form"><p></p></div>
 

@@ -5,7 +5,6 @@
 }
 
 
-
 /* layout of messages sub page */
 
 
@@ -124,29 +123,6 @@
 }
 
 
-/* styles for a button to start a new conversation */
-
-/*#start_new_conversation {
-    box-sizing: border-box;
-    display: inline-block;
-    float: right;
-    width: auto;
-    margin: 0;
-    padding: 0.375em 0.625em;
-    height: 3em;
-    background-color: rgb(215, 215, 215);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-}
-
-#start_new_conversation:hover {
-    cursor: pointer;
-    background-color: rgb(190, 190, 190);
-}*/
-
-
 /* styles for field to search users in conversations */
 
 #search_user_con_list {
@@ -234,7 +210,8 @@
     z-index: 999;
 }
 
-/* button to clear search field */
+
+/* items of search users' list */
 
 .search_result_item {
     box-sizing: border-box;
@@ -406,7 +383,6 @@
 }
 
 
-
 /* chat */
 
 
@@ -435,6 +411,7 @@
     margin-bottom: 1.75em;
 }
 
+
 /* styles for message bubbles */
 
 .message {
@@ -450,6 +427,7 @@
     border-color: rgb(204, 204, 204);
     background-color: rgb(221, 221, 221);
 }
+
 
 /* Clear floats */
 .message::after {
