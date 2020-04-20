@@ -39,19 +39,25 @@ try {
             $time_now = strtotime(date('Y-m-d H:i:s') . '-6 seconds');
             $time_now = date('Y-m-d H:i:s', $time_now);
 
+            /* profile picture */
             if ($profile_picture != null) {
-                $profile_pic = "<img class='avatar avatar-small' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                $img = "user_pictures/" . $profile_picture;
             }
             else {
-                $profile_pic = "<img class='avatar avatar-list' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                $img = "src_pictures/blank-profile-picture-png-8.png";
             }
 
+            $profile_pic = "background-image: url('" . $img . "');";
+            $profile_pic = '<div class="avatar avatar-list" style="' . $profile_pic . '"></div>';
+
+            /* last active */
             if ($last_active > $time_now) {
                 $status = " <span class='active_mark' id='active_mark_" . $id_user . "'></span>";
             } else {
                 $status = " <span class='' id='active_mark_" . $id_user . "'></span>";
             }
 
+            /* count of unseen messages */
             $mes_count = get_unseen_messages_notification($id_user, $_SESSION['id_user']);
             if ($mes_count > 0 ) {
                 $mes_notification = " <span class='mes_not_chat' id='mes_not_" . $id_user . "' ></span>";
@@ -72,8 +78,12 @@ try {
         }
 
         $statement->free_result();
+        $statement->close();
+        $db->close();
 
         print $output;
+
+        exit();
 
     }
 
@@ -100,12 +110,16 @@ try {
 
             $output .= $id_user . "|";
 
+            /* profile picture */
             if ($profile_picture != null) {
-                $profile_pic = "<img class='avatar avatar-list' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                $img = "user_pictures/" . $profile_picture;
             }
             else {
-                $profile_pic = "<img class='avatar avatar-list' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                $img = "src_pictures/blank-profile-picture-png-8.png";
             }
+
+            $profile_pic = "background-image: url('" . $img . "');";
+            $profile_pic = '<div class="avatar avatar-list" style="' . $profile_pic . '"></div>';
 
             $status = " <span class='' id='active_mark_" . $id_user . "'></span>";
             $mes_notification = " <span class='' id='mes_not_" . $id_user . "' ></span>";
@@ -122,7 +136,14 @@ try {
             $output .= "|";
         }
 
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
         print $output;
+
+        exit();
+
     }
 
 
@@ -159,8 +180,12 @@ try {
         }
 
         $statement->free_result();
+        $statement->close();
+        $db->close();
 
         print $output;
+
+        exit();
 
     }
 
@@ -179,6 +204,10 @@ try {
         $statement->execute();
 
         $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
 
     }
 
@@ -202,6 +231,12 @@ try {
         $result = $id_user . "|" . $name . " " . $surname . "|" . process_last_active($last_active) . "|" . $profile_picture;
 
         print $result;
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
 
     }
 
@@ -227,11 +262,14 @@ try {
         while ($statement->fetch()){
 
             if ($profile_picture != null) {
-                $profile_pic = "<img class='avatar avatar-small' src='usersPictures/" . $profile_picture . "' alt='Avatar'>";
+                $img = "user_pictures/" . $profile_picture;
             }
             else {
-                $profile_pic = "<img class='avatar avatar-list' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+                $img = "src_pictures/blank-profile-picture-png-8.png";
             }
+
+            $profile_pic = "background-image: url('" . $img . "');";
+            $profile_pic = '<div class="avatar avatar-list" style="' . $profile_pic . '"></div>';
 
             $output .= "
                 <div id='search_result_" . $id . "' class='search_result_item'>".
@@ -241,6 +279,12 @@ try {
         }
 
         print $output;
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
 
     }
 
@@ -264,9 +308,9 @@ try {
         $output = "";
 
         if ($profile_picture == null) {
-            $output .= "#info_profile_picture|" . "srcPictures/blank-profile-picture-png-8.png";
+            $output .= "#info_profile_picture|" . "src_pictures/blank-profile-picture-png-8.png";
         } else {
-            $output .= "#info_profile_picture|" . "usersPictures/" . $profile_picture;
+            $output .= "#info_profile_picture|" . "user_pictures/" . $profile_picture;
         }
 
         $output .= "|#info_last_active|" . process_last_active($last_active);
@@ -314,6 +358,12 @@ try {
 
         print $output;
 
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
+
     }
 
 
@@ -350,6 +400,12 @@ try {
 
         print $output;
 
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
+
     }
 
 
@@ -375,6 +431,12 @@ try {
 
         print $output;
 
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
+
     }
 
 
@@ -398,16 +460,19 @@ try {
         $output = "";
 
         while ($statement->fetch()) {
+
             $output .= '<div class="friend">';
 
             if ($profile_picture == null) {
-                $output .= '<img class="friend_avatar" src="srcPictures/blank-profile-picture-png-8.png" title="' . $name .
-                    ' ' . $surname . '\'s Avatar" alt="' . $name . ' ' . $surname . '\'s Avatar">';
+                $img = "src_pictures/blank-profile-picture-png-8.png";
             }
             else {
-                $output .= '<img class="friend_avatar" src="usersPictures/' . $profile_picture . '" title="' . $name .
-                    ' ' . $surname . '\'s Avatar" alt="' . $name . ' ' . $surname . '\'s Avatar">';
+                $img = "user_pictures/" . $profile_picture;
             }
+
+            $profile_pic = "background-image: url('" . $img . "')";
+
+            $output .= '<div class="friend_avatar" style="' . $profile_pic . '" title="' . $name . ' ' . $surname . '\'s Avatar"></div>';
 
             $output .=  '<ul class="informations">' .
                 '<li>' .
@@ -442,10 +507,16 @@ try {
 
         print $output;
 
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
+
     }
 
 
-    /* will return data into a some of user's settings */
+    /* will return data to fill some of user's settings */
     else if ($mode == "settings_fill") {
 
         $query =
@@ -474,6 +545,12 @@ try {
         if ($bio != null) $output .= "|textarea[name='biography']||" . $bio;
 
         print $output;
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
 
     }
 
@@ -512,6 +589,12 @@ try {
         $statement = $db->prepare($query);
         $statement->bind_param("si", $password_new_hash, $_SESSION['id_user']);
         print $result .= $statement->execute();
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
 
     }
 

@@ -7,7 +7,6 @@ $(document).ready(function() {
     /* periodical update */
 
     setInterval(function() {
-        if ( $(""))
         refresh_user_list();
     }, 1000);
 
@@ -159,15 +158,20 @@ $(document).ready(function() {
     function create_chat(id_user_to, name_user_to, last_active, profile_picture){
 
         let conversation_header = "";
-        if (profile_picture === "null") {
-            conversation_header += "<img class='avatar' src='usersPictures/" + profile_picture + "' alt='Avatar'>";
+        let img = "";
+
+        if (profile_picture === "") {
+            img = "src_pictures\/blank-profile-picture-png-8.png";
         }
         else {
-            conversation_header += "<img class='avatar' src='srcPictures/blank-profile-picture-png-8.png' alt='Avatar'>";
+            img = "user_pictures\/" + profile_picture;
         }
+        img = "background-image: url('" + img + "');";
+
+        conversation_header += '<div class="avatar" style="' + img + '"></div>';
         conversation_header += "<p><a class='common' href='profile.php?user=" + id_user_to + "'>" + name_user_to + "</a></p>";
         conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Last online " + last_active + "</span>";
-        conversation_header += "<img id='conversation_close_button' src='srcPictures/icons8-no-100.png' alt='send icon' />";
+        conversation_header += "<img id='conversation_close_button' src='src_pictures/icons8-no-100.png' alt='send icon' />";
 
         $("#conversation_header").html(conversation_header);
 

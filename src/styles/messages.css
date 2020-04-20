@@ -307,7 +307,6 @@
 }
 
 
-
 /* conversation header*/
 
 
@@ -315,18 +314,25 @@
 
 .avatar {
     float: left;
+    width: 2em;
     height: 2em;
-    width: auto;
     margin-right: 1.5em;
-    border-radius: 50%;
+    border-radius: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 2em;
 }
 
 .avatar-list {
     box-sizing: border-box;
     display: block;
     float: left;
+    width: 2.7em;
     height: 2.7em;
-    width: auto;
+    border-radius: 100%;
+    background-size: auto 2.7em;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .list_users_item .avatar-list {
@@ -335,11 +341,15 @@
 
 
 .search_result_item .avatar {
+    width: 2em;
     height: 2em;
+    background-size: auto 2em;
 }
 
 #conversation_header .avatar {
-    height: 2.5em
+    width: 2.5em;
+    height: 2.5em;
+    background-size: auto 2.5em;
 }
 
 

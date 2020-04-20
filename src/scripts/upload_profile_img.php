@@ -29,7 +29,7 @@ try {
     $name = $name . $ext;
 
 
-    $uploaded_file = "C:/xampp/htdocs/SocialNetwork/src/usersPictures/" . $name;
+    $uploaded_file = "C:/xampp/htdocs/SocialNetwork/src/user_pictures/" . $name;
 
 
     /* tries to move file to a permanent directory */
@@ -58,7 +58,7 @@ try {
 
     if (!$result) die ("0|Something went wrong.");
 
-    exit ("usersPictures/" . $name);
+    exit ("user_pictures/" . $name);
 
 }
 catch (Exception $ex) {

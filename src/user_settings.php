@@ -127,7 +127,7 @@ $page->displayBodyStart();
             <form method="post" enctype="multipart/form-data" id="change_pic">
                 <ul>
                     <li>
-                        <div id="preview"><img src="srcPictures/defaultpicture.png" alt="Upload image preview"></div>
+                        <div id="preview"><img src="src_pictures/defaultpicture.png" alt="Upload image preview"></div>
                     </li>
                     <li>
                         <label for="profile_pic" class="info_tag_setting">Choose your new Profile Picture</label>

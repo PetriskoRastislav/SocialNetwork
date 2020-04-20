@@ -74,7 +74,7 @@ function display_warning (where, stat, warning) {
     if (!(stat == null)) {
         let status = $("#" + stat + "_status");
         status.addClass("display_icon");
-        status.attr("src", "srcPictures/icons8-checked-no-100.png");
+        status.attr("src", "src_pictures/icons8-checked-no-100.png");
         status.attr("alt", "Input has invalid format.");
     }
     $(w + " p").html(warning);
@@ -91,7 +91,7 @@ function display_ack (where, stat, ack) {
     if (!(stat == null)) {
         let status = $("#" + stat + "_status");
         status.addClass("display_icon");
-        status.attr("src", "srcPictures/icons8-checked-100.png");
+        status.attr("src", "src_pictures/icons8-checked-100.png");
         status.attr("alt", "Input has valid format.");
     }
 

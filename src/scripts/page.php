@@ -103,7 +103,7 @@
 
             if (isset($_SESSION['id_user'])) $message .= "<a href='home.php' class='home_link'>";
 
-            $message .= "<img class='pageLogo' src='srcPictures/defaultpicture.png' alt='Page logo'>";
+            $message .= "<img class='pageLogo' src='src_pictures/defaultpicture.png' alt='Page logo'>";
 
             if (isset($_SESSION['id_user'])) $message .= "</a></div>";
             else $message .= "</div>";
@@ -123,21 +123,21 @@
                                 
                                     <a href='friends.php?user=me' class='header_menu_drop_a'>
                                         <li class='header_drop_item header_drop_item_border'>
-                                            <img class='header_menu_img_drop' src='srcPictures/icons8-user-account-100.png' alt='Friends icon'>
+                                            <img class='header_menu_img_drop' src='src_pictures/icons8-user-account-100.png' alt='Friends icon'>
                                             <p class='header_drop_p'>Friends</p>
                                         </li>
                                     </a>
                                     
                                     <a href='user_settings.php' class='header_menu_drop_a'>
                                         <li class='header_drop_item header_drop_item_border'>
-                                            <img class='header_menu_img_drop' src='srcPictures/icons8-settings-100.png' alt='Settings icon'>
+                                            <img class='header_menu_img_drop' src='src_pictures/icons8-settings-100.png' alt='Settings icon'>
                                             <p class='header_drop_p'>Settings</p>
                                         </li>
                                     </a>
                                     
                                     <a href='scripts/logout.php' class='header_menu_drop_a'>
                                         <li class='header_drop_item header_drop_item_border_last'> 
-                                            <img class='header_menu_img_drop' src='srcPictures/icons8-exit-100.png' alt='Logout icon'>
+                                            <img class='header_menu_img_drop' src='src_pictures/icons8-exit-100.png' alt='Logout icon'>
                                             <p class='header_drop_p'>Logout</p>
                                         </li>
                                     </a>
@@ -152,13 +152,13 @@
                                 
                                 <li class='header_menu_li border_left'>
                                     <a class='header_menu_a header_menu_a_img' href='messages.php'>
-                                        <img class='header_menu_img' src='srcPictures/icons8-group-message-100.png' alt='Messages icon'>
+                                        <img class='header_menu_img' src='src_pictures/icons8-group-message-100.png' alt='Messages icon'>
                                     </a>
                                 </li>
                                 
                                 <li class='header_menu_li'>
                                     <a class='header_menu_a header_menu_a_img' href='messages.php'>
-                                        <img class='header_menu_img' src='srcPictures/icons8-notification-100.png' alt='Notification icon'>
+                                        <img class='header_menu_img' src='src_pictures/icons8-notification-100.png' alt='Notification icon'>
                                     </a>
                                 </li>
                                 
