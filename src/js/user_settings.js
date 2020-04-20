@@ -20,32 +20,43 @@ $(document).ready( function () {
 
 
     /* changes password */
-    $("#change_pass_button").on("click", function () {
+    $("#change_pass_button").on("click", function (event) {
+        event.preventDefault();
         let password_old = $("#password_old").val().toString();
         let password_new = $("#password_new").val().toString();
         let password_new_again = $("#password_new_again").val().toString();
 
-        if (password_new === password_new_again) {
-            if (valid_password(password_new) && valid_password(password_new_again)){
-                $.ajax({
-                    url: "scripts/query_users.php",
-                    method: "POST",
-                    data: {
-                        mode: "change_password",
-                        password_old: password_old,
-                        password_new: password_new,
-                        password_new_again: password_new_again
-                    },
-                    success: display_result
-                });
-            }
-            else {
-                display_warning("pass", "New password has wrong format.");
-            }
+        if (password_new !== password_new_again) {
+            display_warning("pass", "pass_new_again", "Confirming new password doesn't match new password");
+            $(this).blur();
+            return;
         }
-        else {
-            display_warning("pass", "New password aren't same.");
+
+        if (!valid_password(password_new)) {
+            display_warning("pass", "pass_new", "New password has invalid format.");
+            $(this).blur();
+            return;
         }
+
+        if (!valid_password(password_new_again)) {
+            display_warning("pass", "pass_new_again", "Confirming password has invalid format.");
+            $(this).blur();
+            return;
+        }
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "change_password",
+                password_old: password_old,
+                password_new: password_new,
+                password_new_again: password_new_again
+            },
+            success: display_result
+        });
+
+        $(this).blur();
 
     });
 
@@ -53,28 +64,29 @@ $(document).ready( function () {
     /* validates password at the same time as user is typing */
     $("#password_new").on("keyup", function (event) {
         event.preventDefault();
+        let value = $(this).val().toString();
 
-        if ( !valid_pas_low_l( $(this).val().toString() ) ) {
+        if ( !valid_pas_low_l( value ) ) {
             display_warning("pass", "pass_new", "New password doesn't contain lowercase letter.");
         }
 
-        if ( !valid_pas_up_l( $(this).val().toString() ) ) {
+        if ( !valid_pas_up_l( value ) ) {
             display_warning("pass", "pass_new", "New password doesn't contain uppercase letter.");
         }
 
-        if ( !valid_pas_d( $(this).val().toString() ) ) {
+        if ( !valid_pas_d( value ) ) {
             display_warning("pass", "pass_new", "New password doesn't contain digit.");
         }
 
-        if ( !valid_pas_s( $(this).val().toString() ) ) {
+        if ( !valid_pas_s( value ) ) {
             display_warning("pass", "pass_new", "New password doesn't contain symbol (anything but digit or letter).");
         }
 
-        if ( !string_has_length( $(this).val().toString(), 10) ) {
+        if ( !string_has_length( value, 10) ) {
             display_warning("pass", "pass_new", "New password doesn't meet minimum length. Minimal length is 10 characters.");
         }
 
-        if ( valid_password( $(this).val().toString() ) ) {
+        if ( valid_password( value ) ) {
             display_ack("pass", "pass_new", "New password has valid format.");
         }
     });
@@ -83,80 +95,100 @@ $(document).ready( function () {
     /* validates confirming password format at the same time as user is typing */
     $("#password_new_again").on("keyup", function (event) {
         event.preventDefault();
+        let value = $(this).val().toString();
 
-        if ( !valid_pas_low_l( $(this).val().toString() ) ) {
+        if ( !valid_pas_low_l( value ) ) {
             display_warning("pass", "pass_new_again", "Confirming password doesn't contain lowercase letter.");
         }
 
-        if ( !valid_pas_up_l( $(this).val().toString() ) ) {
+        if ( !valid_pas_up_l( value ) ) {
             display_warning("pass", "pass_new_again", "Confirming password doesn't contain uppercase letter.");
         }
 
-        if ( !valid_pas_d( $(this).val().toString() ) ) {
+        if ( !valid_pas_d( value ) ) {
             display_warning("pass", "pass_new_again", "Confirming password doesn't contain digit.");
         }
 
-        if ( !valid_pas_s( $(this).val().toString() ) ) {
+        if ( !valid_pas_s( value ) ) {
             display_warning("pass", "pass_new_again", "Confirming password doesn't contain symbol (anything but digit or letter)");
         }
 
-        if ( !string_has_length( $(this).val().toString(), 10) ) {
+        if ( !string_has_length( value, 10) ) {
             display_warning("pass", "pass_new_again", "Confirming password doesn't meet minimum length. Minimal length is 10 characters.");
         }
 
         let pass = $("#password_new").val().toString();
 
-        if (!($(this).val().toString() === pass)){
+        if (value !== pass){
             display_warning("pass", "pass_new_again", "Confirming password and New password aren't same.");
         }
 
-        if ( valid_password( $(this).val().toString() ) && ($(this).val().toString() === pass)) {
+        if ( valid_password( value ) && (value === pass)) {
             display_ack("pass", "pass_new_again", "Confirming password has valid format.");
         }
     });
 
 
     /* will change name, surname of user */
-    $("#change_name_button").on("click", function () {
-        let name = $("#name").val().toString().trim();
-        let surname = $("#surname").val().toString().trim();
+    $("#change_name_button").on("click", function (event) {
+        event.preventDefault();
 
-        if (string_has_length(name, 40) && string_has_length(surname, 40)){
-            $.ajax({
-                url: "scripts/query_users.php",
-                method: "POST",
-                data: {
-                    mode: "change_name",
-                    name: name,
-                    surname: surname
-                },
-                success: display_result
-            });
+        let name = $("#name").val().toString;
+        let surname = $("#surname").val().toString();
+
+        if (!string_isn_t_longer(name, 40)) {
+            display_warning("name", null, "Name is longer than is allowed. Max allowed length of name is 40 characters.");
+            $(this).blur();
+            return;
         }
-        else {
-            display_warning("name", "Name or surname is longer than allowed.");
+
+        if (!string_isn_t_longer(surname, 40)) {
+            display_warning("name", null, "Surname is longer than is allowed. Max allowed length of surname is 40 characters.");
+            $(this).blur();
+            return;
         }
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "change_name",
+                name: name,
+                surname: surname
+            },
+            success: display_result
+        });
+
     });
 
 
     /* changes email */
-    $("#change_email_button").on("click", function () {
-        let email = $("#email").val().toString().trim();
+    $("#change_email_button").on("click", function (event) {
+        event.preventDefault();
+        let email = $("#email").val().toString();
 
-        if(valid_email(email)){
-            $.ajax({
-                url: "scripts/query_users.php",
-                method: "POST",
-                data: {
-                    mode: "change_email",
-                    email: email
-                },
-                success: display_result
-            });
+        if (!string_isn_t_longer(email, 40)) {
+            display_warning("mail", "mail", "Email is longer than is allowed. Max allowed length of email is 100 characters.");
+            $(this).blur();
+            return;
         }
-        else {
-            display_warning("mail", "Email has invalid format.");
+
+        if (!valid_email(email)) {
+            display_warning("mail", "mail", "Email has invalid format.");
+            $(this).blur();
+            return;
         }
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "change_email",
+                email: email
+            },
+            success: display_result
+        });
+
     });
 
 
@@ -175,7 +207,6 @@ $(document).ready( function () {
 
     /* changes profile picture */
     $("#change_pic_button").on("click", function (event) {
-
         event.preventDefault();
         let form_data = new FormData($("#change_pic")[0]);
 
@@ -187,7 +218,6 @@ $(document).ready( function () {
             cache: false,
             contentType: false,
             success: function(data) {
-                console.log(data.toString());
 
                 data = data.toString().split("|");
 
@@ -200,7 +230,7 @@ $(document).ready( function () {
                     $("#change_pic")[0].reset();
                 }
             },
-            error: function (data) {
+            fail: function (data) {
                 display_warning("pic", data);
             }
         });
@@ -235,29 +265,32 @@ $(document).ready( function () {
         let month_of_birth = $("#month_of_birth").val().toString();
         let year_of_birth = $("#year_of_birth").val().toString().trim();
 
-        if (string_has_length(location, 100)) {
-            if (valid_year(year_of_birth)) {
-                $.ajax({
-                    url: "scripts/query_users.php",
-                    method: "POST",
-                    data: {
-                        mode: "change_profile_det",
-                        location: location,
-                        gender: gender,
-                        day_of_birth: day_of_birth,
-                        month_of_birth: month_of_birth,
-                        year_of_birth: year_of_birth
-                    },
-                    success: display_result
-                });
-            }
-            else {
-                display_warning("info", "Year has wrong format (isn't year or is in forbidden range).");
-            }
+        if (!string_isn_t_longer(location, 100)) {
+            display_warning("info", null, "Location is longer than allowed. Max allowed length of location is 100 characters.");
+            $(this).blur();
+            return;
         }
-        else {
-            display_warning("info", "Location is longer than allowed.");
+
+        if (!valid_year(year_of_birth)) {
+            display_warning("info", null,  "Year has wrong format (isn't year or is in forbidden range).");
+            $(this).blur();
+            return;
         }
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "change_profile_det",
+                location: location,
+                gender: gender,
+                day_of_birth: day_of_birth,
+                month_of_birth: month_of_birth,
+                year_of_birth: year_of_birth
+            },
+            success: display_result
+        });
+
     });
 
 
@@ -350,36 +383,4 @@ function display_result (data) {
         $("#res_" + data[0]).addClass("form_result_neg");
         $("#res_" + data[0] + " p").html("Something went wrong.");
     }
-}
-
-
-/* will display warning when is something wrong with data in inputs */
-function display_warning (where, stat, warning) {
-    let w = "#res_" + where;
-
-    $(w).removeClass("form_result_pos");
-    $(w).addClass("form_result_neg");
-
-    let status = $("#" + stat + "_status");
-    status.addClass("display_icon");
-    status.attr("src", "srcPictures/icons8-checked-no-100.png");
-    status.attr("alt", "Input has invalid format.");
-
-    $(w + " p").html(warning);
-}
-
-
-/* displays acknowledgement when data in input has valid email */
-function display_ack (where, stat, ack) {
-    let w = "#res_" + where;
-
-    $(w).removeClass("form_result_neg");
-    //$(w).addClass("form_result_pos");
-
-    let status = $("#" + stat + "_status");
-    status.addClass("display_icon");
-    status.attr("src", "srcPictures/icons8-checked-100.png");
-    status.attr("alt", "Input has valid format.");
-
-    //$(w + " p").html(ack);
 }

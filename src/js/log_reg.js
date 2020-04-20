@@ -38,28 +38,29 @@ $(document).ready( function () {
     /* validates password at the same time as user is typing */
     $("#password_reg").on("keyup", function (event) {
         event.preventDefault();
+        let value = $(this).val().toString();
 
-        if ( !valid_pas_low_l( $(this).val().toString() ) ) {
+        if ( !valid_pas_low_l( value ) ) {
             display_warning("reg", "pass_reg", "Password doesn't contain lowercase letter.");
         }
 
-        if ( !valid_pas_up_l( $(this).val().toString() ) ) {
+        if ( !valid_pas_up_l( value ) ) {
             display_warning("reg", "pass_reg", "Password doesn't contain uppercase letter.");
         }
 
-        if ( !valid_pas_d( $(this).val().toString() ) ) {
+        if ( !valid_pas_d( value ) ) {
             display_warning("reg", "pass_reg", "Password doesn't contain digit.");
         }
 
-        if ( !valid_pas_s( $(this).val().toString() ) ) {
+        if ( !valid_pas_s( value ) ) {
             display_warning("reg", "pass_reg", "Password doesn't contain symbol (anything but digit or letter).");
         }
 
-        if ( !string_has_length( $(this).val().toString(), 10) ) {
+        if ( !string_has_length( value, 10) ) {
             display_warning("reg", "pass_reg", "Password doesn't meet minimum length. Minimal length is 10 characters.");
         }
 
-        if ( valid_password( $(this).val().toString() ) ) {
+        if ( valid_password( value ) ) {
             display_ack("reg", "pass_reg", "Password has valid format.");
         }
     });
@@ -68,34 +69,35 @@ $(document).ready( function () {
     /* validates confirming password format at the same time as user is typing */
     $("#password_reg_again").on("keyup", function (event) {
         event.preventDefault();
+        let value = $(this).val().toString();
 
-        if ( !valid_pas_low_l( $(this).val().toString() ) ) {
+        if ( !valid_pas_low_l( value ) ) {
             display_warning("reg", "pass_reg_again", "Confirming password doesn't contain lowercase letter.");
         }
 
-        if ( !valid_pas_up_l( $(this).val().toString() ) ) {
+        if ( !valid_pas_up_l( value ) ) {
             display_warning("reg", "pass_reg_again", "Confirming password doesn't contain uppercase letter.");
         }
 
-        if ( !valid_pas_d( $(this).val().toString() ) ) {
+        if ( !valid_pas_d( value ) ) {
             display_warning("reg", "pass_reg_again", "Confirming password doesn't contain digit.");
         }
 
-        if ( !valid_pas_s( $(this).val().toString() ) ) {
+        if ( !valid_pas_s( value ) ) {
             display_warning("reg", "pass_reg_again", "Confirming password doesn't contain symbol (anything but digit or letter).");
         }
 
-        if ( !string_has_length( $(this).val().toString(), 10) ) {
+        if ( !string_has_length( value, 10) ) {
             display_warning("reg", "pass_reg_again", "Confirming password doesn't meet minimum length. Minimal length is 10 characters.");
         }
 
         let pass = $("#password_reg").val().toString();
 
-        if (!($(this).val().toString() === pass)){
+        if (value !== pass){
             display_warning("reg", "pass_reg_again", "Confirming password and password aren't same.");
         }
 
-        if ( valid_password( $(this).val().toString() ) && ($(this).val().toString() === pass)) {
+        if ( valid_password( value ) && (value === pass)) {
             display_ack("reg", "pass_reg_again", "Confirming password has valid format.");
         }
     });
@@ -128,8 +130,7 @@ $(document).ready( function () {
     });
 
 
-    /* register */
-
+    /* registers new user and validates inputs */
     $("#register_submit").on("click", function () {
         let name = $("#name_reg").val().toString();
         let surname = $("#surname_reg").val().toString();
