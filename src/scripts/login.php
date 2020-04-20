@@ -41,7 +41,7 @@ try {
         $_SESSION['id_user'] = $id;
     }
     else if($id > 0) {
-        throw new Exception("Wrong password");
+        throw new Exception("Wrong password.");
     }
     else {
         throw new Exception("Unknown email.");

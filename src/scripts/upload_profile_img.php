@@ -52,7 +52,11 @@ try {
     $statement->bind_param("si", $name, $_SESSION['id_user']);
     $result = $statement->execute();
 
-    if (!$result) die ("0|Something went wrong");
+    $stmt->free_result();
+    $stmt->close();
+    $db->close();
+
+    if (!$result) die ("0|Something went wrong.");
 
     exit ("usersPictures/" . $name);
 

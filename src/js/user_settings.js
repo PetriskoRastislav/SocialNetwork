@@ -1,6 +1,7 @@
 
 let url = new URLSearchParams(window.location.search);
 
+
 /* fills left panel with informations */
 get_profile_left_info("me");
 
@@ -103,11 +104,13 @@ $(document).ready( function () {
             display_warning("pass", "pass_new_again", "Confirming password doesn't meet minimum length. Minimal length is 10 characters.");
         }
 
-        if (!($(this).val().toString() === $("#password_new").val().toString())){
+        let pass = $("#password_new").val().toString();
+
+        if (!($(this).val().toString() === pass)){
             display_warning("pass", "pass_new_again", "Confirming password and New password aren't same.");
         }
 
-        if ( valid_password( $(this).val().toString() ) && ($(this).val().toString() === $("#password_new").val().toString())) {
+        if ( valid_password( $(this).val().toString() ) && ($(this).val().toString() === pass)) {
             display_ack("pass", "pass_new_again", "Confirming password has valid format.");
         }
     });
@@ -325,8 +328,8 @@ function display_result (data) {
     data = data.toString().split("|");
 
     if (data[1] === "1") {
-        $('#res_' + data[0]).removeClass("settings_result_neg");
-        $("#res_" + data[0]).addClass("settings_result_pos");
+        $('#res_' + data[0]).removeClass("form_result_neg");
+        $("#res_" + data[0]).addClass("form_result_pos");
         $("#res_" + data[0] + " p").html("Successfully changed.");
 
         if(data[0] === "theme") {
@@ -343,8 +346,8 @@ function display_result (data) {
         }
     }
     else {
-        $('#res_' + data[0]).removeClass("settings_result_pos");
-        $("#res_" + data[0]).addClass("settings_result_neg");
+        $('#res_' + data[0]).removeClass("form_result_pos");
+        $("#res_" + data[0]).addClass("form_result_neg");
         $("#res_" + data[0] + " p").html("Something went wrong.");
     }
 }
@@ -354,8 +357,8 @@ function display_result (data) {
 function display_warning (where, stat, warning) {
     let w = "#res_" + where;
 
-    $(w).removeClass("settings_result_pos");
-    $(w).addClass("settings_result_neg");
+    $(w).removeClass("form_result_pos");
+    $(w).addClass("form_result_neg");
 
     let status = $("#" + stat + "_status");
     status.addClass("display_icon");
@@ -370,8 +373,8 @@ function display_warning (where, stat, warning) {
 function display_ack (where, stat, ack) {
     let w = "#res_" + where;
 
-    $(w).removeClass("settings_result_neg");
-    //$(w).addClass("settings_result_pos");
+    $(w).removeClass("form_result_neg");
+    //$(w).addClass("form_result_pos");
 
     let status = $("#" + stat + "_status");
     status.addClass("display_icon");

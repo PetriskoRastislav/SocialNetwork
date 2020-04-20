@@ -32,22 +32,3 @@ label {
 }
 
 
-/* div with result from script */
-
-.settings_result_pos {
-    border-color: rgb(0, 130, 0);
-    background-color: rgb(90, 170, 90);
-}
-
-.settings_result_neg {
-    border-color: rgb(180, 0, 0);
-    background-color: rgb(180, 90, 90);
-}
-
-.settings_result_pos p {
-    color: rgb(20, 20, 20);
-}
-
-.settings_result_neg p {
-    color: rgb(255, 255, 255);
-}

@@ -72,22 +72,22 @@ $page->displayBodyStart();
 			<ul>
 				<li>
 					<label for="password_old" class="info_tag_setting">Type your old Password</label>
-					<input type="password" class="value_setting input_form" name="password_old" id="password_old" placeholder="Enter your old password" maxlength="97">
+					<input type="password" class="value_setting input_form" name="password_old" id="password_old" placeholder="Enter your old password">
                     <img id="pass_old_status" src="" alt="" class="stat">
 				</li>
 				<li>
 					<label for="password_new" class="info_tag_setting">Type your new Password</label>
-					<input type="password" class="value_setting input_form" name="password_new" id="password_new" placeholder="Enter your new password" maxlength="97">
+					<input type="password" class="value_setting input_form" name="password_new" id="password_new" placeholder="Enter your new password">
                     <img id="pass_new_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat">
 				</li>
 				<li>
 					<label for="password_new_again" class="info_tag_setting">Type your new Password again</label>
-                    <input type="password" class="value_setting input_form" name="password_new_again" id="password_new_again" placeholder="Enter your new password again" maxlength="97">
-                    <img id="pass_new_again_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat"">
+                    <input type="password" class="value_setting input_form" name="password_new_again" id="password_new_again" placeholder="Enter your new password again">
+                    <img id="pass_new_again_status" src="srcPictures/icons8-empty-100.png" alt="" class="stat">
                 </li>
 			</ul>
 		    <input id="change_pass_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
-            <div id="res_pass" class="settings_result"><p></p></div>
+            <div id="res_pass" class="form_result"><p></p></div>
 		<hr>
 
         <!-- division for changing name -->
@@ -104,7 +104,7 @@ $page->displayBodyStart();
 				</li>
 			</ul>
             <input id="change_name_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
-            <div id="res_name" class="settings_result"><p></p></div>
+            <div id="res_name" class="form_result"><p></p></div>
 		<hr>
 
         <!-- division for changing email -->
@@ -118,7 +118,7 @@ $page->displayBodyStart();
 				</li>
 			</ul>
 			<input id="change_email_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
-            <div id="res_mail" class="settings_result"><p></p></div>
+            <div id="res_mail" class="form_result"><p></p></div>
 		<hr>
 
         <!-- division for changing profile picture -->
@@ -135,7 +135,7 @@ $page->displayBodyStart();
                     </li>
                 </ul>
                 <input id="change_pic_button" type="button" value="Change" class="spacing_form button_form_submit button_setting" accept="image/jpeg image/png">
-                <div id="res_pic" class="settings_result"><p></p></div>
+                <div id="res_pic" class="form_result"><p></p></div>
             </form>
 		<hr>
 
@@ -216,7 +216,7 @@ $page->displayBodyStart();
 				</li>
 			</ul>
 			<input id="change_info_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
-            <div id="res_info" class="settings_result"><p></p></div>
+            <div id="res_info" class="form_result"><p></p></div>
 		<hr>
 
         <!-- division for changing theme (dark / light) -->
@@ -234,7 +234,7 @@ $page->displayBodyStart();
 				</li>
 			</ul>
 			<input id="change_theme_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
-            <div id="res_theme" class="settings_result"><p></p></div>
+            <div id="res_theme" class="form_result"><p></p></div>
 		<hr>
 
         <!-- division for changing biography -->
@@ -250,11 +250,11 @@ $page->displayBodyStart();
 			</ul>
 			
 			<input id="change_bio_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
-            <div id="res_bio" class="settings_result"><p></p></div>
+            <div id="res_bio" class="form_result"><p></p></div>
 		<hr>
 
 		<input id="change_all_button" type="button" value="Change ALL" class="spacing_form button_form_submit button_setting">
-        <div id="res_all" class="settings_result"><p></p></div>
+        <div id="res_all" class="form_result"><p></p></div>
 
 	</div>
 </div>

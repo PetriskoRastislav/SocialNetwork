@@ -46,14 +46,22 @@
     color: rgb(30, 30, 30);
 }
 
-/* formatting of buttons for switching between registration and log in forms */
+/* div with result from script */
 
-.logreg_button {
-    background-color: rgb(90, 90, 90);
-    color: rgb(220, 220, 220);
+.form_result_pos {
+    border-color: rgb(0, 130, 0);
+    background-color: rgb(90, 170, 90);
 }
 
-.logreg_button:hover, .logreg_button:focus, .logreg_active {
-    background-color: rgb(180, 180, 180);
-    color: rgb(30, 30, 30);
+.form_result_neg {
+    border-color: rgb(180, 0, 0);
+    background-color: rgb(180, 90, 90);
+}
+
+.form_result_pos p {
+    color: rgb(20, 20, 20);
+}
+
+.form_result_neg p {
+    color: rgb(255, 255, 255);
 }
