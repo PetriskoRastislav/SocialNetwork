@@ -193,7 +193,7 @@
                                 '</li>'.
                                 
                                 '<li class="header_menu_li">'.
-                                    '<a class="header_menu_a header_menu_a_img" href="messages.php">'.
+                                    '<a class="header_menu_a header_menu_a_img" href="#">'.
                                         '<img class="header_menu_img" src="' . $this->icons['notifications'] . '" alt="Notification icon">'.
                                     '</a>'.
                                 '</li>'.

@@ -1,5 +1,19 @@
 $(document).ready(function() {
 
+    /* gets and stores actual user's theme */
+    let theme;
+    $.ajax({
+        url: "scripts/query_users.php",
+        method: "POST",
+        data: {
+            mode: "get_theme"
+        },
+        success: function (data) {
+            theme = data.toString();
+        }
+    });
+
+
     fetch_users_all();
     open_chat();
 
@@ -171,7 +185,16 @@ $(document).ready(function() {
         conversation_header += '<div class="avatar" style="' + img + '"></div>';
         conversation_header += "<p><a class='common' href='profile.php?user=" + id_user_to + "'>" + name_user_to + "</a></p>";
         conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Last online " + last_active + "</span>";
-        conversation_header += "<img id='conversation_close_button' src='src_pictures/icons8-no-100.png' alt='send icon' />";
+        conversation_header += "<img id='conversation_close_button' src='";
+
+        if (theme === "dark") {
+            conversation_header += "src_pictures/icons8-no-100-white.png";
+        }
+        else {
+            conversation_header += "src_pictures/icons8-no-100.png";
+        }
+
+        conversation_header += "' alt='send icon' />";
 
         $("#conversation_header").html(conversation_header);
 
