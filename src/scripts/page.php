@@ -7,16 +7,16 @@
 
 
         /* will display html header */
-        public function displayHead($titleA, $styles = null) {
-            $this->displayDeclaration();
-            $this->displayHeadTitle($titleA);
-            $this->displayMeta();
-            $this->displayStyles($styles);
+        public function display_header($titleA, $styles = null) {
+            $this->display_declaration();
+            $this->display_header_title($titleA);
+            $this->display_header_meta();
+            $this->display_header_styles($styles);
         }
 
 
         /* will display declaration of a html file */
-        private function displayDeclaration() {
+        private function display_declaration() {
             echo "<!DOCTYPE html>" .
             "<html lang='sk'>" .
             "<head>";
@@ -24,14 +24,14 @@
 
 
         /* will display title of a page */
-        private function displayHeadTitle($titleA) {
+        private function display_header_title($titleA) {
             echo
                 "<title>" . $titleA . " - " . $this->title . "</title>";
         }
 
 
         /* will display meta information of a page */
-        private function displayMeta() {
+        private function display_header_meta() {
             ?>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -41,7 +41,7 @@
 
 
         /* will display default and additional styles */
-        private function displayStyles($styles) {
+        private function display_header_styles($styles) {
 
             if ( !( isset($_SESSION['color_mode']) ) ){
                 $_SESSION['color_mode'] = "dark";
@@ -85,16 +85,16 @@
 
 
         /* will display start of a body and menu */
-        public function displayBodyStart() {
+        public function display_body_start() {
             echo "<body>";
             echo "<div id='page'>";
-            $this->displayHeader();
+            $this->display_page_header();
             echo "<div class='main_content'>";
         }
 
 
         /* will display header of a web-page, logo, menu, etc. */
-        public function displayHeader() {
+        public function display_page_header() {
 
             $message = "
                 <div class='pageHeader'>
@@ -103,7 +103,7 @@
 
             if (isset($_SESSION['id_user'])) $message .= "<a href='home.php' class='home_link'>";
 
-            $message .= "<img class='pageLogo' src='src_pictures/logo-white.png' alt='Page logo'>";
+            $message .= "<img class='pageLogo' src='src_pictures/logo.png' alt='Page logo'>";
 
             if (isset($_SESSION['id_user'])) $message .= "</a></div>";
             else $message .= "</div>";
@@ -173,13 +173,13 @@
 
 
         /* will display title / heading of a web-page */
-        public function displayTitle($title) {
+        public function display_page_title($title) {
             echo "<h1 class='pageTitle'>" . $title . "</h1>";
         }
 
 
         /* will display end of a body and will attach default and additional javascript scripts */
-        public function displayBodyEnd($scripts) {
+        public function display_body_end($scripts) {
             echo "<script src='js/jquery-3.4.1.min.js'></script>";
             echo "<script src='js/menu.js'></script>";
             echo "<script src='js/js.js'></script>";

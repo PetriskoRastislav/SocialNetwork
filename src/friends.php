@@ -10,8 +10,8 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "Friends", array("styles/profile", "styles/friends"));
-$page->displayBodyStart();
+$page->display_header( "Friends", array("styles/profile", "styles/friends"));
+$page->display_body_start();
 
 ?>
 
@@ -69,6 +69,6 @@ $page->displayBodyStart();
 
 <?php
 
-$page->displayBodyEnd(array("js/profile_functions.js", "js/friends.js"));
+$page->display_body_end(array("js/profile_functions.js", "js/friends.js"));
 
 ?>

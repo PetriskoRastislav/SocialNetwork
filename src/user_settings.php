@@ -10,8 +10,8 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "Settings", array("styles/profile", "styles/style_form", "styles/user_settings"));
-$page->displayBodyStart();
+$page->display_header( "Settings", array("styles/profile", "styles/style_form", "styles/user_settings"));
+$page->display_body_start();
 
 ?>
 
@@ -261,6 +261,6 @@ $page->displayBodyStart();
 
 <?php
 
-$page->displayBodyEnd(array("js/validate_inputs.js", "js/profile_functions.js", "js/user_settings.js"));
+$page->display_body_end(array("js/validate_inputs.js", "js/profile_functions.js", "js/user_settings.js"));
 
 ?>

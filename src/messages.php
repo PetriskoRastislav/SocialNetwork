@@ -10,8 +10,8 @@ if (!isset($_SESSION['id_user'])) {
 }
 
 $page = new Page();
-$page->displayHead( "Messages", array("styles/messages"));
-$page->displayBodyStart();
+$page->display_header( "Messages", array("styles/messages"));
+$page->display_body_start();
 
 ?>
 
@@ -52,6 +52,6 @@ $page->displayBodyStart();
 
 <?php
 
-$page->displayBodyEnd(array("js/messages.js"));
+$page->display_body_end(array("js/messages.js"));
 
 ?>

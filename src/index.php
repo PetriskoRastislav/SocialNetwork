@@ -9,8 +9,8 @@
     }
 
     $page = new Page();
-    $page->displayHead( "Login", array("styles/style_form", "styles/index"));
-    $page->displayBodyStart();
+    $page->display_header( "Login", array("styles/style_form", "styles/index"));
+    $page->display_body_start();
 ?>
 
 <div class="div_form_log_reg" id="div_reg">
@@ -81,5 +81,5 @@
 </div>
 
 <?php
-    $page->displayBodyEnd(array("js/validate_inputs.js", "js/log_reg.js"));
+    $page->display_body_end(array("js/validate_inputs.js", "js/log_reg.js"));
 ?>
