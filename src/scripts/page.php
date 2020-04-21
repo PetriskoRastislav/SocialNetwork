@@ -103,7 +103,7 @@
 
             if (isset($_SESSION['id_user'])) $message .= "<a href='home.php' class='home_link'>";
 
-            $message .= "<img class='pageLogo' src='src_pictures/defaultpicture.png' alt='Page logo'>";
+            $message .= "<img class='pageLogo' src='src_pictures/logo-white.png' alt='Page logo'>";
 
             if (isset($_SESSION['id_user'])) $message .= "</a></div>";
             else $message .= "</div>";

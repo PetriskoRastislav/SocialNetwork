@@ -214,6 +214,6 @@ function res_log_reg (data) {
         display_warning(a_data[0], null, a_data[2]);
     }
     else {
-        window.location.replace("profile.php?user=" + data.toString());
+        window.location.replace("profile.php?user=me");
     }
 }
