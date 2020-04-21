@@ -95,11 +95,14 @@ try {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
-                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='src_pictures/icons8-deleted-message-100.png' alt='delete message button'>";
+                    $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="';
+
+                    if ($_SESSION['color_mode'] == "dark") $output .= 'src_pictures/icons8-deleted-message-100-white.png';
+                    else $output .= 'src_pictures/icons8-deleted-message-100.png';
+
+                    $output .= '" alt="delete message button" title="Delete message">';
                 }
-                $output .=
-                    "<div class='message message_my'>" .
-                    $profile_pic_me;
+                $output .= '<div class="message message_my">' . $profile_pic_me;
             }
 
 
@@ -264,7 +267,12 @@ try {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
-                    $output .= "<img id='rem_mes_" . $id_message . "' class='remove_message' src='src_pictures/icons8-deleted-message-100.png' alt='delete message button'>";
+                    $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="';
+
+                    if ($_SESSION['color_mode'] == "dark") $output .= 'src_pictures/icons8-deleted-message-100-white.png';
+                    else $output .= 'src_pictures/icons8-deleted-message-100.png';
+
+                    $output .= '" alt="delete message button" title="Delete message">';
                 }
                 $output .=
                     "<div class='message message_my'>" .
@@ -402,7 +410,12 @@ try {
             else {
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
-                    $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="src_pictures/icons8-deleted-message-100.png" alt="delete message button">';
+                    $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="';
+
+                    if ($_SESSION['color_mode'] == "dark") $output .= 'src_pictures/icons8-deleted-message-100-white.png';
+                    else $output .= 'src_pictures/icons8-deleted-message-100.png';
+
+                    $output .= '" alt="delete message button" title="Delete message">';
                 }
                 $output .= '<div class="message message_my">' . $profile_pic_me;
             }

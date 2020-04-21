@@ -21,7 +21,7 @@
 
         /* will fill array with icons (light / dark version) */
         private function diverse_icons() {
-            if ($_SESSION['color_mode'] == "dark" || !isset($_SESSION['color_mode'])) {
+            if (@$_SESSION['color_mode'] == "dark" || !isset($_SESSION['color_mode'])) {
                 $this->icons = array(
                     "notifications" => "src_pictures/icons8-notification-100-white.png",
                     "messages" => "src_pictures/icons8-group-message-100-white.png",
