@@ -17,10 +17,12 @@ try {
         die ("reg|0|Some of inputs are missing.");
     }
 
+
     /* checks length of name */
     if (!string_isn_t_longer($name, 40)) {
         die ("reg|0|Name is longer than it's allowed. Max allowed length is 40 characters.");
     }
+
 
     /* checks length of surname */
     if (!string_isn_t_longer($surname, 40)) {
@@ -56,6 +58,7 @@ try {
     if (!string_has_length($password, 10)) {
         die ("reg|0|Password doesn't meet minimum length. Minimal length is 10 characters.");
     }
+
 
     /* Connection to database. */
     $db = db_connect();

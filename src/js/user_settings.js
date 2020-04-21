@@ -133,7 +133,7 @@ $(document).ready( function () {
     $("#change_name_button").on("click", function (event) {
         event.preventDefault();
 
-        let name = $("#name").val().toString;
+        let name = $("#name").val().toString();
         let surname = $("#surname").val().toString();
 
         if (!string_isn_t_longer(name, 40)) {
@@ -208,6 +208,12 @@ $(document).ready( function () {
     /* changes profile picture */
     $("#change_pic_button").on("click", function (event) {
         event.preventDefault();
+
+        if( $("#profile_pic").get(0).files.length === 0) {
+            display_warning("pic", null, "No file has been selected.");
+            return;
+        }
+
         let form_data = new FormData($("#change_pic")[0]);
 
         $.ajax({
@@ -222,7 +228,7 @@ $(document).ready( function () {
                 data = data.toString().split("|");
 
                 if (data[0] === "0") {
-                    display_warning("pic", data[1]);
+                    display_warning("pic", null, data[1]);
                 }
                 else {
                     // view uploaded file.
@@ -231,7 +237,7 @@ $(document).ready( function () {
                 }
             },
             fail: function (data) {
-                display_warning("pic", data);
+                display_warning("pic", null, data);
             }
         });
 
@@ -259,7 +265,7 @@ $(document).ready( function () {
 
     /* changes information  */
     $("#change_info_button").on("click", function () {
-        let location = $("#location").val().toString().trim();
+        let location = $("#location").val().toString();
         let gender = $("#gender").val().toString();
         let day_of_birth = $("#day_of_birth").val().toString();
         let month_of_birth = $("#month_of_birth").val().toString();
@@ -314,7 +320,7 @@ $(document).ready( function () {
 
     /* changes biography */
     $("#change_bio_button").on("click", function () {
-        let bio = $("#biography").val().toString().trim();
+        let bio = $("#biography").val().toString();
 
         $.ajax({
             url: "scripts/query_users.php",
@@ -365,12 +371,12 @@ function display_result (data) {
         $("#res_" + data[0]).addClass("form_result_pos");
         $("#res_" + data[0] + " p").html("Successfully changed.");
 
-        if(data[0] === "theme") {
+        if(data[0] === "theme" || data[0] === "name") {
             $.ajax({
                 url: "scripts/query_users.php",
                 method: "POST",
                 data: {
-                    mode: "update_theme"
+                    mode: "update_session"
                 },
                 success: function () {
                     location.reload();
@@ -381,6 +387,6 @@ function display_result (data) {
     else {
         $('#res_' + data[0]).removeClass("form_result_pos");
         $("#res_" + data[0]).addClass("form_result_neg");
-        $("#res_" + data[0] + " p").html("Something went wrong.");
+        $("#res_" + data[0] + " p").html(data[2]);
     }
 }

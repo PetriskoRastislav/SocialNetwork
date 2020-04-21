@@ -73,17 +73,17 @@ $page->displayBodyStart();
 				<li>
 					<label for="password_old" class="info_tag_setting">Type your old Password</label>
 					<input type="password" class="value_setting input_form" name="password_old" id="password_old" placeholder="Enter your old password">
-                    <img id="pass_old_status" src="" alt="" class="stat">
+                    <img id="pass_old_status" src="" alt="" class="stat hide">
 				</li>
 				<li>
 					<label for="password_new" class="info_tag_setting">Type your new Password</label>
 					<input type="password" class="value_setting input_form" name="password_new" id="password_new" placeholder="Enter your new password">
-                    <img id="pass_new_status" src="" alt="" class="stat">
+                    <img id="pass_new_status" src="" alt="" class="stat hide">
 				</li>
 				<li>
 					<label for="password_new_again" class="info_tag_setting">Type your new Password again</label>
                     <input type="password" class="value_setting input_form" name="password_new_again" id="password_new_again" placeholder="Enter your new password again">
-                    <img id="pass_new_again_status" src="" alt="" class="stat">
+                    <img id="pass_new_again_status" src="" alt="" class="stat hide">
                 </li>
 			</ul>
 		    <input id="change_pass_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
@@ -114,7 +114,7 @@ $page->displayBodyStart();
 				<li>
 					<label for="email" class="info_tag_setting">Change your Email</label>
 					<input type="email" id="email" class="value_setting input_form" name="email" placeholder="Enter your new email" maxlength="100">
-                    <img id="mail_status" src="" alt="" class="stat">
+                    <img id="mail_status" src="" alt="" class="stat hide">
 				</li>
 			</ul>
 			<input id="change_email_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">

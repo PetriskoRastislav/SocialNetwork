@@ -52,8 +52,8 @@ try {
     $statement->bind_param("si", $name, $_SESSION['id_user']);
     $result = $statement->execute();
 
-    $stmt->free_result();
-    $stmt->close();
+    $statement->free_result();
+    $statement->close();
     $db->close();
 
     if (!$result) die ("0|Something went wrong.");

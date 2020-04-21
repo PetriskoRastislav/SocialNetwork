@@ -2,7 +2,7 @@
 /* Styles for web-page */
 
 * {
-    outline: none;
+    outline: none; !important;
 }
 
 /* font-family: Cambria, Georgia, serif; */
@@ -138,4 +138,10 @@ a.common:active {
 .main_content {
     margin: 0.75em 1em 0.75em 1em;
     padding: 0;
+}
+
+
+/* hides a element */
+.hide {
+    display: none;
 }

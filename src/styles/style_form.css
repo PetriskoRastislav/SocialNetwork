@@ -139,6 +139,7 @@
     width: 2em;
     height: 2em;
     padding: 0.125em;
+    display: none;
 }
 
 .display_icon {
