@@ -54,13 +54,21 @@ stránky
 
 -->
 
-
 <?php
 
-/* vypíše koniec dokumentu (uzatvaracie tagy), pripojí javascript súbory */
+/* pripojí javascript súbory */
 /* napr. $page->display_body_end(array("js/messages.js")); */
 /* napr. $page->display_body_end(array()); */
 
-$page->display_body_end(array(/* tu sa vymenujú dodatočné súbory js, ktoré potrebuješ na konkrétnu stránku */));
+$page->display_scripts(array(/* tu sa vymenujú dodatočné súbory js, ktoré potrebuješ na konkrétnu stránku */));
+
+?>
+
+
+<?php
+
+/* vypíše koniec dokumentu (uzatvaracie tagy)*/
+
+$page->display_body_end();
 
 ?>

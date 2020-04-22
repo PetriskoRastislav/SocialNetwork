@@ -80,6 +80,16 @@
 
 </div>
 
+
 <?php
-    $page->display_body_end(array("js/validate_inputs.js", "js/log_reg.js"));
+
+$page->display_scripts(array("js/validate_inputs.js", "js/log_reg.js"));
+
+?>
+
+
+<?php
+
+$page->display_body_end();
+
 ?>

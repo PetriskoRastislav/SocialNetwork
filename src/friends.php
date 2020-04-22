@@ -67,12 +67,18 @@ $page->display_body_start();
 
 </div>
 
+<?php
+
+$page->display_scripts(array("js/profile_functions.js", "js/profile.js"));
+
+?>
+
 <script>
     let theme = "<?php echo $_SESSION['color_mode']; ?>";
 </script>
 
 <?php
 
-$page->display_body_end(array("js/profile_functions.js", "js/friends.js"));
+$page->display_body_end();
 
 ?>

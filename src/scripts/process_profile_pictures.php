@@ -41,3 +41,5 @@ while ($statement->fetch()){
 }
 $statement->free_result();
 $statement->close();
+
+

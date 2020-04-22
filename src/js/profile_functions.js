@@ -59,7 +59,7 @@ function get_profile_friend_page_heading (id_user) {
 
 
 /* will generate buttons in left column of profile and affiliated pages */
-function left_panel_buttons (page) {
+function left_panel_buttons (page, id_user) {
 
     let buttons = '';
 
@@ -77,7 +77,7 @@ function left_panel_buttons (page) {
             '<img class="requests_image requests_image_en" src="';
 
         if (theme === "dark") buttons += "src_pictures/icons8-user-100-white.png";
-        else buttons += "src_pictures/icons8-user-100-white.png";
+        else buttons += "src_pictures/icons8-user-100.png";
 
         buttons += '" title="Profile" alt="Profile">' +
             '</a>';
@@ -85,7 +85,7 @@ function left_panel_buttons (page) {
 
     if (page === "profile") {
         buttons +=
-            '<a href="messages.php?user=' + url.get("user") + '" class="requests_a">' +
+            '<a href="messages.php?user=' + id_user + '" class="requests_a">' +
             '<img class="requests_image requests_image_en" src="';
 
         if (theme === "dark") buttons += "src_pictures/icons8-new-message-100-white.png";
@@ -94,10 +94,8 @@ function left_panel_buttons (page) {
         buttons += '" title="Write a Message" alt="Write a Message">' +
             '</a>';
 
-        if (url.get('user') === "me") {
-            /*buttons +=
-                '<img class="requests_image requests_image_dis" src="src_pictures/icons8-add-user-group-man-man-100.png"' +
-                ' title="Wanna be friend with yourself? I guess it won\'t work." alt="Request Friendship">';*/
+        if (id_user === "me") {
+            console.log("here");
         }
         else {
             buttons += '<img class="requests_image requests_image_en" src="';
@@ -109,7 +107,7 @@ function left_panel_buttons (page) {
         }
 
         buttons +=
-            '<a href="friends.php?user=' + url.get("user") + '" class="requests_a">' +
+            '<a href="friends.php?user=' + id_user + '" class="requests_a">' +
             '<img class="requests_image requests_image_en" src="';
 
         if (theme === "dark") buttons += "src_pictures/icons8-user-account-100-white.png";
@@ -120,7 +118,7 @@ function left_panel_buttons (page) {
 
     if (page === "friends") {
         buttons +=
-            '<a href="messages.php?user=' + url.get("user") + '" class="requests_a">' +
+            '<a href="messages.php?user=' + id_user + '" class="requests_a">' +
             '<img class="requests_image requests_image_en" src="';
 
         if (theme === "dark") buttons += "src_pictures/icons8-new-message-100-white.png";
@@ -128,10 +126,8 @@ function left_panel_buttons (page) {
 
         buttons += '" title="Write a Message" alt="Write a Message"></a>';
 
-        if (url.get('user') === "me") {
-            /*buttons +=
-                '<img class="requests_image requests_image_dis" src="src_pictures/icons8-add-user-group-man-man-100.png"' +
-                ' title="Wanna be friend with yourself? I guess it won\'t work." alt="Request Friendship">';*/
+        if (id_user === "me") {
+
         }
         else {
             buttons += '<img class="requests_image requests_image_en" src="';
@@ -143,7 +139,7 @@ function left_panel_buttons (page) {
         }
 
         buttons +=
-            '<a href="profile.php?user=' + url.get("user") + '" class="requests_a">' +
+            '<a href="profile.php?user=' + id_user + '" class="requests_a">' +
             '<img class="requests_image requests_image_en" src="';
 
         if (theme === "dark") buttons += "src_pictures/icons8-user-100-white.png";

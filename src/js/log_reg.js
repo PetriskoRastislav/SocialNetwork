@@ -103,7 +103,6 @@ $(document).ready( function () {
     });
 
 
-
     /* logs in user, if credentials are valid php will redirect user to his profile,
      if not then will display error message here */
     $("#login_submit").on("click", function () {
@@ -214,6 +213,6 @@ function res_log_reg (data) {
         display_warning(a_data[0], null, a_data[2]);
     }
     else {
-        window.location.replace("profile.php?user=me");
+        window.location.replace("profile.php?user=" + data.toString());
     }
 }

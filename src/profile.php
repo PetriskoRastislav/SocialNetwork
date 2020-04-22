@@ -67,11 +67,55 @@ $page->display_body_start();
 	<p id="profile_bio" class="bio"></p>
 </div>
 
-<script>
-    let theme = "<?php echo $_SESSION['color_mode']; ?>";
-</script>
+<?php
+
+$page->display_scripts(array("js/profile_functions.js", "js/profile.js"));
+
+?>
+
+
+    <script>
+        let theme = "<?php echo $_SESSION['color_mode']; ?>";
+        let url = new URLSearchParams(window.location.search);
+        let user_me = (url.get('user') == <?php echo $_SESSION['id_user']; ?>);
+
+        /*console.log(typeof <?php echo $_SESSION['id_user']; ?>);
+        console.log(typeof url.get('user'));
+        console.log( (url.get('user') == <?php echo $_SESSION['id_user']; ?>) );
+        console.log(user_me);*/
+
+        let id_user;
+
+        if (user_me) id_user = "me";
+        else id_user = url.get('user');
+
+        /*console.log(id_user);*/
+
+
+        /* fills left panel with informations */
+        get_profile_left_info(id_user);
+
+
+        /* fills center part with data */
+        get_profile_profile_info(id_user);
+
+
+        /* fills left panel with buttons */
+        left_panel_buttons("profile", id_user);
+
+
+        /* displaying document after everything is ready */
+        $(document).ready( function () {
+
+            document.getElementsByTagName("html")[0].style.visibility = "visible";
+
+        });
+
+    </script>
+
 
 <?php
-$page->display_body_end(array("js/profile_functions.js", "js/profile.js"));
+
+$page->display_body_end();
 
 ?>

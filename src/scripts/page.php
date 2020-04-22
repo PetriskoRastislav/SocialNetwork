@@ -132,7 +132,7 @@
                 '<div class="left">';
 
             if (isset($_SESSION['id_user'])) {
-                $message .= "<a href='profile.php?user=me' class='home_link'>";
+                $message .= "<a href='profile.php?user=" . $_SESSION['id_user'] . "' class='home_link'>";
             }
 
             $message .= '<img class="pageLogo" src="'. $this->icons['logo'] . '" alt="Page logo">';
@@ -157,7 +157,7 @@
                                 
                                 '<ul id="header_drop_content" class="header_menu_drop_hide">'.
                                 
-                                    '<a href="friends.php?user=me" class="header_menu_drop_a">'.
+                                    '<a href="friends.php?user=' . $_SESSION['id_user'] . '" class="header_menu_drop_a">'.
                                         '<li class="header_drop_item header_drop_item_border">'.
                                             '<img class="header_menu_img_drop" src="' . $this->icons['friends'] . '" alt="Friends icon">'.
                                             '<p class="header_drop_p">Friends</p>'.
@@ -181,7 +181,7 @@
                                 '</ul>'.
                                 
                                 '<li class="header_menu_li border_left">'.
-                                    '<a class="header_menu_a" href="profile.php?user=me">'.
+                                    '<a class="header_menu_a" href="profile.php?user=' . $_SESSION['id_user'] . '">'.
                                         $_SESSION['name'] . ' ' . $_SESSION['surname'] .
                                     '</a>'.
                                 '</li>'.
@@ -214,8 +214,9 @@
         }
 
 
-        /* will display end of a body and will attach default and additional javascript scripts */
-        public function display_body_end($scripts) {
+        /* will attach default and additional javascript scripts */
+        public function display_scripts($scripts) {
+
             echo
                 '<script src="js/jquery-3.4.1.min.js"></script>'.
                 '<script src="js/menu.js"></script>'.
@@ -228,7 +229,14 @@
                 $script = next($scripts);
             }
 
+        }
+
+
+        /* will display end of a body */
+        public function display_body_end() {
+
             echo '</div></div></body></html>';
+
         }
     }
 ?>

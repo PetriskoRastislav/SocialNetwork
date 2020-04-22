@@ -54,12 +54,21 @@ $page->display_body_start();
         ?>" alt="send icon" title="Send message" />
 </div>
 
+
+<?php
+
+$page->display_scripts(array("js/messages.js"));
+
+?>
+
+
 <script>
     let theme = "<?php echo $_SESSION['color_mode']; ?>";
 </script>
 
+
 <?php
 
-$page->display_body_end(array("js/messages.js"));
+$page->display_body_end();
 
 ?>

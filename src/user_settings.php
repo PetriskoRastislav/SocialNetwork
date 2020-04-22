@@ -259,12 +259,21 @@ $page->display_body_start();
 	</div>
 </div>
 
+
+<?php
+
+$page->display_scripts(array("js/validate_inputs.js", "js/profile_functions.js", "js/user_settings.js"));
+
+?>
+
+
 <script>
     let theme = "<?php echo $_SESSION['color_mode']; ?>";
 </script>
 
+
 <?php
 
-$page->display_body_end(array("js/validate_inputs.js", "js/profile_functions.js", "js/user_settings.js"));
+$page->display_body_end();
 
 ?>
