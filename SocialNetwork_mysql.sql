@@ -48,6 +48,7 @@ DEFAULT CHARACTER SET = utf8;
 /* Table to store friend relationships between users */
 
 CREATE TABLE IF NOT EXISTS `SocialNetwork`.`friends` (
+	`id_friendship` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	`id_user_1` INT UNSIGNED NOT NULL,
     `id_user_2` INT UNSIGNED NOT NULL,
     `time` CHAR(19) NOT NULL
