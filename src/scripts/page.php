@@ -132,7 +132,7 @@
                 '<div class="left">';
 
             if (isset($_SESSION['id_user'])) {
-                $message .= "<a href='home.php' class='home_link'>";
+                $message .= "<a href='profile.php?user=me' class='home_link'>";
             }
 
             $message .= '<img class="pageLogo" src="'. $this->icons['logo'] . '" alt="Page logo">';

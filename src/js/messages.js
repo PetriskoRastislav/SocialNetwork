@@ -1,18 +1,5 @@
 $(document).ready(function() {
 
-    /* gets and stores actual user's theme */
-    let theme;
-    $.ajax({
-        url: "scripts/query_users.php",
-        method: "POST",
-        data: {
-            mode: "get_theme"
-        },
-        success: function (data) {
-            theme = data.toString();
-        }
-    });
-
 
     fetch_users_all();
     open_chat();
@@ -119,7 +106,9 @@ $(document).ready(function() {
                         last_active_sign.html("Online");
                     }
                     else if (last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline") {
-                        last_active_sign.html("Last online " + ret_data[i + 2]);
+                        if (last_active_sign.html() !== "Last online " + ret_data[i + 2]) {
+                            last_active_sign.html("Last online " + ret_data[i + 2]);
+                        }
                     }
 
 
@@ -399,12 +388,12 @@ $(document).ready(function() {
         }
         else if( !(event.which === 13 || event.which === 27)){
 
-            let value = $(this).val();
+            let value = $(this).val().toString().trim();
 
             if (value !== "") {
                 $(".clear_search_users").addClass("clear_search_users_visible");
             }
-            else if (value === undefined) {
+            else if (value === undefined || value === "") {
                 $(".clear_search_users").removeClass("clear_search_users_visible");
             }
 

@@ -67,6 +67,9 @@ $page->display_body_start();
 	<p id="profile_bio" class="bio"></p>
 </div>
 
+<script>
+    let theme = "<?php echo $_SESSION['color_mode']; ?>";
+</script>
 
 <?php
 $page->display_body_end(array("js/profile_functions.js", "js/profile.js"));

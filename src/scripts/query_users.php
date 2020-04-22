@@ -861,15 +861,6 @@ try {
     }
 
 
-    /* returns theme user's stored in session*/
-    else if ($mode == "get_theme") {
-
-        print $_SESSION['color_mode'];
-        exit();
-
-    }
-
-
 }
 catch (Exception $ex){
     $ex->getMessage();
