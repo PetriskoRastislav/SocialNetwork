@@ -1,69 +1,21 @@
 
-/* Dark style for webpage */
+/* Dark styles for web-page */
 
 /* formatting of header */
 
 .pageHeader {
-    background-color: rgb(35, 35, 35);
+    background-color: rgb(40, 40, 40);
 }
 
 .pageName {
     color: rgb(210, 210, 210);
 }
 
-/* style settings for menu */
-
-.header_menu_li {
-    background-color: rgb(40, 40, 40);
-}
-
-.header_menu_a {
-    background-color: rgb(40, 40, 40);
-    color: rgb(190, 190, 190);
-}
-
-/*.header_menu_li:hover, .header_menu_drop_btn_active {
-    background-color: rgb(40, 40, 40);
-}*/
-
-.header_menu_li:hover .header_menu_a, .header_menu_drop_btn_active .header_menu_a {
-    background-color: rgb(70, 70, 70);
-    color: rgb(230, 230, 230);
-}
-
-
-/* drop content of menu */
-
-#header_drop_content {
-    background-color: rgb(40, 40, 40);
-}
-
-#header_drop_content .header_menu_a {
-    background-color: rgb(40, 40, 40);
-    border-left-color:  rgb(140, 140, 140);
-    border-right-color: rgb(140, 140, 140);
-    border-top-color: rgb(140, 140, 140);
-    width: 6em;
-}
-
-#header_drop_content .header_menu_a:last-child {
-    border-bottom-color: rgb(140, 140, 140);
-}
-
-#header_drop_content .header_menu_a:hover {
-    background-color: rgb(70, 70, 70);
-    color: rgb(230, 230, 230);
-}
-
-
-.border_left {
-    border-left-color: rgb(140, 140, 140);
-}
 
 /* formatting of body */
 
 body {
-    background-color: rgb(54, 57, 63);
+    background-color: rgb(59, 62, 68);
 }
 
 /* formatting of paragraphs */
@@ -75,7 +27,7 @@ p {
 /* formatting of headings */
 
 h1 {
-    border-bottom: solid rgb(180, 180, 180) 0.0625em;
+    border-bottom-color: rgb(160, 160, 160);
     color: rgb(200, 200, 200);
 }
 
@@ -90,17 +42,17 @@ h3 {
 /* formatting of common links */
 
 a.common:link {
-    color: rgb(100, 200, 100);
+    color: rgb(100, 220, 100);
 }
 
 a.common:visited {
-    color: rgb(100, 200, 100);
+    color: rgb(100, 220, 100);
 }
 
 a.common:hover {
-    color: rgb(100, 200, 100);
+    color: rgb(100, 220, 100);
 }
 
 a.common:active {
-    color: rgb(100, 200, 100);
+    color: rgb(100, 220, 100);
 }

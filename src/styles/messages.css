@@ -5,7 +5,6 @@
 }
 
 
-
 /* layout of messages sub page */
 
 
@@ -114,34 +113,14 @@
     box-sizing: border-box;
     display: inline-block;
     float: left;
-    font-family: Cambria, Georgia, serif;
+    font-family: 'Arial', Helvetica, sans-serif;
     color: rgb(20, 20, 20);
     text-align: center;
     line-height: 1.625em;
-    padding: 0.5em 1em;
-    font-size: 1.1875em;
-    font-weight: bolder;
+    padding: 0.75em 1em 0.25em 1em;
+    font-size: 1.125em;
+    font-weight: normal;
 }
-
-
-/* styles for a button to start a new conversation */
-
-/*#start_new_conversation {
-    box-sizing: border-box;
-    display: inline-block;
-    float: right;
-    width: auto;
-    margin: 0;
-    padding: 0.375em 0.625em;
-    height: 3em;
-    background-color: rgb(215, 215, 215);
-    transition: 0.3s;
-}
-
-#start_new_conversation:hover {
-    cursor: pointer;
-    background-color: rgb(190, 190, 190);
-}*/
 
 
 /* styles for field to search users in conversations */
@@ -158,9 +137,11 @@
     color: rgb(0, 0, 0);
     border: 0.125em solid rgb(200, 200, 200);
     outline: none;
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
     resize: none;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 #search_user_con_list:focus {
@@ -181,6 +162,10 @@
     padding: 0.25em;
     background-color: rgb(215, 215, 215);
     display: none;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .clear_search_users_visible {
@@ -209,7 +194,10 @@
     min-height: 0;
     height: auto;
     z-index: 999;
-    transition: 0.4s;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .visible {
@@ -222,7 +210,8 @@
     z-index: 999;
 }
 
-/* button to clear search field */
+
+/* items of search users' list */
 
 .search_result_item {
     box-sizing: border-box;
@@ -235,7 +224,10 @@
     color: rgb(20, 20, 20);
     padding: 0.4375em;
     border-top: solid 0.125em rgb(150, 150, 150);
-    transition: 0.4s;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .search_result_item:last-child {
@@ -251,10 +243,13 @@
 /* styles for labels with names of users */
 
 .list_users_item {
-    height: 3em;
+    height: 3.7em;
     width: 100%;
     clear: both;
-    transition: 0.3s;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .list_users_item:hover {
@@ -268,18 +263,25 @@
 .user {
     box-sizing: border-box;
     display: inline-block;
-    font-family: 'Cambria', Georgia, serif;
+    font-family: 'Arial', Helvetica, sans-serif;
+    /*font-family: "Bahnschrift Condensed", Bahnschrift, sans-serif;*/
     color: rgb(20, 20, 20);
     text-align: left;
     line-height: 1.6em;
-    padding: 0.5em 1em;
-    font-size: 1.1em;
-    clear: both;
-    transition: 0.3s;
-    width: 100%;
+    padding: 0.5em 0.5em;
+    font-size: 1em;
+    float: left;
+    width: auto;
     height: 100%;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
+.user::after {
+    clear: both;
+}
 
 
 /* conversation header*/
@@ -289,10 +291,42 @@
 
 .avatar {
     float: left;
-    max-width: 3.75em;
-    width: 100%;
+    width: 2em;
+    height: 2em;
     margin-right: 1.5em;
-    border-radius: 50%;
+    border-radius: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 2em;
+}
+
+.avatar-list {
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    width: 2.7em;
+    height: 2.7em;
+    border-radius: 100%;
+    background-size: auto 2.7em;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.list_users_item .avatar-list {
+    margin: 0.5em;
+}
+
+
+.search_result_item .avatar {
+    width: 2em;
+    height: 2em;
+    background-size: auto 2em;
+}
+
+#conversation_header .avatar {
+    width: 2.5em;
+    height: 2.5em;
+    background-size: auto 2.5em;
 }
 
 
@@ -336,15 +370,17 @@
     width: auto;
     padding: 0.25em;
     margin: 0.25em 0.5em;
-    transition: 0.3s;
     background-color: rgb(235, 235, 235);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 #conversation_close_button:hover {
     cursor: pointer;
     background-color: rgb(200, 200, 200);
 }
-
 
 
 /* chat */
@@ -375,6 +411,7 @@
     margin-bottom: 1.75em;
 }
 
+
 /* styles for message bubbles */
 
 .message {
@@ -390,6 +427,7 @@
     border-color: rgb(204, 204, 204);
     background-color: rgb(221, 221, 221);
 }
+
 
 /* Clear floats */
 .message::after {
@@ -449,14 +487,17 @@
     width: auto;
     padding: 0.25em;
     margin: 0 0 0 0.625em;
-    transition: 0.3s;
     background-color: rgb(250, 250, 250);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .remove_message:hover {
     display: block;
     cursor: pointer;
-    background-color: rgb(220, 220, 220);
+    background-color: rgb(230, 230, 230);
 }
 
 
@@ -474,9 +515,7 @@
     max-width: 60em;
     height: 3em;
     position: relative;
-    padding: 0.375em 0.5em 0.375em 0.5em;
-    transition: 0.5s;
-    -webkit-transition: 0.5s;
+    padding: 0.375em 0.5em 0.375em 0.5em;;
     outline: none;
     font-family: 'Arial', Helvetica, sans-serif;
     line-height: 1.25em;
@@ -484,6 +523,10 @@
     color: rgb(0, 0, 0);
     border: 0.125em solid rgb(200, 200, 200);
     resize: none;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 #message_to_send:focus {
@@ -503,8 +546,11 @@
     width: auto;
     padding: 0.25em;
     margin: 0.5em 0.25em;
-    transition: 0.3s;
     background-color: rgb(210, 210, 210);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .chat_control_button:hover {

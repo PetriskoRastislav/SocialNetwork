@@ -1,0 +1,187 @@
+/* style settings for menu */
+
+.header_menu_div {
+    position: relative;
+    display: inline-block;
+    height: 3em;
+}
+
+.header_menu_ul {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    height: 100%;
+}
+
+/* styles for items of menu */
+
+.header_menu_li {
+    background-color: rgb(210, 210, 210);
+    margin: 0;
+    padding: 0;
+    font-family: Cambria, Georgia, serif;
+    height: 100%;
+    width: auto;
+    float: right;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.header_menu_a {
+    font-family: Cambria, Georgia, serif;
+    font-size: 1.1em;
+    padding: 0.75em 1.5em 0.75em 1.5em;
+    width: auto;
+    background-color: rgb(210, 210, 210);
+    color: rgb(20, 20, 20);
+    display: block;
+    text-align: left;
+    text-decoration: none;
+    height: 1.25em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* items of menu -> hover, active */
+
+.header_menu_li:hover .header_menu_a, .header_menu_drop_btn_active .header_menu_a {
+    background-color: rgb(230, 230, 230);
+    color: rgb(0, 0, 0);
+}
+
+/* border in menu between items */
+
+.border_left {
+    border-left: solid 0.1875em rgb(90, 90, 90);
+}
+
+/* button, displays drop content */
+
+.drop_btn {
+    cursor: pointer;
+}
+
+/* items with only images */
+
+.header_menu_img {
+    display: block;
+    height: 2.3em;
+    width: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.header_menu_a_img {
+    padding: 0.2em 0.6em;
+    height: 2.3em;
+}
+
+
+
+/* header drop content */
+
+#header_drop_content {
+    box-sizing: border-box;
+    position: absolute;
+    top: 3em;
+    right: 0em;
+    height: auto;
+    z-index: 999;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.header_menu_drop_hide {
+    display: none;
+}
+
+.header_menu_drop_show {
+    display: block;
+}
+
+
+/* items in drop menu */
+
+.header_drop_item {
+    width: 10em;
+    height: 3em;
+    display: block;
+    box-sizing: border-box;
+    background-color: rgb(230, 230, 230);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.header_drop_item:hover {
+    background-color: rgb(245, 245, 245);
+    color: rgb(0, 0, 0);
+}
+
+.header_drop_item_border {
+    border-left: solid 0.125em rgb(170, 170, 170);
+    border-right: solid 0.125em rgb(170, 170, 170);
+    border-top: solid 0.125em rgb(170, 170, 170);
+}
+
+.header_drop_item_border_last {
+    border: solid 0.125em rgb(170, 170, 170);
+}
+
+
+
+/* images in drop menu */
+
+.header_menu_img_drop {
+    padding: 0.5em 0.75em 0.375em 0.75em;
+    height: 2em;
+    width: auto;
+    display: inline-block;
+    float: left;
+}
+
+/* texts in drop menu */
+
+.header_drop_p {
+    height: 1.375em;
+    display: inline-block;
+    float: left;
+    text-align: left;
+    line-height: 1.2em;
+    font-size: 1em;
+    font-weight: normal;
+    padding: 0.75em 0.5em 0.75em 0.75em;
+}
+
+
+/* arrows in menu*/
+
+.arrow {
+    border: solid rgb(0, 0, 0);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+    -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+    -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+    -o-transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+.up_arrow {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down_arrow {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}

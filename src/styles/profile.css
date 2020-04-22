@@ -1,0 +1,131 @@
+html {
+	visibility: hidden;
+}
+
+.main_content {
+	margin-top: 0;
+}
+
+/* div with a name */
+
+.profile_name {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+/* h1, name of a user */
+
+.users_name {
+	font-size: 2em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+
+/* main content of a profile page */
+
+.right_column {
+	box-sizing: border-box;
+	float:right;
+	width: /*67.3em*/ 76%;
+	max-width: 67.3em;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+/* biography of a user */
+
+.bio {
+	width: 100%;
+	margin-top: 2em;
+}
+
+
+/* styles for a left column with profile picture and informations about user */
+
+.left_column {
+	box-sizing: border-box;
+	float:left;
+	margin: 0;
+	padding: 0 0 0 0;
+	width: 20%;
+	max-width: 15em;
+	border-left: 0.0625em solid rgb(220, 220, 220);
+	border-right: 0.0625em solid rgb(220, 220, 220);
+}
+
+
+/* style for a profile image */
+
+.profile_picture {
+	width: 94%;
+	height: auto;
+	margin: 3%;
+	padding: 0;
+}
+
+
+/* buttons for profile control */
+
+.requests {
+	width: auto;
+	height: auto;
+	padding: 0;
+	margin: 0.25em 0.25em 0 0.25em;
+}
+
+.requests_a {
+	margin: 0 0.125em 0 0.125em;
+}
+
+.requests_image {
+	height: 2.5em;
+	width: auto;
+	padding: 0.25em 1em 0.25em 1em;
+	margin: 0 0em 0 0em;
+	/*border: solid black 1px;*/
+	transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+	-webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+	-moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+	-o-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.requests_image_en:hover {
+	cursor: pointer;
+	background-color: rgb(200, 200, 200);
+}
+
+.requests_image_dis:hover {
+	cursor: default;
+	background-color: rgb(250, 250, 250);
+}
+
+
+/* list with information about user */
+
+.informations {
+    font-family: 'Arial', Helvetica, sans-serif;
+    font-size: 0.9375em;
+    line-height: 1.75em;
+    color: rgb(0, 0, 0);
+    padding-left: 0.375em;
+    padding-right: 0.375em;
+}
+
+ul.informations li {
+	margin: 0.25em 0 0 0;
+}
+
+
+.info_tag {
+	float: left;
+	width: auto;
+	clear: right;
+	font-weight: bold;
+}
+
+.value {
+	float: right;
+	width: auto;
+}
+

@@ -4,88 +4,74 @@
     session_start();
 
     if(isset($_SESSION['id_user'])) {
-        header('Location: profile.php');
+        header("Location: profile.php?user=" . $_SESSION['id_user']);
         exit();
     }
 
     $page = new Page();
-    $page->displayHead( "login", array("styles/style_form.css", "styles/style_form-dark.css"));
-    $page->displayBodyStart();
+    $page->display_header( "Login", array("styles/style_form", "styles/index"));
+    $page->display_body_start();
 ?>
 
-<div class="div_form_logreg" id="div_reg">
+<div class="div_form_log_reg" id="div_reg">
 
-    <button onclick="showLogForm()" class="logreg_button logreg_active" id="log_button">Prihlásenie</button>
-    <button onclick="showRegForm()" class="logreg_button" id="reg_button">Registrácia</button>
+    <button class="log_reg_button log_reg_active" id="show_login">Log In</button>
+    <button class="log_reg_button" id="show_registration">Register</button>
 
-    <form method="POST" class="logreg" id="registration">
-
-        <p class="spacing_form">
-            <label for="name_reg">
-                Meno:
-                <span class="required">*</span>
-            </label>
-        </p>
-        <input required class="spacing_form input_form" type="text" name="name" id="name_reg" size="35" placeholder="meno" />
+    <form id="registration" method="POST" class="log_reg hide">
 
         <p class="spacing_form">
-            <label for="surname_reg">
-                Priezvisko:
-                <span class="required">*</span>
-            </label>
+            <label for="name_reg">Name</label>
         </p>
-        <input required class="spacing_form input_form" type="text" name="surname" id="surname_reg" size="35" placeholder="priezvisko" />
+        <input required class="spacing_form input_form" type="text" name="name_reg" id="name_reg" placeholder="Name" maxlength="40"/>
 
         <p class="spacing_form">
-            <label for="email_reg">
-                E-mail:
-                <span class="required">*</span>
-            </label>
+            <label for="surname_reg">Surname</label>
         </p>
-        <input required class="spacing_form input_form" type="email" name="email" id="email_reg" size="35" placeholder="e-mail" />
+        <input required class="spacing_form input_form" type="text" name="surname_reg" id="surname_reg" placeholder="Surname" maxlength="40"/>
 
         <p class="spacing_form">
-            <label for="password1_reg">
-                Heslo:
-                <span class="required">*</span>
-            </label>
+            <label for="email_reg">Email</label>
         </p>
-        <input required class="spacing_form input_form" type="password" name="password1" id="password1_reg" size="35" placeholder="heslo" />
+        <input required class="spacing_form input_form" type="email" name="email_reg" id="email_reg" placeholder="Email" maxlength="100"/>
+        <img id="email_reg_status" src="" alt="" class="stat">
 
         <p class="spacing_form">
-            <label for="password2_reg">
-                Heslo znova:
-                <span class="required">*</span>
-            </label>
+            <label for="password_reg">Password</label>
         </p>
-        <input required class="spacing_form input_form" type="password" name="password2" id="password2_reg" size="35" placeholder="heslo znovu" />
+        <input required class="spacing_form input_form" type="password" name="password_reg" id="password_reg" placeholder="Password" />
+        <img id="pass_reg_status" src="" alt="" class="stat">
 
         <p class="spacing_form">
-            <button class="spacing_form button_form_submit" type="submit" form="registration" formaction="scripts/registration.php">Zaregistrovať</button>
+            <label for="password_reg_again">Confirm your password</label>
         </p>
+        <input required class="spacing_form input_form" type="password" name="password_reg_again" id="password_reg_again" placeholder="Confirm password" />
+        <img id="pass_reg_again_status" src="" alt="" class="stat">
 
-        <p class="spacing_form"><span class="required">*</span> Povinné pole.</p>
+        <div id="res_reg" class="form_result spacing_form"><p></p></div>
+
+        <p class="spacing_form">
+            <input id="register_submit" class="spacing_form button_form_submit" type="button" form="register" value="Register" />
+        </p>
 
     </form>
 
-    <form method="POST" class="logreg" id="login">
+    <form id="login" method="POST" class="log_reg">
 
         <p class="spacing_form">
-            <label for="email_log">
-                E-mail:
-            </label>
+            <label for="email_log">Email</label>
         </p>
-        <input required class="spacing_form input_form" type="email" name="email" id="email_log" size="35" placeholder="e-mail" />
+        <input required class="spacing_form input_form" type="email" name="email_log" id="email_log" placeholder="Email" maxlength="100"/>
 
         <p class="spacing_form">
-            <label for="password_log">
-                Heslo:
-            </label>
+            <label for="password_log">Password</label>
         </p>
-        <input required class="spacing_form input_form" type="password" name="password" id="password_log" size="35" placeholder="heslo" />
+        <input required class="spacing_form input_form" type="password" name="password_log" id="password_log" placeholder="Password" />
+
+        <div id="res_log" class="form_result spacing_form"><p></p></div>
 
         <p class="spacing_form">
-            <button class="spacing_form button_form_submit" type="submit" form="login" formaction="scripts/login.php">Prihlásiť</button>
+            <input id="login_submit" class="spacing_form button_form_submit" type="button" form="login" value="Log IN"/>
         </p>
 
     </form>
@@ -95,7 +81,5 @@
 </div>
 
 <?php
-    $page->displayBodyEnd(array("js/toggle_log_reg_forms.js"));
+    $page->display_body_end(array("js/validate_inputs.js", "js/log_reg.js"));
 ?>
-
-

@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
+
     fetch_users_all();
+    open_chat();
 
 
     /* periodical update */
@@ -15,13 +17,35 @@ $(document).ready(function() {
     }, 400);
 
 
+    /* opens a conversation to a user whom id is contained in link */
+    function open_chat() {
+        let url = new URLSearchParams(window.location.search);
+
+        if (url.get('user') > 0) {
+            $.ajax({
+                url: "scripts/query_users.php",
+                method: "POST",
+                data: {
+                    mode: "get_username",
+                    id_user: url.get('user')
+                },
+                success: function (data) {
+                    data = data.toString().split("|");
+
+                    create_chat(data[0], data[1], data[2], data[3]);
+                }
+            });
+        }
+    }
+
+
     /* will fetch users from with whom had logged user conversations from database */
     function fetch_users_all() {
         $.ajax({
             url: "scripts/query_users.php",
             method: "POST",
             data: {
-                mode: "all",
+                mode: "all"
             },
             success: function (data) {
                 $("#list_users_list").html(data);
@@ -37,7 +61,7 @@ $(document).ready(function() {
             url: "scripts/query_users.php",
             method: "POST",
             data: {
-                mode: "refresh_list",
+                mode: "refresh_list"
             },
             success: function (data) {
                 let ret_data = data.toString().split("|");
@@ -50,7 +74,7 @@ $(document).ready(function() {
                         let id_list_item = $(".list_users_item[id_user_to=" + ret_data[i] + "]").attr("id_user_to");
                         if (!(id_list_item > 0)) {
                             console.log(id_list_item);
-                            list.append(ret_data[i + 1]);
+                            list.prepend(ret_data[i + 1]);
                         }
                     }
                     catch (ex) {
@@ -64,12 +88,12 @@ $(document).ready(function() {
             url: "scripts/query_users.php",
             method: "POST",
             data: {
-                mode: "refresh_marks",
+                mode: "refresh_marks"
             },
             success: function(data){
-                let ret_data = data.toString().split(" ");
+                let ret_data = data.toString().split("|");
 
-                for (let i = 0; i < ret_data.length; i += 5) {
+                for (let i = 0; i < ret_data.length; i += 4) {
 
                     let last_active_sign = $("#user_last_active");
                     let active_mark = $("#active_mark_" + ret_data[i]);
@@ -78,12 +102,13 @@ $(document).ready(function() {
 
                     /* label with last active time or with sign active in chat header */
 
-                    if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Aktívny"){
-                        last_active_sign.html("Aktívny");
+                    if (last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "online" && last_active_sign.text() !== "Online"){
+                        last_active_sign.html("Online");
                     }
-                    else if(last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline" && last_active_sign.text() === "Aktívny"){
-                        last_active_sign.html("Naposledy aktívny " + ret_data[i + 2] + " " + ret_data[i + 3]);
-                        $(".list_users_item[id_user_to='" + ret_data[i] + "']").attr("last_active", ret_data[i + 2] + " " + ret_data[i + 3]);
+                    else if (last_active_sign.hasClass(ret_data[i]) && ret_data[i + 1] === "offline") {
+                        if (last_active_sign.html() !== "Last online " + ret_data[i + 2]) {
+                            last_active_sign.html("Last online " + ret_data[i + 2]);
+                        }
                     }
 
 
@@ -99,10 +124,10 @@ $(document).ready(function() {
 
                     /* mark of a new unread message in the list of conversations */
 
-                    if(ret_data[i + 4] === "0" && new_message_notification.hasClass("mes_not_chat")){
+                    if(ret_data[i + 3] === "0" && new_message_notification.hasClass("mes_not_chat")){
                         new_message_notification.removeClass("mes_not_chat");
                     }
-                    else if(ret_data[i + 4] !== "0" && !new_message_notification.hasClass("mes_not_chat")) {
+                    else if(ret_data[i + 3] !== "0" && !new_message_notification.hasClass("mes_not_chat")) {
                         new_message_notification.addClass("mes_not_chat");
                     }
 
@@ -113,21 +138,52 @@ $(document).ready(function() {
 
 
     /* will display chat with particular user */
-    $(document).on('click', '.list_users_item', function(){
+    $(document).on('click', '.list_users_item', function() {
         let id_user_to = $(this).attr("id_user_to");
-        let name_user_to = $(this).attr("name_user_to");
-        let last_active = $(this).attr("last_active");
-        create_chat(id_user_to, name_user_to, last_active);
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "get_username",
+                id_user: id_user_to
+            },
+            success: function (data) {
+                data = data.toString().split("|");
+
+                create_chat(data[0], data[1], data[2], data[3]);
+            }
+        });
     });
 
 
     /* will create content in conversations section */
-    function create_chat(id_user_to, name_user_to, last_active){
+    function create_chat(id_user_to, name_user_to, last_active, profile_picture){
 
-        let conversation_header = "<img class='avatar' src='' alt='Avatar' />";
-        conversation_header += "<p>" + name_user_to + "</p>";
-        conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Naposledy aktívny " + last_active + "</span>";
-        conversation_header += "<img id='conversation_close_button' src='srcPictures/icons8-no-100.png' alt='send icon' />";
+        let conversation_header = "";
+        let img = "";
+
+        if (profile_picture === "") {
+            img = "src_pictures\/blank-profile-picture-png-8.png";
+        }
+        else {
+            img = "user_pictures\/" + profile_picture;
+        }
+        img = "background-image: url('" + img + "');";
+
+        conversation_header += '<div class="avatar" style="' + img + '"></div>';
+        conversation_header += "<p><a class='common' href='profile.php?user=" + id_user_to + "'>" + name_user_to + "</a></p>";
+        conversation_header += "<span id='user_last_active' class='time " + id_user_to + "'>Last online " + last_active + "</span>";
+        conversation_header += "<img id='conversation_close_button' src='";
+
+        if (theme === "dark") {
+            conversation_header += "src_pictures/icons8-no-100-white.png";
+        }
+        else {
+            conversation_header += "src_pictures/icons8-no-100.png";
+        }
+
+        conversation_header += "' alt='send icon' />";
 
         $("#conversation_header").html(conversation_header);
 
@@ -145,7 +201,7 @@ $(document).ready(function() {
             method: "POST",
             data: {
                 mode: "all",
-                id_user_to: id_user_to,
+                id_user_to: id_user_to
             },
             success: function (data) {
                 $("#conversation").html(data);
@@ -169,7 +225,7 @@ $(document).ready(function() {
                 data: {
                     mode: "send_message",
                     id_user_to: id_user_to,
-                    message: message,
+                    message: message
                 },
                 success: function(){
                     $("#message_to_send").val("");
@@ -236,7 +292,7 @@ $(document).ready(function() {
                 method: "POST",
                 data: {
                     mode: "refresh_messages",
-                    id_user_to: id_user_to,
+                    id_user_to: id_user_to
                 },
                 success: function (data) {
                     let ret_data = data.toString().split("|");
@@ -252,31 +308,7 @@ $(document).ready(function() {
 
                                 let new_message_content_alt = new_message_content.replace("mes_time_info", "mes_time_info mes_time_info_show");
 
-                                //old_message_content = old_message_content.replace(/[\u000d]/g, ' ');
-                                //new_message_content = new_message_content.replace(/[\u000a]/g, ' ');
-
-                                //console.log(ret_data[i]);
-
-
-                                //console.log();
-
-                                /*if ( !( old_message_content.is(ret_data[i + 1])) ) {
-                                    old_message.html(ret_data[i + 1]);
-                                }*/
-
-                                /*if ( ( old_message_content.localeCompare( ret_data[i + 1] ) >= 1 ) ) {
-                                    old_message.html(ret_data[i + 1]);
-                                }*/
-
-                                /*if ( ( old_message_content.localeCompare( new_message_content ) !== 0 ) ) {
-                                    old_message.html(ret_data[i + 1]);
-                                }*/
-
                                 if (!(strings_equal(old_message_content, new_message_content)) && !(strings_equal(old_message_content, new_message_content_alt))) {
-                                    console.log(old_message_content);
-                                    console.log(new_message_content);
-                                    console.log((new_message_content_alt));
-
                                     old_message.html(ret_data[i + 1]);
                                     old_message.removeClass("mes_wrap_active");
                                 }
@@ -285,7 +317,7 @@ $(document).ready(function() {
                             }
                         }
                     }
-                },
+                }
             });
         }
     }
@@ -294,7 +326,6 @@ $(document).ready(function() {
     /* verifies whether two strings are identical */
     function strings_equal (string1, string2) {
         for (let i = 0; i < string1.length; i++) {
-            //console.log(string1.charCodeAt(i) + " " + string2.charCodeAt(i));
             if (string1.charCodeAt(i) !== string2.charCodeAt(i)) {
                 /*console.log("false " + i + " " + string1.charCodeAt(i) + " " + string1.charAt(i) + " " + string2.charCodeAt(i) + " " + string2.charAt(i) +
                     " | " + string1.slice(i - 10, i) + " | " + string1.charAt(i) + " | " + string1.slice(i, i + 10) +
@@ -340,11 +371,11 @@ $(document).ready(function() {
             method: "POST",
             data: {
                 mode: "remove_message",
-                id_message: id_message,
+                id_message: id_message
             },
             success: function () {
 
-            },
+            }
         })
     });
 
@@ -357,12 +388,12 @@ $(document).ready(function() {
         }
         else if( !(event.which === 13 || event.which === 27)){
 
-            let value = $(this).val();
+            let value = $(this).val().toString().trim();
 
             if (value !== "") {
                 $(".clear_search_users").addClass("clear_search_users_visible");
             }
-            else if (value === undefined) {
+            else if (value === undefined || value === "") {
                 $(".clear_search_users").removeClass("clear_search_users_visible");
             }
 
@@ -371,14 +402,14 @@ $(document).ready(function() {
                 method: "POST",
                 data: {
                     mode: "find_user",
-                    value: value,
+                    value: value
                 },
                 success: function (data) {
                     let result = $("#search_result_con_list");
                     result.html(data);
                     result.addClass("visible");
 
-                },
+                }
             });
         }
     });
@@ -409,15 +440,25 @@ $(document).ready(function() {
     });
 
 
-    /* after clicking on a user of a result list will open conversation with him */
+    /* after clicking on a user from a result list of search will open conversation with him */
     $(document).on("click", ".search_result_item", function () {
-
         let id_user_to = $(this).attr("id").split("_")[2];
-        let name_user_to = $(this).attr("name_user_to");
-        let last_active = $(this).attr("last_active");
+
+        $.ajax({
+            url: "scripts/query_users.php",
+            method: "POST",
+            data: {
+                mode: "get_username",
+                id_user: id_user_to
+            },
+            success: function (data) {
+                data = data.toString().split("|");
+
+                create_chat(data[0], data[1], data[2], data[3]);
+            }
+        });
 
         $(".clear_search_users").click();
-        create_chat(id_user_to, name_user_to, last_active);
     });
 
 

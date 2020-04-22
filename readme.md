@@ -1,5 +1,2 @@
 # SocialNetwork
-- Maturitný projekt 2019/2020
-
-
-test 01
+- High school graduation project [2019/2020]

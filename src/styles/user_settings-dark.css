@@ -1,0 +1,34 @@
+
+/* font color for a label */
+
+label {
+    color: rgb(210, 210, 210);
+}
+
+/* colors for a textarea biography */
+
+#biography {
+    background-color: rgb(54, 57, 63);
+    color: rgb(210, 210, 210);
+    border-color: rgb(110, 110, 110);
+}
+
+#biography:focus {
+    background-color: rgb(60, 60, 60);
+    border-color: rgb(250, 250, 250);
+}
+
+
+/* colors for selects */
+
+.select_input {
+	background-color: rgb(54, 57, 63);
+    color: rgb(210, 210, 210);
+    border-color: rgb(110, 110, 110);
+}
+
+.select_input:focus {
+    border-color: rgb(250, 250, 250);
+}
+
+

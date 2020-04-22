@@ -20,14 +20,14 @@ if (!isset($_SESSION['id_user'])) {
 $page = new Page();
 
 /* vypíše html hlavičku */
-/* napr. $page->displayHead( "messages", array("styles/messages.css", "styles/messages-dark.css")); */
-/* napr. $page->displayHead( "", array()); */
+/* napr. $page->display_header( "messages", array("styles/messages")); */
+/* napr. $page->display_header( "", array()); */
 
-$page->displayHead( /* titul stránky, (to čo je napísane hore na lište okna/stránky) */"", array(/* tu sa vymenujú dodatočné súbory css, ktoré potrebuješ na konkrétnu stránku */));
+$page->display_header( /* titul stránky, (to čo je napísane hore na lište okna/stránky) */"", array(/* tu sa vymenujú dodatočné súbory css, ktoré potrebuješ na konkrétnu stránku */));
 
 /* vypíše hlavičku stránky, menu */
 
-$page->displayBodyStart();
+$page->display_body_start();
 
 ?>
 
@@ -58,9 +58,9 @@ stránky
 <?php
 
 /* vypíše koniec dokumentu (uzatvaracie tagy), pripojí javascript súbory */
-/* napr. $page->displayBodyEnd(array("js/messages.js")); */
-/* napr. $page->displayBodyEnd(array()); */
+/* napr. $page->display_body_end(array("js/messages.js")); */
+/* napr. $page->display_body_end(array()); */
 
-$page->displayBodyEnd(array(/* tu sa vymenujú dodatočné súbory js, ktoré potrebuješ na konkrétnu stránku */));
+$page->display_body_end(array(/* tu sa vymenujú dodatočné súbory js, ktoré potrebuješ na konkrétnu stránku */));
 
 ?>
