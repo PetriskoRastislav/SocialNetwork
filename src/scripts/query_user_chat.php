@@ -85,13 +85,8 @@ try {
         $output = "";
 
         while ($statement->fetch()) {
-            if ($id_user_to == $id_user_sender) {
-                $output .=
-                    "<div id='mes_" . $id_message . "' class='mes_wrap'>" .
-                    "<div class='message'>" .
-                    $profile_pic_theirs;
-            }
-            else {
+
+            if ($id_user_sender == $_SESSION['id_user']) {
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
@@ -103,6 +98,15 @@ try {
                     $output .= '" alt="delete message button" title="Delete message">';
                 }
                 $output .= '<div class="message message_my">' . $profile_pic_me;
+
+            }
+            else {
+
+                $output .=
+                    "<div id='mes_" . $id_message . "' class='mes_wrap'>" .
+                    "<div class='message'>" .
+                    $profile_pic_theirs;
+
             }
 
 
@@ -257,13 +261,8 @@ try {
         $output = "";
 
         while ($statement->fetch()) {
-            if ($id_user_to == $id_user_sender) {
-                $output .=
-                    "<div id='mes_" . $id_message . "' class='mes_wrap'>" .
-                    "<div class='message'>" .
-                    $profile_pic_theirs;
-            }
-            else {
+            if ($id_user_sender == $_SESSION['id_user']) {
+
                 $output .= "<div id='mes_" . $id_message . "' class='mes_wrap my_mes_wrap'>";
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
@@ -275,8 +274,16 @@ try {
                     $output .= '" alt="delete message button" title="Delete message">';
                 }
                 $output .=
-                    "<div class='message message_my'>" .
-                    $profile_pic_me;
+                    "<div class='message message_my'>" . $profile_pic_me;
+
+            }
+            else {
+
+                $output .=
+                    "<div id='mes_" . $id_message . "' class='mes_wrap'>" .
+                    "<div class='message'>" .
+                    $profile_pic_theirs;
+
             }
 
 
@@ -404,10 +411,7 @@ try {
 
             $output .= $id_message . "|";
 
-            if ($id_user_to == $id_user_sender) {
-                $output .= '<div class="message">' . $profile_pic_theirs;
-            }
-            else {
+            if ($id_user_sender == $_SESSION['id_user']) {
 
                 if ($status != 'deleted' && $time_sent > $time_limit) {
                     $output .= '<img id="rem_mes_' . $id_message . '" class="remove_message" src="';
@@ -418,6 +422,12 @@ try {
                     $output .= '" alt="delete message button" title="Delete message">';
                 }
                 $output .= '<div class="message message_my">' . $profile_pic_me;
+
+            }
+            else {
+
+                $output .= '<div class="message">' . $profile_pic_theirs;
+
             }
 
 
