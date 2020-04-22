@@ -71,6 +71,20 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
+/* Table to hold pending friendship requests */
+
+CREATE TABLE IF NOT EXISTS `SocialNetwork`.`friendship_requests` (
+	`id_request` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `id_user_sender` INT UNSIGNED NOT NULL,
+    `id_user_receiver` INT UNSIGNED NOT NULL,
+    `time_sent` CHAR(19) NOT NULL,
+    `status` ENUM('seen', 'unseen') NOT NULL DEFAULT 'unseen'
+)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+
 /* Foreign keys */
 
 ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_1`) REFERENCES `SocialNetwork`.`users`(`id_user`);
@@ -78,4 +92,9 @@ ALTER TABLE `SocialNetwork`.`friends` ADD FOREIGN KEY (`id_user_2`) REFERENCES `
 
 ALTER TABLE `SocialNetwork`.`messages` ADD FOREIGN KEY (`id_user_sender`) REFERENCES `SocialNetwork`.`users`(`id_user`);
 ALTER TABLE `SocialNetwork`.`messages` ADD FOREIGN KEY (`id_user_receiver`) REFERENCES `SocialNetwork`.`users`(`id_user`);
+
+ALTER TABLE `SocialNetwork`.`friendship_requests` ADD FOREIGN KEY (`id_user_sender`) REFERENCES `SocialNetwork`.`users`(`id_user`);
+ALTER TABLE `SocialNetwork`.`friendship_requests` ADD FOREIGN KEY (`id_user_receiver`) REFERENCES `SocialNetwork`.`users`(`id_user`);
+
+
 
