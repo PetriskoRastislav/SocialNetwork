@@ -94,68 +94,21 @@ $page->display_body_start();
 
 
         /* button send message */
-
-        $buttons =
-            '<a href="messages.php?user=' . $id_user . '" class="requests_a">' .
-            '<img class="requests_image requests_image_en" src="';
-
-        if($_SESSION['color_mode'] === "dark") $buttons .= "src_pictures/icons8-new-message-100-white.png";
-        else $buttons .= "src_pictures/icons8-new-message-100.png";
-
-        $buttons .= '" title="Write a Message" alt="Write a Message"></a>';
-
-
-        /* button send friendship request / annul friendship */
-
-        if ($id_user != $_SESSION['id_user']){
-
-            $query =
-                "SELECT id_friendship
-                FROM friends
-                WHERE (id_user_1 = ? AND id_user_2 = ?)
-                OR (id_user_1 = ? AND id_user_2 = ?)";
-            $statement = $db->prepare($query);
-            $statement->bind_param("iiii", $id_user, $_SESSION['id_user'], $_SESSION['id_user'], $id_user);
-            $statement->execute();
-            $statement->bind_result($id_friendship);
-            $statement->fetch();
-
-            $buttons .= '<img class="requests_image requests_image_en" src="';
-
-            if ($id_friendship > 0) {
-                if($_SESSION['color_mode'] === "dark") $buttons .= "src_pictures/icons8-remove-user-group-man-man-100-white.png";
-                else $buttons .= "src_pictures/icons8-remove-user-group-man-man-100.png";
-
-                $buttons .= '" title="Annul Friendship" alt="Annul Friendship">';
-            }
-            else {
-                if($_SESSION['color_mode'] === "dark") $buttons .= "src_pictures/icons8-add-user-group-man-man-100-white.png";
-                else $buttons .= "src_pictures/icons8-add-user-group-man-man-100.png";
-
-                $buttons .= '" title="Request Friendship" alt="Request Friendship">';
-            }
-
-            $statement->free_result();
-            $statement->close();
-
-        }
+        echo print_write_message_button($id_user);
 
 
         /* button to show user's profile */
-
-        $buttons .=
-            '<a href="profile.php?user=' . $id_user . '" class="requests_a">' .
-            '<img class="requests_image requests_image_en" src="';
-
-        if ($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-user-100-white.png";
-        else $buttons .= "src_pictures/icons8-user-100.png";
-
-        $buttons .= '" title="Profile" alt="Profile"></a>';
+        echo print_profile_button($id_user);
 
 
-        /* print buttons */
+        /* button send friendship request / cancel friendship / cancel friendship request */
 
-        echo $buttons;
+        if ($id_user != $_SESSION['id_user']){
+
+            echo print_friendship_button($id_user);
+
+        }
+
 
         ?>
 

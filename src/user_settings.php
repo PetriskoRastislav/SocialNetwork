@@ -63,46 +63,16 @@ $page->display_body_start();
 
         /* profile control buttons */
 
-
         /* button send message */
-
-        $buttons =
-            '<a href="messages.php?user=' . $id_user . '" class="requests_a">' .
-            '<img class="requests_image requests_image_en" src="';
-
-        if($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-new-message-100-white.png";
-        else $buttons .= "src_pictures/icons8-new-message-100.png";
-
-        $buttons .= '" title="Write a Message" alt="Write a Message"></a>';
+        echo print_write_message_button($id_user);
 
 
         /* button to show user's profile */
-
-        $buttons .=
-            '<a href="profile.php?user=' . $id_user . '" class="requests_a">' .
-            '<img class="requests_image requests_image_en" src="';
-
-        if ($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-user-100-white.png";
-        else $buttons .= "src_pictures/icons8-user-100.png";
-
-        $buttons .= '" title="Profile" alt="Profile"></a>';
+        echo print_profile_button($id_user);
 
 
         /* button to show user's friends */
-
-        $buttons .=
-            '<a href="friends.php?user=' . $id_user . '" class="requests_a">' .
-            '<img class="requests_image requests_image_en" src="';
-
-        if($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-user-account-100-white.png";
-        else $buttons .= "src_pictures/icons8-user-account-100.png";
-
-        $buttons .= '" title="Friends" alt="Friends"></a>';
-
-
-        /* print buttons */
-
-        echo $buttons;
+        echo print_friends_button($id_user);
 
         ?>
 
