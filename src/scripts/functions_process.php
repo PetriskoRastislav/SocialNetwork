@@ -42,18 +42,18 @@ function get_unseen_messages_notification ($id_user_sender, $id_user_receiver) {
 function process_month ($month) {
 
     switch ($month) {
-        case "01": return "january";
-        case "02": return "february";
-        case "03": return "march";
-        case "04": return "april";
-        case "05": return "may";
-        case "06": return "jun";
-        case "07": return "july";
-        case "08": return "august";
-        case "09": return "september";
-        case "10": return "october";
-        case "11": return "november";
-        case "12": return "december";
+        case "01": return "January";
+        case "02": return "February";
+        case "03": return "March";
+        case "04": return "April";
+        case "05": return "May";
+        case "06": return "Jun";
+        case "07": return "July";
+        case "08": return "August";
+        case "09": return "September";
+        case "10": return "October";
+        case "11": return "November";
+        case "12": return "December";
         default: return false;
     }
 

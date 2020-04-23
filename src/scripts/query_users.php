@@ -524,7 +524,7 @@ try {
             }
         }
         else {
-            $month_of_birth = null;
+            $year_of_birth = null;
         }
 
 

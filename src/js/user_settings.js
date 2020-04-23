@@ -271,7 +271,7 @@ $(document).ready( function () {
                 return;
             }
         }
-
+        
         $.ajax({
             url: "scripts/query_users.php",
             method: "POST",
