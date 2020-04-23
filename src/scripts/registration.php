@@ -1,7 +1,6 @@
 <?php
 
 require_once('scripts_min.php');
-
 session_start();
 
 try {

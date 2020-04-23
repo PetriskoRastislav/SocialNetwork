@@ -1,8 +1,6 @@
 <?php
 
-require_once('db_connect.php');
-require_once('data_valid.php');
-
+require_once('scripts_min.php');
 session_start();
 
 try {

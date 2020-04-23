@@ -2,6 +2,7 @@
 
 /* informations about user (to left panel) */
 
+
 $query =
     "SELECT profile_picture, last_active, gender, location, registered, day_of_birth, month_of_birth, year_of_birth
     FROM users

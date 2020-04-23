@@ -1,10 +1,6 @@
 <?php
 
 require_once('scripts_min.php');
-
-$email = $_POST['email'];
-$password = $_POST['password'];
-
 session_start();
 
 try {
@@ -13,6 +9,11 @@ try {
     if(!filled_out($_POST)){
         die ("log|0|Some of inputs are missing.");
     }
+
+
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
 
     /* Checks if email has a proper format. */
     if(!valid_email($email)){
