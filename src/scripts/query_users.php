@@ -289,8 +289,6 @@ try {
     }
 
 
-    /* to be moved to settings.php */
-
     /* will return data to fill some of user's settings */
     else if ($mode == "settings_fill") {
 

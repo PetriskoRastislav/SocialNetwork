@@ -1,22 +1,9 @@
 
-let url = new URLSearchParams(window.location.search);
-
-
-/* fills left panel with informations */
-get_profile_left_info("me");
-
-
-/* fills left panel with buttons */
-left_panel_buttons("settings");
-
-
 /* will fill some of the forms */
 fill_forms();
 
 
 $(document).ready( function () {
-
-    document.getElementsByTagName("html")[0].style.visibility = "visible";
 
 
     /* changes password */
@@ -277,10 +264,12 @@ $(document).ready( function () {
             return;
         }
 
-        if (!valid_year(year_of_birth)) {
-            display_warning("info", null,  "Year has wrong format (isn't year or is in forbidden range).");
-            $(this).blur();
-            return;
+        if (year_of_birth !== "") {
+            if (!valid_year(year_of_birth)) {
+                display_warning("info", null, "Year has wrong format (isn't year or is in forbidden range).");
+                $(this).blur();
+                return;
+            }
         }
 
         $.ajax({

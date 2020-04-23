@@ -18,7 +18,7 @@ if (filled_out($_GET)) $id_user = $_GET['user'];
 else $id_user = $_SESSION['id_user'];;
 
 
-/* fills profile */
+/* fills friends page */
 
 try {
     $db = db_connect();

@@ -1,13 +1,39 @@
 <?php
 
 require_once('scripts/scripts.php');
-
 session_start();
+
+
+/* checks if user is logged */
 
 if (!isset($_SESSION['id_user'])) {
     header('Location: index.php');
     exit();
 }
+
+
+/* gets id of user to whom belongs profile */
+$id_user = $_SESSION['id_user'];;
+
+
+/* fills settings page */
+
+try {
+    $db = db_connect();
+    mysqli_set_charset($db, "utf8");
+}
+catch (Exception $ex) {
+    $ex->getMessage();
+    exit();
+}
+
+
+/* informations about user (to left panel) */
+
+require_once ("scripts/fills_user_s_info.php");
+
+
+/* prints header of page */
 
 $page = new Page();
 $page->display_header( "Settings", array("styles/profile", "styles/style_form", "styles/user_settings"));
@@ -27,11 +53,58 @@ $page->display_body_start();
 
     <!-- user's profile picture -->
 
-	<img id="info_profile_picture" class="profile_picture" src="" title="Avatar" alt="Avatar">
+    <img id="info_profile_picture" class="profile_picture" src="<?php echo $profile_picture_content; ?>" title="Avatar" alt="Avatar">
 
     <!-- buttons for profile control -->
 
     <div class="requests">
+
+        <?php
+
+        /* profile control buttons */
+
+
+        /* button send message */
+
+        $buttons =
+            '<a href="messages.php?user=' . $id_user . '" class="requests_a">' .
+            '<img class="requests_image requests_image_en" src="';
+
+        if($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-new-message-100-white.png";
+        else $buttons .= "src_pictures/icons8-new-message-100.png";
+
+        $buttons .= '" title="Write a Message" alt="Write a Message"></a>';
+
+
+        /* button to show user's profile */
+
+        $buttons .=
+            '<a href="profile.php?user=' . $id_user . '" class="requests_a">' .
+            '<img class="requests_image requests_image_en" src="';
+
+        if ($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-user-100-white.png";
+        else $buttons .= "src_pictures/icons8-user-100.png";
+
+        $buttons .= '" title="Profile" alt="Profile"></a>';
+
+
+        /* button to show user's friends */
+
+        $buttons .=
+            '<a href="friends.php?user=' . $id_user . '" class="requests_a">' .
+            '<img class="requests_image requests_image_en" src="';
+
+        if($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-user-account-100-white.png";
+        else $buttons .= "src_pictures/icons8-user-account-100.png";
+
+        $buttons .= '" title="Friends" alt="Friends"></a>';
+
+
+        /* print buttons */
+
+        echo $buttons;
+
+        ?>
 
     </div>
 
@@ -40,23 +113,23 @@ $page->display_body_start();
     <ul class="informations">
         <li>
             <span class="info_tag">Last Online</span>
-            <span id="info_last_active" class="value"></span>
+            <span id="info_last_active" class="value"><?php echo $last_active_content; ?></span>
         </li>
         <li>
             <span class="info_tag">Gender</span>
-            <span id="info_gender" class="value"></span>
+            <span id="info_gender" class="value"><?php echo $gender_content; ?></span>
         </li>
         <li>
             <span class="info_tag">Location</span>
-            <span id="info_location" class="value"></span>
+            <span id="info_location" class="value"><?php echo $location_content; ?></span>
         </li>
         <li>
             <span class="info_tag">Registered</span>
-            <span id="info_registered" class="value"></span>
+            <span id="info_registered" class="value"><?php echo $registered_content; ?></span>
         </li>
         <li>
             <span class="info_tag">Date of Birth</span>
-            <span id="info_date_of_birth" class="value"></span>
+            <span id="info_date_of_birth" class="value"><?php echo $date_of_birth; ?></span>
         </li>
     </ul>
 </div>
@@ -127,7 +200,7 @@ $page->display_body_start();
             <form method="post" enctype="multipart/form-data" id="change_pic">
                 <ul>
                     <li>
-                        <div id="preview"><img src="src_pictures/defaultpicture.png" alt="Upload image preview"></div>
+                        <div id="preview"><img src="" alt="Upload image preview"></div>
                     </li>
                     <li>
                         <label for="profile_pic" class="info_tag_setting">Choose your new Profile Picture</label>
@@ -212,7 +285,7 @@ $page->display_body_start();
 				</li>
 				<li>
 					<label for="year_of_birth" class="info_tag_setting">Change your Year of Birth</label>
-					<input type="text" class="value_setting input_form" id="year_of_birth" name="year_of_birth" placeholder="Enter your year of birt" maxlength="4">
+					<input type="text" class="value_setting input_form" id="year_of_birth" name="year_of_birth" placeholder="Enter your year of birth" maxlength="4">
 				</li>
 			</ul>
 			<input id="change_info_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
@@ -251,10 +324,6 @@ $page->display_body_start();
 			
 			<input id="change_bio_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
             <div id="res_bio" class="form_result"><p></p></div>
-		<hr>
-
-		<input id="change_all_button" type="button" value="Change ALL" class="spacing_form button_form_submit button_setting">
-        <div id="res_all" class="form_result"><p></p></div>
 
 	</div>
 </div>
@@ -262,15 +331,15 @@ $page->display_body_start();
 
 <?php
 
-$page->display_scripts(array("js/validate_inputs.js", "js/profile_functions.js", "js/user_settings.js"));
+$page->display_scripts(array("js/validate_inputs.js", "js/user_settings.js"));
 
 ?>
 
-
 <script>
-    let theme = "<?php echo $_SESSION['color_mode']; ?>";
-</script>
 
+
+
+</script>
 
 <?php
 
