@@ -65,7 +65,6 @@ $statement->close();
 require_once ("scripts/fills_user_s_info.php");
 
 
-
 /* prints header of page */
 
 $page = new Page();
@@ -104,7 +103,7 @@ $page->display_body_start();
             '<a href="messages.php?user=' . $id_user . '" class="requests_a">' .
             '<img class="requests_image requests_image_en" src="';
 
-        if($_SESSION['color_mode'] === "dark") $buttons .= "src_pictures/icons8-new-message-100-white.png";
+        if($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-new-message-100-white.png";
         else $buttons .= "src_pictures/icons8-new-message-100.png";
 
         $buttons .= '" title="Write a Message" alt="Write a Message"></a>';
@@ -128,13 +127,13 @@ $page->display_body_start();
             $buttons .= '<img class="requests_image requests_image_en" src="';
 
             if ($id_friendship > 0) {
-                if($_SESSION['color_mode'] === "dark") $buttons .= "src_pictures/icons8-remove-user-group-man-man-100-white.png";
+                if($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-remove-user-group-man-man-100-white.png";
                 else $buttons .= "src_pictures/icons8-remove-user-group-man-man-100.png";
 
                 $buttons .= '" title="Annul Friendship" alt="Annul Friendship">';
             }
             else {
-                if($_SESSION['color_mode'] === "dark") $buttons .= "src_pictures/icons8-add-user-group-man-man-100-white.png";
+                if($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-add-user-group-man-man-100-white.png";
                 else $buttons .= "src_pictures/icons8-add-user-group-man-man-100.png";
 
                 $buttons .= '" title="Request Friendship" alt="Request Friendship">';
@@ -152,10 +151,13 @@ $page->display_body_start();
             '<a href="friends.php?user=' . $id_user . '" class="requests_a">' .
             '<img class="requests_image requests_image_en" src="';
 
-        if($_SESSION['color_mode'] === "dark") $buttons .= "src_pictures/icons8-user-account-100-white.png";
+        if($_SESSION['color_mode'] == "dark") $buttons .= "src_pictures/icons8-user-account-100-white.png";
         else $buttons .= "src_pictures/icons8-user-account-100.png";
 
         $buttons .= '" title="Friends" alt="Friends"></a>';
+
+
+        /* print buttons */
 
         echo $buttons;
 
@@ -197,16 +199,15 @@ $page->display_body_start();
 
 <?php
 
-$page->display_scripts(array("js/profile_functions.js", "js/profile.js"));
+$page->display_scripts(array());
 
 ?>
 
+<script>
 
-    <script>
 
 
-    </script>
-
+</script>
 
 <?php
 
