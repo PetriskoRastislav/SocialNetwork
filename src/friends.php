@@ -229,6 +229,7 @@ $page->display_body_start();
 
 <?php
 
+/* default js scripts */
 $page->display_default_scripts();
 
 ?>
@@ -241,8 +242,13 @@ $page->display_default_scripts();
 
 <?php
 
+/* additional js scripts */
 $page->display_scripts(array("js/friend-control.js"));
+
+/* end of document */
 $page->display_body_end();
+
+/* closing connection with database */
 $db->close();
 
 ?>

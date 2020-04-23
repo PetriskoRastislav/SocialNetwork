@@ -1,16 +1,22 @@
 <?php
-    require_once('scripts/scripts.php');
 
-    session_start();
+require_once('scripts/scripts.php');
+session_start();
 
-    if(isset($_SESSION['id_user'])) {
-        header("Location: profile.php?user=" . $_SESSION['id_user']);
-        exit();
-    }
+/* checks if user is logged */
 
-    $page = new Page();
-    $page->display_header( "Login", array("styles/style_form", "styles/index"));
-    $page->display_body_start();
+if(isset($_SESSION['id_user'])) {
+    header("Location: profile.php?user=" . $_SESSION['id_user']);
+    exit();
+}
+
+
+/* prints header of page */
+
+$page = new Page();
+$page->display_header( "Login", array("styles/style_form", "styles/index"));
+$page->display_body_start();
+
 ?>
 
 <div class="div_form_log_reg" id="div_reg">
@@ -83,14 +89,18 @@
 
 <?php
 
+/* default js scripts */
 $page->display_default_scripts();
-$page->display_scripts(array("js/validate_inputs.js", "js/log_reg.js"));
 
 ?>
 
 
 <?php
 
+/* additional js scripts */
+$page->display_scripts(array("js/validate_inputs.js", "js/log_reg.js"));
+
+/* end of document */
 $page->display_body_end();
 
 ?>

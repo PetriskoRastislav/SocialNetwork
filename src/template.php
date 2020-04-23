@@ -1,78 +1,48 @@
 <?php
 
-/* pripojenie skriptov */
-
 require_once('scripts/scripts.php');
-
-/* spustenie relácie, (sprístupnenie relačných premenných naprieč sktiptami) */
-
 session_start();
 
-/* overenie či je užívateľ prihlásený, ak nie tak ho presmeruje na login/registration stránku */
+
+/* checks if user is logged */
 
 if (!isset($_SESSION['id_user'])) {
     header('Location: index.php');
     exit();
 }
 
-/* vytvorí inštanciu triedy page.php */
+
+/* prints header of page */
 
 $page = new Page();
-
-/* vypíše html hlavičku */
-/* napr. $page->display_header( "messages", array("styles/messages")); */
-/* napr. $page->display_header( "", array()); */
-
-$page->display_header( /* titul stránky, (to čo je napísane hore na lište okna/stránky) */"", array(/* tu sa vymenujú dodatočné súbory css, ktoré potrebuješ na konkrétnu stránku */));
-
-/* vypíše hlavičku stránky, menu */
-
+$page->display_header("", array());
 $page->display_body_start();
 
 ?>
 
 
-<!--
 
-tu
-ide
-telo
-stránky,
-bez
-hlavičky html,
-bez
-hlavičky stránky,
-bez
-menu,
-bez
-štýlov,
-bez
-javascriptu,
-čisté
-telo
-stránky
+<!-- main body oh html document -->
 
--->
+
 
 <?php
 
-/* default skripty */
-
+/* default js scripts */
 $page->display_default_scripts();
-
-/* pripojí javascript súbory */
-/* napr. $page->display_body_end(array("js/messages.js")); */
-/* napr. $page->display_body_end(array()); */
-
-$page->display_scripts(array(/* tu sa vymenujú dodatočné súbory js, ktoré potrebuješ na konkrétnu stránku */));
 
 ?>
 
 
 <?php
 
-/* vypíše koniec dokumentu (uzatvaracie tagy)*/
+/* additional js scripts */
+$page->display_scripts(array("js/friend-control.js"));
 
+/* end of document */
 $page->display_body_end();
+
+/* closing connection with database */
+$db->close();
 
 ?>
