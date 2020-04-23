@@ -1,6 +1,6 @@
 <?php
 
-require_once('scripts.php');
+require_once('scripts_min.php');
 
 $email = $_POST['email'];
 $password = $_POST['password'];

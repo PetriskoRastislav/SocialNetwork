@@ -2,7 +2,7 @@
 
 /* will change profile picture of user */
 
-require_once('db_connect.php');
+require_once('scripts_min.php');
 session_start();
 
 try {

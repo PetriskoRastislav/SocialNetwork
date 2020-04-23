@@ -1,12 +1,6 @@
 <?php
 
-require_once('scripts.php');
-
-$name = $_POST['name'];
-$surname = $_POST['surname'];
-$email = $_POST['email'];
-$password = $_POST['password'];
-$password_again = $_POST['password_confirm'];
+require_once('scripts_min.php');
 
 session_start();
 
@@ -16,6 +10,13 @@ try {
     if (!filled_out($_POST)) {
         die ("reg|0|Some of inputs are missing.");
     }
+
+
+    $name = $_POST['name'];
+    $surname = $_POST['surname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $password_again = $_POST['password_confirm'];
 
 
     /* checks length of name */

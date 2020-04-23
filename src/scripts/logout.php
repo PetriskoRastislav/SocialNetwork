@@ -2,7 +2,6 @@
 
 try {
 
-    require_once('scripts.php');
     session_start();
 
     /* Storing the id of a user to verify that user was successfully logged off */
@@ -34,7 +33,7 @@ try {
     }
     else {
 
-        /* User wasn't logged in  but somehow managed to get here so we will send him back */
+        /* User wasn't logged in but somehow managed to get here so we will send him back */
 
         header('Location: ../index.php');
         exit();
