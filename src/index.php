@@ -83,6 +83,7 @@
 
 <?php
 
+$page->display_default_scripts();
 $page->display_scripts(array("js/validate_inputs.js", "js/log_reg.js"));
 
 ?>

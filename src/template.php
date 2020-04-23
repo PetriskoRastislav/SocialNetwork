@@ -56,6 +56,10 @@ stránky
 
 <?php
 
+/* default skripty */
+
+$page->display_default_scripts();
+
 /* pripojí javascript súbory */
 /* napr. $page->display_body_end(array("js/messages.js")); */
 /* napr. $page->display_body_end(array()); */

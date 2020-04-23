@@ -108,7 +108,9 @@ $page->display_body_start();
         /* button to show settings */
 
         if ($id_user == $_SESSION['id_user']){
+
             echo print_settings_button();
+
         }
 
 
@@ -158,18 +160,19 @@ $page->display_body_start();
 
 <?php
 
-$page->display_scripts(array());
+$page->display_default_scripts();
 
 ?>
 
 <script>
 
-
+    let theme = "<?php echo $_SESSION['color_mode']; ?>";
 
 </script>
 
 <?php
 
+$page->display_scripts(array("js/friend-control.js"));
 $page->display_body_end();
 $db->close();
 

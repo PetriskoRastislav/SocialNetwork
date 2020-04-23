@@ -10,7 +10,7 @@
 
 
         /* will display html header */
-        public function display_header($titleA, $styles = null) {
+        public function display_header ($titleA, $styles = null) {
             $this->diverse_icons();
             $this->display_declaration();
             $this->display_header_title($titleA);
@@ -20,7 +20,7 @@
 
 
         /* will fill array with icons (light / dark version) */
-        private function diverse_icons() {
+        private function diverse_icons () {
             if (@$_SESSION['color_mode'] == "dark" || !isset($_SESSION['color_mode'])) {
                 $this->icons = array(
                     "notifications" => "src_pictures/icons8-notification-100-white.png",
@@ -45,7 +45,7 @@
 
 
         /* will display declaration of a html file */
-        private function display_declaration() {
+        private function display_declaration () {
             echo "<!DOCTYPE html>" .
             "<html lang='sk'>" .
             "<head>";
@@ -53,14 +53,14 @@
 
 
         /* will display title of a page */
-        private function display_header_title($titleA) {
+        private function display_header_title ($titleA) {
             echo
                 "<title>" . $titleA . " - " . $this->title . "</title>";
         }
 
 
         /* will display meta information of a page */
-        private function display_header_meta() {
+        private function display_header_meta () {
             echo
             '<meta charset="UTF-8">'.
             '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">'.
@@ -70,7 +70,7 @@
 
 
         /* will display default and additional styles */
-        private function display_header_styles($styles) {
+        private function display_header_styles ($styles) {
 
             if ( !( isset($_SESSION['color_mode']) ) ){
                 $_SESSION['color_mode'] = "dark";
@@ -114,7 +114,7 @@
 
 
         /* will display start of a body and menu */
-        public function display_body_start() {
+        public function display_body_start () {
             echo
                 '<body>'.
                 '<div id="page">';
@@ -124,7 +124,7 @@
 
 
         /* will display header of a web-page, logo, menu, etc. */
-        public function display_page_header() {
+        public function display_page_header () {
 
             $message =
                 '<div class="pageHeader">'.
@@ -209,18 +209,22 @@
 
 
         /* will display title / heading of a web-page */
-        public function display_page_title($title) {
+        public function display_page_title ($title) {
             echo '<h1 class="pageTitle">' . $title . '</h1>';
         }
 
 
-        /* will attach default and additional javascript scripts */
-        public function display_scripts($scripts) {
-
+        /* will attach default javascript scripts */
+        public function display_default_scripts () {
             echo
                 '<script src="js/jquery-3.4.1.min.js"></script>'.
                 '<script src="js/menu.js"></script>'.
                 '<script src="js/js.js"></script>';
+        }
+
+
+        /* will attach default and additional javascript scripts */
+        public function display_scripts ($scripts) {
 
             $script = @reset($scripts);
 
@@ -233,7 +237,7 @@
 
 
         /* will display end of a body */
-        public function display_body_end() {
+        public function display_body_end () {
 
             echo '</div></div></body></html>';
 

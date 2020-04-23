@@ -301,7 +301,7 @@ $page->display_body_start();
 
 <?php
 
-$page->display_scripts(array("js/validate_inputs.js", "js/user_settings.js"));
+$page->display_default_scripts();
 
 ?>
 
@@ -313,6 +313,8 @@ $page->display_scripts(array("js/validate_inputs.js", "js/user_settings.js"));
 
 <?php
 
+$page->display_scripts(array("js/validate_inputs.js", "js/user_settings.js"));
 $page->display_body_end();
+$db->close();
 
 ?>

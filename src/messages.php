@@ -57,7 +57,7 @@ $page->display_body_start();
 
 <?php
 
-$page->display_scripts(array("js/messages.js"));
+$page->display_default_scripts();
 
 ?>
 
@@ -69,6 +69,7 @@ $page->display_scripts(array("js/messages.js"));
 
 <?php
 
+$page->display_scripts(array("js/messages.js"));
 $page->display_body_end();
 
 ?>
