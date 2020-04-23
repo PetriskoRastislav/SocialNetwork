@@ -138,7 +138,7 @@ $(document).ready(function() {
 
 
     /* will display chat with particular user */
-    $(document).on('click', '.list_users_item', function() {
+    $(document).on("click", ".list_users_item", function() {
         let id_user_to = $(this).attr("id_user_to");
 
         $.ajax({
@@ -212,7 +212,7 @@ $(document).ready(function() {
 
 
     /* will send message into a database */
-    $(document).on("click", "#send_button", function () {
+    $("#send_button").on("click", function () {
         let id_user_to = $(this).attr("id_user_to");
         let message = $("#message_to_send").val();
 
@@ -247,7 +247,7 @@ $(document).ready(function() {
 
 
     /* will send message also after clicking on Enter */
-    $(document).on("keyup", "#message_to_send", function (event) {
+    $("#message_to_send").on("keyup", function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();
             $("#send_button").click();
@@ -381,7 +381,7 @@ $(document).ready(function() {
 
 
     /* will search for a particular user */
-    $(document).on("keyup", "#search_user_con_list", function (event) {
+    $("#search_user_con_list").on("keyup", function (event) {
 
         if ((event.type === "keydown" || event.type === "keyup") && event.which === 27) {
             $("#search_result_con_list").removeClass("visible");
@@ -416,22 +416,23 @@ $(document).ready(function() {
 
 
     /* will display div with search result on focus on a search input */
-    $(document).on("focus", "#search_user_con_list", function () {
+    $("#search_user_con_list").on("focus", function () {
         $("#search_result_con_list").addClass("visible");
     });
 
 
     /* will hide div with a search result on a blur of a search input */
-    $(document).on("blur", "#search_user_con_list", function () {
+    $("#search_user_con_list").on("blur", function (event) {
         if ($("#search_user_con_list").val().toString() === "") {
             $("#search_result_con_list").removeClass("visible");
             $(".clear_search_users").removeClass("clear_search_users_visible");
+            $(".search_result_con_list").html("");
         }
     });
 
 
     /* will clear search field for searching users in conversations header */
-    $(document).on("click", ".clear_search_users", function () {
+    $(".clear_search_users").on("click", function () {
         $("#search_user_con_list").val("");
         $(this).removeClass("clear_search_users_visible");
         let result = $("#search_result_con_list");

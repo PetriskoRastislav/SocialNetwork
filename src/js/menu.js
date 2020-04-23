@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 
-    $(document).on("click", "#header_menu_drop_btn",  function () {
+    $("#header_menu_drop_btn").on("click", function () {
 
         let drop_content = $("#header_drop_content");
         let drop_btn = $("#header_menu_drop_btn");
