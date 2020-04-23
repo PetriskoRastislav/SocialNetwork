@@ -32,7 +32,7 @@ $(document).ready( function () {
         }
 
         $.ajax({
-            url: "scripts/query_users.php",
+            url: "scripts/query_settings.php",
             method: "POST",
             data: {
                 mode: "change_password",
@@ -136,7 +136,7 @@ $(document).ready( function () {
         }
 
         $.ajax({
-            url: "scripts/query_users.php",
+            url: "scripts/query_settings.php",
             method: "POST",
             data: {
                 mode: "change_name",
@@ -167,7 +167,7 @@ $(document).ready( function () {
         }
 
         $.ajax({
-            url: "scripts/query_users.php",
+            url: "scripts/query_settings.php",
             method: "POST",
             data: {
                 mode: "change_email",
@@ -273,7 +273,7 @@ $(document).ready( function () {
         }
 
         $.ajax({
-            url: "scripts/query_users.php",
+            url: "scripts/query_settings.php",
             method: "POST",
             data: {
                 mode: "change_profile_det",
@@ -296,7 +296,7 @@ $(document).ready( function () {
         else theme = "light";
 
         $.ajax({
-            url: "scripts/query_users.php",
+            url: "scripts/query_settings.php",
             method: "POST",
             data: {
                 mode: "change_theme",
@@ -312,7 +312,7 @@ $(document).ready( function () {
         let bio = $("#biography").val().toString();
 
         $.ajax({
-            url: "scripts/query_users.php",
+            url: "scripts/query_settings.php",
             method: "POST",
             data: {
                 mode: "change_bio",
@@ -328,7 +328,7 @@ $(document).ready( function () {
 /* fills some of the fields in settings with values fom database */
 function fill_forms () {
     $.ajax({
-        url: "scripts/query_users.php",
+        url: "scripts/query_settings.php",
         method: "POST",
         data: {
             mode: "settings_fill"
@@ -362,7 +362,7 @@ function display_result (data) {
 
         if(data[0] === "theme" || data[0] === "name") {
             $.ajax({
-                url: "scripts/query_users.php",
+                url: "scripts/query_settings.php",
                 method: "POST",
                 data: {
                     mode: "update_session"
