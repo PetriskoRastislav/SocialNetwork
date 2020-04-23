@@ -632,17 +632,6 @@ try {
     }
 
 
-    /* will write friendship request into a database */
-    else if ($mode == "request_friendship") {
-
-        $id_user_to = $_SESSION['id_user_to'];
-        $time_now = date("Y-m-d H:i:s");
-
-
-
-    }
-
-
 }
 catch (Exception $ex){
     $ex->getMessage();

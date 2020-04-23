@@ -105,7 +105,7 @@ function print_friendship_button ($id_user) {
         if($_SESSION['color_mode'] == "dark") $button .= "src_pictures/icons8-remove-user-group-man-man-100-white.png";
         else $button .= "src_pictures/icons8-remove-user-group-man-man-100.png";
 
-        $button .= '" id="cancel_friendship" title="Cancel Friendship" alt="Cancel Friendship">';
+        $button .= '" id="cancel_friendship" title="Cancel Friendship" alt="Cancel Friendship" onclick="process_cancel_friendship()">';
     }
     else {
 
@@ -129,7 +129,7 @@ function print_friendship_button ($id_user) {
             if($_SESSION['color_mode'] == "dark") $button .= "src_pictures/icons8-remove-user-group-man-man-100-white.png";
             else $button .= "src_pictures/icons8-remove-user-group-man-man-100.png";
 
-            $button .= '" id="cancel_friendship_request" title="Cancel Friendship Request" alt="Cancel Friendship Request">';
+            $button .= '" id="cancel_friendship_request" title="Cancel Friendship Request" alt="Cancel Friendship Request" onclick="process_cancel_friendship_request()">';
 
         }
         else {
@@ -139,7 +139,7 @@ function print_friendship_button ($id_user) {
             if($_SESSION['color_mode'] == "dark") $button .= "src_pictures/icons8-add-user-group-man-man-100-white.png";
             else $button .= "src_pictures/icons8-add-user-group-man-man-100.png";
 
-            $button .= '" id="request_friendship" title="Request Friendship" alt="Request Friendship">';
+            $button .= '" id="request_friendship" title="Request Friendship" alt="Request Friendship" onclick="process_request_friendship()">';
 
         }
 
