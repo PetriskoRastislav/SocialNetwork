@@ -122,10 +122,24 @@ $(".accept").on("click", function (event) {
         },
         success: function (data) {
 
-            data = data.toString().split("|");
+            data = data.toString();
 
-            if (data[0] === "1") {
-                $("#f_r_" + data[1]).remove();
+            if (data === "1") {
+
+                let url = new URLSearchParams(window.location.search);
+
+                $.ajax({
+                    url: "scripts/query_friends.php",
+                    method: "POST",
+                    data: {
+                        mode: "refresh_friends_list",
+                        id_user: url.get('user')
+                    },
+                    success: function (data) {
+                        $(".right_column").html(data.toString());
+                    }
+                });
+
             }
             else {
                 console.log(data.toString());

@@ -136,9 +136,22 @@ try {
         $statement->close();
         $db->close();
 
-        print $result . "|" . $id_user_to;
+        print $result;
         exit();
 
+    }
+
+
+    /* returns list of friends and friendship_requests */
+    else if ($mode == "refresh_friends_list") {
+
+        $id_user_page = $_POST['id_user'];
+
+        require_once ('get_friends_friend_requests.php');
+
+        $db->close();
+
+        exit();
 
     }
 
