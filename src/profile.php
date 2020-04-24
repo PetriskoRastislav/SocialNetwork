@@ -14,8 +14,8 @@ if (!isset($_SESSION['id_user'])) {
 
 /* gets id of user to whom belongs profile */
 
-if (filled_out($_GET)) $id_user = $_GET['user'];
-else $id_user = $_SESSION['id_user'];;
+if (filled_out($_GET)) $id_user_page = $_GET['user'];
+else $id_user_page = $_SESSION['id_user'];;
 
 
 /* fills profile page */
@@ -37,7 +37,7 @@ $query =
     FROM users
     WHERE id_user = ?";
 $statement = $db->prepare($query);
-$statement->bind_param("i", $id_user);
+$statement->bind_param("i", $id_user_page);
 $statement->execute();
 $statement->bind_result($name, $surname, $bio);
 $statement->fetch();
@@ -48,7 +48,7 @@ $profile_heading = $name . " " . $surname . "'s Profile";
 $bio_content = "";
 
 if ($bio == null) {
-    if ($id_user == $_SESSION['id_user']) {
+    if ($id_user_page == $_SESSION['id_user']) {
         $bio_content = "No biography written yet. Write it <a class='common' href='user_settings.php#user_bio'>now</a>!";
     }
 }
@@ -98,16 +98,16 @@ $page->display_body_start();
 
 
         /* button send message */
-        echo print_write_message_button($id_user);
+        echo print_write_message_button($id_user_page);
 
 
         /* button to show user's friends */
-        echo print_friends_button($id_user);
+        echo print_friends_button($id_user_page);
 
 
         /* button to show settings */
 
-        if ($id_user == $_SESSION['id_user']){
+        if ($id_user_page == $_SESSION['id_user']){
 
             echo print_settings_button();
 
@@ -116,9 +116,9 @@ $page->display_body_start();
 
         /* button send friendship request / cancel friendship / cancel friendship request */
 
-        if ($id_user != $_SESSION['id_user']){
+        if ($id_user_page != $_SESSION['id_user']){
 
-            echo print_friendship_button($id_user);
+            echo print_friendship_button($id_user_page);
 
         }
 

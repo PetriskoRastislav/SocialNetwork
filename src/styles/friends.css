@@ -17,7 +17,7 @@
 	border-top: 0.125em solid rgb(120, 120, 120);
 }
 
-.friend:nth-last-of-type(-n+2) {
+.friend:last-child {
 	margin-bottom: 4em;
 }
 

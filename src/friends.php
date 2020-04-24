@@ -14,8 +14,8 @@ if (!isset($_SESSION['id_user'])) {
 
 /* gets id of user to whom belongs profile */
 
-if (filled_out($_GET)) $id_user = $_GET['user'];
-else $id_user = $_SESSION['id_user'];;
+if (filled_out($_GET)) $id_user_page = $_GET['user'];
+else $id_user_page = $_SESSION['id_user'];;
 
 
 /* fills friends page */
@@ -32,7 +32,7 @@ catch (Exception $ex) {
 
 /* heading */
 
-if ($id_user == $_SESSION['id_user']) {
+if ($id_user_page == $_SESSION['id_user']) {
 
     $profile_heading = $_SESSION['name'] . " " . $_SESSION['surname'] . "'s Friends";
 
@@ -44,7 +44,7 @@ else {
     FROM users
     WHERE id_user = ?";
     $statement = $db->prepare($query);
-    $statement->bind_param("i", $id_user);
+    $statement->bind_param("i", $id_user_page);
     $statement->execute();
     $statement->bind_result($name, $surname);
     $statement->fetch();
@@ -94,16 +94,16 @@ $page->display_body_start();
 
 
         /* button send message */
-        echo print_write_message_button($id_user);
+        echo print_write_message_button($id_user_page);
 
 
         /* button to show user's profile */
-        echo print_profile_button($id_user);
+        echo print_profile_button($id_user_page);
 
 
         /* button to show settings */
 
-        if ($id_user == $_SESSION['id_user']){
+        if ($id_user_page == $_SESSION['id_user']){
 
             echo print_settings_button();
 
@@ -112,9 +112,9 @@ $page->display_body_start();
 
         /* button send friendship request / cancel friendship / cancel friendship request */
 
-        if ($id_user != $_SESSION['id_user']){
+        if ($id_user_page != $_SESSION['id_user']){
 
-            echo print_friendship_button($id_user);
+            echo print_friendship_button($id_user_page);
 
         }
 
@@ -161,7 +161,7 @@ $page->display_body_start();
 
     $is_requests = false;
 
-    if ($id_user == $_SESSION['id_user']) {
+    if ($id_user_page == $_SESSION['id_user']) {
 
         $query =
             "SELECT id_user, name, surname, profile_picture
@@ -177,7 +177,7 @@ $page->display_body_start();
 
         while ($statement->fetch()) {
 
-            $requests_list .= '<div class="friend">';
+            $requests_list .= '<div class="friend" id="f_r_' . $id_user . '">';
 
             if ($profile_picture == null) {
                 $img = "src_pictures/blank-profile-picture-png-8.png";
@@ -228,13 +228,13 @@ $page->display_body_start();
     /* prints user's list of friends */
 
     $query =
-        "SELECT DISTINCT id_user, name, surname, profile_picture, last_active, gender, location
+        "SELECT id_user, name, surname, profile_picture, last_active, gender, location
             FROM users
             JOIN friends
             ON ((friends.id_user_1 = ? AND friends.id_user_2 = users.id_user)
             OR (friends.id_user_1 = users.id_user AND friends.id_user_2 = ?))";
     $statement = $db->prepare($query);
-    $statement->bind_param("ii", $id_user, $id_user);
+    $statement->bind_param("ii", $id_user_page, $id_user_page);
     $statement->execute();
     $statement->bind_result($id_user, $name, $surname, $profile_picture, $last_active, $gender, $location);
 

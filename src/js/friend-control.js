@@ -106,3 +106,62 @@ function process_cancel_friendship () {
 
 }
 
+
+/* function that process acceptance of request (process_accept_friendship_request) */
+$(".accept").on("click", function (event) {
+
+    let user_to = $(this).attr("id").split("_")[1];
+    console.log(user_to);
+
+    $.ajax({
+        url: "scripts/query_friends.php",
+        method: "POST",
+        data: {
+            mode: "accept_request",
+            user_to: user_to
+        },
+        success: function (data) {
+
+            data = data.toString().split("|");
+
+            if (data[0] === "1") {
+                $("#f_r_" + data[1]).remove();
+            }
+            else {
+                console.log(data.toString());
+            }
+
+        }
+    });
+
+});
+
+
+/* function that process denial of request (process_decline_friendship_request) */
+$(".decline").on("click", function (event) {
+
+    let user_to = $(this).attr("id").split("_")[1];
+    console.log(user_to);
+
+    $.ajax({
+        url: "scripts/query_friends.php",
+        method: "POST",
+        data: {
+            mode: "decline_request",
+            user_to: user_to
+        },
+        success: function (data) {
+
+            data = data.toString().split("|");
+
+            if (data[0] === "1") {
+                $("#f_r_" + data[1]).remove();
+            }
+            else {
+                console.log(data.toString());
+            }
+
+        }
+    });
+
+});

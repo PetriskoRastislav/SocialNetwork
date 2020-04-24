@@ -8,7 +8,7 @@ $query =
     FROM users
     WHERE id_user = ?";
 $statement = $db->prepare($query);
-$statement->bind_param("i", $id_user);
+$statement->bind_param("i", $id_user_page);
 $statement->execute();
 $statement->bind_result($profile_picture, $last_active, $gender, $location, $registered, $day_of_birth, $month_of_bith, $year_of_birth);
 $statement->fetch();
