@@ -156,6 +156,75 @@ $page->display_body_start();
 
     <?php
 
+
+    /* if a logged user is viewing his list of friend will also see request for friendship */
+
+    $is_requests = false;
+
+    if ($id_user == $_SESSION['id_user']) {
+
+        $query =
+            "SELECT id_user, name, surname, profile_picture
+            FROM users
+            JOIN friendship_requests
+            ON (friendship_requests.id_user_sender = users.id_user AND friendship_requests.id_user_receiver = ?)";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($id_user, $name, $surname, $profile_picture);
+
+        $requests_list = "<div id='friendship_requests'>";
+
+        while ($statement->fetch()) {
+
+            $requests_list .= '<div class="friend">';
+
+            if ($profile_picture == null) {
+                $img = "src_pictures/blank-profile-picture-png-8.png";
+            }
+            else {
+                $img = "user_pictures/" . $profile_picture;
+            }
+
+            $profile_pic = "background-image: url('" . $img . "')";
+
+            $requests_list .= '<div class="friend_avatar request_f_a" style="' . $profile_pic . '" title="' . $name . ' ' . $surname . '\'s Avatar"></div>';
+
+            $requests_list .=
+                '<ul class="informations">' .
+                '<li>' .
+                '<span class="info_tag_friend">Name</span>' .
+                '<a href="profile.php?user=' . $id_user . '" class="common">' .
+                '<span class="value_friend">' . $name . ' ' . $surname . '</span>' .
+                '</a>' .
+                '</li>' .
+                '<li>' .
+                '<span id="accept_' . $id_user . '" class="process_request accept">Accept</span>' .
+                '<span id="decline_' . $id_user . '" class="process_request decline">Decline</span>' .
+                '</li>' .
+                '</ul>' .
+                '</div>';
+
+            $is_requests = true;
+
+        }
+
+        $requests_list .= "</div>";
+
+        if ($is_requests) {
+
+            print '<h2 class="friends_page">Pending Friendship requests</h2>';
+            print $requests_list;
+
+        }
+
+        $statement->free_result();
+        $statement->close();
+
+    }
+
+
+
     /* prints user's list of friends */
 
     $query =
@@ -169,7 +238,7 @@ $page->display_body_start();
     $statement->execute();
     $statement->bind_result($id_user, $name, $surname, $profile_picture, $last_active, $gender, $location);
 
-    $friend_list = "";
+    $friend_list = "<div id='friends_list'>";
 
     while ($statement->fetch()) {
 
@@ -186,7 +255,8 @@ $page->display_body_start();
 
         $friend_list .= '<div class="friend_avatar" style="' . $profile_pic . '" title="' . $name . ' ' . $surname . '\'s Avatar"></div>';
 
-        $friend_list .=  '<ul class="informations">' .
+        $friend_list .=
+            '<ul class="informations">' .
             '<li>' .
             '<span class="info_tag_friend">Name</span>' .
             '<a href="profile.php?user=' . $id_user . '" class="common">' .
@@ -211,16 +281,19 @@ $page->display_body_start();
             $friend_list .= '<span class="value_friend">' . $location . '</span>';
         }
 
-        $friend_list .= '</li>' .
+        $friend_list .=
+            '</li>' .
             '</ul>' .
             '</div>';
 
     }
 
+    $friend_list .= "</div>";
+
     $statement->free_result();
     $statement->close();
 
-
+    if ($is_requests) print '<h2 class="friends_page">Friends</h2>';
     print $friend_list;
 
     ?>

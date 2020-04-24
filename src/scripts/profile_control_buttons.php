@@ -60,7 +60,7 @@ function print_settings_button () {
         '<img class="requests_image requests_image_en" src="';
 
     if($_SESSION['color_mode'] == "dark") $button .= "src_pictures/icons8-settings-100-white.png";
-    else $button .= "src_pictures/icons8-settings-100.png.png";
+    else $button .= "src_pictures/icons8-settings-100.png";
 
     $button .= '" title="Settings" alt="Settings"></a>';
 

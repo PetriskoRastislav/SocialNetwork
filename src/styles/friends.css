@@ -17,20 +17,32 @@
 	border-top: 0.125em solid rgb(120, 120, 120);
 }
 
+.friend:nth-last-of-type(-n+2) {
+	margin-bottom: 4em;
+}
+
 /* styles for a friend's avatar */
 
 .friend_avatar {
 	width: 6em;
 	height: 6em;
 	float: left;
-	margin: 0.5em;
+	margin: 0.5em 1.5em 0.5em 0.5em;
 	border-radius: 100%;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: auto 6em;
 }
 
-/* name of a info in div */
+/* styles for avatar of request */
+
+.request_f_a {
+	width: 3em;
+	height: 3em;
+	background-size: auto 3em;
+}
+
+/* name of a info in list */
 
 .info_tag_friend {
 	float: left;
@@ -40,7 +52,7 @@
 	margin-top: 0.06125em;
 }
 
-/* value of a info on div */
+/* value of a info on list */
 
 .value_friend {
 	float: right;
@@ -49,6 +61,49 @@
 	margin-top: 0.06125em;
 }
 
+/* underlines link to user's profile (his name) */
+
 a .value_friend:hover {
 	text-decoration: underline;
+}
+
+/* process the request of friendship (accept / decline in list) */
+
+.process_request {
+	width: 35%;
+	margin-top: 0.06125em;
+	float: left;
+	clear: right;
+	cursor: pointer;
+}
+
+/* accept / decline signs */
+
+.process_request.accept {
+	text-align: right;
+	margin-right: 0.75em;
+	color: rgb(0, 150, 0);
+}
+
+.process_request.accept:hover {
+	color: rgb(0, 150, 0);
+	text-decoration: underline;
+}
+
+.process_request.decline {
+	text-align: left;
+	margin-left: 0.75em;
+	color: rgb(200, 0, 0);
+}
+
+.process_request.decline:hover {
+	color: rgb(200, 0, 0);
+	text-decoration: underline;
+}
+
+/* margin for h2 headings */
+
+.friends_page {
+	clear: both;
+	margin-top: 1em;
 }
