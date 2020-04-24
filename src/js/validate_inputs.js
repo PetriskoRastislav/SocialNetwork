@@ -87,7 +87,7 @@ function display_ack (where, stat, ack) {
     let w = "#res_" + where;
 
     $(w).removeClass("form_result_neg");
-    //$(w).addClass("form_result_pos");
+    if (ack != null) $(w).addClass("form_result_pos");
 
     if (!(stat == null)) {
         let status = $("#" + stat + "_status");
@@ -97,5 +97,5 @@ function display_ack (where, stat, ack) {
         status.attr("alt", "Input has valid format.");
     }
 
-    //$(w + " p").html(ack);
+    if (ack != null) $(w + " p").html(ack);
 }

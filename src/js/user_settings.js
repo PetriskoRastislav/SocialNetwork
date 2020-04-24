@@ -74,12 +74,12 @@ $(document).ready( function () {
         }
 
         if ( valid_password( value ) ) {
-            display_ack("pass", "pass_new", "New password has valid format.");
+            display_ack("pass", "pass_new", null);
         }
     });
 
 
-    /* validates confirming password format at the same time as user is typing */
+    /* validates confirming password at the same time as user is typing */
     $("#password_new_again").on("keyup", function (event) {
         event.preventDefault();
         let value = $(this).val().toString();
@@ -111,7 +111,7 @@ $(document).ready( function () {
         }
 
         if ( valid_password( value ) && (value === pass)) {
-            display_ack("pass", "pass_new_again", "Confirming password has valid format.");
+            display_ack("pass", "pass_new_again", null);
         }
     });
 
@@ -184,7 +184,7 @@ $(document).ready( function () {
         event.preventDefault();
 
         if ( valid_email( $(this).val().toString() ) ) {
-            display_ack("mail", "mail", "Email has valid format.");
+            display_ack("mail", "mail", null);
         }
         else {
             display_warning("mail", "mail", "Email has invalid format.");
@@ -218,9 +218,14 @@ $(document).ready( function () {
                     display_warning("pic", null, data[1]);
                 }
                 else {
-                    // view uploaded file.
+
+                    /* view uploaded file. */
                     $("#preview img").attr("src", data);
                     $("#change_pic")[0].reset();
+
+                    /* display confirming message */
+                    display_ack("pic", null, "Profile image changed successfully.");
+
                 }
             },
             fail: function (data) {
@@ -233,21 +238,39 @@ $(document).ready( function () {
 
 
     /* displays preview of a image intended to be uploaded */
-    $("#profile_pic").on("change", function () {
-        readURL(this);
-    });
+    function imagesPreview (placeToInsertImagePreview) {
 
-    function readURL (input) {
-        if (input.files && input.files[0]) {
+        /* Empty preview so we can safely rebuild it */
+        $(placeToInsertImagePreview).empty();
+
+        /* Get file */
+        let elem = document.getElementById("profile_pic");
+
+        /* preview file */
+
+        if (elem.files.length !== 0) {
             let reader = new FileReader();
+            let id = $(elem).attr('id');
 
-            reader.onload = function (event) {
-                $("#preview img").attr("src", event.target.result);
-            };
+            reader.onload = (function(id) {
+                return function(e){
+                    $($.parseHTML('<img>')).attr({
+                        'src' : e.target.result,
+                        'alt' : "Upload image preview"
+                    }).appendTo(placeToInsertImagePreview);
+                }
+            })(id);
 
-            reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(elem.files[0]);
         }
+
     }
+
+
+    /* if value of input[type=file] changes will display preview */
+    $("#profile_pic").on("change", function() {
+        imagesPreview("#preview");
+    });
 
 
     /* changes information  */
@@ -360,7 +383,7 @@ function display_result (data) {
         $("#res_" + data[0]).addClass("form_result_pos");
         $("#res_" + data[0] + " p").html("Successfully changed.");
 
-        if(data[0] === "theme" || data[0] === "name") {
+        if(data[0] === "theme") {
             $.ajax({
                 url: "scripts/query_settings.php",
                 method: "POST",
