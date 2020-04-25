@@ -145,3 +145,21 @@ a.common:active {
 .hide {
     display: none;
 }
+
+
+/* notification mark */
+
+.notification_mark {
+    background-color: rgb(200, 50, 50);
+    width: 0.625em;
+    height: 0.625em;
+    border-radius: 50%;
+    margin-left: 0.3125em;
+    display: inline-block;
+}
+
+.menu_notification {
+    display: block;
+    float: right;
+    margin-top: 1em;
+}

@@ -124,11 +124,11 @@ $(document).ready(function() {
 
                     /* mark of a new unread message in the list of conversations */
 
-                    if(ret_data[i + 3] === "0" && new_message_notification.hasClass("mes_not_chat")){
-                        new_message_notification.removeClass("mes_not_chat");
+                    if(ret_data[i + 3] === "0" && new_message_notification.hasClass("notification_mark")){
+                        new_message_notification.removeClass("notification_mark");
                     }
-                    else if(ret_data[i + 3] !== "0" && !new_message_notification.hasClass("mes_not_chat")) {
-                        new_message_notification.addClass("mes_not_chat");
+                    else if(ret_data[i + 3] !== "0" && !new_message_notification.hasClass("notification_mark")) {
+                        new_message_notification.addClass("notification_mark");
                     }
 
                 }

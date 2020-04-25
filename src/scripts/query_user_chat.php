@@ -106,8 +106,8 @@ try {
 
         $time_now = date("Y-m-d H:i:s");
 
-        $query = "
-            UPDATE messages
+        $query =
+            "UPDATE messages
             SET status = 'seen', time_sent = ?, time_seen = ?, time_deleted = ?
             WHERE id_user_sender = ? AND id_user_receiver = ? AND status = 'unseen'";
         $statement = $db->prepare($query);

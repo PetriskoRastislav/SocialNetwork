@@ -23,7 +23,6 @@
         private function diverse_icons () {
             if (@$_SESSION['color_mode'] == "dark" || !isset($_SESSION['color_mode'])) {
                 $this->icons = array(
-                    "notifications" => "src_pictures/icons8-notification-100-white.png",
                     "messages" => "src_pictures/icons8-group-message-100-white.png",
                     "friends" => "src_pictures/icons8-user-account-100-white.png",
                     "settings" => "src_pictures/icons8-settings-100-white.png",
@@ -33,7 +32,6 @@
             }
             else {
                 $this->icons = array(
-                    "notifications" => "src_pictures/icons8-notification-100.png",
                     "messages" => "src_pictures/icons8-group-message-100.png",
                     "friends" => "src_pictures/icons8-user-account-100.png",
                     "settings" => "src_pictures/icons8-settings-100.png",
@@ -156,13 +154,6 @@
                                 '</li>'.
                                 
                                 '<ul id="header_drop_content" class="header_menu_drop_hide">'.
-                                
-                                    '<a href="friends.php?user=' . $_SESSION['id_user'] . '" class="header_menu_drop_a">'.
-                                        '<li class="header_drop_item header_drop_item_border">'.
-                                            '<img class="header_menu_img_drop" src="' . $this->icons['friends'] . '" alt="Friends icon">'.
-                                            '<p class="header_drop_p">Friends</p>'.
-                                        '</li>'.
-                                    '</a>'.
                                     
                                     '<a href="user_settings.php" class="header_menu_drop_a">'.
                                         '<li class="header_drop_item header_drop_item_border">'.
@@ -185,18 +176,20 @@
                                         $_SESSION['name'] . ' ' . $_SESSION['surname'] .
                                     '</a>'.
                                 '</li>'.
-                                
+
                                 '<li class="header_menu_li border_left">'.
-                                    '<a class="header_menu_a header_menu_a_img" href="messages.php">'.
-                                        '<img class="header_menu_img" src="' . $this->icons['messages'] . '" alt="Messages icon">'.
+                                    '<a id="menu_friends" class="header_menu_a header_menu_a_img" href="friends.php?user=' . $_SESSION['id_user'] . '">'.
+                                        '<img class="header_menu_img" src="' . $this->icons['friends'] . '" alt="Friends icon">'.
                                     '</a>'.
                                 '</li>'.
                                 
                                 '<li class="header_menu_li">'.
-                                    '<a class="header_menu_a header_menu_a_img" href="#">'.
-                                        '<img class="header_menu_img" src="' . $this->icons['notifications'] . '" alt="Notification icon">'.
+                                    '<a id="menu_messages" class="header_menu_a header_menu_a_img" href="messages.php">'.
+                                        '<img class="header_menu_img" src="' . $this->icons['messages'] . '" alt="Messages icon">'.
                                     '</a>'.
                                 '</li>'.
+                                
+
                                 
                             '</ul>'.
                         '</div>'.

@@ -13,7 +13,7 @@ if (!isset($_SESSION['id_user'])) {
 
 
 /* gets id of user to whom belongs profile */
-$id_user = $_SESSION['id_user'];;
+$id_user_page = $_SESSION['id_user'];;
 
 
 /* fills settings page */
@@ -64,15 +64,15 @@ $page->display_body_start();
         /* profile control buttons */
 
         /* button send message */
-        echo print_write_message_button($id_user);
+        echo print_write_message_button($id_user_page);
 
 
         /* button to show user's profile */
-        echo print_profile_button($id_user);
+        echo print_profile_button($id_user_page);
 
 
         /* button to show user's friends */
-        echo print_friends_button($id_user);
+        echo print_friends_button($id_user_page);
 
         ?>
 

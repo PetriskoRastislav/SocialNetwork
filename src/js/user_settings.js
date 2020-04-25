@@ -383,7 +383,7 @@ function display_result (data) {
         $("#res_" + data[0]).addClass("form_result_pos");
         $("#res_" + data[0] + " p").html("Successfully changed.");
 
-        if(data[0] === "theme") {
+        if(data[0] === "theme" || data[0] === "name") {
             $.ajax({
                 url: "scripts/query_settings.php",
                 method: "POST",

@@ -111,7 +111,6 @@ function process_cancel_friendship () {
 $(".accept").on("click", function (event) {
 
     let user_to = $(this).attr("id").split("_")[1];
-    console.log(user_to);
 
     $.ajax({
         url: "scripts/query_friends.php",
@@ -141,9 +140,6 @@ $(".accept").on("click", function (event) {
                 });
 
             }
-            else {
-                console.log(data.toString());
-            }
 
         }
     });
@@ -155,7 +151,6 @@ $(".accept").on("click", function (event) {
 $(".decline").on("click", function (event) {
 
     let user_to = $(this).attr("id").split("_")[1];
-    console.log(user_to);
 
     $.ajax({
         url: "scripts/query_friends.php",
@@ -170,9 +165,6 @@ $(".decline").on("click", function (event) {
 
             if (data[0] === "1") {
                 $("#f_r_" + data[1]).remove();
-            }
-            else {
-                console.log(data.toString());
             }
 
         }

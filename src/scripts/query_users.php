@@ -58,7 +58,7 @@ try {
             /* count of unseen messages */
             $mes_count = get_unseen_messages_notification($id_user, $_SESSION['id_user']);
             if ($mes_count > 0 ) {
-                $mes_notification = " <span class='mes_not_chat' id='mes_not_" . $id_user . "' ></span>";
+                $mes_notification = " <span class='notification_mark' id='mes_not_" . $id_user . "' ></span>";
             }
             else {
                 $mes_notification = " <span class='' id='mes_not_" . $id_user . "' ></span>";
@@ -282,6 +282,55 @@ try {
         $statement->close();
         $db->close();
 
+        exit();
+
+    }
+
+
+    /* will return notifications, which will be displayed in menu, if there will be any */
+    else if ($mode == "update_notifications") {
+
+        /* selects message notification */
+
+        $query =
+            "SELECT id_message
+            FROM messages
+            WHERE (id_user_receiver = ? AND status = 'unseen')";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($id_message);
+        $statement->fetch();
+
+        $is_new_message = false;
+
+        if ($id_message > 0) $is_new_message = true;
+
+        $statement->free_result();
+        $statement->close();
+
+
+        /* selects friends notification */
+
+        $query =
+            "SELECT id_request
+            FROM friendship_requests
+            WHERE (id_user_receiver = ? AND status = 'unseen')";
+        $statement = $db->prepare($query);
+        $statement->bind_param("i", $_SESSION['id_user']);
+        $statement->execute();
+        $statement->bind_result($id_request);
+        $statement->fetch();
+
+        $is_new_request = false;
+
+        if ($id_request > 0) $is_new_request = true;
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        print $is_new_message . "|" . $is_new_request;
         exit();
 
     }

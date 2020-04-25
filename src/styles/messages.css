@@ -78,19 +78,10 @@
 /* list of conversations */
 
 
-/* marks */
+/* active user mark */
 
 .active_mark {
     background-color: rgb(100, 200, 0);
-    width: 0.625em;
-    height: 0.625em;
-    border-radius: 50%;
-    margin-left: 0.3125em;
-    display: inline-block;
-}
-
-.mes_not_chat {
-    background-color: rgb(200, 50, 50);
     width: 0.625em;
     height: 0.625em;
     border-radius: 50%;
