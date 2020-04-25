@@ -54,34 +54,6 @@ if ($id_user_page == $_SESSION['id_user']) {
 
         $is_requests = true;
 
-
-        /* updates status of request to seen */
-
-        if ($status == "unseen") {
-
-            try {
-                $db2 = db_connect();
-                mysqli_set_charset($db2, "utf8");
-            }
-            catch (Exception $ex) {
-                $ex->getMessage();
-            }
-
-
-            $query2 =
-                "UPDATE friendship_requests
-                SET status = 'seen'
-                WHERE (id_user_sender = ? AND id_user_receiver = ? AND status = 'unseen')";
-            $statement2 = $db2->prepare($query2);
-            $statement2->bind_param("ii", $id_user, $_SESSION['id_user']);
-            $statement2->execute();
-
-            $statement2->free_result();
-            $statement2->close();
-            $db2->close();
-
-        }
-
     }
 
     $requests_list .= "</div>";
@@ -95,6 +67,21 @@ if ($id_user_page == $_SESSION['id_user']) {
 
     $statement->free_result();
     $statement->close();
+
+
+    $query =
+        "UPDATE friendship_requests
+        SET status = 'seen'
+        WHERE (id_user_receiver = ? AND status = 'unseen')";
+    $statement = $db->prepare($query);
+    $statement->bind_param("i", $_SESSION['id_user']);
+    $statement->execute();
+
+    $statement->free_result();
+    $statement->close();
+
+
+
 
 
 }

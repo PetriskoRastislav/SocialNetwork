@@ -70,17 +70,17 @@ a .value_friend:hover {
 /* process the request of friendship (accept / decline in list) */
 
 .process_request {
-	width: 35%;
+	width: auto;
 	margin-top: 0.06125em;
 	float: left;
 	clear: right;
 	cursor: pointer;
+	text-align: left;
 }
 
 /* accept / decline signs */
 
 .process_request.accept {
-	text-align: right;
 	margin-right: 0.75em;
 	color: rgb(0, 150, 0);
 }
@@ -91,7 +91,6 @@ a .value_friend:hover {
 }
 
 .process_request.decline {
-	text-align: left;
 	margin-left: 0.75em;
 	color: rgb(200, 0, 0);
 }
