@@ -27,29 +27,29 @@ $page->display_body_start();
     <form id="registration" method="POST" class="log_reg hide">
 
         <p class="spacing_form">
-            <label for="name_reg">Name</label>
+            <label for="name_reg" class="label_form">Name</label>
         </p>
         <input required class="spacing_form input_form" type="text" name="name_reg" id="name_reg" placeholder="Name" maxlength="40"/>
 
         <p class="spacing_form">
-            <label for="surname_reg">Surname</label>
+            <label for="surname_reg" class="label_form">Surname</label>
         </p>
         <input required class="spacing_form input_form" type="text" name="surname_reg" id="surname_reg" placeholder="Surname" maxlength="40"/>
 
         <p class="spacing_form">
-            <label for="email_reg">Email</label>
+            <label for="email_reg" class="label_form">Email</label>
         </p>
         <input required class="spacing_form input_form" type="email" name="email_reg" id="email_reg" placeholder="Email" maxlength="100"/>
         <img id="email_reg_status" src="" alt="" class="stat">
 
         <p class="spacing_form">
-            <label for="password_reg">Password</label>
+            <label for="password_reg" class="label_form">Password</label>
         </p>
         <input required class="spacing_form input_form" type="password" name="password_reg" id="password_reg" placeholder="Password" />
         <img id="pass_reg_status" src="" alt="" class="stat">
 
         <p class="spacing_form">
-            <label for="password_reg_again">Confirm your password</label>
+            <label for="password_reg_again" class="label_form">Confirm your password</label>
         </p>
         <input required class="spacing_form input_form" type="password" name="password_reg_again" id="password_reg_again" placeholder="Confirm password" />
         <img id="pass_reg_again_status" src="" alt="" class="stat">
@@ -65,12 +65,12 @@ $page->display_body_start();
     <form id="login" method="POST" class="log_reg">
 
         <p class="spacing_form">
-            <label for="email_log">Email</label>
+            <label for="email_log" class="label_form">Email</label>
         </p>
         <input required class="spacing_form input_form" type="email" name="email_log" id="email_log" placeholder="Email" maxlength="100"/>
 
         <p class="spacing_form">
-            <label for="password_log">Password</label>
+            <label for="password_log" class="label_form">Password</label>
         </p>
         <input required class="spacing_form input_form" type="password" name="password_log" id="password_log" placeholder="Password" />
 

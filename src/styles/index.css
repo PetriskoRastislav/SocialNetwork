@@ -68,13 +68,16 @@
 .stat {
     position: absolute;
     left: 480px;
-    top: 255px;
+}
+
+#email_reg_status {
+    top: 259px;
 }
 
 #pass_reg_status {
-    top: 331px;
+    top: 337px;
 }
 
 #pass_reg_again_status {
-    top: 409px;
+    top: 416px;
 }
