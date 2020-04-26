@@ -20,31 +20,21 @@
 
 .pageHeader {
     background-color: rgb(180, 180, 180);
-    height: 3em;
+    height: 48px;
     width: 100%;
 }
 
 .header_content {
-    margin-left: 1em;
-    margin-right: 1em;
+    margin-left: 16px;
+    margin-right: 16px;
 }
 
 .pageLogo {
     width: auto;
-    height: 2.7em;
-    padding: 0.15em 0;
+    height: 44px;
+    padding: 2px 0;
     position: relative;
 
-}
-
-.pageName {
-    font-family: 'Arial', Helvetica, sans-serif;
-    font-weight: bold;
-    font-size: 1.5em;
-    position: relative;
-    padding: 0.375em;
-    margin: 0;
-    color: rgb(10, 10, 10);
 }
 
 
@@ -66,9 +56,7 @@ p {
 }
 
 .spacing {
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-    line-height: 1.5625em;
+    margin: 20px 0 20px 0;
 }
 
 
@@ -80,7 +68,7 @@ h1 {
     font-family: 'Arial', Helvetica, sans-serif;
     font-weight: bold;
     font-size: 2.4em;
-    border-bottom: solid rgb(0, 0, 0) 0.0625em;
+    border-bottom: 2px solid rgb(0, 0, 0);
     color: rgb(0, 0, 0);
     padding: 0.625em;
 }
@@ -139,21 +127,21 @@ a.common:active {
     box-sizing: border-box;
     display: block;
     clear: both;
-    height: 0.0625em;
+    height: 1px;
     background-color: rgb(190, 190, 190);
-    margin: 1em 0 1em 0;
+    margin: 16px 0 16px 0;
 }
 
 .reduced_width {
-    margin: 0.5em 5% 0.5em 5%;
-    width: 90%;
+    margin: 8px 4% 8px 4%;
+    width: 92%;
 }
 
 
 /* formatting of .main_content */
 
 .main_content {
-    margin: 0.75em 1em 0.75em 1em;
+    margin: 12px 16px 40px 16px;
     padding: 0;
 }
 
@@ -175,15 +163,15 @@ a.common:active {
 
 .notification_mark {
     background-color: rgb(200, 50, 50);
-    width: 0.625em;
-    height: 0.625em;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    margin-left: 0.3125em;
+    margin-left: 5px;
     display: inline-block;
 }
 
 .menu_notification {
     display: block;
     float: right;
-    margin-top: 1em;
+    margin-top: 16px;
 }

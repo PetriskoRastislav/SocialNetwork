@@ -5,41 +5,41 @@
 	width: 49%;
 	float: left;
 	margin-bottom: 0;
-	border-bottom: 0.125em solid rgb(120, 120, 120);
+	border-bottom: 2px solid rgb(120, 120, 120);
 }
 
 .friend:nth-child(even) {
-	border-left: 0.125em solid rgb(120, 120, 120);
+	border-left: 2px solid rgb(120, 120, 120);
 }
 
 .friend:nth-child(-n+2) {
-	margin-top: 1em;
-	border-top: 0.125em solid rgb(120, 120, 120);
+	margin-top: 16px;
+	border-top: 2px solid rgb(120, 120, 120);
 }
 
 .friend:last-child {
-	margin-bottom: 4em;
+	margin-bottom: 64px;
 }
 
 /* styles for a friend's avatar */
 
 .friend_avatar {
-	width: 6em;
-	height: 6em;
+	width: 96px;
+	height: 96px;
 	float: left;
-	margin: 0.5em 1.5em 0.5em 0.5em;
+	margin: 8px 24px 8px 24px;
 	border-radius: 100%;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: auto 6em;
+	background-size: auto 96px;
 }
 
 /* styles for avatar of request */
 
 .request_f_a {
-	width: 3em;
-	height: 3em;
-	background-size: auto 3em;
+	width: 48px;
+	height: 48px;
+	background-size: auto 48px;
 }
 
 /* name of a info in list */
@@ -49,7 +49,7 @@
 	width: 35%;
 	clear: right;
 	font-weight: bold;
-	margin-top: 0.06125em;
+	margin-top: 1px;
 }
 
 /* value of a info on list */
@@ -58,7 +58,7 @@
 	float: right;
 	width: 35%;
 	clear: right;
-	margin-top: 0.06125em;
+	margin-top: 1px;
 }
 
 /* underlines link to user's profile (his name) */
@@ -71,7 +71,7 @@ a .value_friend:hover {
 
 .process_request {
 	width: auto;
-	margin-top: 0.06125em;
+	margin-top: 1px;
 	float: left;
 	clear: right;
 	cursor: pointer;
@@ -81,7 +81,7 @@ a .value_friend:hover {
 /* accept / decline signs */
 
 .process_request.accept {
-	margin-right: 0.75em;
+	margin-right: 12px;
 	color: rgb(0, 150, 0);
 }
 
@@ -91,7 +91,7 @@ a .value_friend:hover {
 }
 
 .process_request.decline {
-	margin-left: 0.75em;
+	margin-left: 12px;
 	color: rgb(200, 0, 0);
 }
 
@@ -104,5 +104,5 @@ a .value_friend:hover {
 
 .friends_page {
 	clear: both;
-	margin-top: 1em;
+	margin-top: 16px;
 }

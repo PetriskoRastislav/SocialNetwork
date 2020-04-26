@@ -118,17 +118,17 @@ $page->display_body_start();
 			<ul>
 				<li>
 					<label for="password_old" class="info_tag_setting">Type your old Password</label>
-					<input type="password" class="value_setting input_form" name="password_old" id="password_old" placeholder="Enter your old password">
+					<input type="password" class="input_form" name="password_old" id="password_old" placeholder="Enter your old password">
                     <img id="pass_old_status" src="" alt="" class="stat hide">
 				</li>
 				<li>
 					<label for="password_new" class="info_tag_setting">Type your new Password</label>
-					<input type="password" class="value_setting input_form" name="password_new" id="password_new" placeholder="Enter your new password">
+					<input type="password" class="input_form" name="password_new" id="password_new" placeholder="Enter your new password">
                     <img id="pass_new_status" src="" alt="" class="stat hide">
 				</li>
 				<li>
 					<label for="password_new_again" class="info_tag_setting">Type your new Password again</label>
-                    <input type="password" class="value_setting input_form" name="password_new_again" id="password_new_again" placeholder="Enter your new password again">
+                    <input type="password" class="input_form" name="password_new_again" id="password_new_again" placeholder="Enter your new password again">
                     <img id="pass_new_again_status" src="" alt="" class="stat hide">
                 </li>
 			</ul>
@@ -142,11 +142,11 @@ $page->display_body_start();
 			<ul>
 				<li>
 					<label for="name" class="info_tag_setting">Change your Name</label>
-					<input id="name" type="text" class="value_setting input_form" name="name" placeholder="Enter your new name" maxlength="40">
+					<input id="name" type="text" class="input_form" name="name" placeholder="Enter your new name" maxlength="40">
 				</li>
 				<li>
 					<label for="surname" class="info_tag_setting">Change your Surname</label>
-					<input id="surname" type="text" class="value_setting input_form" name="surname" placeholder="Enter your new surname" maxlength="40">
+					<input id="surname" type="text" class="input_form" name="surname" placeholder="Enter your new surname" maxlength="40">
 				</li>
 			</ul>
             <input id="change_name_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
@@ -159,7 +159,7 @@ $page->display_body_start();
 			<ul>
 				<li>
 					<label for="email" class="info_tag_setting">Change your Email</label>
-					<input type="email" id="email" class="value_setting input_form" name="email" placeholder="Enter your new email" maxlength="100">
+					<input type="email" id="email" class="input_form" name="email" placeholder="Enter your new email" maxlength="100">
                     <img id="mail_status" src="" alt="" class="stat hide">
 				</li>
 			</ul>
@@ -177,7 +177,7 @@ $page->display_body_start();
                     </li>
                     <li>
                         <label for="profile_pic" class="info_tag_setting">Choose your new Profile Picture</label>
-                        <input type="file" class="value_setting" name="profile_pic" id="profile_pic" accept="image/*">
+                        <input type="file" class="" name="profile_pic" id="profile_pic" accept="image/*">
                     </li>
                 </ul>
                 <input id="change_pic_button" type="button" value="Change" class="spacing_form button_form_submit button_setting" accept="image/jpeg image/png">
@@ -191,11 +191,11 @@ $page->display_body_start();
 			<ul>
 				<li>
 					<label for="location" class="info_tag_setting">Change your Location</label>
-					<input id="location" type="text" class="value_setting input_form" name="location" placeholder="Enter your new location" maxlength="100">
+					<input id="location" type="text" class="input_form" name="location" placeholder="Enter your new location" maxlength="100">
 				</li>
 				<li>
 					<label for="gender" class="info_tag_setting">Change your Gender</label>
-					<select id="gender" name="gender" class="select_input">
+					<select id="gender" name="gender" class="select_form">
 	    				<option value="other">Other</option>
 	    				<option value="male">Male</option>
 	   					<option value="female">Female</option>
@@ -203,7 +203,7 @@ $page->display_body_start();
 				</li>
 				<li>
 					<label for="day_of_birth" class="info_tag_setting">Change your Day of Birth</label>
-					<select id="day_of_birth" name="day_of_birth" class="select_input">
+					<select id="day_of_birth" name="day_of_birth" class="select_form">
 	    				<option value="--">--</option>
 	    				<option value="01">01</option>
 	   					<option value="02">02</option>
@@ -240,7 +240,7 @@ $page->display_body_start();
 				</li>
 				<li>
 					<label for="month_of_birth" class="info_tag_setting">Change your Month of Birth</label>
-					<select id="month_of_birth" name="month_of_birth" class="select_input">
+					<select id="month_of_birth" name="month_of_birth" class="select_form">
 	    				<option value="--">--</option>
 	    				<option value="01">January</option>
 	   					<option value="02">February</option>
@@ -258,7 +258,7 @@ $page->display_body_start();
 				</li>
 				<li>
 					<label for="year_of_birth" class="info_tag_setting">Change your Year of Birth</label>
-					<input type="text" class="value_setting input_form" id="year_of_birth" name="year_of_birth" placeholder="Enter your year of birth" maxlength="4">
+					<input type="text" class="input_form" id="year_of_birth" name="year_of_birth" placeholder="Enter your year of birth" maxlength="4">
 				</li>
 			</ul>
 			<input id="change_info_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
@@ -291,7 +291,7 @@ $page->display_body_start();
 					<label for="biography" class="info_tag_setting">Write something about you</label>
 				</li>
 				<li>
-					<textarea name="biography" id="biography" cols="50" rows="5" placeholder="Write something about you"></textarea>
+					<textarea name="biography" id="biography" class="text_area_form" cols="50" rows="5" placeholder="Write something about you"></textarea>
 				</li>
 			</ul>
 			
