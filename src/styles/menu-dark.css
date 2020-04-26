@@ -13,7 +13,7 @@
 
 /* items of menu -> hover, active */
 
-.header_menu_li:hover .header_menu_a, .header_menu_drop_btn_active .header_menu_a {
+.header_menu_li:hover .header_menu_a, .header_menu_li_active .header_menu_a {
     background-color: rgb(80, 80, 80);
     color: rgb(235, 235, 235);
 }

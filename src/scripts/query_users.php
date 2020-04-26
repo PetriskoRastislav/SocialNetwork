@@ -287,6 +287,54 @@ try {
     }
 
 
+    /* will return result of searching for a user */
+    else if ($mode == "find_user_menu") {
+
+        $value = $_POST['value'];
+
+        $query =
+            "SELECT id_user, email, name, surname, profile_picture, last_active
+            FROM users
+            WHERE name LIKE ? 
+            OR surname LIKE ?";
+        $statement = $db->prepare($query);
+        $val = "%" . $value . "%";
+        $statement->bind_param("ss", $val, $val);
+        $statement->execute();
+        $statement->bind_result($id, $email, $name, $surname, $profile_picture, $last_active);
+
+        $output = "";
+
+        while ($statement->fetch()){
+
+            if ($profile_picture != null) {
+                $img = "user_pictures/" . $profile_picture;
+            }
+            else {
+                $img = "src_pictures/blank-profile-picture-png-8.png";
+            }
+
+            $profile_pic = "background-image: url('" . $img . "');";
+            $profile_pic = '<div class="avatar search_list" style="' . $profile_pic . '"></div>';
+
+            $output .=
+                '<div class="search_result_item">'.
+                $profile_pic .
+                '<a href="profile.php?user=' . $id . '" class="common">' . $name . ' ' . $surname . '</a>'.
+                '</div>';
+        }
+
+        print $output;
+
+        $statement->free_result();
+        $statement->close();
+        $db->close();
+
+        exit();
+
+    }
+
+
     /* will return notifications, which will be displayed in menu, if there will be any */
     else if ($mode == "update_notifications") {
 

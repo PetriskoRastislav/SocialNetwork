@@ -36,7 +36,7 @@ require_once ("scripts/fills_user_s_info.php");
 /* prints header of page */
 
 $page = new Page();
-$page->display_header( "Settings", array("styles/profile", "styles/style_form", "styles/user_settings"));
+$page->display_header( "Settings", array("styles/profile", "styles/user_settings"));
 $page->display_body_start();
 
 ?>
@@ -54,6 +54,8 @@ $page->display_body_start();
     <!-- user's profile picture -->
 
     <img id="info_profile_picture" class="profile_picture" src="<?php echo $profile_picture_content; ?>" title="Avatar" alt="Avatar">
+
+    <div class="hr reduced_width"></div>
 
     <!-- buttons for profile control -->
 
@@ -79,6 +81,8 @@ $page->display_body_start();
     </div>
 
     <!-- informations about user -->
+
+    <div class="hr reduced_width"></div>
 
     <ul class="informations">
         <li>
@@ -107,7 +111,6 @@ $page->display_body_start();
 <!-- main content of a page -->
 
 <div class='right_column'>
-	<div>
 
         <!-- division for changing password -->
 
@@ -131,7 +134,7 @@ $page->display_body_start();
 			</ul>
 		    <input id="change_pass_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
             <div id="res_pass" class="form_result"><p></p></div>
-		<hr>
+        <div class="hr double_margin"></div>
 
         <!-- division for changing name -->
 
@@ -148,7 +151,7 @@ $page->display_body_start();
 			</ul>
             <input id="change_name_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
             <div id="res_name" class="form_result"><p></p></div>
-		<hr>
+		<div class="hr"></div>
 
         <!-- division for changing email -->
 
@@ -162,7 +165,7 @@ $page->display_body_start();
 			</ul>
 			<input id="change_email_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
             <div id="res_mail" class="form_result"><p></p></div>
-		<hr>
+		<div class="hr"></div>
 
         <!-- division for changing profile picture -->
 
@@ -180,7 +183,7 @@ $page->display_body_start();
                 <input id="change_pic_button" type="button" value="Change" class="spacing_form button_form_submit button_setting" accept="image/jpeg image/png">
                 <div id="res_pic" class="form_result"><p></p></div>
             </form>
-		<hr>
+		<div class="hr"></div>
 
         <!-- division for changing other informations about user -->
 
@@ -260,7 +263,7 @@ $page->display_body_start();
 			</ul>
 			<input id="change_info_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
             <div id="res_info" class="form_result"><p></p></div>
-		<hr>
+		<div class="hr"></div>
 
         <!-- division for changing theme (dark / light) -->
 
@@ -278,7 +281,7 @@ $page->display_body_start();
 			</ul>
 			<input id="change_theme_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
             <div id="res_theme" class="form_result"><p></p></div>
-		<hr>
+		<div class="hr"></div>
 
         <!-- division for changing biography -->
 
@@ -295,7 +298,7 @@ $page->display_body_start();
 			<input id="change_bio_button" type="button" value="Change" class="spacing_form button_form_submit button_setting">
             <div id="res_bio" class="form_result"><p></p></div>
 
-	</div>
+
 </div>
 
 

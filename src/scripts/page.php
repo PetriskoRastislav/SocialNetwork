@@ -27,7 +27,8 @@
                     "friends" => "src_pictures/icons8-user-account-100-white.png",
                     "settings" => "src_pictures/icons8-settings-100-white.png",
                     "logout" => "src_pictures/icons8-exit-100-white.png",
-                    "logo" => "src_pictures/logo-white.png"
+                    "logo" => "src_pictures/logo-white.png",
+                    "search" => "src_pictures/icons8-search-100-white.png"
                 );
             }
             else {
@@ -36,7 +37,8 @@
                     "friends" => "src_pictures/icons8-user-account-100.png",
                     "settings" => "src_pictures/icons8-settings-100.png",
                     "logout" => "src_pictures/icons8-exit-100.png",
-                    "logo" => "src_pictures/logo.png"
+                    "logo" => "src_pictures/logo.png",
+                    "search" => "src_pictures/icons8-search-100.png"
                 );
             }
         }
@@ -78,6 +80,7 @@
             $def_styles = array(
                 "styles/reset",
                 "styles/style",
+                "styles/style_form",
                 "styles/menu"
             );
 
@@ -183,13 +186,23 @@
                                     '</a>'.
                                 '</li>'.
                                 
-                                '<li class="header_menu_li">'.
+                                '<li class="header_menu_li border_left">'.
                                     '<a id="menu_messages" class="header_menu_a header_menu_a_img" href="messages.php">'.
                                         '<img class="header_menu_img" src="' . $this->icons['messages'] . '" alt="Messages icon">'.
                                     '</a>'.
                                 '</li>'.
-                                
 
+                    '<li class="header_menu_li" id="menu_search_icon">' .
+                                    '<span class="header_menu_a header_menu_a_img">'.
+                                        '<img class="header_menu_img smaller" src="' . $this->icons['search'] . '" alt="Search users">'.
+                                    '</span>'.
+                                '</li>'.
+
+                                '<li class="header_menu_li hide" id="menu_search_field">' .
+                                    '<input class="input_form" type="text" name="search_user" id="search_user" placeholder="Search users ...">'.
+                                '</li>'.
+
+                                '<div id="menu_search_result"></div>'.
                                 
                             '</ul>'.
                         '</div>'.

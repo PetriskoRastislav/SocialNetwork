@@ -84,6 +84,8 @@ $page->display_body_start();
 
     <img id="info_profile_picture" class="profile_picture" src="<?php echo $profile_picture_content; ?>" title="Avatar" alt="Avatar">
 
+    <div class="hr reduced_width"></div>
+
     <!-- buttons for profile control -->
 
     <div class="requests">
@@ -121,8 +123,9 @@ $page->display_body_start();
 
         ?>
 
-
     </div>
+
+    <div class="hr reduced_width"></div>
 
     <!-- informations about user -->
 

@@ -14,7 +14,7 @@ if(isset($_SESSION['id_user'])) {
 /* prints header of page */
 
 $page = new Page();
-$page->display_header( "Login", array("styles/style_form", "styles/index"));
+$page->display_header( "Login", array("styles/index"));
 $page->display_body_start();
 
 ?>

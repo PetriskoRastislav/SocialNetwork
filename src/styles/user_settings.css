@@ -48,8 +48,8 @@ h2 {
 
 /* style for a horizontal lines */
 
-hr {
-	clear: both;
+.double_margin {
+	margin: 1em 0 1em 0;
 }
 
 /* style for a input for a file */
@@ -204,19 +204,4 @@ input:checked + .slider:before {
 #preview img {
 	height: 15em;
 	width: auto;
-}
-
-
-/* additional styles for a mark icons */
-
-#pass_new_status {
-	position: relative;
-	top: 1.5em;
-	left: 0;
-}
-
-#pass_new_again_status {
-	position: relative;
-	top: 1.875em;
-	left: 0;
 }

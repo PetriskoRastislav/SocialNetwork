@@ -13,12 +13,9 @@
 /* forms log in, register */
 
 .log_reg {
+    box-sizing: border-box;
     width: 30em;
     margin: 1em auto 1em auto;
-}
-
-.hide {
-    display: none;
 }
 
 
@@ -70,7 +67,7 @@
 .stat {
     position: absolute;
     left: 30em;
-    top: 15.5em
+    top: 15.5em;
 }
 
 #pass_reg_status {

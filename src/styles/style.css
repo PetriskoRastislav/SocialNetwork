@@ -133,6 +133,23 @@ a.common:active {
 }
 
 
+/* styles for hr */
+
+.hr {
+    box-sizing: border-box;
+    display: block;
+    clear: both;
+    height: 0.0625em;
+    background-color: rgb(190, 190, 190);
+    margin: 1em 0 1em 0;
+}
+
+.reduced_width {
+    margin: 0.5em 5% 0.5em 5%;
+    width: 90%;
+}
+
+
 /* formatting of .main_content */
 
 .main_content {
@@ -142,8 +159,15 @@ a.common:active {
 
 
 /* hides a element */
+
 .hide {
     display: none;
+}
+
+/* shows a element */
+
+.show {
+    display: block;
 }
 
 

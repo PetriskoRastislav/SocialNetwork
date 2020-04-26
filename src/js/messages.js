@@ -383,19 +383,27 @@ $(document).ready(function() {
     /* will search for a particular user */
     $("#search_user_con_list").on("keyup", function (event) {
 
-        if ((event.type === "keydown" || event.type === "keyup") && event.which === 27) {
+        let value = $(this).val().toString();
+
+
+        if (value.length > 0) {
+            $(".clear_search_users").addClass("clear_search_users_visible");
+        }
+        else {
+            $(".clear_search_users").removeClass("clear_search_users_visible");
             $("#search_result_con_list").removeClass("visible");
         }
+
+
+        if (event.which === 27) {
+            $("#search_result_con_list").removeClass("visible");
+        }
+        else if ((event.which === 8 && value === "")) {
+            let result = $("#search_result_con_list");
+            result.html("");
+            result.removeClass("visible");
+        }
         else if( !(event.which === 13 || event.which === 27)){
-
-            let value = $(this).val().toString().trim();
-
-            if (value !== "") {
-                $(".clear_search_users").addClass("clear_search_users_visible");
-            }
-            else if (value === undefined || value === "") {
-                $(".clear_search_users").removeClass("clear_search_users_visible");
-            }
 
             $.ajax({
                 url: "scripts/query_users.php",
