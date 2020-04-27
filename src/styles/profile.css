@@ -52,6 +52,26 @@
 }
 
 
+@media screen and (max-width: 1100px) {
+	.left_column {
+		width: 94%;
+		margin: 16px 3% 16px 3%;
+		clear: both;
+		max-width: none;
+		padding: 16px;
+		border-left: 1px solid rgb(190, 190, 190);
+		border-right: 1px solid rgb(190, 190, 190);
+	}
+
+	.right_column {
+		width: 94%;
+		margin: 16px 3% 16px 3%;
+		clear: both;
+		padding: 16px;
+	}
+}
+
+
 /* style for a profile image */
 
 .profile_picture {
@@ -124,3 +144,19 @@
 	width: auto;
 }
 
+@media screen and (max-width: 1100px) {
+	.profile_picture {
+		max-width: 400px;
+		text-align: center;
+	}
+
+	.informations {
+		max-width: 400px;
+	}
+
+	.requests {
+		width: 92%;
+		margin-right: 4%;
+		margin-left: 4%;
+	}
+}

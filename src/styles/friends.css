@@ -27,6 +27,24 @@
 	margin-bottom: 64px;
 }
 
+@media screen and (max-width: 1250px) {
+	.row {
+		display: block;
+	}
+
+	.friend {
+		display: block;
+		width: 100%;
+	}
+
+	.friend:nth-child(even) {
+		border-left: none;
+	}
+}
+
+
+
+
 /* styles for a friend's avatar */
 
 .friend_avatar {
