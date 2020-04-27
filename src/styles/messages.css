@@ -15,7 +15,7 @@
     box-sizing: border-box;
     width: 25%;
     position: fixed;
-    top: 3em;
+    top: 48px;
     bottom: 0;
     left: 0;
     right: 75%;
@@ -31,15 +31,15 @@
 #conversation_header {
     display: block;
     box-sizing: border-box;
-    height: 3.5em;
+    height: 56px;
     width: 75%;
     position: fixed;
-    top: 3em;
+    top: 48px;
     right: 0;
     left: 25%;
     overflow: hidden;
     background-color: rgb(235, 235, 235);
-    padding: 0.625em;
+    padding: 10px;
 }
 
 
@@ -50,8 +50,8 @@
     box-sizing: border-box;
     width: 75%;
     position: fixed;
-    top: 6.5em;
-    bottom: 4em;
+    top: 104px;
+    bottom: 64px;
     right: 0;
     left: 25%;
     overflow-y: scroll;
@@ -69,7 +69,7 @@
     bottom: 0;
     left: 25%;
     right: 0;
-    height: 4em;
+    height: 64px;
     background-color: rgb(210, 210, 210);
 }
 
@@ -82,10 +82,10 @@
 
 .active_mark {
     background-color: rgb(100, 200, 0);
-    width: 0.625em;
-    height: 0.625em;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    margin-left: 0.3125em;
+    margin-left: 5px;
     display: inline-block;
 }
 
@@ -93,24 +93,23 @@
 /* header of list */
 
 #list_users_header {
-    height: 6em;
+    height: 96px;
     width: 100%;
     display: block;
     box-sizing: border-box;
     background-color: rgb(215, 215, 215);
 }
 
-#list_users_header_title{
+#list_users_header_title {
     box-sizing: border-box;
     display: inline-block;
     float: left;
-    font-family: 'Arial', Helvetica, sans-serif;
     color: rgb(20, 20, 20);
-    text-align: center;
-    line-height: 1.625em;
-    padding: 0.75em 1em 0.25em 1em;
-    font-size: 1.125em;
+    font-family: 'Arial', Helvetica, sans-serif;
+    line-height: 26px;
+    font-size: 20px;
     font-weight: normal;
+    padding: 12px 16px 4px 16px;
 }
 
 
@@ -119,14 +118,16 @@
 #search_user_con_list {
     box-sizing: border-box;
     width: 85%;
-    height: 2.5em;
-    margin: 0.25em 7% 0.75em 3%;
-    padding: 0.3125em 0.5em 0.3125em 0.5em;
+    height: 40px;
+    margin: 4px 7% 12px 3%;
+    padding: 5px 8px 5px 4px;
     font-family: 'Arial', Helvetica, sans-serif;
-    line-height: 1.25em;
+    line-height: 14px;
+    font-size: 14px;
+    font-weight: normal;
     background-color: rgb(240, 240, 240);
     color: rgb(0, 0, 0);
-    border: 0.125em solid rgb(200, 200, 200);
+    border: 2px solid rgb(200, 200, 200);
     outline: none;
     resize: none;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -145,12 +146,12 @@
 
 .clear_search_users {
     position: absolute;
-    top: 3.25em;
+    top: 52px;
     left: 90%;
     box-sizing: border-box;
-    height: 1.75em;
-    width: 1.75em;
-    padding: 0.25em;
+    height: 28px;
+    width: 28px;
+    padding: 4px;
     background-color: rgb(215, 215, 215);
     display: none;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -173,12 +174,13 @@
 
 .search_result_con_list {
     display: none;
+    visibility: hidden;
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: scroll;
     width: 25%;
     position: fixed;
-    top: 9em;
+    top: 144px;
     right: 0;
     margin-right: 75%;
     background-color: rgb(225, 225, 225);
@@ -193,8 +195,9 @@
 
 .visible {
     display: block;
+    visibility: visible;
     position: fixed;
-    top: 9em;
+    top: 144px;
     left: 0;
     width: 25%;
     margin-right: 75%;
@@ -206,15 +209,15 @@
 
 .search_result_item {
     box-sizing: border-box;
-    height: 3em;
+    height: 48px;
     width: 100%;
     font-family: 'Arial', Helvetica, sans-serif;
     text-align: left;
-    font-size: 1em;
+    font-size: 16px;
     font-weight: normal;
     color: rgb(20, 20, 20);
-    padding: 0.4375em;
-    border-top: solid 0.125em rgb(150, 150, 150);
+    padding: 7px;
+    border-top: 2px solid rgb(150, 150, 150);
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     -moz-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -222,7 +225,7 @@
 }
 
 .search_result_item:last-child {
-    border-bottom: solid 0.125em rgb(150, 150, 150);
+    border-bottom: 2px solid rgb(150, 150, 150);
 }
 
 .search_result_item:hover {
@@ -234,7 +237,7 @@
 /* styles for labels with names of users */
 
 .list_users_item {
-    height: 3.7em;
+    height: 60px;
     width: 100%;
     clear: both;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -258,9 +261,9 @@
     /*font-family: "Bahnschrift Condensed", Bahnschrift, sans-serif;*/
     color: rgb(20, 20, 20);
     text-align: left;
-    line-height: 1.6em;
-    padding: 0.5em 0.5em;
-    font-size: 1em;
+    line-height: 26px;
+    padding: 8px 8px;
+    font-size: 16px;
     float: left;
     width: auto;
     height: 100%;
@@ -282,42 +285,42 @@
 
 .avatar {
     float: left;
-    width: 2em;
-    height: 2em;
-    margin-right: 1.5em;
+    width: 32px;
+    height: 32px;
+    margin-right: 24px;
     border-radius: 100%;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: auto 2em;
+    background-size: auto 32px;
 }
 
 .avatar-list {
     box-sizing: border-box;
     display: block;
     float: left;
-    width: 2.7em;
-    height: 2.7em;
+    width: 43px;
+    height: 43px;
     border-radius: 100%;
-    background-size: auto 2.7em;
+    background-size: auto 43px;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .list_users_item .avatar-list {
-    margin: 0.5em;
+    margin: 8px;
 }
 
 
 .search_result_item .avatar {
-    width: 2em;
-    height: 2em;
-    background-size: auto 2em;
+    width: 32px;
+    height: 32px;
+    background-size: auto 32px;
 }
 
 #conversation_header .avatar {
-    width: 2.5em;
-    height: 2.5em;
-    background-size: auto 2.5em;
+    width: 40px;
+    height: 40px;
+    background-size: auto 40px;
 }
 
 
@@ -325,7 +328,7 @@
 
 .time {
     font-family: 'Arial', Helvetica, sans-serif;
-    font-size: 0.8em;
+    font-size: 12px;
     font-weight: lighter;
     float: left;
     color: rgb(60, 60, 60);
@@ -336,7 +339,7 @@
 #conversation_header p {
     font-family: 'Arial', Helvetica, sans-serif;
     text-align: left;
-    font-size: 1em;
+    font-size: 16px;
     font-weight: normal;
     color: rgb(20, 20, 20);
 }
@@ -345,7 +348,7 @@
 /* time when was use last active */
 
 #conversation_header .time {
-    padding-top: 0.4em;
+    padding-top: 5px;
 }
 
 
@@ -355,12 +358,12 @@
     box-sizing: border-box;
     display: block;
     position: fixed;
-    top: 3em;
+    top: 48px;
     right: 0;
-    height: 3em;
+    height: 48px;
     width: auto;
-    padding: 0.25em;
-    margin: 0.25em 0.5em;
+    padding: 4px;
+    margin: 4px 8px 4px 8px;
     background-color: rgb(235, 235, 235);
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -372,9 +375,6 @@
     cursor: pointer;
     background-color: rgb(200, 200, 200);
 }
-
-
-/* chat */
 
 
 /* detail time info */
@@ -395,26 +395,29 @@
 
 .mes_time_info_show {
     display: block;
-    margin: 0.3125em auto 0.3125em auto;
+    margin: 4px auto 4px auto;
 }
 
 .mes_wrap_active {
-    margin-bottom: 1.75em;
+    margin-bottom: 20px;
 }
 
 
 /* styles for message bubbles */
 
 .message {
-    border: 0.125em solid rgb(222, 222, 222);
+    border: 2px solid rgb(222, 222, 222);
     background-color: rgb(241, 241, 241);
     border-radius: 5px;
-    padding: 0.625em;
-    margin: 0.5em 5em 0.5em 1em;
+    padding: 10px;
+    margin: 6px 16px 6px 16px;
+    width: 750px;
+    float: left;
 }
 
 .message_my {
-    margin: 0.5em 1em 0.5em 5em;
+    float: right;
+    margin: 5px 16px 5px 16px;
     border-color: rgb(204, 204, 204);
     background-color: rgb(221, 221, 221);
 }
@@ -432,7 +435,7 @@
 
 .message_my .avatar {
     float: right;
-    margin-left: 1.5em;
+    margin-left: 24px;
     margin-right:0;
 }
 
@@ -442,7 +445,7 @@
 .message p {
     font-family: 'Arial', Helvetica, sans-serif;
     text-align: left;
-    font-size: 1em;
+    font-size: 16px;
     font-weight: normal;
     color: rgb(20, 20, 20);
 }
@@ -474,10 +477,10 @@
     box-sizing: border-box;
     display: none;
     position: absolute;
-    height: 3em;
+    height: 48px;
     width: auto;
-    padding: 0.25em;
-    margin: 0 0 0 0.625em;
+    padding: 4px;
+    margin: 0 0 0 10px;
     background-color: rgb(250, 250, 250);
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -500,19 +503,21 @@
 
 #message_to_send {
     box-sizing: border-box;
-    margin: 1em 0.25em 1em 1em;
+    margin: 8px 4px 8px 8px;
+    padding: 6px 8px 6px 8px;
     float: left;
     width: 80%;
-    max-width: 60em;
-    height: 3em;
+    max-width: 950px;
+    height: 48px;
     position: relative;
-    padding: 0.375em 0.5em 0.375em 0.5em;;
     outline: none;
     font-family: 'Arial', Helvetica, sans-serif;
-    line-height: 1.25em;
+    line-height: 18px;
+    font-weight: normal;
+    font-size: 15px;
     background-color: rgb(240, 240, 240);
     color: rgb(0, 0, 0);
-    border: 0.125em solid rgb(200, 200, 200);
+    border: 2px solid rgb(200, 200, 200);
     resize: none;
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -533,10 +538,10 @@
     display: block;
     position: relative;
     float: left;
-    height: 3em;
+    height: 48px;
     width: auto;
-    padding: 0.25em;
-    margin: 0.5em 0.25em;
+    padding: 4px;
+    margin: 8px 4px 8px 4px;
     background-color: rgb(210, 210, 210);
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
     -webkit-transition: background-color 0.3s, color 0.3s, border-color 0.3s;

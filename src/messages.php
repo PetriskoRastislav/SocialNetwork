@@ -52,7 +52,7 @@ $page->display_body_start();
 <!-- bar with chat controls (textarea for message, button to send) -->
 
 <div id="chat_control">
-    <input name="message" id="message_to_send" placeholder="Your message ...">
+    <textarea name="message" id="message_to_send" placeholder="Your message ..."></textarea>
     <img id="send_button" class="chat_control_button" src="<?php
         if ($_SESSION['color_mode'] == "dark") echo "src_pictures/icons8-send-100-white.png";
         else echo "src_pictures/icons8-send-100.png";
