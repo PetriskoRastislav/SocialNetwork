@@ -28,12 +28,12 @@ $page->display_body_start();
 
     <div id="list_users_header">
         <span id="list_users_header_title">Chats</span>
-        <input id="search_user_con_list" name="search_user_conversation_list" type="text" placeholder="Search users ..." >
+        <input id="list_users_search_field" name="search_user_conversation_list" type="text" placeholder="Search users ..." >
         <img src="<?php
             if ($_SESSION['color_mode'] == "dark") echo "src_pictures/icons8-delete-100-white.png";
             else echo "src_pictures/icons8-delete-100.png";
             ?>" alt="clear" class="clear_search_users">
-        <div id="search_result_con_list" class="search_result_con_list"></div>
+        <div id="list_users_search_result" class="list_users_search_result"></div>
     </div>
 
     <!-- list of conversations -->

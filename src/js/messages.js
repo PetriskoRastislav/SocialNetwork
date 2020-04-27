@@ -381,7 +381,7 @@ $(document).ready(function() {
 
 
     /* will search for a particular user */
-    $("#search_user_con_list").on("keyup", function (event) {
+    $("#list_users_search_field").on("keyup", function (event) {
 
         let value = $(this).val().toString();
 
@@ -391,15 +391,15 @@ $(document).ready(function() {
         }
         else {
             $(".clear_search_users").removeClass("clear_search_users_visible");
-            $("#search_result_con_list").removeClass("visible");
+            $("#list_users_search_result").removeClass("visible");
         }
 
 
         if (event.which === 27) {
-            $("#search_result_con_list").removeClass("visible");
+            $("#list_users_search_result").removeClass("visible");
         }
         else if ((event.which === 8 && value === "")) {
-            let result = $("#search_result_con_list");
+            let result = $("#list_users_search_result");
             result.html("");
             result.removeClass("visible");
         }
@@ -413,7 +413,7 @@ $(document).ready(function() {
                     value: value
                 },
                 success: function (data) {
-                    let result = $("#search_result_con_list");
+                    let result = $("#list_users_search_result");
                     result.html(data);
                     result.addClass("visible");
 
@@ -424,26 +424,26 @@ $(document).ready(function() {
 
 
     /* will display div with search result on focus on a search input */
-    $("#search_user_con_list").on("focus", function () {
-        $("#search_result_con_list").addClass("visible");
+    $("#list_users_search_field").on("focus", function () {
+        $("#list_users_search_result").addClass("visible");
     });
 
 
     /* will hide div with a search result on a blur of a search input */
-    $("#search_user_con_list").on("blur", function (event) {
-        if ($("#search_user_con_list").val().toString() === "") {
-            $("#search_result_con_list").removeClass("visible");
+    $("#list_users_search_field").on("blur", function (event) {
+        if ($("#list_users_search_field").val().toString() === "") {
+            $("#list_users_search_result").removeClass("visible");
             $(".clear_search_users").removeClass("clear_search_users_visible");
-            $(".search_result_con_list").html("");
+            $(".list_users_search_result").html("");
         }
     });
 
 
     /* will clear search field for searching users in conversations header */
     $(".clear_search_users").on("click", function () {
-        $("#search_user_con_list").val("");
+        $("#list_users_search_field").val("");
         $(this).removeClass("clear_search_users_visible");
-        let result = $("#search_result_con_list");
+        let result = $("#list_users_search_result");
         result.removeClass("visible");
         result.html("");
     });
