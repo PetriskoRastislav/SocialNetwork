@@ -145,6 +145,14 @@
                 $message .= "</div>";
             }
 
+            $message .=
+                '<div class="left menu_search_bar">'.
+                '<img id="menu_search_icon" class="header_menu_img " src="' . $this->icons['search'] . '" alt="Search users">'.
+                '<input id="menu_search_field"  class="input_form hide_v" type="text" name="search_user"placeholder="Search users ...">'.
+                '</div>'.
+                '<div id="menu_search_result"></div>';
+
+
 
             if(isset($_SESSION['id_user']))
                 $message .=
@@ -153,7 +161,7 @@
                             '<ul class="menu_ul">'.
                                 
                                 '<li class="header_menu_li drop_btn" id="header_menu_drop_btn">'.
-                                    '<p class="header_menu_a"><i class="arrow down_arrow" id="arrow_btn_menu"></i></p>'.
+                                    '<p class="header_menu_a drop_btn_a"><i class="arrow down_arrow" id="arrow_btn_menu"></i></p>'.
                                 '</li>'.
                                 
                                 '<ul id="header_drop_content" class="header_menu_drop_hide">'.
@@ -186,23 +194,11 @@
                                     '</a>'.
                                 '</li>'.
                                 
-                                '<li class="header_menu_li border_left">'.
+                                '<li class="header_menu_li">'.
                                     '<a id="menu_messages" class="header_menu_a header_menu_a_img" href="messages.php">'.
                                         '<img class="header_menu_img" src="' . $this->icons['messages'] . '" alt="Messages icon">'.
                                     '</a>'.
                                 '</li>'.
-
-                    '<li class="header_menu_li" id="menu_search_icon">' .
-                                    '<span class="header_menu_a header_menu_a_img">'.
-                                        '<img class="header_menu_img smaller" src="' . $this->icons['search'] . '" alt="Search users">'.
-                                    '</span>'.
-                                '</li>'.
-
-                                '<li class="header_menu_li hide" id="menu_search_field">' .
-                                    '<input class="input_form" type="text" name="search_user" id="search_user" placeholder="Search users ...">'.
-                                '</li>'.
-
-                                '<div id="menu_search_result"></div>'.
                                 
                             '</ul>'.
                         '</div>'.

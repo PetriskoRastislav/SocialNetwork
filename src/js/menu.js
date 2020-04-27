@@ -26,22 +26,25 @@ $(document).ready(function() {
     /* displays field for searching users */
     $("#menu_search_icon").on("click", function () {
         let search_field_menu = $("#menu_search_field");
+        let menu_search_icon = $(this);
 
-        if (search_field_menu.hasClass("hide")) {
-            search_field_menu.removeClass("hide");
-            search_field_menu.addClass("show");
-            $("#menu_search_icon").addClass("header_menu_li_active");
+        if (menu_search_icon.hasClass("menu_search_icon_active")) {
+
+            search_field_menu.removeClass("show_v");
+            search_field_menu.addClass("hide_v");
+            menu_search_icon.removeClass("menu_search_icon_active");
         }
         else {
-            search_field_menu.removeClass("show");
-            search_field_menu.addClass("hide");
-            $("#menu_search_icon").removeClass("header_menu_li_active");
+
+            search_field_menu.removeClass("hide_v");
+            search_field_menu.addClass("show_v");
+            menu_search_icon.addClass("menu_search_icon_active");
         }
     });
 
 
     /* will search for a user */
-    $("#search_user").on("keyup", function (event) {
+    $("#menu_search_field").on("keyup", function (event) {
 
         let value = $(this).val().toString();
 
@@ -49,17 +52,17 @@ $(document).ready(function() {
 
 
         if (!(value.length > 0)) {
-            $("#menu_search_result").removeClass("show");
+            $("#menu_search_result").removeClass("show_v");
         }
 
 
         if (event.which === 27) {
-            $("#menu_search_result").removeClass("show");
+            $("#menu_search_result").removeClass("show_v");
         }
         else if (event.which === 8 && value === "") {
             let result = $("#menu_search_result");
             result.html("");
-            result.removeClass("show");
+            result.removeClass("show_v");
         }
         else if( !(event.which === 13 || event.which === 27)){
 
@@ -74,7 +77,7 @@ $(document).ready(function() {
 
                     let result = $("#menu_search_result");
                     result.html(data);
-                    result.addClass("show");
+                    result.addClass("show_v");
 
                 }
             });
