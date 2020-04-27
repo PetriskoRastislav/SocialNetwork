@@ -150,7 +150,7 @@
                 '<img id="menu_search_icon" class="header_menu_img " src="' . $this->icons['search'] . '" alt="Search users">'.
                 '<input id="menu_search_field"  class="input_form hide_v" type="text" name="search_user"placeholder="Search users ...">'.
                 '</div>'.
-                '<div id="menu_search_result"></div>';
+                '<div id="menu_search_result" class="hide"></div>';
 
 
 

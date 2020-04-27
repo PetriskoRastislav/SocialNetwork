@@ -318,7 +318,7 @@ try {
             $profile_pic = '<div class="avatar search_list" style="' . $profile_pic . '"></div>';
 
             $output .=
-                '<div class="search_result_item">'.
+                '<div class="menu_search_result_item">'.
                 $profile_pic .
                 '<a href="profile.php?user=' . $id . '" class="common">' . $name . ' ' . $surname . '</a>'.
                 '</div>';
