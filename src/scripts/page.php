@@ -125,84 +125,86 @@
 
 
         /* will display header of a web-page, logo, menu, etc. */
-        public function display_page_header () {
+        public function display_page_header ()
+        {
 
             $message =
-                '<div class="pageHeader">'.
-                '<div class="header_content">'.
-                '<div class="left">';
+                '<div class="pageHeader">' .
+                    '<div class="header_content">' .
+                        '<div class="left">';
 
             if (isset($_SESSION['id_user'])) {
                 $message .= "<a href='profile.php?user=" . $_SESSION['id_user'] . "' class='home_link'>";
             }
 
-            $message .= '<img class="pageLogo" src="'. $this->icons['logo'] . '" alt="Page logo">';
+            $message .= '<img class="pageLogo" src="' . $this->icons['logo'] . '" alt="Page logo">';
 
             if (isset($_SESSION['id_user'])) {
                 $message .= '</a></div>';
-            }
-            else {
+            } else {
                 $message .= "</div>";
             }
 
-            $message .=
-                '<div class="left menu_search_bar">'.
-                '<img id="menu_search_icon" class="header_menu_img " src="' . $this->icons['search'] . '" alt="Search users">'.
-                '<input id="menu_search_field"  class="input_form hide_v" type="text" name="search_user"placeholder="Search users ...">'.
-                '</div>'.
-                '<div id="menu_search_result" class="hide"></div>';
+            if (isset($_SESSION['id_user'])) {
 
-
-
-            if(isset($_SESSION['id_user']))
                 $message .=
-                    '<div class="right">'.
-                        '<div class="header_menu_div">'.
-                            '<ul class="menu_ul">'.
-                                
-                                '<li class="header_menu_li drop_btn" id="header_menu_drop_btn">'.
-                                    '<p class="header_menu_a drop_btn_a"><i class="arrow down_arrow" id="arrow_btn_menu"></i></p>'.
-                                '</li>'.
-                                
-                                '<ul id="header_drop_content" class="header_menu_drop_hide">'.
-                                    
-                                    '<a href="user_settings.php" class="header_menu_drop_a">'.
-                                        '<li class="header_drop_item header_drop_item_border">'.
-                                            '<img class="header_menu_img_drop" src="' . $this->icons['settings'] . '" alt="Settings icon">'.
-                                            '<p class="header_drop_p">Settings</p>'.
-                                        '</li>'.
-                                    '</a>'.
-                                    
-                                    '<a href="scripts/logout.php" class="header_menu_drop_a">'.
-                                        '<li class="header_drop_item header_drop_item_border_last">'.
-                                            '<img class="header_menu_img_drop" src="' . $this->icons['logout'] . '" alt="Logout icon">'.
-                                            '<p class="header_drop_p">Logout</p>'.
-                                        '</li>'.
-                                    '</a>'.
-                                    
-                                '</ul>'.
-                                
-                                '<li class="header_menu_li border_left">'.
-                                    '<a class="header_menu_a" href="profile.php?user=' . $_SESSION['id_user'] . '">'.
-                                        $_SESSION['name'] . ' ' . $_SESSION['surname'] .
+                    '<div class="left menu_search_bar">' .
+                        '<img id="menu_search_icon" class="header_menu_img " src="' . $this->icons['search'] . '" alt="Search users">' .
+                        '<input id="menu_search_field"  class="input_form hide_v" type="text" name="search_user"placeholder="Search users ...">' .
+                        '</div>' .
+                        '<div id="menu_search_result" class="hide">'.
+                    '</div>';
+
+                $message .=
+                    '<div class="right">' .
+                        '<div class="header_menu_div">' .
+                            '<ul class="menu_ul">' .
+
+                                '<li class="header_menu_li drop_btn" id="header_menu_drop_btn">' .
+                                    '<p class="header_menu_a drop_btn_a"><i class="arrow down_arrow" id="arrow_btn_menu"></i></p>' .
+                                '</li>' .
+
+                                '<ul id="header_drop_content" class="header_menu_drop_hide">' .
+
+                                    '<a href="user_settings.php" class="header_menu_drop_a">' .
+                                        '<li class="header_drop_item header_drop_item_border">' .
+                                            '<img class="header_menu_img_drop" src="' . $this->icons['settings'] . '" alt="Settings icon">' .
+                                            '<p class="header_drop_p">Settings</p>' .
+                                        '</li>' .
+                                    '</a>' .
+
+                                    '<a href="scripts/logout.php" class="header_menu_drop_a">' .
+                                        '<li class="header_drop_item header_drop_item_border_last">' .
+                                            '<img class="header_menu_img_drop" src="' . $this->icons['logout'] . '" alt="Logout icon">' .
+                                            '<p class="header_drop_p">Logout</p>' .
+                                        '</li>' .
+                                    '</a>' .
+
+                                '</ul>' .
+
+                                '<li class="header_menu_li border_left">' .
+                                    '<a class="header_menu_a" href="profile.php?user=' . $_SESSION['id_user'] . '">' .
+                                         $_SESSION['name'] . ' ' . $_SESSION['surname'] .
                                     '</a>'.
                                 '</li>'.
 
-                                '<li class="header_menu_li border_left">'.
-                                    '<a id="menu_friends" class="header_menu_a header_menu_a_img" href="friends.php?user=' . $_SESSION['id_user'] . '">'.
-                                        '<img class="header_menu_img" src="' . $this->icons['friends'] . '" alt="Friends icon">'.
+                                '<li class="header_menu_li border_left">' .
+                                    '<a id="menu_friends" class="header_menu_a header_menu_a_img" href="friends.php?user=' . $_SESSION['id_user'] . '">' .
+                                       '<img class="header_menu_img" src="' . $this->icons['friends'] . '" alt="Friends icon">' .
                                     '</a>'.
                                 '</li>'.
-                                
-                                '<li class="header_menu_li">'.
-                                    '<a id="menu_messages" class="header_menu_a header_menu_a_img" href="messages.php">'.
-                                        '<img class="header_menu_img" src="' . $this->icons['messages'] . '" alt="Messages icon">'.
+
+                                '<li class="header_menu_li">' .
+                                    '<a id="menu_messages" class="header_menu_a header_menu_a_img" href="messages.php">' .
+                                        '<img class="header_menu_img" src="' . $this->icons['messages'] . '" alt="Messages icon">' .
                                     '</a>'.
                                 '</li>'.
-                                
+
                             '</ul>'.
                         '</div>'.
                     '</div>';
+
+            }
 
             $message .= '</div></div>';
 
