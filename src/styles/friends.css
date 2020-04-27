@@ -2,22 +2,28 @@
 /* styles for a div with info about one friend */
 
 .friend {
-	width: 49%;
+	width: 50%;
 	float: left;
-	margin-bottom: 0;
+	margin: 0;
 	border-bottom: 2px solid rgb(120, 120, 120);
+	flex: 1;
+}
+
+.row {
+	display: flex;
+	margin: 0;
 }
 
 .friend:nth-child(even) {
 	border-left: 2px solid rgb(120, 120, 120);
 }
 
-.friend:nth-child(-n+2) {
+.row:first-child {
 	margin-top: 16px;
 	border-top: 2px solid rgb(120, 120, 120);
 }
 
-.friend:last-child {
+.row:last-child {
 	margin-bottom: 64px;
 }
 

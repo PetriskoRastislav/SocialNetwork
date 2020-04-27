@@ -21,8 +21,13 @@ if ($id_user_page == $_SESSION['id_user']) {
     $statement->bind_result($id_user, $name, $surname, $profile_picture, $status);
 
     $requests_list = "<div id='friendship_requests'>";
+    $i = 0;
 
     while ($statement->fetch()) {
+
+        if ($i % 2 == 0) {
+            $requests_list .= '<div class="row">';
+        }
 
         $requests_list .= '<div class="friend" id="f_r_' . $id_user . '">';
 
@@ -53,6 +58,12 @@ if ($id_user_page == $_SESSION['id_user']) {
             '</div>';
 
         $is_requests = true;
+
+        if ($i % 2 == 1) {
+            $requests_list .= '</div>';
+        }
+
+        $i++;
 
     }
 
@@ -102,8 +113,13 @@ $statement->execute();
 $statement->bind_result($id_user, $name, $surname, $profile_picture, $last_active, $gender, $location);
 
 $friend_list = "<div id='friends_list'>";
+$i = 0;
 
 while ($statement->fetch()) {
+
+    if ($i % 2 == 0) {
+        $friend_list .= '<div class="row">';
+    }
 
     $friend_list .= '<div class="friend">';
 
@@ -148,6 +164,12 @@ while ($statement->fetch()) {
         '</li>' .
         '</ul>' .
         '</div>';
+
+    if ($i % 2 == 1) {
+        $friend_list .= '</div>';
+    }
+
+    $i++;
 
 }
 
