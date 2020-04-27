@@ -2,53 +2,131 @@
 /* styles for a div with info about one friend */
 
 .friend {
-	width: 49%;
+	width: 50%;
 	float: left;
-	margin-bottom: 0;
-	border-bottom: 0.125em solid rgb(120, 120, 120);
+	margin: 0;
+	border-bottom: 2px solid rgb(120, 120, 120);
+	flex: 1;
+}
+
+.row {
+	display: flex;
+	margin: 0;
 }
 
 .friend:nth-child(even) {
-	border-left: 0.125em solid rgb(120, 120, 120);
+	border-left: 2px solid rgb(120, 120, 120);
 }
 
-.friend:nth-child(-n+2) {
-	margin-top: 1em;
-	border-top: 0.125em solid rgb(120, 120, 120);
+.row:first-child {
+	margin-top: 16px;
+	border-top: 2px solid rgb(120, 120, 120);
 }
+
+.row:last-child {
+	margin-bottom: 64px;
+}
+
+@media screen and (max-width: 1250px) {
+	.row {
+		display: block;
+	}
+
+	.friend {
+		display: block;
+		width: 100%;
+	}
+
+	.friend:nth-child(even) {
+		border-left: none;
+	}
+}
+
+
+
 
 /* styles for a friend's avatar */
 
 .friend_avatar {
-	width: 6em;
-	height: 6em;
+	width: 96px;
+	height: 96px;
 	float: left;
-	margin: 0.5em;
+	margin: 8px 24px 8px 24px;
 	border-radius: 100%;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: auto 6em;
+	background-size: auto 96px;
 }
 
-/* name of a info in div */
+/* styles for avatar of request */
+
+.request_f_a {
+	width: 48px;
+	height: 48px;
+	background-size: auto 48px;
+}
+
+/* name of a info in list */
 
 .info_tag_friend {
 	float: left;
 	width: 35%;
 	clear: right;
 	font-weight: bold;
-	margin-top: 0.06125em;
+	margin-top: 1px;
 }
 
-/* value of a info on div */
+/* value of a info on list */
 
 .value_friend {
 	float: right;
 	width: 35%;
 	clear: right;
-	margin-top: 0.06125em;
+	margin-top: 1px;
 }
+
+/* underlines link to user's profile (his name) */
 
 a .value_friend:hover {
 	text-decoration: underline;
+}
+
+/* process the request of friendship (accept / decline in list) */
+
+.process_request {
+	width: auto;
+	margin-top: 1px;
+	float: left;
+	clear: right;
+	cursor: pointer;
+	text-align: left;
+}
+
+/* accept / decline signs */
+
+.process_request.accept {
+	margin-right: 12px;
+	color: rgb(0, 150, 0);
+}
+
+.process_request.accept:hover {
+	color: rgb(0, 150, 0);
+	text-decoration: underline;
+}
+
+.process_request.decline {
+	margin-left: 12px;
+	color: rgb(200, 0, 0);
+}
+
+.process_request.decline:hover {
+	color: rgb(200, 0, 0);
+	text-decoration: underline;
+}
+
+/* margin for h2 headings */
+
+.friends_page {
+	clear: both;
+	margin-top: 16px;
 }

@@ -1,0 +1,18 @@
+
+/* accept / decline signs */
+
+.process_request.accept {
+    color: rgb(100, 220, 100);
+}
+
+.process_request.accept:hover {
+    color: rgb(100, 220, 100);
+}
+
+.process_request.decline {
+    color: rgb(255, 70, 70);
+}
+
+.process_request.decline:hover {
+    color: rgb(255, 70, 70);
+}

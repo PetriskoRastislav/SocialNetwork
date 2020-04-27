@@ -1,4 +1,4 @@
-
+;
 $(document).ready( function () {
 
 
@@ -101,7 +101,6 @@ $(document).ready( function () {
             display_ack("reg", "pass_reg_again", "Confirming password has valid format.");
         }
     });
-
 
 
     /* logs in user, if credentials are valid php will redirect user to his profile,
@@ -214,6 +213,6 @@ function res_log_reg (data) {
         display_warning(a_data[0], null, a_data[2]);
     }
     else {
-        window.location.replace("profile.php?user=me");
+        window.location.replace("profile.php?user=" + data.toString());
     }
 }

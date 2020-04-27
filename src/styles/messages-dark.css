@@ -19,13 +19,13 @@
 
 /* styles for field to search users in conversations */
 
-#search_user_con_list {
+#list_users_search_field {
     background-color: rgb(50, 50, 50);
     color: rgb(220, 220, 220);
     border-color: rgb(110, 110, 110);
 }
 
-#search_user_con_list:focus {
+#list_users_search_field:focus {
     background-color: rgb(60, 60, 60);
     border-color: rgb(250, 250, 250);
 }
@@ -44,7 +44,7 @@
 
 /* div with results of search */
 
-.search_result_con_list {
+.list_users_search_result {
     background-color: rgb(49, 52, 58);
 }
 

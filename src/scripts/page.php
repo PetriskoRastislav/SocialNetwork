@@ -10,7 +10,7 @@
 
 
         /* will display html header */
-        public function display_header($titleA, $styles = null) {
+        public function display_header ($titleA, $styles = null) {
             $this->diverse_icons();
             $this->display_declaration();
             $this->display_header_title($titleA);
@@ -20,32 +20,32 @@
 
 
         /* will fill array with icons (light / dark version) */
-        private function diverse_icons() {
+        private function diverse_icons () {
             if (@$_SESSION['color_mode'] == "dark" || !isset($_SESSION['color_mode'])) {
                 $this->icons = array(
-                    "notifications" => "src_pictures/icons8-notification-100-white.png",
                     "messages" => "src_pictures/icons8-group-message-100-white.png",
                     "friends" => "src_pictures/icons8-user-account-100-white.png",
                     "settings" => "src_pictures/icons8-settings-100-white.png",
                     "logout" => "src_pictures/icons8-exit-100-white.png",
-                    "logo" => "src_pictures/logo-white.png"
+                    "logo" => "src_pictures/logo-white.png",
+                    "search" => "src_pictures/icons8-search-100-white.png"
                 );
             }
             else {
                 $this->icons = array(
-                    "notifications" => "src_pictures/icons8-notification-100.png",
                     "messages" => "src_pictures/icons8-group-message-100.png",
                     "friends" => "src_pictures/icons8-user-account-100.png",
                     "settings" => "src_pictures/icons8-settings-100.png",
                     "logout" => "src_pictures/icons8-exit-100.png",
-                    "logo" => "src_pictures/logo.png"
+                    "logo" => "src_pictures/logo.png",
+                    "search" => "src_pictures/icons8-search-100.png"
                 );
             }
         }
 
 
         /* will display declaration of a html file */
-        private function display_declaration() {
+        private function display_declaration () {
             echo "<!DOCTYPE html>" .
             "<html lang='sk'>" .
             "<head>";
@@ -53,14 +53,14 @@
 
 
         /* will display title of a page */
-        private function display_header_title($titleA) {
+        private function display_header_title ($titleA) {
             echo
                 "<title>" . $titleA . " - " . $this->title . "</title>";
         }
 
 
         /* will display meta information of a page */
-        private function display_header_meta() {
+        private function display_header_meta () {
             echo
             '<meta charset="UTF-8">'.
             '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">'.
@@ -70,7 +70,7 @@
 
 
         /* will display default and additional styles */
-        private function display_header_styles($styles) {
+        private function display_header_styles ($styles) {
 
             if ( !( isset($_SESSION['color_mode']) ) ){
                 $_SESSION['color_mode'] = "dark";
@@ -80,6 +80,7 @@
             $def_styles = array(
                 "styles/reset",
                 "styles/style",
+                "styles/style_form",
                 "styles/menu"
             );
 
@@ -114,7 +115,7 @@
 
 
         /* will display start of a body and menu */
-        public function display_body_start() {
+        public function display_body_start () {
             echo
                 '<body>'.
                 '<div id="page">';
@@ -124,83 +125,86 @@
 
 
         /* will display header of a web-page, logo, menu, etc. */
-        public function display_page_header() {
+        public function display_page_header ()
+        {
 
             $message =
-                '<div class="pageHeader">'.
-                '<div class="header_content">'.
-                '<div class="left">';
+                '<div class="pageHeader">' .
+                    '<div class="header_content">' .
+                        '<div class="left">';
 
             if (isset($_SESSION['id_user'])) {
-                $message .= "<a href='profile.php?user=me' class='home_link'>";
+                $message .= "<a href='profile.php?user=" . $_SESSION['id_user'] . "' class='home_link'>";
             }
 
-            $message .= '<img class="pageLogo" src="'. $this->icons['logo'] . '" alt="Page logo">';
+            $message .= '<img class="pageLogo" src="' . $this->icons['logo'] . '" alt="Page logo">';
 
             if (isset($_SESSION['id_user'])) {
                 $message .= '</a></div>';
-            }
-            else {
+            } else {
                 $message .= "</div>";
             }
 
+            if (isset($_SESSION['id_user'])) {
 
-            if(isset($_SESSION['id_user']))
                 $message .=
-                    '<div class="right">'.
-                        '<div class="header_menu_div">'.
-                            '<ul class="menu_ul">'.
-                                
-                                '<li class="header_menu_li drop_btn" id="header_menu_drop_btn">'.
-                                    '<p class="header_menu_a"><i class="arrow down_arrow" id="arrow_btn_menu"></i></p>'.
-                                '</li>'.
-                                
-                                '<ul id="header_drop_content" class="header_menu_drop_hide">'.
-                                
-                                    '<a href="friends.php?user=me" class="header_menu_drop_a">'.
-                                        '<li class="header_drop_item header_drop_item_border">'.
-                                            '<img class="header_menu_img_drop" src="' . $this->icons['friends'] . '" alt="Friends icon">'.
-                                            '<p class="header_drop_p">Friends</p>'.
-                                        '</li>'.
-                                    '</a>'.
-                                    
-                                    '<a href="user_settings.php" class="header_menu_drop_a">'.
-                                        '<li class="header_drop_item header_drop_item_border">'.
-                                            '<img class="header_menu_img_drop" src="' . $this->icons['settings'] . '" alt="Settings icon">'.
-                                            '<p class="header_drop_p">Settings</p>'.
-                                        '</li>'.
-                                    '</a>'.
-                                    
-                                    '<a href="scripts/logout.php" class="header_menu_drop_a">'.
-                                        '<li class="header_drop_item header_drop_item_border_last">'.
-                                            '<img class="header_menu_img_drop" src="' . $this->icons['logout'] . '" alt="Logout icon">'.
-                                            '<p class="header_drop_p">Logout</p>'.
-                                        '</li>'.
-                                    '</a>'.
-                                    
-                                '</ul>'.
-                                
-                                '<li class="header_menu_li border_left">'.
-                                    '<a class="header_menu_a" href="profile.php?user=me">'.
-                                        $_SESSION['name'] . ' ' . $_SESSION['surname'] .
-                                    '</a>'.
-                                '</li>'.
-                                
-                                '<li class="header_menu_li border_left">'.
-                                    '<a class="header_menu_a header_menu_a_img" href="messages.php">'.
-                                        '<img class="header_menu_img" src="' . $this->icons['messages'] . '" alt="Messages icon">'.
+                    '<div class="left menu_search_bar">' .
+                        '<img id="menu_search_icon" class="header_menu_img " src="' . $this->icons['search'] . '" alt="Search users">' .
+                        '<input id="menu_search_field"  class="input_form hide_v" type="text" name="search_user"placeholder="Search users ...">' .
+                        '</div>' .
+                        '<div id="menu_search_result" class="hide">'.
+                    '</div>';
+
+                $message .=
+                    '<div class="right">' .
+                        '<div class="header_menu_div">' .
+                            '<ul class="menu_ul">' .
+
+                                '<li class="header_menu_li drop_btn" id="header_menu_drop_btn">' .
+                                    '<p class="header_menu_a drop_btn_a"><i class="arrow down_arrow" id="arrow_btn_menu"></i></p>' .
+                                '</li>' .
+
+                                '<ul id="header_drop_content" class="header_menu_drop_hide">' .
+
+                                    '<a href="user_settings.php" class="header_menu_drop_a">' .
+                                        '<li class="header_drop_item header_drop_item_border">' .
+                                            '<img class="header_menu_img_drop" src="' . $this->icons['settings'] . '" alt="Settings icon">' .
+                                            '<p class="header_drop_p">Settings</p>' .
+                                        '</li>' .
+                                    '</a>' .
+
+                                    '<a href="scripts/logout.php" class="header_menu_drop_a">' .
+                                        '<li class="header_drop_item header_drop_item_border_last">' .
+                                            '<img class="header_menu_img_drop" src="' . $this->icons['logout'] . '" alt="Logout icon">' .
+                                            '<p class="header_drop_p">Logout</p>' .
+                                        '</li>' .
+                                    '</a>' .
+
+                                '</ul>' .
+
+                                '<li class="header_menu_li border_left">' .
+                                    '<a class="header_menu_a" href="profile.php?user=' . $_SESSION['id_user'] . '">' .
+                                         $_SESSION['name'] . ' ' . $_SESSION['surname'] .
                                     '</a>'.
                                 '</li>'.
-                                
-                                '<li class="header_menu_li">'.
-                                    '<a class="header_menu_a header_menu_a_img" href="#">'.
-                                        '<img class="header_menu_img" src="' . $this->icons['notifications'] . '" alt="Notification icon">'.
+
+                                '<li class="header_menu_li border_left">' .
+                                    '<a id="menu_friends" class="header_menu_a header_menu_a_img" href="friends.php?user=' . $_SESSION['id_user'] . '">' .
+                                       '<img class="header_menu_img" src="' . $this->icons['friends'] . '" alt="Friends icon">' .
                                     '</a>'.
                                 '</li>'.
-                                
+
+                                '<li class="header_menu_li">' .
+                                    '<a id="menu_messages" class="header_menu_a header_menu_a_img" href="messages.php">' .
+                                        '<img class="header_menu_img" src="' . $this->icons['messages'] . '" alt="Messages icon">' .
+                                    '</a>'.
+                                '</li>'.
+
                             '</ul>'.
                         '</div>'.
                     '</div>';
+
+            }
 
             $message .= '</div></div>';
 
@@ -209,17 +213,22 @@
 
 
         /* will display title / heading of a web-page */
-        public function display_page_title($title) {
+        public function display_page_title ($title) {
             echo '<h1 class="pageTitle">' . $title . '</h1>';
         }
 
 
-        /* will display end of a body and will attach default and additional javascript scripts */
-        public function display_body_end($scripts) {
+        /* will attach default javascript scripts */
+        public function display_default_scripts () {
             echo
                 '<script src="js/jquery-3.4.1.min.js"></script>'.
                 '<script src="js/menu.js"></script>'.
                 '<script src="js/js.js"></script>';
+        }
+
+
+        /* will attach default and additional javascript scripts */
+        public function display_scripts ($scripts) {
 
             $script = @reset($scripts);
 
@@ -228,7 +237,14 @@
                 $script = next($scripts);
             }
 
+        }
+
+
+        /* will display end of a body */
+        public function display_body_end () {
+
             echo '</div></div></body></html>';
+
         }
     }
 ?>

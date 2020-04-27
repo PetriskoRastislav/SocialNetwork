@@ -124,11 +124,11 @@ $(document).ready(function() {
 
                     /* mark of a new unread message in the list of conversations */
 
-                    if(ret_data[i + 3] === "0" && new_message_notification.hasClass("mes_not_chat")){
-                        new_message_notification.removeClass("mes_not_chat");
+                    if(ret_data[i + 3] === "0" && new_message_notification.hasClass("notification_mark")){
+                        new_message_notification.removeClass("notification_mark");
                     }
-                    else if(ret_data[i + 3] !== "0" && !new_message_notification.hasClass("mes_not_chat")) {
-                        new_message_notification.addClass("mes_not_chat");
+                    else if(ret_data[i + 3] !== "0" && !new_message_notification.hasClass("notification_mark")) {
+                        new_message_notification.addClass("notification_mark");
                     }
 
                 }
@@ -138,7 +138,7 @@ $(document).ready(function() {
 
 
     /* will display chat with particular user */
-    $(document).on('click', '.list_users_item', function() {
+    $(document).on("click", ".list_users_item", function() {
         let id_user_to = $(this).attr("id_user_to");
 
         $.ajax({
@@ -212,7 +212,7 @@ $(document).ready(function() {
 
 
     /* will send message into a database */
-    $(document).on("click", "#send_button", function () {
+    $("#send_button").on("click", function () {
         let id_user_to = $(this).attr("id_user_to");
         let message = $("#message_to_send").val();
 
@@ -247,7 +247,7 @@ $(document).ready(function() {
 
 
     /* will send message also after clicking on Enter */
-    $(document).on("keyup", "#message_to_send", function (event) {
+    $("#message_to_send").on("keyup", function (event) {
         if (event.keyCode === 13) {
             event.preventDefault();
             $("#send_button").click();
@@ -381,21 +381,29 @@ $(document).ready(function() {
 
 
     /* will search for a particular user */
-    $(document).on("keyup", "#search_user_con_list", function (event) {
+    $("#list_users_search_field").on("keyup", function (event) {
 
-        if ((event.type === "keydown" || event.type === "keyup") && event.which === 27) {
-            $("#search_result_con_list").removeClass("visible");
+        let value = $(this).val().toString();
+
+
+        if (value.length > 0) {
+            $(".clear_search_users").addClass("clear_search_users_visible");
+        }
+        else {
+            $(".clear_search_users").removeClass("clear_search_users_visible");
+            $("#list_users_search_result").removeClass("visible");
+        }
+
+
+        if (event.which === 27) {
+            $("#list_users_search_result").removeClass("visible");
+        }
+        else if ((event.which === 8 && value === "")) {
+            let result = $("#list_users_search_result");
+            result.html("");
+            result.removeClass("visible");
         }
         else if( !(event.which === 13 || event.which === 27)){
-
-            let value = $(this).val().toString().trim();
-
-            if (value !== "") {
-                $(".clear_search_users").addClass("clear_search_users_visible");
-            }
-            else if (value === undefined || value === "") {
-                $(".clear_search_users").removeClass("clear_search_users_visible");
-            }
 
             $.ajax({
                 url: "scripts/query_users.php",
@@ -405,7 +413,7 @@ $(document).ready(function() {
                     value: value
                 },
                 success: function (data) {
-                    let result = $("#search_result_con_list");
+                    let result = $("#list_users_search_result");
                     result.html(data);
                     result.addClass("visible");
 
@@ -416,25 +424,26 @@ $(document).ready(function() {
 
 
     /* will display div with search result on focus on a search input */
-    $(document).on("focus", "#search_user_con_list", function () {
-        $("#search_result_con_list").addClass("visible");
+    $("#list_users_search_field").on("focus", function () {
+        $("#list_users_search_result").addClass("visible");
     });
 
 
     /* will hide div with a search result on a blur of a search input */
-    $(document).on("blur", "#search_user_con_list", function () {
-        if ($("#search_user_con_list").val().toString() === "") {
-            $("#search_result_con_list").removeClass("visible");
+    $("#list_users_search_field").on("blur", function (event) {
+        if ($("#list_users_search_field").val().toString() === "") {
+            $("#list_users_search_result").removeClass("visible");
             $(".clear_search_users").removeClass("clear_search_users_visible");
+            $(".list_users_search_result").html("");
         }
     });
 
 
     /* will clear search field for searching users in conversations header */
-    $(document).on("click", ".clear_search_users", function () {
-        $("#search_user_con_list").val("");
+    $(".clear_search_users").on("click", function () {
+        $("#list_users_search_field").val("");
         $(this).removeClass("clear_search_users_visible");
-        let result = $("#search_result_con_list");
+        let result = $("#list_users_search_result");
         result.removeClass("visible");
         result.html("");
     });

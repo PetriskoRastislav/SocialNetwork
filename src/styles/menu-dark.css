@@ -13,7 +13,7 @@
 
 /* items of menu -> hover, active */
 
-.header_menu_li:hover .header_menu_a, .header_menu_drop_btn_active .header_menu_a {
+.header_menu_li:hover .header_menu_a, .header_menu_li_active .header_menu_a {
     background-color: rgb(80, 80, 80);
     color: rgb(235, 235, 235);
 }
@@ -52,4 +52,23 @@
 
 .arrow {
     border-color: rgb(210, 210, 210);
+}
+
+/* search bar */
+
+#menu_search_result {
+    background-color: rgb(49, 52, 58);
+}
+
+.menu_search_result_item:hover {
+    background-color: rgb(74, 77, 83);
+}
+
+
+#menu_search_icon:hover {
+    background-color: rgb(70, 70, 70);
+}
+
+.menu_search_icon_active {
+    background-color: rgb(70, 70, 70);
 }
