@@ -45,6 +45,10 @@ h2 {
 	margin-bottom: 40px;
 }
 
+.form_result:last-of-type {
+	margin-bottom: 60px;
+}
+
 /* style for a horizontal lines */
 
 .double_margin {
