@@ -3,6 +3,7 @@
 require_once('scripts/scripts.php');
 session_start();
 
+
 /* checks if user is logged */
 
 if(isset($_SESSION['id_user'])) {
@@ -57,7 +58,7 @@ $page->display_body_start();
         <div id="res_reg" class="form_result spacing_form"><p></p></div>
 
         <p class="spacing_form">
-            <input id="register_submit" class="spacing_form button_form_submit" type="button" form="register" value="Register" />
+            <input id="register_submit" class="spacing_form button_form_submit" type="submit" form="register" value="Register" />
         </p>
 
     </form>
@@ -77,7 +78,7 @@ $page->display_body_start();
         <div id="res_log" class="form_result spacing_form"><p></p></div>
 
         <p class="spacing_form">
-            <input id="login_submit" class="spacing_form button_form_submit" type="button" form="login" value="Log IN"/>
+            <input id="login_submit" class="spacing_form button_form_submit" type="submit" form="login" value="Log IN"/>
         </p>
 
     </form>
