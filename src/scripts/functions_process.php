@@ -103,10 +103,25 @@ function process_last_active ($timestamp) {
         $day_n = intval($date_now[2], 10);
         $hour_n = intval($time_now[0], 10);
 
-        $hour_la = $hour_la + ($day_la + get_days_in_month($month_la, $year_la)) * 24;
-        $hour_n = $hour_n + ($day_n + get_days_in_month($month_n, $year_n)) * 24;
 
-        $hour_diff = ($hour_n - $hour_la);
+
+        if ($month_la != $month_n) {
+
+            $days = get_days_in_month($month_la, $year_la) - $day_la;
+            $days += $day_n;
+
+            $hour_diff = ($days * 24) + ($hour_n - $hour_la);
+
+        }
+        else {
+
+            $hour_la = $hour_la + ($day_la + get_days_in_month($month_la, $year_la)) * 24;
+            $hour_n = $hour_n + ($day_n + get_days_in_month($month_n, $year_n)) * 24;
+
+            $hour_diff = ($hour_n - $hour_la);
+
+        }
+
         $day_diff = (int) ($hour_diff / 24);
 
         if ($day_diff > 1) return $day_diff . " days ago";
